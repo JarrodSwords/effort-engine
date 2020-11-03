@@ -6,9 +6,9 @@ namespace Effort.Domain
     {
         #region Core
 
-        protected Entity()
+        protected Entity(Guid id)
         {
-            Id = Guid.NewGuid();
+            Id = id == Guid.Empty ? Guid.NewGuid() : id;
         }
 
         #endregion
