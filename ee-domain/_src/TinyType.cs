@@ -1,19 +1,19 @@
 namespace Effort.Domain
 {
-    public abstract class Entity
+    public abstract class TinyType<T>
     {
         #region Core
 
-        protected Entity(Id id)
+        protected TinyType(T value)
         {
-            Id = id ?? new Id();
+            Value = value;
         }
 
         #endregion
 
         #region Public Interface
 
-        public Id Id { get; }
+        public T Value { get; }
 
         #endregion
     }

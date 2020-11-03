@@ -1,12 +1,10 @@
-using System;
-
 namespace Effort.Domain
 {
     public class Foo : Entity
     {
         #region Core
 
-        public Foo(Guid id = new Guid()) : base(id)
+        public Foo(Id id = null) : base(id)
         {
         }
 

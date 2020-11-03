@@ -9,7 +9,7 @@ namespace Effort.Test.Domain
 
         protected override Entity CreateEntity(Guid id)
         {
-            return new Foo(id);
+            return new Foo(new Id(id));
         }
 
         protected override Entity CreateEntity()

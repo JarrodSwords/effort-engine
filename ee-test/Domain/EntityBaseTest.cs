@@ -18,7 +18,7 @@ namespace Effort.Test.Domain
             var id = Guid.NewGuid();
             var entity = CreateEntity(id);
 
-            entity.Id.Should().Be(id);
+            entity.Id.Value.Should().Be(id);
         }
 
         [Fact]
@@ -26,7 +26,8 @@ namespace Effort.Test.Domain
         {
             var entity = CreateEntity();
 
-            entity.Id.Should().NotBeEmpty();
+            entity.Id.Should().NotBeNull();
+            entity.Id.Value.Should().NotBeEmpty();
         }
 
         #endregion
