@@ -13,6 +13,15 @@ namespace Effort.Test.Domain
         protected abstract Entity<T> CreateEntity();
 
         [Fact]
+        public void EntitiesHaveReferenceEquality()
+        {
+            var entity1 = CreateEntity();
+            var entity2 = entity1;
+
+            entity2.Should().BeSameAs(entity1);
+        }
+
+        [Fact]
         public void WhenCreatingEntity_WithId_EntityHasCorrectId()
         {
             var id = Guid.NewGuid();
