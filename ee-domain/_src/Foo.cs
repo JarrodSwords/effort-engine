@@ -10,6 +10,12 @@ namespace Effort.Domain
 
         #endregion
 
+        #region Public Interface
+
+        public int Bar { get; set; }
+
+        #endregion
+
         #region Protected Interface
 
         protected override FooId CreateId() => new FooId();

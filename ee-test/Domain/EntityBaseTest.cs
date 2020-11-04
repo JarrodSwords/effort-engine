@@ -9,8 +9,20 @@ namespace Effort.Test.Domain
     {
         #region Test Methods
 
+        protected abstract Entity<T> CreateDifferentEntity(Guid id);
         protected abstract Entity<T> CreateEntity(Guid id);
         protected abstract Entity<T> CreateEntity();
+
+        [Fact]
+        public void EntitiesHaveIdentifierEquality()
+        {
+            var id = Guid.NewGuid();
+            var entity1 = CreateEntity(id);
+            var entity2 = CreateDifferentEntity(id);
+
+            entity2.Should().NotBeSameAs(entity1);
+            entity2.Should().BeEquivalentTo(entity1, o => o.RespectingRuntimeTypes());
+        }
 
         [Fact]
         public void EntitiesHaveReferenceEquality()
