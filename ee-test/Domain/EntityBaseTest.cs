@@ -26,7 +26,6 @@ namespace Effort.Test.Domain
         {
             var entity = CreateEntity();
 
-            entity.Id.Should().NotBeNull();
             entity.Id.Value.Should().NotBeEmpty();
         }
 
