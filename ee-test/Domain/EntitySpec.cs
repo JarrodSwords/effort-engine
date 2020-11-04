@@ -5,11 +5,17 @@ using Xunit;
 
 namespace Effort.Test.Domain
 {
-    public abstract class EntityBaseTest
+    public abstract class EntitySpec
     {
-        #region Test Methods
+        #region Protected Interface
 
         protected abstract Entity CreateDifferentEntity(Guid id);
+        protected abstract Entity CreateEntity(Guid id);
+        protected abstract Entity CreateEntity();
+
+        #endregion
+
+        #region Test Methods
 
         [Fact]
         public void CreatedWithId_HasCorrectId()
@@ -27,9 +33,6 @@ namespace Effort.Test.Domain
 
             entity.Id.Value.Should().NotBeEmpty();
         }
-
-        protected abstract Entity CreateEntity(Guid id);
-        protected abstract Entity CreateEntity();
 
         [Fact]
         public void HasIdentifierEquality()

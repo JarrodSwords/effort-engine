@@ -3,7 +3,7 @@ using Effort.Domain;
 
 namespace Effort.Test.Domain
 {
-    public class FooTest : EntityBaseTest
+    public class FooTest : EntitySpec
     {
         #region Test Methods
 
