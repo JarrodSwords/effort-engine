@@ -1,61 +1,49 @@
 using System;
-using System.Collections.Generic;
 
 namespace Effort.Domain
 {
-    public abstract class Entity<T> : IEquatable<Entity<T>>
-        where T : Id
+    public abstract class Entity : IEquatable<Entity>
     {
         #region Core
 
-        private T _id;
-
-        protected Entity(T id)
+        protected Entity(Guid id = new Guid())
         {
-            _id = id;
+            Id = new Id(id);
         }
 
         #endregion
 
         #region Public Interface
 
-        public T Id => _id ??= CreateId();
-
-        #endregion
-
-        #region Protected Interface
-
-        protected abstract T CreateId();
+        public Id Id { get; }
 
         #endregion
 
         #region Equality, Operators
 
-        public bool Equals(Entity<T> other)
+        public bool Equals(Entity other)
         {
-            if (ReferenceEquals(null, other))
+            if (other is null)
                 return false;
             if (ReferenceEquals(this, other))
                 return true;
-            return EqualityComparer<T>.Default.Equals(_id, other._id);
+            return Equals(Id, other.Id);
         }
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
                 return false;
             if (ReferenceEquals(this, obj))
                 return true;
             if (obj.GetType() != GetType())
                 return false;
-            return Equals((Entity<T>) obj);
+            return Equals((Entity) obj);
         }
 
-        public override int GetHashCode() => EqualityComparer<T>.Default.GetHashCode(_id);
-
-        public static bool operator ==(Entity<T> left, Entity<T> right) => Equals(left, right);
-
-        public static bool operator !=(Entity<T> left, Entity<T> right) => !Equals(left, right);
+        public override int GetHashCode() => Id != null ? Id.GetHashCode() : 0;
+        public static bool operator ==(Entity left, Entity right) => Equals(left, right);
+        public static bool operator !=(Entity left, Entity right) => !Equals(left, right);
 
         #endregion
     }

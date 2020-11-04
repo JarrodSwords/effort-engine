@@ -1,10 +1,12 @@
+using System;
+
 namespace Effort.Domain
 {
-    public class Foo : Entity<FooId>
+    public class Foo : Entity
     {
         #region Core
 
-        public Foo(FooId id = null) : base(id)
+        public Foo(Guid id = new Guid()) : base(id)
         {
         }
 
@@ -13,12 +15,6 @@ namespace Effort.Domain
         #region Public Interface
 
         public int Bar { get; set; }
-
-        #endregion
-
-        #region Protected Interface
-
-        protected override FooId CreateId() => new FooId();
 
         #endregion
     }

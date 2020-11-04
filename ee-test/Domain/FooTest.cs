@@ -3,19 +3,19 @@ using Effort.Domain;
 
 namespace Effort.Test.Domain
 {
-    public class FooTest : EntityBaseTest<FooId>
+    public class FooTest : EntityBaseTest
     {
         #region Test Methods
 
-        protected override Entity<FooId> CreateDifferentEntity(Guid id)
+        protected override Entity CreateDifferentEntity(Guid id)
         {
             var foo = CreateEntity(id) as Foo;
             foo.Bar = 1;
             return foo;
         }
 
-        protected override Entity<FooId> CreateEntity(Guid id) => new Foo(new FooId(id));
-        protected override Entity<FooId> CreateEntity() => new Foo();
+        protected override Entity CreateEntity(Guid id) => new Foo(id);
+        protected override Entity CreateEntity() => new Foo();
 
         #endregion
     }

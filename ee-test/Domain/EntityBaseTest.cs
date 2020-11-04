@@ -5,13 +5,13 @@ using Xunit;
 
 namespace Effort.Test.Domain
 {
-    public abstract class EntityBaseTest<T> where T : Id
+    public abstract class EntityBaseTest
     {
         #region Test Methods
 
-        protected abstract Entity<T> CreateDifferentEntity(Guid id);
-        protected abstract Entity<T> CreateEntity(Guid id);
-        protected abstract Entity<T> CreateEntity();
+        protected abstract Entity CreateDifferentEntity(Guid id);
+        protected abstract Entity CreateEntity(Guid id);
+        protected abstract Entity CreateEntity();
 
         [Fact]
         public void EntitiesHaveIdentifierEquality()
