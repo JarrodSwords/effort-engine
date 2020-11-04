@@ -12,7 +12,7 @@ namespace Effort.Test.Domain
         protected abstract Entity CreateDifferentEntity(Guid id);
 
         [Fact]
-        public void CreatedWithId_SetsId()
+        public void CreatedWithId_HasCorrectId()
         {
             var id = Guid.NewGuid();
             var entity = CreateEntity(id);
