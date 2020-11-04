@@ -1,19 +1,27 @@
 namespace Effort.Domain
 {
-    public abstract class Entity
+    public abstract class Entity<T> where T : Id
     {
         #region Core
 
-        protected Entity(Id id)
+        private T _id;
+
+        protected Entity(T id)
         {
-            Id = id ?? new Id();
+            _id = id;
         }
 
         #endregion
 
         #region Public Interface
 
-        public Id Id { get; }
+        public T Id => _id ??= CreateId();
+
+        #endregion
+
+        #region Protected Interface
+
+        protected abstract T CreateId();
 
         #endregion
     }

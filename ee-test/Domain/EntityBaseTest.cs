@@ -5,12 +5,12 @@ using Xunit;
 
 namespace Effort.Test.Domain
 {
-    public abstract class EntityBaseTest
+    public abstract class EntityBaseTest<T> where T : Id
     {
         #region Test Methods
 
-        protected abstract Entity CreateEntity(Guid id);
-        protected abstract Entity CreateEntity();
+        protected abstract Entity<T> CreateEntity(Guid id);
+        protected abstract Entity<T> CreateEntity();
 
         [Fact]
         public void WhenCreatingEntity_WithId_EntityHasCorrectId()
