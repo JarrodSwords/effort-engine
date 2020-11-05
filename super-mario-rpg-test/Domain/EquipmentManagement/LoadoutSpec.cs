@@ -1,13 +1,14 @@
 using Effort.Domain;
+using Effort.Test.Domain;
 using SuperMarioRpg.Domain.EquipmentManagement;
 
 namespace SuperMarioRpg.Test.Domain.EquipmentManagement
 {
-    public class WeaponSpec : EquipmentSpec
+    public class LoadoutSpec : ValueObjectSpec<Loadout>
     {
         #region Protected Interface
 
-        protected override ValueObject<Equipment> CreateValueObject() => new Weapon("Hammer");
+        protected override ValueObject<Loadout> CreateValueObject() => new Loadout();
 
         #endregion
     }

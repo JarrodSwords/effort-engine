@@ -1,4 +1,5 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.EquipmentManagement
@@ -7,33 +8,41 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
     {
         #region Core
 
-        public Loadout()
-        {
-        }
+        private readonly IDictionary<EquipmentType, Equipment> _equipment;
 
-        public Loadout(Armor armor, Weapon weapon)
+        public Loadout(IDictionary<EquipmentType, Equipment> equipment = null)
         {
-            Armor = armor;
-            Weapon = weapon;
+            _equipment = equipment ?? new Dictionary<EquipmentType, Equipment>();
         }
 
         #endregion
 
         #region Public Interface
 
-        public Armor Armor { get; }
-        public Weapon Weapon { get; }
+        public Equipment this[EquipmentType equipmentType] => _equipment[equipmentType];
 
-        public Loadout Equip(Armor armor) => new Loadout(armor, Weapon);
-        public Loadout Equip(Weapon weapon) => new Loadout(Armor, weapon);
+        public Loadout Equip(Equipment equipment)
+        {
+            var loadout = _equipment;
+
+            if (loadout.ContainsKey(equipment.EquipmentType))
+                loadout[equipment.EquipmentType] = equipment;
+            else
+                loadout.Add(equipment.EquipmentType, equipment);
+
+            return new Loadout(loadout);
+        }
 
         #endregion
 
         #region Equality, Operators
 
-        protected override bool EqualsExplicit(Loadout other) => throw new NotImplementedException();
+        protected override bool EqualsExplicit(Loadout other) =>
+            _equipment.OrderBy(x => x.Key).SequenceEqual(
+                other._equipment.OrderBy(x => x.Key)
+            );
 
-        protected override int GetHashCodeExplicit() => throw new NotImplementedException();
+        protected override int GetHashCodeExplicit() => _equipment.GetHashCode();
 
         #endregion
     }

@@ -18,14 +18,9 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
 
         public Loadout Loadout { get; private set; }
 
-        public void Equip(Armor armor)
+        public void Equip(Equipment equipment)
         {
-            Loadout = Loadout.Equip(armor);
-        }
-
-        public void Equip(Weapon weapon)
-        {
-            Loadout = Loadout.Equip(weapon);
+            Loadout = Loadout.Equip(equipment);
         }
 
         #endregion

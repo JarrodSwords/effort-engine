@@ -2,12 +2,13 @@ using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.EquipmentManagement
 {
-    public abstract class Equipment : ValueObject<Equipment>
+    public class Equipment : ValueObject<Equipment>
     {
         #region Core
 
-        protected Equipment(string name)
+        public Equipment(EquipmentType equipmentType, string name)
         {
+            EquipmentType = equipmentType;
             Name = name;
         }
 
@@ -15,14 +16,17 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
 
         #region Public Interface
 
+        public EquipmentType EquipmentType { get; }
         public string Name { get; }
 
         #endregion
 
         #region Equality, Operators
 
-        protected override bool EqualsExplicit(Equipment other) => Name == other.Name;
-        protected override int GetHashCodeExplicit() => Name.GetHashCode();
+        protected override bool EqualsExplicit(Equipment other) =>
+            EquipmentType == other.EquipmentType && Name == other.Name;
+
+        protected override int GetHashCodeExplicit() => EquipmentType.GetHashCode() + Name.GetHashCode();
 
         #endregion
     }
