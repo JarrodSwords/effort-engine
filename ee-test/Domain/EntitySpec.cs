@@ -9,7 +9,6 @@ namespace Effort.Test.Domain
     {
         #region Protected Interface
 
-        protected abstract Entity CreateDifferentEntity(Guid id);
         protected abstract Entity CreateEntity(Guid id);
         protected abstract Entity CreateEntity();
 
@@ -39,7 +38,7 @@ namespace Effort.Test.Domain
         {
             var id = Guid.NewGuid();
             var entity1 = CreateEntity(id);
-            var entity2 = CreateDifferentEntity(id);
+            var entity2 = CreateEntity(id);
 
             entity2.Should().NotBeSameAs(entity1);
             entity2.Should().BeEquivalentTo(entity1, o => o.RespectingRuntimeTypes());

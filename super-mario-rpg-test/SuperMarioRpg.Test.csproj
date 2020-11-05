@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ee-test\Effort.Test.csproj" />
     <ProjectReference Include="..\super-mario-rpg\SuperMarioRpg.csproj" />
   </ItemGroup>
 
