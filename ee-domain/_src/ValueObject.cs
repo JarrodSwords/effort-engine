@@ -7,22 +7,23 @@ namespace Effort.Domain
     {
         #region Equality, Operators
 
-        public abstract bool Equals(T other);
-
         public override bool Equals(object obj)
         {
-            if (obj is null)
+            if (!(obj is T valueObject))
                 return false;
-            if (ReferenceEquals(this, obj))
+            if (ReferenceEquals(this, valueObject))
                 return true;
-            if (obj.GetType() != GetType())
+            if (valueObject.GetType() != GetType())
                 return false;
-            return Equals((ValueObject<T>) obj);
+            return EqualsExplicit(valueObject);
         }
 
         public bool Equals(ValueObject<T> other) => throw new NotImplementedException();
 
-        public override int GetHashCode() => throw new NotImplementedException();
+        protected abstract bool EqualsExplicit(T other);
+
+        public override int GetHashCode() => GetHashCodeExplicit();
+        protected abstract int GetHashCodeExplicit();
 
         public static bool operator ==(ValueObject<T> left, ValueObject<T> right) => Equals(left, right);
 

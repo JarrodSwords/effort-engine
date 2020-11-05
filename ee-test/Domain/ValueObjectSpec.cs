@@ -24,6 +24,15 @@ namespace Effort.Test.Domain
             valueObject2.Should().Be(valueObject1);
         }
 
+        [Fact]
+        public void HasStructureEquality()
+        {
+            var valueObject1 = CreateValueObject();
+            var valueObject2 = CreateValueObject();
+
+            valueObject2.Should().BeEquivalentTo(valueObject1);
+        }
+
         #endregion
     }
 }

@@ -19,7 +19,8 @@ namespace Effort.Domain
 
         #region Equality, Operators
 
-        public override bool Equals(Bar other) => Size == other.Size;
+        protected override bool EqualsExplicit(Bar other) => Size == other.Size;
+        protected override int GetHashCodeExplicit() => Size.GetHashCode();
 
         #endregion
     }
