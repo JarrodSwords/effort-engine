@@ -17,7 +17,7 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
         private EquipmentFactory()
         {
             _equipment = new Dictionary<EquipmentType, Equipment>();
-            InitializeEquippables();
+            InitializeEquipment();
         }
 
         #endregion
@@ -30,7 +30,7 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
 
         #region Private Interface
 
-        private void InitializeEquippables()
+        private void InitializeEquipment()
         {
             _equipment.Add(EquipmentType.Hammer, new Equipment(Slot.Weapon, "Hammer"));
             _equipment.Add(EquipmentType.Shirt, new Equipment(Slot.Armor, "Shirt"));
