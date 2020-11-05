@@ -12,11 +12,11 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
 
         #region Core
 
-        private readonly IDictionary<Equippable, Equipment> _equipment;
+        private readonly IDictionary<EquipmentType, Equipment> _equipment;
 
         private EquipmentFactory()
         {
-            _equipment = new Dictionary<Equippable, Equipment>();
+            _equipment = new Dictionary<EquipmentType, Equipment>();
             InitializeEquippables();
         }
 
@@ -24,7 +24,7 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
 
         #region Public Interface
 
-        public Equipment Create(Equippable equippable) => _equipment[equippable].Clone();
+        public Equipment Create(EquipmentType equipmentType) => _equipment[equipmentType].Clone();
 
         #endregion
 
@@ -32,8 +32,8 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
 
         private void InitializeEquippables()
         {
-            _equipment.Add(Equippable.Hammer, new Equipment(EquipmentType.Weapon, "Hammer"));
-            _equipment.Add(Equippable.Shirt, new Equipment(EquipmentType.Armor, "Shirt"));
+            _equipment.Add(EquipmentType.Hammer, new Equipment(Slot.Weapon, "Hammer"));
+            _equipment.Add(EquipmentType.Shirt, new Equipment(Slot.Armor, "Shirt"));
         }
 
         #endregion

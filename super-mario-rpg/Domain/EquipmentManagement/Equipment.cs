@@ -6,14 +6,14 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
     {
         #region Core
 
-        public Equipment(EquipmentType equipmentType, string name)
+        public Equipment(Slot slot, string name)
         {
-            EquipmentType = equipmentType;
+            Slot = slot;
             Name = name;
         }
 
         private Equipment(Equipment equipment) : this(
-            equipment.EquipmentType,
+            equipment.Slot,
             equipment.Name
         )
         {
@@ -23,7 +23,7 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
 
         #region Public Interface
 
-        public EquipmentType EquipmentType { get; }
+        public Slot Slot { get; }
         public string Name { get; }
 
         public Equipment Clone() => new Equipment(this);
@@ -33,9 +33,9 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
         #region Equality, Operators
 
         protected override bool EqualsExplicit(Equipment other) =>
-            EquipmentType == other.EquipmentType && Name == other.Name;
+            Slot == other.Slot && Name == other.Name;
 
-        protected override int GetHashCodeExplicit() => EquipmentType.GetHashCode() + Name.GetHashCode();
+        protected override int GetHashCodeExplicit() => Slot.GetHashCode() + Name.GetHashCode();
 
         #endregion
     }

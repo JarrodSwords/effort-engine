@@ -1,8 +1,8 @@
 namespace SuperMarioRpg.Domain.EquipmentManagement
 {
-    public enum Equippable
+    public enum Slot
     {
-        Hammer,
-        Shirt
+        Armor,
+        Weapon
     }
 }

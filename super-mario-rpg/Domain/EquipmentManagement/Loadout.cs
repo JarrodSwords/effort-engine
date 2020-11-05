@@ -8,27 +8,27 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
     {
         #region Core
 
-        private readonly IDictionary<EquipmentType, Equipment> _equipment;
+        private readonly IDictionary<Slot, Equipment> _equipment;
 
-        public Loadout(IDictionary<EquipmentType, Equipment> equipment = null)
+        public Loadout(IDictionary<Slot, Equipment> equipment = null)
         {
-            _equipment = equipment ?? new Dictionary<EquipmentType, Equipment>();
+            _equipment = equipment ?? new Dictionary<Slot, Equipment>();
         }
 
         #endregion
 
         #region Public Interface
 
-        public Equipment this[EquipmentType equipmentType] => _equipment[equipmentType];
+        public Equipment this[Slot slot] => _equipment[slot];
 
         public Loadout Equip(Equipment equipment)
         {
             var loadout = _equipment;
 
-            if (loadout.ContainsKey(equipment.EquipmentType))
-                loadout[equipment.EquipmentType] = equipment;
+            if (loadout.ContainsKey(equipment.Slot))
+                loadout[equipment.Slot] = equipment;
             else
-                loadout.Add(equipment.EquipmentType, equipment);
+                loadout.Add(equipment.Slot, equipment);
 
             return new Loadout(loadout);
         }

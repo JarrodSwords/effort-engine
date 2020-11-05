@@ -15,16 +15,16 @@ namespace SuperMarioRpg.Test.Domain.EquipmentManagement
         protected override Entity CreateEntity(Guid id) => new Combatant(id);
 
         [Theory]
-        [InlineData(Equippable.Hammer)]
-        [InlineData(Equippable.Shirt)]
-        public void WhenEquipping_CombatantUpdated(Equippable equippable)
+        [InlineData(EquipmentType.Hammer)]
+        [InlineData(EquipmentType.Shirt)]
+        public void WhenEquipping_CombatantUpdated(EquipmentType equipmentType)
         {
-            var equipment = EquipmentFactory.Instance.Create(equippable);
+            var equipment = EquipmentFactory.Instance.Create(equipmentType);
             var combatant = new Combatant();
 
             combatant.Equip(equipment);
 
-            combatant.Loadout[equipment.EquipmentType].Should().Be(equipment);
+            combatant.Loadout[equipment.Slot].Should().Be(equipment);
         }
 
         #endregion
