@@ -9,23 +9,23 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
 
         public Combatant(Guid id = new Guid()) : base(id)
         {
+            Loadout = new Loadout();
         }
 
         #endregion
 
         #region Public Interface
 
-        public Armor Armor { get; private set; }
-        public Weapon Weapon { get; private set; }
-
-        public void Equip(Weapon weapon)
-        {
-            Weapon = weapon;
-        }
+        public Loadout Loadout { get; private set; }
 
         public void Equip(Armor armor)
         {
-            Armor = armor;
+            Loadout = Loadout.Equip(armor);
+        }
+
+        public void Equip(Weapon weapon)
+        {
+            Loadout = Loadout.Equip(weapon);
         }
 
         #endregion

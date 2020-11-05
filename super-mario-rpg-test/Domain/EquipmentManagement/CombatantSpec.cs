@@ -22,7 +22,7 @@ namespace SuperMarioRpg.Test.Domain.EquipmentManagement
 
             combatant.Equip(armor);
 
-            combatant.Armor.Should().Be(armor);
+            combatant.Loadout.Armor.Should().Be(armor);
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace SuperMarioRpg.Test.Domain.EquipmentManagement
 
             combatant.Equip(weapon);
 
-            combatant.Weapon.Should().Be(weapon);
+            combatant.Loadout.Weapon.Should().Be(weapon);
         }
 
         #endregion
