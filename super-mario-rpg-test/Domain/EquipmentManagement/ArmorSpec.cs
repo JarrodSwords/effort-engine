@@ -1,14 +1,13 @@
 using Effort.Domain;
-using Effort.Test.Domain;
 using SuperMarioRpg.Domain.EquipmentManagement;
 
 namespace SuperMarioRpg.Test.Domain.EquipmentManagement
 {
-    public class ArmorSpec : ValueObjectSpec<Armor>
+    public class ArmorSpec : EquipmentSpec
     {
         #region Protected Interface
 
-        protected override ValueObject<Armor> CreateValueObject() => new Armor("Shirt");
+        protected override ValueObject<Equipment> CreateValueObject() => new Armor("Shirt");
 
         #endregion
     }

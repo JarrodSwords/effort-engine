@@ -1,28 +1,12 @@
-using Effort.Domain;
-
 namespace SuperMarioRpg.Domain.EquipmentManagement
 {
-    public class Armor : ValueObject<Armor>
+    public class Armor : Equipment
     {
         #region Core
 
-        public Armor(string name)
+        public Armor(string name) : base(name)
         {
-            Name = name;
         }
-
-        #endregion
-
-        #region Public Interface
-
-        public string Name { get; }
-
-        #endregion
-
-        #region Equality, Operators
-
-        protected override bool EqualsExplicit(Armor other) => Name == other.Name;
-        protected override int GetHashCodeExplicit() => Name.GetHashCode();
 
         #endregion
     }
