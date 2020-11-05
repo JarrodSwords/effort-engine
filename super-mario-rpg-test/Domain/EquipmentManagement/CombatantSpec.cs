@@ -15,6 +15,17 @@ namespace SuperMarioRpg.Test.Domain.EquipmentManagement
         protected override Entity CreateEntity(Guid id) => new Combatant(id);
 
         [Fact]
+        public void WhenEquippingArmor_ArmorIsSet()
+        {
+            var armor = new Armor("Shirt");
+            var combatant = new Combatant();
+
+            combatant.Equip(armor);
+
+            combatant.Armor.Should().Be(armor);
+        }
+
+        [Fact]
         public void WhenEquippingWeapon_WeaponIsSet()
         {
             var weapon = new Weapon("Hammer");
