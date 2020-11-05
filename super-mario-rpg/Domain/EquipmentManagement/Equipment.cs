@@ -12,12 +12,21 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
             Name = name;
         }
 
+        private Equipment(Equipment equipment) : this(
+            equipment.EquipmentType,
+            equipment.Name
+        )
+        {
+        }
+
         #endregion
 
         #region Public Interface
 
         public EquipmentType EquipmentType { get; }
         public string Name { get; }
+
+        public Equipment Clone() => new Equipment(this);
 
         #endregion
 
