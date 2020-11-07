@@ -19,14 +19,10 @@ namespace Effort.Domain
         }
 
         public bool Equals(ValueObject<T> other) => throw new NotImplementedException();
-
         protected abstract bool EqualsExplicit(T other);
-
         public override int GetHashCode() => GetHashCodeExplicit();
         protected abstract int GetHashCodeExplicit();
-
         public static bool operator ==(ValueObject<T> left, ValueObject<T> right) => Equals(left, right);
-
         public static bool operator !=(ValueObject<T> left, ValueObject<T> right) => !Equals(left, right);
 
         #endregion

@@ -28,7 +28,7 @@ namespace Effort.Domain
                 return false;
             if (ReferenceEquals(this, other))
                 return true;
-            return EqualityComparer<T>.Default.Equals(Value, other.Value);
+            return EqualsExplicit(other);
         }
 
         public override bool Equals(object obj)
@@ -39,10 +39,12 @@ namespace Effort.Domain
                 return true;
             if (obj.GetType() != GetType())
                 return false;
-            return EqualsExplicit((TinyType<T>) obj);
+            return Equals((TinyType<T>) obj);
         }
 
-        public virtual bool EqualsExplicit(TinyType<T> other) => Equals(other);
+        protected virtual bool EqualsExplicit(TinyType<T> other) =>
+            EqualityComparer<T>.Default.Equals(Value, other.Value);
+
         public override int GetHashCode() => EqualityComparer<T>.Default.GetHashCode(Value);
         public static bool operator ==(TinyType<T> left, TinyType<T> right) => Equals(left, right);
         public static bool operator !=(TinyType<T> left, TinyType<T> right) => !Equals(left, right);
