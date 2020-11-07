@@ -2,8 +2,8 @@ using System;
 
 namespace Effort.Domain
 {
-    public abstract class ValueObject<T> : IEquatable<ValueObject<T>>
-        where T : ValueObject<T>
+    public abstract class ValueObject<T> :
+        IEquatable<ValueObject<T>> where T : ValueObject<T>
     {
         #region Equality, Operators
 
