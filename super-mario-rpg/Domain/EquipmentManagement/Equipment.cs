@@ -24,7 +24,6 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
         #region Public Interface
 
         public string Name { get; }
-
         public Slot Slot { get; }
 
         public Equipment Clone() => new Equipment(this);

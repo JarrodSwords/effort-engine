@@ -7,4 +7,8 @@
     <RootNamespace>Effort</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Effort.csproj.DotSettings" />
+  </ItemGroup>
+
 </Project>
