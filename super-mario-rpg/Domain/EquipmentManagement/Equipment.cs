@@ -23,8 +23,9 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
 
         #region Public Interface
 
-        public Slot Slot { get; }
         public string Name { get; }
+
+        public Slot Slot { get; }
 
         public Equipment Clone() => new Equipment(this);
 
@@ -32,8 +33,7 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
 
         #region Equality, Operators
 
-        protected override bool EqualsExplicit(Equipment other) =>
-            Slot == other.Slot && Name == other.Name;
+        protected override bool EqualsExplicit(Equipment other) => Slot == other.Slot && Name == other.Name;
 
         protected override int GetHashCodeExplicit() => Slot.GetHashCode() + Name.GetHashCode();
 
