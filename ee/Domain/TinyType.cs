@@ -39,13 +39,12 @@ namespace Effort.Domain
                 return true;
             if (obj.GetType() != GetType())
                 return false;
-            return Equals((TinyType<T>) obj);
+            return EqualsExplicit((TinyType<T>) obj);
         }
 
+        public virtual bool EqualsExplicit(TinyType<T> other) => Equals(other);
         public override int GetHashCode() => EqualityComparer<T>.Default.GetHashCode(Value);
-
         public static bool operator ==(TinyType<T> left, TinyType<T> right) => Equals(left, right);
-
         public static bool operator !=(TinyType<T> left, TinyType<T> right) => !Equals(left, right);
 
         #endregion
