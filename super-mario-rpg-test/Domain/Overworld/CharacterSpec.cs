@@ -9,10 +9,10 @@ namespace SuperMarioRpg.Test.Domain.Overworld
         #region Test Methods
 
         [Fact]
-        public void CharacterCanMoveToLocation()
+        public void CanMoveToLocation()
         {
             var character = new Character();
-            var location = new Location();
+            var location = new Location("Mario's Pad");
 
             character.Move(location);
 
