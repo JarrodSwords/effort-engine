@@ -8,14 +8,14 @@ namespace SuperMarioRpg.Domain.Overworld
 
         public Location(string name)
         {
-            Name = name;
+            Name = Name.Create(name);
         }
 
         #endregion
 
         #region Public Interface
 
-        public string Name { get; }
+        public Name Name { get; }
 
         #endregion
 
