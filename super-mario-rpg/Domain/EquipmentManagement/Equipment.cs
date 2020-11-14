@@ -9,12 +9,12 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
         public Equipment(Slot slot, string name)
         {
             Slot = slot;
-            Name = name;
+            Name = Name.Create(name);
         }
 
         private Equipment(Equipment equipment) : this(
             equipment.Slot,
-            equipment.Name
+            equipment.Name.Value
         )
         {
         }
@@ -23,8 +23,7 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
 
         #region Public Interface
 
-        public string Name { get; }
-
+        public Name Name { get; }
         public Slot Slot { get; }
 
         public Equipment Clone() => new Equipment(this);
