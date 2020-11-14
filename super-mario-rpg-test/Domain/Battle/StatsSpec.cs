@@ -1,4 +1,5 @@
-﻿using Effort.Domain;
+﻿using System;
+using Effort.Domain;
 using Effort.Test.Domain;
 using FluentAssertions;
 using SuperMarioRpg.Domain.Battle;
@@ -9,6 +10,37 @@ namespace SuperMarioRpg.Test.Domain.Battle
     public class StatsSpec : ValueObjectSpec<Stats>
     {
         #region Test Methods
+
+        [Theory]
+        [InlineData(256, 0, 0, 0, 0, 0)]
+        [InlineData(0, 256, 0, 0, 0, 0)]
+        [InlineData(0, 0, 256, 0, 0, 0)]
+        [InlineData(0, 0, 0, 256, 0, 0)]
+        [InlineData(0, 0, 0, 0, 256, 0)]
+        [InlineData(0, 0, 0, 0, 0, 256)]
+        public void CannotExceedUpperBounds(
+            short attack,
+            short defense,
+            short hitPoints,
+            short specialAttack,
+            short specialDefense,
+            short speed
+        )
+        {
+            Action createInvalidStats = () =>
+            {
+                var stats = new Stats(
+                    attack,
+                    defense,
+                    hitPoints,
+                    specialAttack,
+                    specialDefense,
+                    speed
+                );
+            };
+
+            createInvalidStats.Should().Throw<ArgumentOutOfRangeException>();
+        }
 
         protected override ValueObject<Stats> CreateValueObject() => new Stats(20, 0, 20, 10, 2, 20);
 

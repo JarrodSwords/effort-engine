@@ -1,4 +1,5 @@
-﻿using Effort.Domain;
+﻿using System;
+using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Battle
 {
@@ -6,15 +7,59 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
+        public const short Max = 255;
+
         public Stats(
-            byte attack,
-            byte defense,
-            byte hitPoints,
-            byte specialAttack,
-            byte specialDefense,
-            byte speed
+            short attack,
+            short defense,
+            short hitPoints,
+            short specialAttack,
+            short specialDefense,
+            short speed
         )
         {
+            if (attack > Max)
+                throw new ArgumentOutOfRangeException(
+                    nameof(attack),
+                    attack,
+                    $"\"{nameof(Attack)}\" cannot exceed {Max}."
+                );
+
+            if (defense > Max)
+                throw new ArgumentOutOfRangeException(
+                    nameof(attack),
+                    attack,
+                    $"\"{nameof(Defense)}\" cannot exceed {Max}."
+                );
+
+            if (hitPoints > Max)
+                throw new ArgumentOutOfRangeException(
+                    nameof(attack),
+                    attack,
+                    $"\"{nameof(HitPoints)}\" cannot exceed {Max}."
+                );
+
+            if (specialAttack > Max)
+                throw new ArgumentOutOfRangeException(
+                    nameof(attack),
+                    attack,
+                    $"\"{nameof(SpecialAttack)}\" cannot exceed {Max}."
+                );
+
+            if (specialDefense > Max)
+                throw new ArgumentOutOfRangeException(
+                    nameof(attack),
+                    attack,
+                    $"\"{nameof(SpecialDefense)}\" cannot exceed {Max}."
+                );
+
+            if (speed > Max)
+                throw new ArgumentOutOfRangeException(
+                    nameof(attack),
+                    attack,
+                    $"\"{nameof(Speed)}\" cannot exceed {Max}."
+                );
+
             Attack = attack;
             Defense = defense;
             HitPoints = hitPoints;
@@ -27,12 +72,12 @@ namespace SuperMarioRpg.Domain.Battle
 
         #region Public Interface
 
-        public byte Attack { get; }
-        public byte Defense { get; }
-        public byte HitPoints { get; }
-        public byte SpecialAttack { get; }
-        public byte SpecialDefense { get; }
-        public byte Speed { get; }
+        public short Attack { get; }
+        public short Defense { get; }
+        public short HitPoints { get; }
+        public short SpecialAttack { get; }
+        public short SpecialDefense { get; }
+        public short Speed { get; }
 
         #endregion
 
@@ -51,12 +96,12 @@ namespace SuperMarioRpg.Domain.Battle
 
         public static Stats operator +(Stats addend1, Stats addend2) =>
             new Stats(
-                (byte) (addend1.Attack + addend2.Attack),
-                (byte) (addend1.Defense + addend2.Defense),
-                (byte) (addend1.HitPoints + addend2.HitPoints),
-                (byte) (addend1.SpecialAttack + addend2.SpecialAttack),
-                (byte) (addend1.SpecialDefense + addend2.SpecialDefense),
-                (byte) (addend1.Speed + addend2.Speed)
+                (short) (addend1.Attack + addend2.Attack),
+                (short) (addend1.Defense + addend2.Defense),
+                (short) (addend1.HitPoints + addend2.HitPoints),
+                (short) (addend1.SpecialAttack + addend2.SpecialAttack),
+                (short) (addend1.SpecialDefense + addend2.SpecialDefense),
+                (short) (addend1.Speed + addend2.Speed)
             );
 
         #endregion
