@@ -6,7 +6,14 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
-        public Stats(byte attack, byte defense, byte hitPoints, byte specialAttack, byte specialDefense, byte speed)
+        public Stats(
+            byte attack,
+            byte defense,
+            byte hitPoints,
+            byte specialAttack,
+            byte specialDefense,
+            byte speed
+        )
         {
             Attack = attack;
             Defense = defense;
@@ -41,6 +48,16 @@ namespace SuperMarioRpg.Domain.Battle
 
         protected override int GetHashCodeExplicit() =>
             (Attack, Defense, HitPoints, SpecialAttack, SpecialDefense, Speed).GetHashCode();
+
+        public static Stats operator +(Stats addend1, Stats addend2) =>
+            new Stats(
+                (byte) (addend1.Attack + addend2.Attack),
+                (byte) (addend1.Defense + addend2.Defense),
+                (byte) (addend1.HitPoints + addend2.HitPoints),
+                (byte) (addend1.SpecialAttack + addend2.SpecialAttack),
+                (byte) (addend1.SpecialDefense + addend2.SpecialDefense),
+                (byte) (addend1.Speed + addend2.Speed)
+            );
 
         #endregion
     }
