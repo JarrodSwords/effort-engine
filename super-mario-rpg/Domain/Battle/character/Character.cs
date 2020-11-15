@@ -10,12 +10,24 @@ namespace SuperMarioRpg.Domain.Battle
         {
             Loadout = builder.Loadout;
             Stats = builder.Stats;
+
+            EffectiveStats = Stats;
+
+            if (Loadout?.Accessory != null)
+                EffectiveStats += Loadout.Accessory.Stats;
+
+            if (Loadout?.Armor != null)
+                EffectiveStats += Loadout.Armor.Stats;
+
+            if (Loadout?.Weapon != null)
+                EffectiveStats += Loadout.Weapon.Stats;
         }
 
         #endregion
 
         #region Public Interface
 
+        public Stats EffectiveStats { get; }
         public Loadout Loadout { get; }
         public Stats Stats { get; }
 
