@@ -11,21 +11,34 @@ namespace SuperMarioRpg.Test.Domain.Battle
     {
         #region Test Methods
 
+        protected override TinyType<short> CreateTinyType(short value) => new Stat(value);
+        protected override short CreateValue() => 10;
+
         [Theory]
-        [InlineData(-256)]
-        [InlineData(256)]
-        public void CannotExceedBounds(short value)
+        [InlineData(Stat.Max, 1)]
+        [InlineData(Stat.Min, -1)]
+        public void WhenAdding_OutOfBounds_SumIsClamped(short limit, short addend)
+        {
+            var addend1 = new Stat(limit);
+            var addend2 = new Stat(addend);
+
+            var sum = addend1 + addend2;
+
+            sum.Value.Should().Be(limit);
+        }
+
+        [Theory]
+        [InlineData(Stat.Max, 1)]
+        [InlineData(Stat.Min, -1)]
+        public void WhenInstantiating_WithValueOutOfRange_ThrowException(short limit, short addend)
         {
             Action createInvalidStat = () =>
             {
-                var stat = new Stat(value);
+                var stat = new Stat((short) (limit + addend));
             };
 
             createInvalidStat.Should().Throw<ArgumentOutOfRangeException>();
         }
-
-        protected override TinyType<short> CreateTinyType(short value) => new Stat(value);
-        protected override short CreateValue() => 10;
 
         #endregion
     }

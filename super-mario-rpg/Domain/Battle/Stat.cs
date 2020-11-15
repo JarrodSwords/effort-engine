@@ -7,8 +7,8 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
-        private const short Max = 255;
-        private const short Min = -255;
+        public const short Max = 255;
+        public const short Min = -255;
 
         public Stat(short value) : base(value)
         {
@@ -31,7 +31,15 @@ namespace SuperMarioRpg.Domain.Battle
 
         #region Equality, Operators
 
-        public static Stat operator +(Stat addend1, Stat addend2) => new Stat((short) (addend1.Value + addend2.Value));
+        public static Stat operator +(Stat addend1, Stat addend2)
+        {
+            var sum = (short) (addend1.Value + addend2.Value);
+
+            // clamp
+            sum = sum < Min ? Min : sum > Max ? Max : sum;
+
+            return new Stat(sum);
+        }
 
         #endregion
     }
