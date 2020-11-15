@@ -9,22 +9,15 @@ namespace SuperMarioRpg.Domain.Battle
 
         public Character(CharacterBuilder builder) : base(builder.Id)
         {
-            if (builder.Loadout != null && !builder.Loadout.CheckCompatibility(builder.Character))
+            if (!builder.Loadout.CheckCompatibility(builder.Character))
                 throw new ArgumentException();
 
             Loadout = builder.Loadout;
             Stats = builder.Stats;
-
-            EffectiveStats = Stats;
-
-            if (Loadout?.Accessory != null)
-                EffectiveStats += Loadout.Accessory.Stats;
-
-            if (Loadout?.Armor != null)
-                EffectiveStats += Loadout.Armor.Stats;
-
-            if (Loadout?.Weapon != null)
-                EffectiveStats += Loadout.Weapon.Stats;
+            EffectiveStats = Stats
+                           + Loadout.Accessory.Stats
+                           + Loadout.Armor.Stats
+                           + Loadout.Weapon.Stats;
         }
 
         #endregion
