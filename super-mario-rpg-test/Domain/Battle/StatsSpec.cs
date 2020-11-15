@@ -13,7 +13,7 @@ namespace SuperMarioRpg.Test.Domain.Battle
         protected override ValueObject<Stats> CreateValueObject() => new Stats(20, 0, 20, 10, 2, 20);
 
         [Fact]
-        public void SupportsAddition_WithinBounds()
+        public void WhenAdding_EachStatIsSummed()
         {
             var addend1 = new Stats(20, 0, 20, 10, 2, 20);
             var addend2 = new Stats(1, 2, 3, 4, 5, 6);
