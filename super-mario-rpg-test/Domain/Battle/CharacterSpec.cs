@@ -40,7 +40,7 @@ namespace SuperMarioRpg.Test.Domain.Battle
             _director.ConfigureCharacter(characterBuilder);
 
             var character = characterBuilder.Build();
-            var expectedStats = character.Stats + _hammer.Stats + _jumpShoes.Stats + _shirt.Stats;
+            var expectedStats = character.NaturalStats + _hammer.Stats + _jumpShoes.Stats + _shirt.Stats;
 
             character.EffectiveStats.Should().BeEquivalentTo(expectedStats);
         }

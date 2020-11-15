@@ -7,13 +7,14 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
+        private readonly Characters _character;
         private readonly List<Equipment> _equipment;
         private Loadout _loadout;
-        private Stats _stats;
+        private Stats _naturalStats;
 
         public CharacterBuilder(Characters character)
         {
-            Character = character;
+            _character = character;
             _equipment = new List<Equipment>();
         }
 
@@ -21,7 +22,6 @@ namespace SuperMarioRpg.Domain.Battle
 
         #region Public Interface
 
-        public Characters Character { get; }
         public Stats EffectiveStats { get; private set; }
         public Guid Id { get; private set; }
 
@@ -31,22 +31,16 @@ namespace SuperMarioRpg.Domain.Battle
             private set => _loadout = value;
         }
 
-        public Stats Stats
+        public Stats NaturalStats
         {
-            get => _stats ??= new Stats();
-            private set => _stats = value;
+            get => _naturalStats ??= new Stats();
+            private set => _naturalStats = value;
         }
 
         public Character Build()
         {
             Validate();
             return new Character(this);
-        }
-
-        public void Validate()
-        {
-            if (!Loadout.IsCompatible(Character))
-                throw new ArgumentException();
         }
 
         public CharacterBuilder WithEquipment(params Equipment[] equipment)
@@ -63,11 +57,21 @@ namespace SuperMarioRpg.Domain.Battle
 
         #endregion
 
+        #region Private Interface
+
+        private void Validate()
+        {
+            if (!Loadout.IsCompatible(_character))
+                throw new ArgumentException();
+        }
+
+        #endregion
+
         #region ICharacterBuilder
 
         public void CalculateEffectiveStats()
         {
-            EffectiveStats = Stats
+            EffectiveStats = NaturalStats
                            + Loadout.Accessory.Stats
                            + Loadout.Armor.Stats
                            + Loadout.Weapon.Stats;
@@ -78,9 +82,9 @@ namespace SuperMarioRpg.Domain.Battle
             Loadout = new Loadout(_equipment.ToArray());
         }
 
-        public void CreateStats()
+        public void CreateNaturalStats()
         {
-            Stats = StatFactory.Instance.Create(Character);
+            NaturalStats = StatFactory.Instance.Create(_character);
         }
 
         #endregion

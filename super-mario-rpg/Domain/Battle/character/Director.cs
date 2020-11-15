@@ -7,7 +7,7 @@ namespace SuperMarioRpg.Domain.Battle
         public void ConfigureCharacter(ICharacterBuilder builder)
         {
             builder.CreateLoadout();
-            builder.CreateStats();
+            builder.CreateNaturalStats();
             builder.CalculateEffectiveStats();
         }
 

@@ -4,6 +4,6 @@ namespace SuperMarioRpg.Domain.Battle
     {
         void CalculateEffectiveStats();
         void CreateLoadout();
-        void CreateStats();
+        void CreateNaturalStats();
     }
 }

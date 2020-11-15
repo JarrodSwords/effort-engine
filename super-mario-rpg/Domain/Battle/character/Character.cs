@@ -8,9 +8,9 @@ namespace SuperMarioRpg.Domain.Battle
 
         public Character(CharacterBuilder builder) : base(builder.Id)
         {
-            Loadout = builder.Loadout;
-            Stats = builder.Stats;
             EffectiveStats = builder.EffectiveStats;
+            Loadout = builder.Loadout;
+            NaturalStats = builder.NaturalStats;
         }
 
         #endregion
@@ -19,7 +19,7 @@ namespace SuperMarioRpg.Domain.Battle
 
         public Stats EffectiveStats { get; }
         public Loadout Loadout { get; }
-        public Stats Stats { get; }
+        public Stats NaturalStats { get; }
 
         #endregion
     }
