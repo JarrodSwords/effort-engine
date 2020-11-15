@@ -52,12 +52,12 @@ namespace SuperMarioRpg.Test.Domain.Battle
 
             var sum = addend1 + addend2;
 
-            sum.Attack.Should().Be(21);
-            sum.Defense.Should().Be(2);
-            sum.HitPoints.Should().Be(23);
-            sum.SpecialAttack.Should().Be(14);
-            sum.SpecialDefense.Should().Be(7);
-            sum.Speed.Should().Be(26);
+            sum.Attack.Value.Should().Be(21);
+            sum.Defense.Value.Should().Be(2);
+            sum.HitPoints.Value.Should().Be(23);
+            sum.SpecialAttack.Value.Should().Be(14);
+            sum.SpecialDefense.Value.Should().Be(7);
+            sum.Speed.Value.Should().Be(26);
         }
 
         #endregion
