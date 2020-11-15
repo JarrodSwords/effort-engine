@@ -4,14 +4,14 @@ using Xunit;
 
 namespace SuperMarioRpg.Test.Domain.Battle
 {
-    public class EquipmentFactorySpec
+    public class CharacterFactorySpec
     {
         #region Test Methods
 
         [Theory]
-        [InlineData(EquipmentType.Shirt, 0, 6, 0, 0, 6)]
+        [InlineData(CharacterType.Mario, 20, 0, 20, 10, 2, 20)]
         public void HasExpectedStats(
-            EquipmentType equipmentType,
+            CharacterType characterType,
             short attack = 0,
             short defense = 0,
             short hitPoints = 0,
@@ -22,9 +22,9 @@ namespace SuperMarioRpg.Test.Domain.Battle
         {
             var expectedStats = new Stats(attack, defense, hitPoints, specialAttack, specialDefense, speed);
 
-            var equipment = EquipmentFactory.Instance.Create(equipmentType);
+            var character = CharacterFactory.Instance.Create(characterType);
 
-            equipment.Stats.Should().BeEquivalentTo(expectedStats);
+            character.Stats.Should().BeEquivalentTo(expectedStats);
         }
 
         #endregion
