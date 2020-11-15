@@ -10,7 +10,7 @@ namespace SuperMarioRpg.Domain.Battle
 
         private readonly List<Equipment> _equipment;
 
-        public CharacterBuilder(Characters character) : base(character)
+        public CharacterBuilder(Characters characterType) : base(characterType)
         {
             _equipment = new List<Equipment>();
         }

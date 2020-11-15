@@ -2,6 +2,7 @@ using System;
 using Effort.Domain;
 using Effort.Test.Domain;
 using FluentAssertions;
+using FluentValidation;
 using SuperMarioRpg.Domain.Battle;
 using Xunit;
 
@@ -30,8 +31,7 @@ namespace SuperMarioRpg.Test.Domain.Battle
 
         protected override Entity CreateEntity() => new CharacterBuilder(Characters.Mario).Build();
 
-        protected override Entity CreateEntity(Guid id) =>
-            new CharacterBuilder(Characters.Mario).WithId(id).Build();
+        protected override Entity CreateEntity(Guid id) => new CharacterBuilder(Characters.Mario).WithId(id).Build();
 
         [Fact]
         public void EffectiveStatsAreSumOfNaturalStatsAndLoadout()
@@ -78,7 +78,7 @@ namespace SuperMarioRpg.Test.Domain.Battle
                 var character = builder.Build();
             };
 
-            createInvalidCharacter.Should().Throw<ArgumentException>();
+            createInvalidCharacter.Should().Throw<ValidationException>();
         }
 
         #endregion
