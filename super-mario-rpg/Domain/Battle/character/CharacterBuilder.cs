@@ -7,12 +7,11 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
-        private readonly CharacterType _characterType;
         private readonly List<Equipment> _equipment;
 
-        public CharacterBuilder(CharacterType characterType)
+        public CharacterBuilder(Characters character)
         {
-            _characterType = characterType;
+            Character = character;
             _equipment = new List<Equipment>();
         }
 
@@ -20,6 +19,7 @@ namespace SuperMarioRpg.Domain.Battle
 
         #region Public Interface
 
+        public Characters Character { get; }
         public Guid Id { get; private set; }
         public Loadout Loadout { get; private set; }
         public Stats Stats { get; private set; }
@@ -49,7 +49,7 @@ namespace SuperMarioRpg.Domain.Battle
 
         public void CreateStats()
         {
-            Stats = StatFactory.Instance.Create(_characterType);
+            Stats = StatFactory.Instance.Create(Character);
         }
 
         #endregion

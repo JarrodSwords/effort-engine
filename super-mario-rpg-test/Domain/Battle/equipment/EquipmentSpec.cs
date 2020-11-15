@@ -13,7 +13,7 @@ namespace SuperMarioRpg.Test.Domain.Battle
         [Fact]
         public void CanBeCloned()
         {
-            var shirt1 = new Equipment(Slot.Armor, "Shirt", new Stats());
+            var shirt1 = new Equipment("Shirt", Slot.Armor, new Stats(), Characters.Mario);
             var shirt2 = shirt1.Clone();
 
             shirt2.Should().NotBeSameAs(shirt1);
@@ -21,7 +21,7 @@ namespace SuperMarioRpg.Test.Domain.Battle
         }
 
         protected override ValueObject<Equipment> CreateValueObject() =>
-            new Equipment(Slot.Armor, "shirt", new Stats());
+            new Equipment("shirt", Slot.Armor, new Stats(), Characters.Mario);
 
         #endregion
     }

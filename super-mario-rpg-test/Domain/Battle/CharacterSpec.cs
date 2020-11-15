@@ -28,13 +28,13 @@ namespace SuperMarioRpg.Test.Domain.Battle
 
         #region Test Methods
 
-        protected override Entity CreateEntity() => new CharacterBuilder(CharacterType.Mario).Build();
-        protected override Entity CreateEntity(Guid id) => new CharacterBuilder(CharacterType.Mario).WithId(id).Build();
+        protected override Entity CreateEntity() => new CharacterBuilder(Characters.Mario).Build();
+        protected override Entity CreateEntity(Guid id) => new CharacterBuilder(Characters.Mario).WithId(id).Build();
 
         [Fact]
         public void EffectiveStatsAreSumOfNaturalStatsAndLoadout()
         {
-            var characterBuilder = new CharacterBuilder(CharacterType.Mario)
+            var characterBuilder = new CharacterBuilder(Characters.Mario)
                 .WithEquipment(_hammer, _shirt, _jumpShoes);
 
             _director.ConfigureCharacter(characterBuilder);
@@ -48,7 +48,7 @@ namespace SuperMarioRpg.Test.Domain.Battle
         [Fact]
         public void WhenInstantiating_WithEquipment_LoadoutIsExpected()
         {
-            var characterBuilder = new CharacterBuilder(CharacterType.Mario)
+            var characterBuilder = new CharacterBuilder(Characters.Mario)
                 .WithEquipment(_hammer, _shirt, _jumpShoes);
 
             _director.ConfigureCharacter(characterBuilder);
@@ -58,6 +58,25 @@ namespace SuperMarioRpg.Test.Domain.Battle
             character.Loadout.Weapon.Should().Be(_hammer);
             character.Loadout.Armor.Should().Be(_shirt);
             character.Loadout.Accessory.Should().Be(_jumpShoes);
+        }
+
+        [Theory]
+        [InlineData(EquipmentType.Hammer)]
+        [InlineData(EquipmentType.Shirt)]
+        [InlineData(EquipmentType.JumpShoes)]
+        public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(EquipmentType equipmentType)
+        {
+            var equipment = EquipmentFactory.Instance.Create(equipmentType);
+            var builder = new CharacterBuilder(Characters.Mallow).WithEquipment(equipment);
+
+            _director.ConfigureCharacter(builder);
+
+            Action createInvalidCharacter = () =>
+            {
+                var character = builder.Build();
+            };
+
+            createInvalidCharacter.Should().Throw<ArgumentException>();
         }
 
         #endregion

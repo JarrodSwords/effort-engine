@@ -32,6 +32,13 @@ namespace SuperMarioRpg.Domain.Battle
         public Equipment Armor { get; }
         public Equipment Weapon { get; }
 
+        public bool CheckCompatibility(Characters character) =>
+            (Accessory?.CompatibleCharacters
+           & Armor?.CompatibleCharacters
+           & Weapon?.CompatibleCharacters
+           & character)
+          > 0;
+
         #endregion
 
         #region Private Interface

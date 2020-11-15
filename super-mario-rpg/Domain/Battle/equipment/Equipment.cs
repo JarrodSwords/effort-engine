@@ -6,17 +6,24 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
-        public Equipment(Slot slot, string name, Stats stats)
+        public Equipment(
+            string name,
+            Slot slot,
+            Stats stats,
+            Characters compatibleCharacters
+        )
         {
+            Name = Name.Create(name);
             Slot = slot;
             Stats = stats;
-            Name = Name.Create(name);
+            CompatibleCharacters = compatibleCharacters;
         }
 
         private Equipment(Equipment equipment) : this(
-            equipment.Slot,
             equipment.Name.Value,
-            equipment.Stats
+            equipment.Slot,
+            equipment.Stats,
+            equipment.CompatibleCharacters
         )
         {
         }
@@ -25,6 +32,7 @@ namespace SuperMarioRpg.Domain.Battle
 
         #region Public Interface
 
+        public Characters CompatibleCharacters { get; }
         public Name Name { get; }
         public Slot Slot { get; }
         public Stats Stats { get; }
