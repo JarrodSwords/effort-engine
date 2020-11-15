@@ -31,6 +31,17 @@ namespace SuperMarioRpg.Domain.Battle
             return stats;
         }
 
+        public Stats Create(EquipmentType key)
+        {
+            var stats = key switch
+            {
+                EquipmentType.Shirt => new Stats(0, 6, 0, 0, 6),
+                _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+            };
+
+            return stats;
+        }
+
         #endregion
     }
 }
