@@ -1,12 +1,27 @@
-﻿using Effort.Domain;
+﻿using System;
+using Effort.Domain;
 using Effort.Test.Domain;
+using FluentAssertions;
 using SuperMarioRpg.Domain.Battle;
+using Xunit;
 
 namespace SuperMarioRpg.Test.Domain.Battle
 {
     public class StatSpec : TinyTypeSpec<short>
     {
-        #region Protected Interface
+        #region Test Methods
+
+        [Theory]
+        [InlineData(256)]
+        public void CannotExceedUpperBounds(short value)
+        {
+            Action createInvalidStat = () =>
+            {
+                var stat = new Stat(value);
+            };
+
+            createInvalidStat.Should().Throw<ArgumentOutOfRangeException>();
+        }
 
         protected override TinyType<short> CreateTinyType(short value) => new Stat(value);
         protected override short CreateValue() => 10;

@@ -6,15 +6,13 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
-        public const short Max = 255;
-
         public Stats(
-            short attack,
-            short defense,
-            short hitPoints,
-            short specialAttack,
-            short specialDefense,
-            short speed
+            short attack = 0,
+            short defense = 0,
+            short hitPoints = 0,
+            short specialAttack = 0,
+            short specialDefense = 0,
+            short speed = 0
         )
         {
             Attack = new Stat(attack);
@@ -23,6 +21,24 @@ namespace SuperMarioRpg.Domain.Battle
             SpecialAttack = new Stat(specialAttack);
             SpecialDefense = new Stat(specialDefense);
             Speed = new Stat(speed);
+        }
+
+        public Stats(
+            Stat attack,
+            Stat defense,
+            Stat hitPoints,
+            Stat specialAttack,
+            Stat specialDefense,
+            Stat speed
+        ) : this(
+            attack.Value,
+            defense.Value,
+            hitPoints.Value,
+            specialAttack.Value,
+            specialDefense.Value,
+            speed.Value
+        )
+        {
         }
 
         #endregion
@@ -53,12 +69,12 @@ namespace SuperMarioRpg.Domain.Battle
 
         public static Stats operator +(Stats addend1, Stats addend2) =>
             new Stats(
-                (addend1.Attack + addend2.Attack).Value,
-                (addend1.Defense + addend2.Defense).Value,
-                (addend1.HitPoints + addend2.HitPoints).Value,
-                (addend1.SpecialAttack + addend2.SpecialAttack).Value,
-                (addend1.SpecialDefense + addend2.SpecialDefense).Value,
-                (addend1.Speed + addend2.Speed).Value
+                addend1.Attack + addend2.Attack,
+                addend1.Defense + addend2.Defense,
+                addend1.HitPoints + addend2.HitPoints,
+                addend1.SpecialAttack + addend2.SpecialAttack,
+                addend1.SpecialDefense + addend2.SpecialDefense,
+                addend1.Speed + addend2.Speed
             );
 
         #endregion
