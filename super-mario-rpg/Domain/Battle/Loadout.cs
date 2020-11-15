@@ -29,7 +29,7 @@ namespace SuperMarioRpg.Domain.Battle
         public Equipment Armor => _armor ??= Equipment.NullArmor;
         public Equipment Weapon => _weapon ??= Equipment.NullWeapon;
 
-        public bool CheckCompatibility(Characters character) =>
+        public bool IsCompatible(Characters character) =>
             (Accessory.CompatibleCharacters
            & Armor.CompatibleCharacters
            & Weapon.CompatibleCharacters

@@ -45,7 +45,7 @@ namespace SuperMarioRpg.Domain.Battle
 
         public void Validate()
         {
-            if (!Loadout.CheckCompatibility(Character))
+            if (!Loadout.IsCompatible(Character))
                 throw new ArgumentException();
         }
 
