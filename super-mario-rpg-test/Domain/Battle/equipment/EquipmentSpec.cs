@@ -13,14 +13,15 @@ namespace SuperMarioRpg.Test.Domain.Battle
         [Fact]
         public void CanBeCloned()
         {
-            var shirt1 = new Equipment(Slot.Armor, "Shirt");
+            var shirt1 = new Equipment(Slot.Armor, "Shirt", new Stats());
             var shirt2 = shirt1.Clone();
 
             shirt2.Should().NotBeSameAs(shirt1);
             shirt2.Should().BeEquivalentTo(shirt1);
         }
 
-        protected override ValueObject<Equipment> CreateValueObject() => new Equipment(Slot.Armor, "shirt");
+        protected override ValueObject<Equipment> CreateValueObject() =>
+            new Equipment(Slot.Armor, "shirt", new Stats());
 
         #endregion
     }

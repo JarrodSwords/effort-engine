@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Effort.Domain;
@@ -8,29 +9,49 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
-        private readonly IDictionary<Slot, Equipment> _equipment;
-
-        public Loadout(IDictionary<Slot, Equipment> equipment = null)
+        public Loadout(Equipment accessory = null, Equipment armor = null, Equipment weapon = null)
         {
-            _equipment = equipment ?? new Dictionary<Slot, Equipment>();
+            Accessory = accessory;
+            Armor = armor;
+            Weapon = weapon;
+        }
+
+        public Loadout(IReadOnlyCollection<Equipment> equipment)
+        {
+            ValidateEquipment(equipment);
+            Accessory = equipment.FirstOrDefault(x => x.Slot == Slot.Accessory);
+            Armor = equipment.FirstOrDefault(x => x.Slot == Slot.Armor);
+            Weapon = equipment.FirstOrDefault(x => x.Slot == Slot.Weapon);
         }
 
         #endregion
 
         #region Public Interface
 
-        public Equipment this[Slot slot] => _equipment[slot];
+        public Equipment Accessory { get; }
+        public Equipment Armor { get; }
+        public Equipment Weapon { get; }
 
-        public Loadout Equip(Equipment equipment)
+        #endregion
+
+        #region Private Interface
+
+        private void ValidateEquipment(IReadOnlyCollection<Equipment> equipment)
         {
-            var loadout = _equipment;
+            var equipmentBySlot = from e in equipment
+                                  group e by e.Slot
+                                  into g
+                                  select new
+                                  {
+                                      Equipment = g.Key,
+                                      Count = g.Count()
+                                  };
 
-            if (loadout.ContainsKey(equipment.Slot))
-                loadout[equipment.Slot] = equipment;
-            else
-                loadout.Add(equipment.Slot, equipment);
-
-            return new Loadout(loadout);
+            if (equipmentBySlot.Any(x => x.Count > 1))
+                throw new ArgumentException(
+                    $"Invalid {nameof(Loadout)}. Cannot have more than one item per slot.",
+                    nameof(equipment)
+                );
         }
 
         #endregion
@@ -38,11 +59,11 @@ namespace SuperMarioRpg.Domain.Battle
         #region Equality, Operators
 
         protected override bool EqualsExplicit(Loadout other) =>
-            _equipment.OrderBy(x => x.Key).SequenceEqual(
-                other._equipment.OrderBy(x => x.Key)
-            );
+            Accessory == other.Accessory
+         && Armor == other.Armor
+         && Weapon == other.Weapon;
 
-        protected override int GetHashCodeExplicit() => _equipment.GetHashCode();
+        protected override int GetHashCodeExplicit() => (Accessory, Armor, Weapon).GetHashCode();
 
         #endregion
     }
