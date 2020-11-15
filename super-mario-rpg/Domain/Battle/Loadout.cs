@@ -13,14 +13,7 @@ namespace SuperMarioRpg.Domain.Battle
         private Equipment _armor;
         private Equipment _weapon;
 
-        public Loadout(Equipment accessory = null, Equipment armor = null, Equipment weapon = null)
-        {
-            _accessory = accessory;
-            _armor = armor;
-            _weapon = weapon;
-        }
-
-        public Loadout(IReadOnlyCollection<Equipment> equipment)
+        public Loadout(params Equipment[] equipment)
         {
             ValidateEquipment(equipment);
             _accessory = equipment.FirstOrDefault(x => x.Slot == Slot.Accessory);

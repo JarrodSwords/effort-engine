@@ -44,7 +44,7 @@ namespace SuperMarioRpg.Domain.Battle
 
         public void CreateLoadout()
         {
-            Loadout = new Loadout(_equipment);
+            Loadout = new Loadout(_equipment.ToArray());
         }
 
         public void CreateStats()
