@@ -1,66 +1,71 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SuperMarioRpg.Domain.Battle
 {
-    public abstract class CharacterBuilder
+    public class CharacterBuilder : CharacterBuilderBase, ICharacterBuilder
     {
         #region Core
 
-        private readonly Characters _character;
-        private Loadout _loadout;
-        private Stats _naturalStats;
+        private readonly List<Equipment> _equipment;
 
-        protected CharacterBuilder(Characters character)
+        public CharacterBuilder(Characters character) : base(character)
         {
-            _character = character;
+            _equipment = new List<Equipment>();
         }
 
         #endregion
 
         #region Public Interface
 
-        public Stats EffectiveStats { get; private set; }
-        public Guid Id { get; protected set; }
-
-        public Loadout Loadout
+        public CharacterBuilder WithEquipment(params Equipment[] equipment)
         {
-            get => _loadout ??= new Loadout();
-            protected set => _loadout = value;
+            _equipment.AddRange(equipment);
+            return this;
         }
 
-        public Stats NaturalStats
+        public CharacterBuilder WithId(Guid id)
         {
-            get => _naturalStats ??= new Stats();
-            private set => _naturalStats = value;
-        }
-
-        public Character Build()
-        {
-            Validate();
-            return new Character(this);
-        }
-
-        public void CalculateEffectiveStats()
-        {
-            EffectiveStats = NaturalStats
-                           + Loadout.Accessory.Stats
-                           + Loadout.Armor.Stats
-                           + Loadout.Weapon.Stats;
-        }
-
-        public void CreateNaturalStats()
-        {
-            NaturalStats = StatFactory.Instance.Create(_character);
+            Id = id;
+            return this;
         }
 
         #endregion
 
         #region Private Interface
 
-        private void Validate()
+        private void ValidateEquipment()
         {
-            if (!Loadout.IsCompatible(_character))
-                throw new ArgumentException();
+            var equipmentBySlot = from e in _equipment
+                                  group e by e.Slot
+                                  into g
+                                  select new
+                                  {
+                                      Equipment = g.Key,
+                                      Count = g.Count()
+                                  };
+
+            if (equipmentBySlot.Any(x => x.Count > 1))
+                throw new ArgumentException(
+                    $"Invalid {nameof(Loadout)}. Cannot have more than one item per slot.",
+                    nameof(_equipment)
+                );
+        }
+
+        #endregion
+
+        #region ICharacterBuilder
+
+        public void CreateLoadout()
+        {
+            ValidateEquipment();
+
+            Loadout = new Loadout(
+                _equipment.FirstOrDefault(x => x.Slot == Slot.Accessory),
+                _equipment.FirstOrDefault(x => x.Slot == Slot.Armor),
+                _equipment.FirstOrDefault(x => x.Slot == Slot.Weapon)
+            );
         }
 
         #endregion

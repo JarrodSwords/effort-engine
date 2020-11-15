@@ -28,15 +28,15 @@ namespace SuperMarioRpg.Test.Domain.Battle
 
         #region Test Methods
 
-        protected override Entity CreateEntity() => new HighLevelCharacterBuilder(Characters.Mario).Build();
+        protected override Entity CreateEntity() => new CharacterBuilder(Characters.Mario).Build();
 
         protected override Entity CreateEntity(Guid id) =>
-            new HighLevelCharacterBuilder(Characters.Mario).WithId(id).Build();
+            new CharacterBuilder(Characters.Mario).WithId(id).Build();
 
         [Fact]
         public void EffectiveStatsAreSumOfNaturalStatsAndLoadout()
         {
-            var builder = new HighLevelCharacterBuilder(Characters.Mario)
+            var builder = new CharacterBuilder(Characters.Mario)
                 .WithEquipment(_hammer, _shirt, _jumpShoes);
 
             _director.ConfigureCharacter(builder);
@@ -50,7 +50,7 @@ namespace SuperMarioRpg.Test.Domain.Battle
         [Fact]
         public void WhenInstantiating_WithEquipment_LoadoutIsExpected()
         {
-            var builder = new HighLevelCharacterBuilder(Characters.Mario)
+            var builder = new CharacterBuilder(Characters.Mario)
                 .WithEquipment(_hammer, _shirt, _jumpShoes);
 
             _director.ConfigureCharacter(builder);
@@ -69,7 +69,7 @@ namespace SuperMarioRpg.Test.Domain.Battle
         public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(EquipmentType equipmentType)
         {
             var equipment = EquipmentFactory.Instance.Create(equipmentType);
-            var builder = new HighLevelCharacterBuilder(Characters.Mallow).WithEquipment(equipment);
+            var builder = new CharacterBuilder(Characters.Mallow).WithEquipment(equipment);
 
             _director.ConfigureCharacter(builder);
 

@@ -6,11 +6,11 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
-        public Character(CharacterBuilder builder) : base(builder.Id)
+        public Character(CharacterBuilderBase builderBase) : base(builderBase.Id)
         {
-            EffectiveStats = builder.EffectiveStats;
-            Loadout = builder.Loadout;
-            NaturalStats = builder.NaturalStats;
+            EffectiveStats = builderBase.EffectiveStats;
+            Loadout = builderBase.Loadout;
+            NaturalStats = builderBase.NaturalStats;
         }
 
         #endregion
