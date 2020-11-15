@@ -23,16 +23,6 @@ namespace SuperMarioRpg.Test.Domain.Battle
         protected override ValueObject<Equipment> CreateValueObject() =>
             new Equipment(Slot.Armor, "shirt", new Stats());
 
-        [Fact]
-        public void ShirtHasExpectedStats()
-        {
-            var expectedStats = new Stats(0, 6, 0, 0, 6);
-
-            var shirt = EquipmentFactory.Instance.Create(EquipmentType.Shirt);
-
-            shirt.Stats.Should().BeEquivalentTo(expectedStats);
-        }
-
         #endregion
     }
 }
