@@ -1,3 +1,5 @@
+using System;
+
 namespace SuperMarioRpg.Domain.Battle
 {
     public class CharacterBuilder : ICharacterBuilder
@@ -15,6 +17,7 @@ namespace SuperMarioRpg.Domain.Battle
 
         #region Public Interface
 
+        public Guid Id { get; private set; }
         public Loadout Loadout { get; private set; }
         public Stats Stats { get; private set; }
 
@@ -23,6 +26,12 @@ namespace SuperMarioRpg.Domain.Battle
         public CharacterBuilder WithEquipment(Equipment armor)
         {
             Armor = armor;
+            return this;
+        }
+
+        public CharacterBuilder WithId(Guid id)
+        {
+            Id = id;
             return this;
         }
 

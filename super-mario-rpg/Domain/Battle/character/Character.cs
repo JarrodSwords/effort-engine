@@ -1,4 +1,3 @@
-using System;
 using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Battle
@@ -7,12 +6,7 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
-        public Character(Guid id = new Guid(), Stats stats = null) : base(id)
-        {
-            Stats = stats;
-        }
-
-        public Character(CharacterBuilder builder)
+        public Character(CharacterBuilder builder) : base(builder.Id)
         {
             Loadout = builder.Loadout;
             Stats = builder.Stats;

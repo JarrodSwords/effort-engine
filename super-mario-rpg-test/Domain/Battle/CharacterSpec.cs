@@ -11,8 +11,8 @@ namespace SuperMarioRpg.Test.Domain.Battle
     {
         #region Test Methods
 
-        protected override Entity CreateEntity() => new Character();
-        protected override Entity CreateEntity(Guid id) => new Character(id);
+        protected override Entity CreateEntity() => new CharacterBuilder(CharacterType.Mario).Build();
+        protected override Entity CreateEntity(Guid id) => new CharacterBuilder(CharacterType.Mario).WithId(id).Build();
 
         [Fact]
         public void WhenInstantiating_WithArmor_LoadoutIsExpected()
