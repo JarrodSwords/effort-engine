@@ -31,6 +31,8 @@ namespace SuperMarioRpg.Domain.Battle
 
         public Equipment Clone() => new Equipment(this);
 
+        public override string ToString() => Name.ToString();
+
         #endregion
 
         #region Equality, Operators
