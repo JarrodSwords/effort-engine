@@ -1,4 +1,4 @@
-namespace SuperMarioRpg.Test.Domain.Battle
+namespace SuperMarioRpg.Domain.Battle
 {
     public enum CharacterType
     {

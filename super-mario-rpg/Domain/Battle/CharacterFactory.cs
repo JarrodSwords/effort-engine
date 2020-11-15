@@ -1,7 +1,6 @@
 using System;
-using SuperMarioRpg.Domain.Battle;
 
-namespace SuperMarioRpg.Test.Domain.Battle
+namespace SuperMarioRpg.Domain.Battle
 {
     public class CharacterFactory
     {
