@@ -9,33 +9,37 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
+        private Equipment _accessory;
+        private Equipment _armor;
+        private Equipment _weapon;
+
         public Loadout(Equipment accessory = null, Equipment armor = null, Equipment weapon = null)
         {
-            Accessory = accessory;
-            Armor = armor;
-            Weapon = weapon;
+            _accessory = accessory;
+            _armor = armor;
+            _weapon = weapon;
         }
 
         public Loadout(IReadOnlyCollection<Equipment> equipment)
         {
             ValidateEquipment(equipment);
-            Accessory = equipment.FirstOrDefault(x => x.Slot == Slot.Accessory);
-            Armor = equipment.FirstOrDefault(x => x.Slot == Slot.Armor);
-            Weapon = equipment.FirstOrDefault(x => x.Slot == Slot.Weapon);
+            _accessory = equipment.FirstOrDefault(x => x.Slot == Slot.Accessory);
+            _armor = equipment.FirstOrDefault(x => x.Slot == Slot.Armor);
+            _weapon = equipment.FirstOrDefault(x => x.Slot == Slot.Weapon);
         }
 
         #endregion
 
         #region Public Interface
 
-        public Equipment Accessory { get; }
-        public Equipment Armor { get; }
-        public Equipment Weapon { get; }
+        public Equipment Armor => _armor ??= new NullEquipment(Slot.Armor);
+        public Equipment Weapon => _weapon ??= new NullEquipment(Slot.Weapon);
+        public Equipment Accessory => _accessory ??= new NullEquipment(Slot.Accessory);
 
         public bool CheckCompatibility(Characters character) =>
-            (Accessory?.CompatibleCharacters
-           & Armor?.CompatibleCharacters
-           & Weapon?.CompatibleCharacters
+            (Accessory.CompatibleCharacters
+           & Armor.CompatibleCharacters
+           & Weapon.CompatibleCharacters
            & character)
           > 0;
 
