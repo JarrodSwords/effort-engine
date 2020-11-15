@@ -1,4 +1,3 @@
-using System;
 using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Battle
@@ -9,15 +8,9 @@ namespace SuperMarioRpg.Domain.Battle
 
         public Character(CharacterBuilder builder) : base(builder.Id)
         {
-            if (!builder.Loadout.CheckCompatibility(builder.Character))
-                throw new ArgumentException();
-
             Loadout = builder.Loadout;
             Stats = builder.Stats;
-            EffectiveStats = Stats
-                           + Loadout.Accessory.Stats
-                           + Loadout.Armor.Stats
-                           + Loadout.Weapon.Stats;
+            EffectiveStats = builder.EffectiveStats;
         }
 
         #endregion

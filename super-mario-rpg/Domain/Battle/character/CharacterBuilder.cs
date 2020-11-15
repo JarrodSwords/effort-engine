@@ -22,13 +22,8 @@ namespace SuperMarioRpg.Domain.Battle
         #region Public Interface
 
         public Characters Character { get; }
+        public Stats EffectiveStats { get; private set; }
         public Guid Id { get; private set; }
-
-        public Stats Stats
-        {
-            get => _stats ??= new Stats();
-            private set => _stats = value;
-        }
 
         public Loadout Loadout
         {
@@ -36,7 +31,23 @@ namespace SuperMarioRpg.Domain.Battle
             private set => _loadout = value;
         }
 
-        public Character Build() => new Character(this);
+        public Stats Stats
+        {
+            get => _stats ??= new Stats();
+            private set => _stats = value;
+        }
+
+        public Character Build()
+        {
+            Validate();
+            return new Character(this);
+        }
+
+        public void Validate()
+        {
+            if (!Loadout.CheckCompatibility(Character))
+                throw new ArgumentException();
+        }
 
         public CharacterBuilder WithEquipment(params Equipment[] equipment)
         {
@@ -53,6 +64,14 @@ namespace SuperMarioRpg.Domain.Battle
         #endregion
 
         #region ICharacterBuilder
+
+        public void CalculateEffectiveStats()
+        {
+            EffectiveStats = Stats
+                           + Loadout.Accessory.Stats
+                           + Loadout.Armor.Stats
+                           + Loadout.Weapon.Stats;
+        }
 
         public void CreateLoadout()
         {
