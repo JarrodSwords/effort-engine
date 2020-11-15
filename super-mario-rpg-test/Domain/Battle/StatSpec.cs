@@ -12,8 +12,9 @@ namespace SuperMarioRpg.Test.Domain.Battle
         #region Test Methods
 
         [Theory]
+        [InlineData(-256)]
         [InlineData(256)]
-        public void CannotExceedUpperBounds(short value)
+        public void CannotExceedBounds(short value)
         {
             Action createInvalidStat = () =>
             {

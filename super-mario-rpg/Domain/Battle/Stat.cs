@@ -8,6 +8,7 @@ namespace SuperMarioRpg.Domain.Battle
         #region Core
 
         private const short Max = 255;
+        private const short Min = -255;
 
         public Stat(short value) : base(value)
         {
@@ -16,6 +17,13 @@ namespace SuperMarioRpg.Domain.Battle
                     nameof(value),
                     value,
                     $"\"{nameof(Stat)}\" cannot be greater than {Max}."
+                );
+
+            if (value < Min)
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    $"\"{nameof(Stat)}\" cannot be less than {Min}."
                 );
         }
 
