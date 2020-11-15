@@ -1,3 +1,4 @@
+using System;
 using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Battle
@@ -11,6 +12,15 @@ namespace SuperMarioRpg.Domain.Battle
             Accessory = accessory ?? Equipment.NullAccessory;
             Armor = armor ?? Equipment.NullArmor;
             Weapon = weapon ?? Equipment.NullWeapon;
+
+            if (Accessory.Slot != Slot.Accessory)
+                throw new ArgumentException();
+
+            if (Armor.Slot != Slot.Armor)
+                throw new ArgumentException();
+
+            if (Weapon.Slot != Slot.Weapon)
+                throw new ArgumentException();
         }
 
         #endregion
