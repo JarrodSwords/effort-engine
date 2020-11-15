@@ -12,10 +12,17 @@ namespace SuperMarioRpg.Domain.Battle
             Stats = stats;
         }
 
+        public Character(CharacterBuilder builder)
+        {
+            Loadout = builder.Loadout;
+            Stats = builder.Stats;
+        }
+
         #endregion
 
         #region Public Interface
 
+        public Loadout Loadout { get; }
         public Stats Stats { get; }
 
         #endregion
