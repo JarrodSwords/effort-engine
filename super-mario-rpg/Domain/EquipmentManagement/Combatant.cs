@@ -1,7 +1,8 @@
 using System;
 using Effort.Domain;
+using SuperMarioRpg.Domain.Battle;
 
-namespace SuperMarioRpg.Domain.Battle
+namespace SuperMarioRpg.Domain.EquipmentManagement
 {
     public class Combatant : Entity
     {
