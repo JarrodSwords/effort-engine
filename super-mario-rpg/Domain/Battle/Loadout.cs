@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Battle
@@ -11,6 +13,12 @@ namespace SuperMarioRpg.Domain.Battle
             Accessory = accessory;
             Armor = armor;
             Weapon = weapon;
+        }
+
+        public Loadout(IReadOnlyCollection<Equipment> equipment)
+        {
+            Armor = equipment.FirstOrDefault(x => x.Slot == Slot.Armor);
+            Weapon = equipment.FirstOrDefault(x => x.Slot == Slot.Weapon);
         }
 
         #endregion

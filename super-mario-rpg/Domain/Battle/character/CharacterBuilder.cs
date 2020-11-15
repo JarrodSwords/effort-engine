@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace SuperMarioRpg.Domain.Battle
 {
@@ -7,10 +8,12 @@ namespace SuperMarioRpg.Domain.Battle
         #region Core
 
         private readonly CharacterType _characterType;
+        private readonly List<Equipment> _equipment;
 
         public CharacterBuilder(CharacterType characterType)
         {
             _characterType = characterType;
+            _equipment = new List<Equipment>();
         }
 
         #endregion
@@ -23,9 +26,9 @@ namespace SuperMarioRpg.Domain.Battle
 
         public Character Build() => new Character(this);
 
-        public CharacterBuilder WithEquipment(Equipment armor)
+        public CharacterBuilder WithEquipment(params Equipment[] equipment)
         {
-            Armor = armor;
+            _equipment.AddRange(equipment);
             return this;
         }
 
@@ -37,17 +40,11 @@ namespace SuperMarioRpg.Domain.Battle
 
         #endregion
 
-        #region Private Interface
-
-        private Equipment Armor { get; set; }
-
-        #endregion
-
         #region ICharacterBuilder
 
         public void CreateLoadout()
         {
-            Loadout = new Loadout(armor: Armor);
+            Loadout = new Loadout(_equipment);
         }
 
         public void CreateStats()

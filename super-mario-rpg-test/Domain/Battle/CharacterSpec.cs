@@ -19,9 +19,7 @@ namespace SuperMarioRpg.Test.Domain.Battle
         {
             var shirt = EquipmentFactory.Instance.Create(EquipmentType.Shirt);
             var director = new Director();
-            var characterBuilder = new CharacterBuilder(CharacterType.Mario)
-                .WithEquipment(shirt);
-
+            var characterBuilder = new CharacterBuilder(CharacterType.Mario).WithEquipment(shirt);
             director.ConfigureCharacter(characterBuilder);
 
             var character = characterBuilder.Build();
