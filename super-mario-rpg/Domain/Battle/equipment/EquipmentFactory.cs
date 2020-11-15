@@ -32,8 +32,18 @@ namespace SuperMarioRpg.Domain.Battle
 
         private void Initialize()
         {
-            _equipment.Add(EquipmentType.Hammer, new Equipment(Slot.Weapon, "Hammer", new Stats()));
-            _equipment.Add(EquipmentType.Shirt, new Equipment(Slot.Armor, "Shirt", StatFactory.Instance.Create(EquipmentType.Shirt)));
+            _equipment.Add(
+                EquipmentType.Hammer,
+                new Equipment(Slot.Weapon, "Hammer", StatFactory.Instance.Create(EquipmentType.Hammer))
+            );
+            _equipment.Add(
+                EquipmentType.JumpShoes,
+                new Equipment(Slot.Accessory, "Jump Shoes", StatFactory.Instance.Create(EquipmentType.JumpShoes))
+            );
+            _equipment.Add(
+                EquipmentType.Shirt,
+                new Equipment(Slot.Armor, "Shirt", StatFactory.Instance.Create(EquipmentType.Shirt))
+            );
         }
 
         #endregion

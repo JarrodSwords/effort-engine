@@ -9,6 +9,8 @@ namespace SuperMarioRpg.Test.Domain.Battle
         #region Test Methods
 
         [Theory]
+        [InlineData(EquipmentType.Hammer, 10)]
+        [InlineData(EquipmentType.JumpShoes, 0, 1, 0, 5, 1, 2)]
         [InlineData(EquipmentType.Shirt, 0, 6, 0, 0, 6)]
         public void HasExpectedStats(
             EquipmentType equipmentType,

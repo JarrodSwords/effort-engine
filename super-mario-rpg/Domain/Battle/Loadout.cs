@@ -19,6 +19,7 @@ namespace SuperMarioRpg.Domain.Battle
         public Loadout(IReadOnlyCollection<Equipment> equipment)
         {
             ValidateEquipment(equipment);
+            Accessory = equipment.FirstOrDefault(x => x.Slot == Slot.Accessory);
             Armor = equipment.FirstOrDefault(x => x.Slot == Slot.Armor);
             Weapon = equipment.FirstOrDefault(x => x.Slot == Slot.Weapon);
         }
