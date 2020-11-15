@@ -25,9 +25,9 @@ namespace SuperMarioRpg.Domain.Battle
 
         #region Public Interface
 
-        public Equipment Armor => _armor ??= new NullEquipment(Slot.Armor);
-        public Equipment Weapon => _weapon ??= new NullEquipment(Slot.Weapon);
-        public Equipment Accessory => _accessory ??= new NullEquipment(Slot.Accessory);
+        public Equipment Accessory => _accessory ??= Equipment.NullAccessory;
+        public Equipment Armor => _armor ??= Equipment.NullArmor;
+        public Equipment Weapon => _weapon ??= Equipment.NullWeapon;
 
         public bool CheckCompatibility(Characters character) =>
             (Accessory.CompatibleCharacters

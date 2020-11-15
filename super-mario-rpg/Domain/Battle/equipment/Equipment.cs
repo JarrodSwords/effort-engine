@@ -2,8 +2,12 @@ using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Battle
 {
-    public class Equipment : ValueObject<Equipment>
+    public partial class Equipment : ValueObject<Equipment>
     {
+        public static Equipment NullAccessory = new NullEquipment(Slot.Accessory);
+        public static Equipment NullArmor = new NullEquipment(Slot.Armor);
+        public static Equipment NullWeapon = new NullEquipment(Slot.Weapon, "Unarmed");
+
         #region Core
 
         public Equipment(

@@ -1,16 +1,23 @@
 namespace SuperMarioRpg.Domain.Battle
 {
-    public class NullEquipment : Equipment
+    public partial class Equipment
     {
-        #region Core
+        #region Nested type: NullEquipment
 
-        public NullEquipment(Slot slot) : base(
-            "None",
-            slot,
-            new Stats(),
-            Characters.All
-        )
+        private class NullEquipment : Equipment
         {
+            #region Core
+
+            public NullEquipment(Slot slot, string name = "None") : base(
+                name,
+                slot,
+                new Stats(),
+                Characters.All
+            )
+            {
+            }
+
+            #endregion
         }
 
         #endregion
