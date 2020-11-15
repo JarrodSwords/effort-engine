@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Effort.Domain;
 
-namespace SuperMarioRpg.Domain.EquipmentManagement
+namespace SuperMarioRpg.Domain.Battle
 {
     public class Loadout : ValueObject<Loadout>
     {

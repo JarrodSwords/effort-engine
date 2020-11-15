@@ -1,10 +1,10 @@
 using Effort.Domain;
 using Effort.Test.Domain;
 using FluentAssertions;
-using SuperMarioRpg.Domain.EquipmentManagement;
+using SuperMarioRpg.Domain.Battle;
 using Xunit;
 
-namespace SuperMarioRpg.Test.Domain.EquipmentManagement
+namespace SuperMarioRpg.Test.Domain.Battle
 {
     public class EquipmentSpec : ValueObjectSpec<Equipment>
     {

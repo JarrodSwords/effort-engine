@@ -1,6 +1,6 @@
 using Effort.Domain;
 
-namespace SuperMarioRpg.Domain.EquipmentManagement
+namespace SuperMarioRpg.Domain.Battle
 {
     public class Equipment : ValueObject<Equipment>
     {

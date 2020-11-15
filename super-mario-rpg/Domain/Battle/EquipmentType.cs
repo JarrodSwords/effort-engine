@@ -1,4 +1,4 @@
-namespace SuperMarioRpg.Domain.EquipmentManagement
+namespace SuperMarioRpg.Domain.Battle
 {
     public enum EquipmentType
     {

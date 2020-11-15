@@ -1,8 +1,8 @@
 using Effort.Domain;
 using Effort.Test.Domain;
-using SuperMarioRpg.Domain.EquipmentManagement;
+using SuperMarioRpg.Domain.Battle;
 
-namespace SuperMarioRpg.Test.Domain.EquipmentManagement
+namespace SuperMarioRpg.Test.Domain.Battle
 {
     public class LoadoutSpec : ValueObjectSpec<Loadout>
     {
