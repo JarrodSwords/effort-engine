@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Battle

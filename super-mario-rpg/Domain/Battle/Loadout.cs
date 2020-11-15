@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Battle
@@ -8,29 +8,30 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
-        public Loadout(Equipment accessory = null, Equipment armor = null, Equipment weapon = null)
+        private readonly Dictionary<Slot, Equipment> _equipment;
+
+        private static readonly List<Equipment> NullEquipment = new List<Equipment>
         {
-            Accessory = accessory ?? Equipment.NullAccessory;
-            Armor = armor ?? Equipment.NullArmor;
-            Weapon = weapon ?? Equipment.NullWeapon;
+            Equipment.NullAccessory,
+            Equipment.NullArmor,
+            Equipment.NullWeapon
+        };
 
-            if (Accessory.Slot != Slot.Accessory)
-                throw new ArgumentException();
+        public Loadout(params Equipment[] equipment)
+        {
+            _equipment = equipment.ToDictionary(x => x.Slot);
 
-            if (Armor.Slot != Slot.Armor)
-                throw new ArgumentException();
-
-            if (Weapon.Slot != Slot.Weapon)
-                throw new ArgumentException();
+            foreach (var e in NullEquipment.Where(x => !_equipment.ContainsKey(x.Slot)))
+                _equipment.Add(e.Slot, e);
         }
 
         #endregion
 
         #region Public Interface
 
-        public Equipment Accessory { get; }
-        public Equipment Armor { get; }
-        public Equipment Weapon { get; }
+        public Equipment Accessory => GetEquipment(Slot.Accessory);
+        public Equipment Armor => GetEquipment(Slot.Armor);
+        public Equipment Weapon => GetEquipment(Slot.Weapon);
 
         public bool IsCompatible(Characters character) =>
             (Accessory.CompatibleCharacters
@@ -38,6 +39,12 @@ namespace SuperMarioRpg.Domain.Battle
            & Weapon.CompatibleCharacters
            & character)
           > 0;
+
+        #endregion
+
+        #region Private Interface
+
+        private Equipment GetEquipment(Slot slot) => _equipment[slot];
 
         #endregion
 
