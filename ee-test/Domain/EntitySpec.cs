@@ -9,8 +9,8 @@ namespace Effort.Test.Domain
     {
         #region Protected Interface
 
-        protected abstract Entity CreateEntity(Guid id);
         protected abstract Entity CreateEntity();
+        protected abstract Entity CreateEntity(Guid id);
 
         #endregion
 

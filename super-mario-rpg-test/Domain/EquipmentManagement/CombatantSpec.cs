@@ -2,6 +2,7 @@ using System;
 using Effort.Domain;
 using Effort.Test.Domain;
 using FluentAssertions;
+using SuperMarioRpg.Domain.Battle;
 using SuperMarioRpg.Domain.EquipmentManagement;
 using Xunit;
 

@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ee-domain\Effort.Domain.csproj" />
+    <ProjectReference Include="..\ee\Effort.csproj" />
   </ItemGroup>
 
 </Project>

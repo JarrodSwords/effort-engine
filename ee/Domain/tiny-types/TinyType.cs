@@ -18,6 +18,8 @@ namespace Effort.Domain
 
         public T Value { get; }
 
+        public override string ToString() => Value.ToString();
+
         #endregion
 
         #region Equality, Operators
@@ -28,7 +30,7 @@ namespace Effort.Domain
                 return false;
             if (ReferenceEquals(this, other))
                 return true;
-            return EqualityComparer<T>.Default.Equals(Value, other.Value);
+            return EqualsExplicit(other);
         }
 
         public override bool Equals(object obj)
@@ -42,10 +44,11 @@ namespace Effort.Domain
             return Equals((TinyType<T>) obj);
         }
 
+        protected virtual bool EqualsExplicit(TinyType<T> other) =>
+            EqualityComparer<T>.Default.Equals(Value, other.Value);
+
         public override int GetHashCode() => EqualityComparer<T>.Default.GetHashCode(Value);
-
         public static bool operator ==(TinyType<T> left, TinyType<T> right) => Equals(left, right);
-
         public static bool operator !=(TinyType<T> left, TinyType<T> right) => !Equals(left, right);
 
         #endregion

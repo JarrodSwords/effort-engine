@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SuperMarioRpg.Domain.EquipmentManagement
+namespace SuperMarioRpg.Domain.Battle
 {
     public class EquipmentFactory
     {
@@ -17,7 +17,7 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
         private EquipmentFactory()
         {
             _equipment = new Dictionary<EquipmentType, Equipment>();
-            InitializeEquipment();
+            Initialize();
         }
 
         #endregion
@@ -30,10 +30,20 @@ namespace SuperMarioRpg.Domain.EquipmentManagement
 
         #region Private Interface
 
-        private void InitializeEquipment()
+        private void Initialize()
         {
-            _equipment.Add(EquipmentType.Hammer, new Equipment(Slot.Weapon, "Hammer"));
-            _equipment.Add(EquipmentType.Shirt, new Equipment(Slot.Armor, "Shirt"));
+            _equipment.Add(
+                EquipmentType.Hammer,
+                new Equipment(Slot.Weapon, "Hammer", StatFactory.Instance.Create(EquipmentType.Hammer))
+            );
+            _equipment.Add(
+                EquipmentType.JumpShoes,
+                new Equipment(Slot.Accessory, "Jump Shoes", StatFactory.Instance.Create(EquipmentType.JumpShoes))
+            );
+            _equipment.Add(
+                EquipmentType.Shirt,
+                new Equipment(Slot.Armor, "Shirt", StatFactory.Instance.Create(EquipmentType.Shirt))
+            );
         }
 
         #endregion
