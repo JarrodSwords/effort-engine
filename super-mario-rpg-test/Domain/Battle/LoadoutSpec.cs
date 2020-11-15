@@ -9,20 +9,27 @@ namespace SuperMarioRpg.Test.Domain.Battle
 {
     public class LoadoutSpec : ValueObjectSpec<Loadout>
     {
-        #region Test Methods
+        #region Protected Interface
 
         protected override ValueObject<Loadout> CreateValueObject() => new Loadout();
+
+        #endregion
+    }
+
+    public class CharacterBuilder2Spec
+    {
+        #region Test Methods
 
         [Fact]
         public void WhenInstantiating_WithDuplicateSlot_ExceptionIsThrown()
         {
-            Action createInvalidLoadout = () =>
-            {
-                var loadout = new Loadout(
+            var builder = new HighLevelCharacterBuilder(Characters.Mario)
+                .WithEquipment(
                     EquipmentFactory.Instance.Create(EquipmentType.Shirt),
                     EquipmentFactory.Instance.Create(EquipmentType.Shirt)
                 );
-            };
+
+            Action createInvalidLoadout = () => { new Director().ConfigureCharacter(builder); };
 
             createInvalidLoadout.Should().Throw<ArgumentException>();
         }

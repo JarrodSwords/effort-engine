@@ -1,21 +1,18 @@
 using System;
-using System.Collections.Generic;
 
 namespace SuperMarioRpg.Domain.Battle
 {
-    public class CharacterBuilder : ICharacterBuilder
+    public abstract class CharacterBuilder
     {
         #region Core
 
         private readonly Characters _character;
-        private readonly List<Equipment> _equipment;
         private Loadout _loadout;
         private Stats _naturalStats;
 
-        public CharacterBuilder(Characters character)
+        protected CharacterBuilder(Characters character)
         {
             _character = character;
-            _equipment = new List<Equipment>();
         }
 
         #endregion
@@ -23,12 +20,12 @@ namespace SuperMarioRpg.Domain.Battle
         #region Public Interface
 
         public Stats EffectiveStats { get; private set; }
-        public Guid Id { get; private set; }
+        public Guid Id { get; protected set; }
 
         public Loadout Loadout
         {
             get => _loadout ??= new Loadout();
-            private set => _loadout = value;
+            protected set => _loadout = value;
         }
 
         public Stats NaturalStats
@@ -43,16 +40,17 @@ namespace SuperMarioRpg.Domain.Battle
             return new Character(this);
         }
 
-        public CharacterBuilder WithEquipment(params Equipment[] equipment)
+        public void CalculateEffectiveStats()
         {
-            _equipment.AddRange(equipment);
-            return this;
+            EffectiveStats = NaturalStats
+                           + Loadout.Accessory.Stats
+                           + Loadout.Armor.Stats
+                           + Loadout.Weapon.Stats;
         }
 
-        public CharacterBuilder WithId(Guid id)
+        public void CreateNaturalStats()
         {
-            Id = id;
-            return this;
+            NaturalStats = StatFactory.Instance.Create(_character);
         }
 
         #endregion
@@ -63,28 +61,6 @@ namespace SuperMarioRpg.Domain.Battle
         {
             if (!Loadout.IsCompatible(_character))
                 throw new ArgumentException();
-        }
-
-        #endregion
-
-        #region ICharacterBuilder
-
-        public void CalculateEffectiveStats()
-        {
-            EffectiveStats = NaturalStats
-                           + Loadout.Accessory.Stats
-                           + Loadout.Armor.Stats
-                           + Loadout.Weapon.Stats;
-        }
-
-        public void CreateLoadout()
-        {
-            Loadout = new Loadout(_equipment.ToArray());
-        }
-
-        public void CreateNaturalStats()
-        {
-            NaturalStats = StatFactory.Instance.Create(_character);
         }
 
         #endregion
