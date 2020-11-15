@@ -4,11 +4,11 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
-        private readonly CharacterType _mario;
+        private readonly CharacterType _characterType;
 
-        public CharacterBuilder(CharacterType mario)
+        public CharacterBuilder(CharacterType characterType)
         {
-            _mario = mario;
+            _characterType = characterType;
         }
 
         #endregion
@@ -43,7 +43,7 @@ namespace SuperMarioRpg.Domain.Battle
 
         public void CreateStats()
         {
-            Stats = new Stats(20, 0, 20, 10, 2, 20);
+            Stats = StatFactory.Instance.Create(_characterType);
         }
 
         #endregion
