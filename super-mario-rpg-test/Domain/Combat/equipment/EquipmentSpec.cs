@@ -4,7 +4,7 @@ using FluentAssertions;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
 
-namespace SuperMarioRpg.Test.Domain
+namespace SuperMarioRpg.Test.Domain.Combat
 {
     public class EquipmentSpec : ValueObjectSpec<Equipment>
     {
