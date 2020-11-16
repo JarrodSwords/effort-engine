@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace SuperMarioRpg.Domain.Battle
 {
-    public class Character : Entity
+    public class Character : AggregateRoot
     {
         #region Core
 
