@@ -69,10 +69,10 @@ namespace SuperMarioRpg.Test.Domain.Battle
         [InlineData(EquipmentType.Hammer, EquipmentType.Shirt, EquipmentType.JumpShoes)]
         public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
         {
-            var equipment = equipmentTypes.Select(e => EquipmentFactory.Instance.Create(e));
+            var equipment = equipmentTypes.Select(e => EquipmentFactory.Instance.Create(e)).ToArray();
 
             var builder = new CharacterBuilder(Characters.Mallow)
-                .WithEquipment(equipment.ToArray());
+                .WithEquipment(equipment);
 
             _director.ConfigureCharacter(builder);
 
@@ -81,7 +81,8 @@ namespace SuperMarioRpg.Test.Domain.Battle
                 var character = builder.Build();
             };
 
-            createInvalidCharacter.Should().Throw<ValidationException>();
+            createInvalidCharacter.Should().Throw<ValidationException>()
+                .WithMessage($"*Mallow cannot equip: {string.Join(", ", equipment.ToList())}*");
         }
 
         #endregion
