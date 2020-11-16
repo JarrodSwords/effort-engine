@@ -10,11 +10,12 @@ namespace SuperMarioRpg.Domain.Combat
         private static readonly CharacterValidator Validator = new CharacterValidator();
         private Loadout _loadout;
 
-        public Character(CharacterBuilderBase builderBase) : base(builderBase.Id)
+        public Character(CharacterBuilder builder) : base(builder.Id)
         {
-            CharacterType = builderBase.CharacterType;
-            _loadout = builderBase.Loadout;
-            NaturalStats = builderBase.NaturalStats;
+            CharacterType = builder.CharacterType;
+            _loadout = builder.Loadout;
+            NaturalStats = builder.NaturalStats;
+            ExperiencePoints = new ExperiencePoints();
             CalculateEffectiveStats();
 
             Validator.ValidateAndThrow(this);
@@ -24,8 +25,9 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public Characters CharacterType { get; }
+        public CharacterTypes CharacterType { get; }
         public Stats EffectiveStats { get; private set; }
+        public ExperiencePoints ExperiencePoints { get; set; }
         public Stats NaturalStats { get; }
 
         public Loadout Loadout
@@ -41,6 +43,12 @@ namespace SuperMarioRpg.Domain.Combat
         public Equipment Accessory => Loadout.Accessory;
         public Equipment Armor => Loadout.Armor;
         public Equipment Weapon => Loadout.Weapon;
+
+        public Character Add(ExperiencePoints experiencePoints)
+        {
+            ExperiencePoints += experiencePoints;
+            return this;
+        }
 
         public Character Equip(Equipment equipment)
         {

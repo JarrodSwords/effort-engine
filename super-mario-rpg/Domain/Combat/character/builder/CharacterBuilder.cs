@@ -1,50 +1,57 @@
 using System;
+using static SuperMarioRpg.Domain.Combat.StatFactory;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class CharacterBuilder : CharacterBuilderBase, ICharacterBuilder
+    public abstract class CharacterBuilder
     {
         #region Core
 
-        private Equipment[] _equipment;
-
-        public CharacterBuilder(Characters characterType) : base(characterType)
+        protected CharacterBuilder()
         {
+            Reset();
         }
 
         #endregion
 
         #region Public Interface
 
-        public CharacterBuilder WithEquipment(params Equipment[] equipment)
+        public CharacterTypes CharacterType { get; protected set; }
+        public Guid Id { get; protected set; }
+        public Loadout Loadout { get; protected set; }
+        public Stats NaturalStats { get; protected set; }
+
+        public Character Build()
         {
-            Equipment = equipment;
-            return this;
+            var character = new Character(this);
+
+            Reset();
+
+            return character;
         }
 
-        public CharacterBuilder WithId(Guid id)
+        public void CreateNaturalStats()
         {
-            Id = id;
-            return this;
+            NaturalStats = CreateStats(CharacterType);
         }
+
+        #endregion
+
+        #region Protected Interface
+
+        protected abstract void ResetExplicit();
 
         #endregion
 
         #region Private Interface
 
-        private Equipment[] Equipment
+        private void Reset()
         {
-            get => _equipment ??= new Equipment[0];
-            set => _equipment = value;
-        }
-
-        #endregion
-
-        #region ICharacterBuilder
-
-        public void CreateLoadout()
-        {
-            Loadout = new Loadout(Equipment);
+            Id = Guid.Empty;
+            CharacterType = CharacterTypes.Mario;
+            Loadout = new Loadout();
+            NaturalStats = new Stats();
+            ResetExplicit();
         }
 
         #endregion

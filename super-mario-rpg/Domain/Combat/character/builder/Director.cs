@@ -4,7 +4,7 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Public Interface
 
-        public void ConfigureCharacter(ICharacterBuilder builder)
+        public void Configure(ICharacterBuilder builder)
         {
             builder.CreateLoadout();
             builder.CreateNaturalStats();

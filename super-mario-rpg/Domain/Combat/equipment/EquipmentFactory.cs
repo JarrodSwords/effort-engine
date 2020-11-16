@@ -20,14 +20,14 @@ namespace SuperMarioRpg.Domain.Combat
         {
             var equipment = equipmentType switch
             {
-                EquipmentType.Hammer => new Equipment("Hammer", EquipmentType.Hammer, Slot.Weapon, Characters.Mario),
+                EquipmentType.Hammer => new Equipment("Hammer", EquipmentType.Hammer, Slot.Weapon, CharacterTypes.Mario),
                 EquipmentType.JumpShoes => new Equipment(
                     "Jump Shoes",
                     EquipmentType.JumpShoes,
                     Slot.Accessory,
-                    Characters.Mario
+                    CharacterTypes.Mario
                 ),
-                EquipmentType.Shirt => new Equipment("Shirt", EquipmentType.Shirt, Slot.Armor, Characters.Mario),
+                EquipmentType.Shirt => new Equipment("Shirt", EquipmentType.Shirt, Slot.Armor, CharacterTypes.Mario),
                 _ => throw new ArgumentOutOfRangeException(nameof(equipmentType), equipmentType, null)
             };
 
