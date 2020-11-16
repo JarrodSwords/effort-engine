@@ -28,21 +28,35 @@ namespace SuperMarioRpg.Test.Domain.Battle
 
         #endregion
 
+        #region Private Interface
+
+        private static Equipment[] GetEquipment(params EquipmentType[] equipmentTypes)
+        {
+            return equipmentTypes.Select(x => EquipmentFactory.Instance.Create(x)).ToArray();
+        }
+
+        #endregion
+
         #region Test Methods
 
         protected override Entity CreateEntity() => new CharacterBuilder(Characters.Mario).Build();
         protected override Entity CreateEntity(Guid id) => new CharacterBuilder(Characters.Mario).WithId(id).Build();
 
-        [Fact]
-        public void EffectiveStatsAreSumOfNaturalStatsAndLoadout()
+        [Theory]
+        [InlineData(EquipmentType.Hammer, EquipmentType.Shirt, EquipmentType.JumpShoes)]
+        public void EffectiveStatsAreSumOfNaturalStatsAndLoadout(params EquipmentType[] equipmentTypes)
         {
+            var equipment = GetEquipment(equipmentTypes);
             var builder = new CharacterBuilder(Characters.Mario)
-                .WithEquipment(_hammer, _shirt, _jumpShoes);
+                .WithEquipment(equipment);
 
             _director.ConfigureCharacter(builder);
-
             var character = builder.Build();
-            var expectedStats = character.NaturalStats + _hammer.Stats + _jumpShoes.Stats + _shirt.Stats;
+
+            var expectedStats = character.NaturalStats
+                              + _hammer.Stats
+                              + _jumpShoes.Stats
+                              + _shirt.Stats;
 
             character.EffectiveStats.Should().BeEquivalentTo(expectedStats);
         }
@@ -57,9 +71,9 @@ namespace SuperMarioRpg.Test.Domain.Battle
 
             var character = builder.Build();
 
-            character.Loadout.Weapon.Should().Be(_hammer);
-            character.Loadout.Armor.Should().Be(_shirt);
             character.Loadout.Accessory.Should().Be(_jumpShoes);
+            character.Loadout.Armor.Should().Be(_shirt);
+            character.Loadout.Weapon.Should().Be(_hammer);
         }
 
         [Theory]
@@ -69,7 +83,7 @@ namespace SuperMarioRpg.Test.Domain.Battle
         [InlineData(EquipmentType.Hammer, EquipmentType.Shirt, EquipmentType.JumpShoes)]
         public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
         {
-            var equipment = equipmentTypes.Select(e => EquipmentFactory.Instance.Create(e)).ToArray();
+            var equipment = GetEquipment(equipmentTypes);
 
             var builder = new CharacterBuilder(Characters.Mallow)
                 .WithEquipment(equipment);
