@@ -1,8 +1,8 @@
 using FluentAssertions;
-using SuperMarioRpg.Domain.Battle;
+using SuperMarioRpg.Domain.Combat;
 using Xunit;
 
-namespace SuperMarioRpg.Test.Domain.Battle
+namespace SuperMarioRpg.Test.Domain
 {
     public class EquipmentFactorySpec
     {

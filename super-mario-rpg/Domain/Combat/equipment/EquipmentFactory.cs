@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SuperMarioRpg.Domain.Battle
+namespace SuperMarioRpg.Domain.Combat
 {
     public class EquipmentFactory
     {

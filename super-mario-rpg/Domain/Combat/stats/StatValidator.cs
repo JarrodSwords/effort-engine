@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace SuperMarioRpg.Domain.Battle
+namespace SuperMarioRpg.Domain.Combat
 {
     public class StatValidator : AbstractValidator<Stat>
     {

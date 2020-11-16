@@ -1,7 +1,7 @@
 ﻿using Effort.Domain;
 using FluentValidation;
 
-namespace SuperMarioRpg.Domain.Battle
+namespace SuperMarioRpg.Domain.Combat
 {
     public class Stat : TinyType<short>
     {

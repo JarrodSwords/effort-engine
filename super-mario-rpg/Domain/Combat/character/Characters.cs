@@ -1,6 +1,6 @@
 using System;
 
-namespace SuperMarioRpg.Domain.Battle
+namespace SuperMarioRpg.Domain.Combat
 {
     [Flags]
     public enum Characters

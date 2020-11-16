@@ -1,10 +1,10 @@
 ﻿using Effort.Domain;
 using Effort.Test.Domain;
 using FluentAssertions;
-using SuperMarioRpg.Domain.Battle;
+using SuperMarioRpg.Domain.Combat;
 using Xunit;
 
-namespace SuperMarioRpg.Test.Domain.Battle
+namespace SuperMarioRpg.Test.Domain
 {
     public class StatsSpec : ValueObjectSpec<Stats>
     {

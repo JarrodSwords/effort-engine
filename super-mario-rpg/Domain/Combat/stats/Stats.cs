@@ -1,6 +1,6 @@
 ﻿using Effort.Domain;
 
-namespace SuperMarioRpg.Domain.Battle
+namespace SuperMarioRpg.Domain.Combat
 {
     public class Stats : ValueObject<Stats>
     {

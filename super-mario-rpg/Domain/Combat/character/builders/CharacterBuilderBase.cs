@@ -1,6 +1,6 @@
 using System;
 
-namespace SuperMarioRpg.Domain.Battle
+namespace SuperMarioRpg.Domain.Combat
 {
     public abstract class CharacterBuilderBase
     {

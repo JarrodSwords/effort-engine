@@ -3,10 +3,10 @@ using Effort.Domain;
 using Effort.Test.Domain;
 using FluentAssertions;
 using FluentValidation;
-using SuperMarioRpg.Domain.Battle;
+using SuperMarioRpg.Domain.Combat;
 using Xunit;
 
-namespace SuperMarioRpg.Test.Domain.Battle
+namespace SuperMarioRpg.Test.Domain
 {
     public class StatSpec : TinyTypeSpec<short>
     {
