@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -6,21 +7,24 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Core
 
-        private Equipment[] _equipment;
+        public CharacterBuilder()
+        {
+            Equipment = new List<Equipment>();
+        }
 
         #endregion
 
         #region Public Interface
 
-        public CharacterBuilder WithCharacterType(Characters characterType)
+        public CharacterBuilder Add(params Equipment[] equipment)
         {
-            CharacterType = characterType;
+            Equipment.AddRange(equipment);
             return this;
         }
 
-        public CharacterBuilder WithEquipment(params Equipment[] equipment)
+        public CharacterBuilder For(Characters characterType)
         {
-            Equipment = equipment;
+            CharacterType = characterType;
             return this;
         }
 
@@ -36,18 +40,14 @@ namespace SuperMarioRpg.Domain.Combat
 
         protected override void ResetExplicit()
         {
-            Equipment = null;
+            Equipment?.Clear();
         }
 
         #endregion
 
         #region Private Interface
 
-        private Equipment[] Equipment
-        {
-            get => _equipment ??= new Equipment[0];
-            set => _equipment = value;
-        }
+        private List<Equipment> Equipment { get; }
 
         #endregion
 
@@ -55,7 +55,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public void CreateLoadout()
         {
-            Loadout = new Loadout(Equipment);
+            Loadout = new Loadout(Equipment.ToArray());
         }
 
         #endregion

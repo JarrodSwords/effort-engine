@@ -47,7 +47,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         public void EffectiveStatsAreSumOfNaturalStatsAndLoadout(params EquipmentType[] equipmentTypes)
         {
             var equipment = CreateEquipment(equipmentTypes).ToArray();
-            _builder.WithEquipment(equipment);
+            _builder.Add(equipment);
             var expectedStats = CreateStats(Characters.Mario)
                               + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
 
@@ -75,7 +75,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [InlineData(EquipmentType.JumpShoes)]
         public void WhenEquipping_WithInvalidEquipment_LoadoutIsExpected(EquipmentType equipmentType)
         {
-            _builder.WithCharacterType(Characters.Mallow);
+            _builder.For(Characters.Mallow);
             var character = CreateCharacter();
             var equipment = CreateEquipment(equipmentType);
 
@@ -98,7 +98,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenInstantiating_WithEquipment_LoadoutIsExpected()
         {
-            _builder.WithEquipment(Hammer, JumpShoes, Shirt);
+            _builder.Add(Hammer, JumpShoes, Shirt);
 
             var character = CreateCharacter();
 
@@ -113,7 +113,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
         {
             var equipment = CreateEquipment(equipmentTypes).ToArray();
-            _builder.WithCharacterType(Characters.Mallow).WithEquipment(equipment);
+            _builder.For(Characters.Mallow).Add(equipment);
             _director.ConfigureCharacter(_builder);
 
             Action createInvalidCharacter = () =>
@@ -128,7 +128,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenUnequipping_WithEquipmentId_LoadoutIsExpected()
         {
-            _builder.WithEquipment(Shirt);
+            _builder.Add(Shirt);
             var character = CreateCharacter();
 
             character.Unequip(Shirt.Id);
