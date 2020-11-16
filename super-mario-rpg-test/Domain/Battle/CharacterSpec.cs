@@ -78,8 +78,6 @@ namespace SuperMarioRpg.Test.Domain.Battle
 
         [Theory]
         [InlineData(EquipmentType.Hammer)]
-        [InlineData(EquipmentType.Shirt)]
-        [InlineData(EquipmentType.JumpShoes)]
         [InlineData(EquipmentType.Hammer, EquipmentType.Shirt, EquipmentType.JumpShoes)]
         public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
         {
