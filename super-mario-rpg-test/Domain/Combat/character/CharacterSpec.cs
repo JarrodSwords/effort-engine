@@ -86,9 +86,9 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             var character = builder.Build();
 
-            character.Loadout.Accessory.Should().Be(JumpShoes);
-            character.Loadout.Armor.Should().Be(Shirt);
-            character.Loadout.Weapon.Should().Be(Hammer);
+            character.Accessory.Should().Be(JumpShoes);
+            character.Armor.Should().Be(Shirt);
+            character.Weapon.Should().Be(Hammer);
         }
 
         [Theory]
