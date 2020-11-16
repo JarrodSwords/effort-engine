@@ -19,9 +19,9 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Equality, Operators
 
-        public static Stat operator +(Stat addend1, Stat addend2)
+        public static Stat operator +(Stat left, Stat right)
         {
-            var sum = (short) (addend1.Value + addend2.Value);
+            var sum = (short) (left.Value + right.Value);
 
             // clamp
             sum = sum < Min ? Min : sum > Max ? Max : sum;

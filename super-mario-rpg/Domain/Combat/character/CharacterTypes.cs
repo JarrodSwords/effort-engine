@@ -3,7 +3,7 @@ using System;
 namespace SuperMarioRpg.Domain.Combat
 {
     [Flags]
-    public enum Characters
+    public enum CharacterTypes
     {
         Bowser = 1,
         Geno = 1 << 1,

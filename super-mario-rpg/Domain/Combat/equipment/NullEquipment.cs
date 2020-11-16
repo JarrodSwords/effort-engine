@@ -12,7 +12,7 @@ namespace SuperMarioRpg.Domain.Combat
                 name,
                 EquipmentType.None,
                 slot,
-                Characters.All
+                CharacterTypes.All
             )
             {
             }
