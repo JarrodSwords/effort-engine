@@ -34,10 +34,9 @@ namespace SuperMarioRpg.Domain.Battle
         public Equipment Weapon => GetEquipment(Slot.Weapon);
 
         public bool IsCompatible(Characters character) =>
-            (Accessory.CompatibleCharacters
-           & Armor.CompatibleCharacters
-           & Weapon.CompatibleCharacters
-           & character)
+            _equipment
+                .Select(x => x.Value.CompatibleCharacters)
+                .Aggregate(character, (x, y) => x & y)
           > 0;
 
         #endregion
