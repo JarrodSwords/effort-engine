@@ -29,7 +29,7 @@ namespace SuperMarioRpg.Domain.Combat
             foreach (var e in NullLoadout._equipment.Select(x => x.Value).Where(x => !_equipment.ContainsKey(x.Slot)))
                 _equipment.Add(e.Slot, e);
 
-            Stats = Stats.Aggregate(_equipment.Select(x => x.Value.Stats).ToArray());
+            Stats = CalculateStats();
         }
 
         private Loadout(Loadout previous, Equipment equipment)
@@ -41,7 +41,7 @@ namespace SuperMarioRpg.Domain.Combat
             else
                 _equipment.Add(equipment.Slot, equipment);
 
-            Stats = Stats.Aggregate(_equipment.Select(x => x.Value.Stats).ToArray());
+            Stats = CalculateStats();
         }
 
         #endregion
@@ -66,9 +66,16 @@ namespace SuperMarioRpg.Domain.Combat
                 .Aggregate(character, (x, y) => x & y)
           > 0;
 
+        public Loadout Unequip(Id id)
+        {
+            return new Loadout(_equipment.Select(x => x.Value).Where(x => x.Id != id).ToArray());
+        }
+
         #endregion
 
         #region Private Interface
+
+        private Stats CalculateStats() => Stats.Aggregate(_equipment.Select(x => x.Value.Stats).ToArray());
 
         private Equipment GetEquipment(Slot slot) => _equipment[slot];
 
