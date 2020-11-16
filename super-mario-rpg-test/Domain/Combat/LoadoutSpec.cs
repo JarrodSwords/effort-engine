@@ -4,6 +4,7 @@ using Effort.Test.Domain;
 using FluentAssertions;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
+using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 
 namespace SuperMarioRpg.Test.Domain.Combat
 {
@@ -19,8 +20,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
             Action createInvalidLoadout = () =>
             {
                 var loadout = new Loadout(
-                    EquipmentFactory.Instance.Create(EquipmentType.Shirt),
-                    EquipmentFactory.Instance.Create(EquipmentType.Shirt)
+                    Create(EquipmentType.Shirt),
+                    Create(EquipmentType.Shirt)
                 );
             };
 

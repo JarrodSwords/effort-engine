@@ -1,6 +1,7 @@
 using FluentAssertions;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
+using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 
 namespace SuperMarioRpg.Test.Domain.Combat
 {
@@ -24,7 +25,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             var expectedStats = new Stats(attack, defense, hitPoints, specialAttack, specialDefense, speed);
 
-            var equipment = EquipmentFactory.Instance.Create(equipmentType);
+            var equipment = Create(equipmentType);
 
             equipment.Stats.Should().BeEquivalentTo(expectedStats);
         }

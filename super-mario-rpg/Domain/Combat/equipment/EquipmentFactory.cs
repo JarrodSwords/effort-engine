@@ -1,50 +1,37 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SuperMarioRpg.Domain.Combat
 {
     public class EquipmentFactory
     {
-        #region Singleton
-
-        public static EquipmentFactory Instance => new EquipmentFactory();
-
-        #endregion
-
-        #region Core
-
-        private readonly IDictionary<EquipmentType, Equipment> _equipment;
-
-        private EquipmentFactory()
-        {
-            _equipment = new Dictionary<EquipmentType, Equipment>();
-            Initialize();
-        }
-
-        #endregion
+        public static Equipment Hammer = Create(EquipmentType.Hammer);
+        public static Equipment JumpShoes = Create(EquipmentType.JumpShoes);
+        public static Equipment Shirt = Create(EquipmentType.Shirt);
 
         #region Public Interface
 
-        public Equipment Create(EquipmentType equipmentType) => _equipment[equipmentType].Clone();
-
-        #endregion
-
-        #region Private Interface
-
-        private void Initialize()
+        public static Equipment Create(EquipmentType equipmentType)
         {
-            _equipment.Add(
-                EquipmentType.Hammer,
-                new Equipment("Hammer", EquipmentType.Hammer, Slot.Weapon, Characters.Mario)
-            );
-            _equipment.Add(
-                EquipmentType.JumpShoes,
-                new Equipment("Jump Shoes", EquipmentType.JumpShoes, Slot.Accessory, Characters.Mario)
-            );
-            _equipment.Add(
-                EquipmentType.Shirt,
-                new Equipment("Shirt", EquipmentType.Shirt, Slot.Armor, Characters.Mario)
-            );
+            var equipment = equipmentType switch
+            {
+                EquipmentType.Hammer => new Equipment("Hammer", EquipmentType.Hammer, Slot.Weapon, Characters.Mario),
+                EquipmentType.JumpShoes => new Equipment(
+                    "Jump Shoes",
+                    EquipmentType.JumpShoes,
+                    Slot.Accessory,
+                    Characters.Mario
+                ),
+                EquipmentType.Shirt => new Equipment("Shirt", EquipmentType.Shirt, Slot.Armor, Characters.Mario),
+                _ => throw new ArgumentOutOfRangeException(nameof(equipmentType), equipmentType, null)
+            };
+
+            return equipment;
         }
+
+        public static IEnumerable<Equipment> Create(params EquipmentType[] equipmentTypes) =>
+            equipmentTypes.Select(Create);
 
         #endregion
     }
