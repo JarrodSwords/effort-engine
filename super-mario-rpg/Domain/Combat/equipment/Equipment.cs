@@ -1,8 +1,9 @@
+using System;
 using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public partial class Equipment : ValueObject<Equipment>
+    public partial class Equipment : Entity
     {
         #region Core
 
@@ -14,8 +15,9 @@ namespace SuperMarioRpg.Domain.Combat
             string name,
             Slot slot,
             Stats stats,
-            Characters compatibleCharacters
-        )
+            Characters compatibleCharacters,
+            Guid id = new Guid()
+        ) : base(id)
         {
             Name = Name.Create(name);
             Slot = slot;
@@ -27,7 +29,8 @@ namespace SuperMarioRpg.Domain.Combat
             equipment.Name.Value,
             equipment.Slot,
             equipment.Stats,
-            equipment.CompatibleCharacters
+            equipment.CompatibleCharacters,
+            equipment.Id.Value
         )
         {
         }
@@ -46,13 +49,6 @@ namespace SuperMarioRpg.Domain.Combat
         public bool IsCompatible(Characters character) => (character & CompatibleCharacters) > 0;
 
         public override string ToString() => Name.ToString();
-
-        #endregion
-
-        #region Equality, Operators
-
-        protected override bool EqualsExplicit(Equipment other) => Slot == other.Slot && Name == other.Name;
-        protected override int GetHashCodeExplicit() => Slot.GetHashCode() + Name.GetHashCode();
 
         #endregion
     }

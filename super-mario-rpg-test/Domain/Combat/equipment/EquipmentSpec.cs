@@ -1,3 +1,4 @@
+using System;
 using Effort.Domain;
 using Effort.Test.Domain;
 using FluentAssertions;
@@ -6,7 +7,7 @@ using Xunit;
 
 namespace SuperMarioRpg.Test.Domain.Combat
 {
-    public class EquipmentSpec : ValueObjectSpec<Equipment>
+    public class EquipmentSpec : EntitySpec
     {
         #region Test Methods
 
@@ -20,8 +21,22 @@ namespace SuperMarioRpg.Test.Domain.Combat
             shirt2.Should().BeEquivalentTo(shirt1);
         }
 
-        protected override ValueObject<Equipment> CreateValueObject() =>
-            new Equipment("shirt", Slot.Armor, new Stats(), Characters.Mario);
+        protected override Entity CreateEntity() =>
+            new Equipment(
+                "Shirt",
+                Slot.Armor,
+                StatFactory.Instance.Create(EquipmentType.Shirt),
+                Characters.Mario
+            );
+
+        protected override Entity CreateEntity(Guid id) =>
+            new Equipment(
+                "Shirt",
+                Slot.Armor,
+                StatFactory.Instance.Create(EquipmentType.Shirt),
+                Characters.Mario,
+                id
+            );
 
         #endregion
     }
