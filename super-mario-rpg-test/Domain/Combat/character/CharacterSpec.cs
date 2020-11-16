@@ -57,6 +57,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             character.Accessory.Should().Be(JumpShoes);
             character.Armor.Should().Be(Shirt);
             character.Weapon.Should().Be(Hammer);
+            character.EffectiveStats.Should().Be(character.NaturalStats + character.Loadout.Stats);
         }
 
         [Theory]
@@ -117,6 +118,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             character.Unequip(Shirt.Id);
 
             character.Armor.Should().Be(Equipment.NullArmor);
+            character.EffectiveStats.Should().Be(character.NaturalStats + character.Loadout.Stats);
         }
 
         #endregion
