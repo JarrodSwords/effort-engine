@@ -1,5 +1,6 @@
 using System;
 using Effort.Domain;
+using static SuperMarioRpg.Domain.Combat.StatFactory;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -22,7 +23,7 @@ namespace SuperMarioRpg.Domain.Combat
             Name = Name.Create(name);
             EquipmentType = equipmentType;
             Slot = slot;
-            Stats = StatFactory.Instance.Create(EquipmentType);
+            Stats = Create(EquipmentType);
             CompatibleCharacters = compatibleCharacters;
         }
 

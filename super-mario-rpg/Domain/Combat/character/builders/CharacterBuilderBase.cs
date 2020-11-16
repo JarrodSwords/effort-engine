@@ -1,4 +1,5 @@
 using System;
+using static SuperMarioRpg.Domain.Combat.StatFactory;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -37,7 +38,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public void CreateNaturalStats()
         {
-            NaturalStats = StatFactory.Instance.Create(CharacterType);
+            NaturalStats = Create(CharacterType);
         }
 
         #endregion

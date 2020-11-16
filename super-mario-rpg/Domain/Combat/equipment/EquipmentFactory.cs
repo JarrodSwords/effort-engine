@@ -6,9 +6,13 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class EquipmentFactory
     {
+        #region Core
+
         public static Equipment Hammer = Create(EquipmentType.Hammer);
         public static Equipment JumpShoes = Create(EquipmentType.JumpShoes);
         public static Equipment Shirt = Create(EquipmentType.Shirt);
+
+        #endregion
 
         #region Public Interface
 

@@ -4,23 +4,9 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class StatFactory
     {
-        #region Singleton
-
-        public static StatFactory Instance => new StatFactory();
-
-        #endregion
-
-        #region Core
-
-        private StatFactory()
-        {
-        }
-
-        #endregion
-
         #region Public Interface
 
-        public Stats Create(Characters key)
+        public static Stats Create(Characters key)
         {
             var stats = key switch
             {
@@ -35,7 +21,7 @@ namespace SuperMarioRpg.Domain.Combat
             return stats;
         }
 
-        public Stats Create(EquipmentType key)
+        public static Stats Create(EquipmentType key)
         {
             var stats = key switch
             {
