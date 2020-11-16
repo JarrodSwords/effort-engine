@@ -37,7 +37,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
             var equipment = CreateEquipment(equipmentTypes).ToArray();
             var builder = new CharacterBuilder(Characters.Mario).WithEquipment(equipment);
             _director.ConfigureCharacter(builder);
-            var expectedStats = CreateStats(Characters.Mario) + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
+            var expectedStats = CreateStats(Characters.Mario)
+                              + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
 
             var character = builder.Build();
 
@@ -67,7 +68,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             var builder = new CharacterBuilder(Characters.Mallow);
             _director.ConfigureCharacter(builder);
             var character = builder.Build();
-            var equipment = EquipmentFactory.CreateEquipment(equipmentType);
+            var equipment = CreateEquipment(equipmentType);
 
             Action equipInvalidItem = () => { character.Equip(equipment); };
 
@@ -104,6 +105,18 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             createInvalidCharacter.Should().Throw<ValidationException>()
                 .WithMessage($"*Mallow cannot equip: {string.Join(", ", equipment.ToList())}*");
+        }
+
+        [Fact]
+        public void WhenUnequipping_WithEquipmentId_LoadoutIsExpected()
+        {
+            var builder = new CharacterBuilder(Characters.Mario).WithEquipment(Shirt);
+            _director.ConfigureCharacter(builder);
+            var character = builder.Build();
+
+            character.Unequip(Shirt.Id);
+
+            character.Armor.Should().Be(Equipment.NullArmor);
         }
 
         #endregion

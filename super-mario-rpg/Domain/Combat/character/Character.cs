@@ -49,6 +49,12 @@ namespace SuperMarioRpg.Domain.Combat
             return this;
         }
 
+        public Character Unequip(Id id)
+        {
+            Loadout = Loadout.Unequip(id);
+            return this;
+        }
+
         #endregion
 
         #region Private Interface

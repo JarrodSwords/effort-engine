@@ -66,6 +66,11 @@ namespace SuperMarioRpg.Domain.Combat
                 .Aggregate(character, (x, y) => x & y)
           > 0;
 
+        public Loadout Unequip(Id id)
+        {
+            return new Loadout(_equipment.Select(x => x.Value).Where(x => x.Id != id).ToArray());
+        }
+
         #endregion
 
         #region Private Interface
