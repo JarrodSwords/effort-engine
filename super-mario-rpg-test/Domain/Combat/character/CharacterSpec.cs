@@ -91,7 +91,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             var character = CreateCharacter();
             var exp = new ExperiencePoints(50);
 
-            character.GainExperience(exp).GainExperience(exp);
+            character.Add(exp).Add(exp);
 
             character.ExperiencePoints.Value.Should().Be(100);
         }

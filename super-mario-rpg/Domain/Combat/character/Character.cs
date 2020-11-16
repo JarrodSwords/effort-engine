@@ -44,16 +44,16 @@ namespace SuperMarioRpg.Domain.Combat
         public Equipment Armor => Loadout.Armor;
         public Equipment Weapon => Loadout.Weapon;
 
+        public Character Add(ExperiencePoints experiencePoints)
+        {
+            ExperiencePoints += experiencePoints;
+            return this;
+        }
+
         public Character Equip(Equipment equipment)
         {
             Loadout = Loadout.Equip(equipment);
             Validator.ValidateAndThrow(this);
-            return this;
-        }
-
-        public Character GainExperience(ExperiencePoints experiencePoints)
-        {
-            ExperiencePoints += experiencePoints;
             return this;
         }
 
