@@ -15,12 +15,14 @@ namespace SuperMarioRpg.Test.Domain.Combat
     {
         #region Core
 
-        private readonly FluentCharacterBuilder _builder;
+        private readonly CharacterBuilder _builder;
         private readonly Director _director;
+        private readonly NewCharacterBuilder _newCharacterBuilder;
 
         public CharacterSpec()
         {
-            _builder = new FluentCharacterBuilder();
+            _builder = new CharacterBuilder();
+            _newCharacterBuilder = new NewCharacterBuilder();
             _director = new Director();
         }
 
@@ -30,7 +32,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
         private Character CreateCharacter()
         {
-            _director.ConfigureExisting(_builder);
+            _director.Configure(_builder);
             return _builder.Build();
         }
 
@@ -105,11 +107,11 @@ namespace SuperMarioRpg.Test.Domain.Combat
             ushort expectedExperiencePoints
         )
         {
-            _builder.For(characterType);
-            _director.ConfigureNew(_builder);
+            _newCharacterBuilder.For(characterType);
+            _director.Configure(_newCharacterBuilder);
             var expectedStats = CreateStats(characterType);
 
-            var character = _builder.Build();
+            var character = _newCharacterBuilder.Build();
 
             character.Level.Value.Should().Be(expectedLevel);
             character.ExperiencePoints.Value.Should().Be(expectedExperiencePoints);
@@ -135,7 +137,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             var equipment = CreateEquipment(equipmentTypes).ToArray();
             _builder.For(CharacterTypes.Mallow).Add(equipment);
-            _director.ConfigureExisting(_builder);
+            _director.Configure(_builder);
 
             Action createInvalidCharacter = () =>
             {

@@ -4,16 +4,11 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Public Interface
 
-        public void ConfigureExisting(ICharacterBuilder builder)
+        public void Configure(ICharacterBuilder builder)
         {
             builder.CreateLoadout();
             builder.CreateNaturalStats();
-        }
-
-        public void ConfigureNew(ICharacterBuilder builder)
-        {
-            builder.InitializeGrowth();
-            builder.CreateNaturalStats();
+            builder.CreateProgressionSystem();
         }
 
         #endregion

@@ -10,12 +10,12 @@ namespace SuperMarioRpg.Domain.Combat
         private static readonly CharacterValidator Validator = new CharacterValidator();
         private Loadout _loadout;
 
-        public Character(CharacterBuilder builder) : base(builder.Id)
+        public Character(ICharacterBuilder builder) : base(builder.Id)
         {
             CharacterType = builder.CharacterType;
             _loadout = builder.Loadout;
             NaturalStats = builder.NaturalStats;
-            ProgressionSystem = new ProgressionSystem(builder.Level, builder.ExperiencePoints);
+            ProgressionSystem = builder.ProgressionSystem;
             CalculateEffectiveStats();
 
             Validator.ValidateAndThrow(this);
