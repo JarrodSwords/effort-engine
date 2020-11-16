@@ -10,8 +10,8 @@ namespace SuperMarioRpg.Domain.Combat
 
             public NullEquipment(Slot slot, string name = "None") : base(
                 name,
+                EquipmentType.None,
                 slot,
-                new Stats(),
                 Characters.All
             )
             {

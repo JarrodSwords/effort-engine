@@ -13,22 +13,23 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Equipment(
             string name,
+            EquipmentType equipmentType,
             Slot slot,
-            Stats stats,
             Characters compatibleCharacters,
             Guid id = new Guid()
         ) : base(id)
         {
             Name = Name.Create(name);
+            EquipmentType = equipmentType;
             Slot = slot;
-            Stats = stats;
+            Stats = StatFactory.Instance.Create(EquipmentType);
             CompatibleCharacters = compatibleCharacters;
         }
 
         private Equipment(Equipment equipment) : this(
             equipment.Name.Value,
+            equipment.EquipmentType,
             equipment.Slot,
-            equipment.Stats,
             equipment.CompatibleCharacters,
             equipment.Id.Value
         )
@@ -40,6 +41,7 @@ namespace SuperMarioRpg.Domain.Combat
         #region Public Interface
 
         public Characters CompatibleCharacters { get; }
+        public EquipmentType EquipmentType { get; }
         public Name Name { get; }
         public Slot Slot { get; }
         public Stats Stats { get; }

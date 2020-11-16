@@ -39,6 +39,7 @@ namespace SuperMarioRpg.Domain.Combat
         {
             var stats = key switch
             {
+                EquipmentType.None => new Stats(),
                 EquipmentType.Hammer => new Stats(10),
                 EquipmentType.JumpShoes => new Stats(0, 1, 0, 5, 1, 2),
                 EquipmentType.Shirt => new Stats(0, 6, 0, 0, 6),
