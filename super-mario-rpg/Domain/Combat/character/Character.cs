@@ -26,6 +26,8 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Characters CharacterType { get; }
         public Stats EffectiveStats { get; private set; }
+
+        public ushort Experience { get; set; }
         public Stats NaturalStats { get; }
 
         public Loadout Loadout
@@ -46,6 +48,12 @@ namespace SuperMarioRpg.Domain.Combat
         {
             Loadout = Loadout.Equip(equipment);
             Validator.ValidateAndThrow(this);
+            return this;
+        }
+
+        public Character GainExperience(ushort experience)
+        {
+            Experience += experience;
             return this;
         }
 

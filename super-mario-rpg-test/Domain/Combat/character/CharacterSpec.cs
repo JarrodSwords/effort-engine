@@ -78,6 +78,18 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
+        public void WhenGainingExperience_ExperienceIsExpected()
+        {
+            var builder = new CharacterBuilder(Characters.Mario);
+            _director.ConfigureCharacter(builder);
+            var character = builder.Build();
+
+            character.GainExperience(100).GainExperience(50);
+
+            character.Experience.Should().Be(150);
+        }
+
+        [Fact]
         public void WhenInstantiating_WithEquipment_LoadoutIsExpected()
         {
             var builder = new CharacterBuilder(Characters.Mario).WithEquipment(Hammer, JumpShoes, Shirt);
