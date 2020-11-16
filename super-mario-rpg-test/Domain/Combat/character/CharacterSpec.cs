@@ -89,10 +89,11 @@ namespace SuperMarioRpg.Test.Domain.Combat
         public void WhenGainingExperience_ExperienceIsExpected()
         {
             var character = CreateCharacter();
+            var exp = new ExperiencePoints(50);
 
-            character.GainExperience(100).GainExperience(50);
+            character.GainExperience(exp).GainExperience(exp);
 
-            character.Experience.Should().Be(150);
+            character.ExperiencePoints.Value.Should().Be(100);
         }
 
         [Fact]

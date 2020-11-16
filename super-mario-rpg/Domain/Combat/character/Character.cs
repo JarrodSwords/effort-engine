@@ -15,6 +15,7 @@ namespace SuperMarioRpg.Domain.Combat
             CharacterType = builder.CharacterType;
             _loadout = builder.Loadout;
             NaturalStats = builder.NaturalStats;
+            ExperiencePoints = new ExperiencePoints();
             CalculateEffectiveStats();
 
             Validator.ValidateAndThrow(this);
@@ -26,8 +27,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public CharacterTypes CharacterType { get; }
         public Stats EffectiveStats { get; private set; }
-
-        public ushort Experience { get; set; }
+        public ExperiencePoints ExperiencePoints { get; set; }
         public Stats NaturalStats { get; }
 
         public Loadout Loadout
@@ -51,9 +51,9 @@ namespace SuperMarioRpg.Domain.Combat
             return this;
         }
 
-        public Character GainExperience(ushort experience)
+        public Character GainExperience(ExperiencePoints experiencePoints)
         {
-            Experience += experience;
+            ExperiencePoints += experiencePoints;
             return this;
         }
 
