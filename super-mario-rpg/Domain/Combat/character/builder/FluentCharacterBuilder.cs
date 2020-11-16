@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class FluentCharacterBuilder : CharacterBuilder, ICharacterBuilder
+    public class FluentCharacterBuilder : CharacterBuilder
     {
         #region Core
 
@@ -20,6 +20,11 @@ namespace SuperMarioRpg.Domain.Combat
         {
             Equipment.AddRange(equipment);
             return this;
+        }
+
+        public override void CreateLoadout()
+        {
+            Loadout = new Loadout(Equipment.ToArray());
         }
 
         public FluentCharacterBuilder For(CharacterTypes characterType)
@@ -48,15 +53,6 @@ namespace SuperMarioRpg.Domain.Combat
         #region Private Interface
 
         private List<Equipment> Equipment { get; }
-
-        #endregion
-
-        #region ICharacterBuilder
-
-        public override void CreateLoadout()
-        {
-            Loadout = new Loadout(Equipment.ToArray());
-        }
 
         #endregion
     }

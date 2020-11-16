@@ -107,11 +107,13 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             _builder.For(characterType);
             _director.ConfigureNew(_builder);
+            var expectedStats = CreateStats(characterType);
 
             var character = _builder.Build();
 
             character.Level.Value.Should().Be(expectedLevel);
             character.ExperiencePoints.Value.Should().Be(expectedExperiencePoints);
+            character.NaturalStats.Should().Be(expectedStats);
         }
 
         [Fact]
