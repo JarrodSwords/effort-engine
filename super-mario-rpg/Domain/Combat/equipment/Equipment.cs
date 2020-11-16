@@ -23,7 +23,7 @@ namespace SuperMarioRpg.Domain.Combat
             Name = Name.Create(name);
             EquipmentType = equipmentType;
             Slot = slot;
-            Stats = Create(EquipmentType);
+            Stats = CreateStats(EquipmentType);
             CompatibleCharacters = compatibleCharacters;
         }
 

@@ -6,7 +6,7 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Public Interface
 
-        public static Stats Create(Characters key)
+        public static Stats CreateStats(Characters key)
         {
             var stats = key switch
             {
@@ -21,7 +21,7 @@ namespace SuperMarioRpg.Domain.Combat
             return stats;
         }
 
-        public static Stats Create(EquipmentType key)
+        public static Stats CreateStats(EquipmentType key)
         {
             var stats = key switch
             {

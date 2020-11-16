@@ -8,15 +8,15 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Core
 
-        public static Equipment Hammer = Create(EquipmentType.Hammer);
-        public static Equipment JumpShoes = Create(EquipmentType.JumpShoes);
-        public static Equipment Shirt = Create(EquipmentType.Shirt);
+        public static Equipment Hammer = CreateEquipment(EquipmentType.Hammer);
+        public static Equipment JumpShoes = CreateEquipment(EquipmentType.JumpShoes);
+        public static Equipment Shirt = CreateEquipment(EquipmentType.Shirt);
 
         #endregion
 
         #region Public Interface
 
-        public static Equipment Create(EquipmentType equipmentType)
+        public static Equipment CreateEquipment(EquipmentType equipmentType)
         {
             var equipment = equipmentType switch
             {
@@ -34,8 +34,8 @@ namespace SuperMarioRpg.Domain.Combat
             return equipment;
         }
 
-        public static IEnumerable<Equipment> Create(params EquipmentType[] equipmentTypes) =>
-            equipmentTypes.Select(Create);
+        public static IEnumerable<Equipment> CreateEquipment(params EquipmentType[] equipmentTypes) =>
+            equipmentTypes.Select(CreateEquipment);
 
         #endregion
     }

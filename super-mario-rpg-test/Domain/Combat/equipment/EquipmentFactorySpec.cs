@@ -25,7 +25,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             var expectedStats = new Stats(attack, defense, hitPoints, specialAttack, specialDefense, speed);
 
-            var equipment = Create(equipmentType);
+            var equipment = CreateEquipment(equipmentType);
 
             equipment.Stats.Should().BeEquivalentTo(expectedStats);
         }

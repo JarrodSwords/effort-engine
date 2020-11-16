@@ -20,8 +20,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
             Action createInvalidLoadout = () =>
             {
                 var loadout = new Loadout(
-                    Create(EquipmentType.Shirt),
-                    Create(EquipmentType.Shirt)
+                    CreateEquipment(EquipmentType.Shirt),
+                    CreateEquipment(EquipmentType.Shirt)
                 );
             };
 

@@ -38,7 +38,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public void CreateNaturalStats()
         {
-            NaturalStats = Create(CharacterType);
+            NaturalStats = CreateStats(CharacterType);
         }
 
         #endregion
