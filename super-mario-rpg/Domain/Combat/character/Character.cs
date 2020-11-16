@@ -23,8 +23,14 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Characters CharacterType { get; }
         public Stats EffectiveStats { get; }
-        public Loadout Loadout { get; }
+        public Loadout Loadout { get; private set; }
         public Stats NaturalStats { get; }
+        public Equipment Weapon => Loadout.Weapon;
+
+        public void Equip(Equipment equipment)
+        {
+            Loadout = Loadout.Equip(equipment);
+        }
 
         #endregion
     }

@@ -32,6 +32,18 @@ namespace SuperMarioRpg.Domain.Combat
             Stats = Stats.Aggregate(_equipment.Select(x => x.Value.Stats).ToArray());
         }
 
+        private Loadout(Loadout previous, Equipment equipment)
+        {
+            _equipment = previous._equipment;
+
+            if (_equipment.ContainsKey(equipment.Slot))
+                _equipment[equipment.Slot] = equipment;
+            else
+                _equipment.Add(equipment.Slot, equipment);
+
+            Stats = Stats.Aggregate(_equipment.Select(x => x.Value.Stats).ToArray());
+        }
+
         #endregion
 
         #region Public Interface
@@ -40,6 +52,8 @@ namespace SuperMarioRpg.Domain.Combat
         public Equipment Accessory => GetEquipment(Slot.Accessory);
         public Equipment Armor => GetEquipment(Slot.Armor);
         public Equipment Weapon => GetEquipment(Slot.Weapon);
+
+        public Loadout Equip(Equipment equipment) => new Loadout(this, equipment);
 
         public IEnumerable<Equipment> GetIncompatible(Characters character) =>
             _equipment

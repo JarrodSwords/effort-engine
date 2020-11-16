@@ -46,6 +46,18 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
+        public void WhenEquipping_WithValidEquipment_LoadoutUpdateIsExpected()
+        {
+            var builder = new CharacterBuilder(Characters.Mario);
+            _director.ConfigureCharacter(builder);
+            var character = builder.Build();
+
+            character.Equip(Hammer);
+
+            character.Weapon.Should().Be(Hammer);
+        }
+
+        [Fact]
         public void WhenInstantiating_WithEquipment_LoadoutIsExpected()
         {
             var builder = new CharacterBuilder(Characters.Mario)
