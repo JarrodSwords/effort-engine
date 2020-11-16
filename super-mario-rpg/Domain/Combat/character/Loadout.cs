@@ -10,18 +10,23 @@ namespace SuperMarioRpg.Domain.Combat
 
         private readonly Dictionary<Slot, Equipment> _equipment;
 
-        private static readonly List<Equipment> NullEquipment = new List<Equipment>
+        public static Loadout NullLoadout = new Loadout();
+
+        private Loadout()
         {
-            Equipment.NullAccessory,
-            Equipment.NullArmor,
-            Equipment.NullWeapon
-        };
+            _equipment = new List<Equipment>
+            {
+                Equipment.NullAccessory,
+                Equipment.NullArmor,
+                Equipment.NullWeapon
+            }.ToDictionary(x => x.Slot);
+        }
 
         public Loadout(params Equipment[] equipment)
         {
             _equipment = equipment.ToDictionary(x => x.Slot);
 
-            foreach (var e in NullEquipment.Where(x => !_equipment.ContainsKey(x.Slot)))
+            foreach (var e in NullLoadout._equipment.Select(x => x.Value).Where(x => !_equipment.ContainsKey(x.Slot)))
                 _equipment.Add(e.Slot, e);
 
             Stats = Stats.Aggregate(_equipment.Select(x => x.Value.Stats).ToArray());
