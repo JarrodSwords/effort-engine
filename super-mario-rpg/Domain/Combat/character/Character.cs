@@ -10,11 +10,11 @@ namespace SuperMarioRpg.Domain.Combat
         private static readonly CharacterValidator Validator = new CharacterValidator();
         private Loadout _loadout;
 
-        public Character(CharacterBuilderBase builderBase) : base(builderBase.Id)
+        public Character(CharacterBuilder builder) : base(builder.Id)
         {
-            CharacterType = builderBase.CharacterType;
-            _loadout = builderBase.Loadout;
-            NaturalStats = builderBase.NaturalStats;
+            CharacterType = builder.CharacterType;
+            _loadout = builder.Loadout;
+            NaturalStats = builder.NaturalStats;
             CalculateEffectiveStats();
 
             Validator.ValidateAndThrow(this);

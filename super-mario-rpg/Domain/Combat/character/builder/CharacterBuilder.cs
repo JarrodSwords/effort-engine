@@ -1,61 +1,57 @@
 using System;
-using System.Collections.Generic;
+using static SuperMarioRpg.Domain.Combat.StatFactory;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class CharacterBuilder : CharacterBuilderBase, ICharacterBuilder
+    public abstract class CharacterBuilder
     {
         #region Core
 
-        public CharacterBuilder()
+        protected CharacterBuilder()
         {
-            Equipment = new List<Equipment>();
+            Reset();
         }
 
         #endregion
 
         #region Public Interface
 
-        public CharacterBuilder Add(params Equipment[] equipment)
+        public Characters CharacterType { get; protected set; }
+        public Guid Id { get; protected set; }
+        public Loadout Loadout { get; protected set; }
+        public Stats NaturalStats { get; protected set; }
+
+        public Character Build()
         {
-            Equipment.AddRange(equipment);
-            return this;
+            var character = new Character(this);
+
+            Reset();
+
+            return character;
         }
 
-        public CharacterBuilder For(Characters characterType)
+        public void CreateNaturalStats()
         {
-            CharacterType = characterType;
-            return this;
-        }
-
-        public CharacterBuilder WithId(Guid id)
-        {
-            Id = id;
-            return this;
+            NaturalStats = CreateStats(CharacterType);
         }
 
         #endregion
 
         #region Protected Interface
 
-        protected override void ResetExplicit()
-        {
-            Equipment?.Clear();
-        }
+        protected abstract void ResetExplicit();
 
         #endregion
 
         #region Private Interface
 
-        private List<Equipment> Equipment { get; }
-
-        #endregion
-
-        #region ICharacterBuilder
-
-        public void CreateLoadout()
+        private void Reset()
         {
-            Loadout = new Loadout(Equipment.ToArray());
+            Id = Guid.Empty;
+            CharacterType = Characters.Mario;
+            Loadout = new Loadout();
+            NaturalStats = new Stats();
+            ResetExplicit();
         }
 
         #endregion

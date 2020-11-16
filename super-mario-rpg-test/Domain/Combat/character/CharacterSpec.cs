@@ -15,12 +15,12 @@ namespace SuperMarioRpg.Test.Domain.Combat
     {
         #region Core
 
-        private readonly CharacterBuilder _builder;
+        private readonly FluentCharacterBuilder _builder;
         private readonly Director _director;
 
         public CharacterSpec()
         {
-            _builder = new CharacterBuilder();
+            _builder = new FluentCharacterBuilder();
             _director = new Director();
         }
 
@@ -38,8 +38,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
         #region Test Methods
 
-        protected override Entity CreateEntity() => new CharacterBuilder().Build();
-        protected override Entity CreateEntity(Guid id) => new CharacterBuilder().WithId(id).Build();
+        protected override Entity CreateEntity() => new FluentCharacterBuilder().Build();
+        protected override Entity CreateEntity(Guid id) => new FluentCharacterBuilder().WithId(id).Build();
 
         [Theory]
         [InlineData(EquipmentType.Hammer)]
