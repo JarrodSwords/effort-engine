@@ -15,15 +15,15 @@ namespace SuperMarioRpg.Test.Domain.Combat
     {
         #region Core
 
-        private readonly CharacterBuilder _builder;
         private readonly Director _director;
-        private readonly NewCharacterBuilder _newCharacterBuilder;
+        private readonly ManualCharacterBuilder _manualBuilder;
+        private readonly NewCharacterBuilder _newBuilder;
 
         public CharacterSpec()
         {
-            _builder = new CharacterBuilder();
-            _newCharacterBuilder = new NewCharacterBuilder();
             _director = new Director();
+            _manualBuilder = new ManualCharacterBuilder();
+            _newBuilder = new NewCharacterBuilder();
         }
 
         #endregion
@@ -32,16 +32,16 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
         private Character CreateCharacter()
         {
-            _director.Configure(_builder);
-            return _builder.Build();
+            _director.Configure(_manualBuilder);
+            return _manualBuilder.Build();
         }
 
         #endregion
 
         #region Test Methods
 
-        protected override Entity CreateEntity() => _builder.Build();
-        protected override Entity CreateEntity(Guid id) => _builder.WithId(id).Build();
+        protected override Entity CreateEntity() => _manualBuilder.Build();
+        protected override Entity CreateEntity(Guid id) => _manualBuilder.WithId(id).Build();
 
         [Theory]
         [InlineData(EquipmentType.Hammer)]
@@ -49,7 +49,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         public void EffectiveStatsAreSumOfNaturalStatsAndLoadout(params EquipmentType[] equipmentTypes)
         {
             var equipment = CreateEquipment(equipmentTypes).ToArray();
-            _builder.Add(equipment);
+            _manualBuilder.Add(equipment);
             var expectedStats = CreateStats(CharacterTypes.Mario)
                               + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
 
@@ -77,7 +77,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [InlineData(EquipmentType.JumpShoes)]
         public void WhenEquipping_WithInvalidEquipment_LoadoutIsExpected(EquipmentType equipmentType)
         {
-            _builder.For(CharacterTypes.Mallow);
+            _manualBuilder.For(CharacterTypes.Mallow);
             var character = CreateCharacter();
             var equipment = CreateEquipment(equipmentType);
 
@@ -107,11 +107,11 @@ namespace SuperMarioRpg.Test.Domain.Combat
             ushort expectedExperiencePoints
         )
         {
-            _newCharacterBuilder.For(characterType);
-            _director.Configure(_newCharacterBuilder);
+            _newBuilder.For(characterType);
+            _director.Configure(_newBuilder);
             var expectedStats = CreateStats(characterType);
 
-            var character = _newCharacterBuilder.Build();
+            var character = _newBuilder.Build();
 
             character.Level.Value.Should().Be(expectedLevel);
             character.ExperiencePoints.Value.Should().Be(expectedExperiencePoints);
@@ -121,7 +121,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenInstantiating_WithEquipment_LoadoutIsExpected()
         {
-            _builder.Add(Hammer, JumpShoes, Shirt);
+            _manualBuilder.Add(Hammer, JumpShoes, Shirt);
 
             var character = CreateCharacter();
 
@@ -136,12 +136,12 @@ namespace SuperMarioRpg.Test.Domain.Combat
         public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
         {
             var equipment = CreateEquipment(equipmentTypes).ToArray();
-            _builder.For(CharacterTypes.Mallow).Add(equipment);
-            _director.Configure(_builder);
+            _manualBuilder.For(CharacterTypes.Mallow).Add(equipment);
+            _director.Configure(_manualBuilder);
 
             Action createInvalidCharacter = () =>
             {
-                var character = _builder.Build();
+                var character = _manualBuilder.Build();
             };
 
             createInvalidCharacter.Should().Throw<ValidationException>()
@@ -151,7 +151,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenUnequipping_WithEquipmentId_LoadoutIsExpected()
         {
-            _builder.Add(Shirt);
+            _manualBuilder.Add(Shirt);
             var character = CreateCharacter();
 
             character.Unequip(Shirt.Id);

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class CharacterBuilder : ICharacterBuilder
+    public class ManualCharacterBuilder : ICharacterBuilder
     {
         #region Core
 
-        public CharacterBuilder()
+        public ManualCharacterBuilder()
         {
             Reset();
         }
@@ -16,7 +16,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public CharacterBuilder Add(params Equipment[] equipment)
+        public ManualCharacterBuilder Add(params Equipment[] equipment)
         {
             Equipment.AddRange(equipment);
             return this;
@@ -31,19 +31,19 @@ namespace SuperMarioRpg.Domain.Combat
             return character;
         }
 
-        public CharacterBuilder For(CharacterTypes characterType)
+        public ManualCharacterBuilder For(CharacterTypes characterType)
         {
             CharacterType = characterType;
             return this;
         }
 
-        public CharacterBuilder WithId(Guid id)
+        public ManualCharacterBuilder WithId(Guid id)
         {
             Id = id;
             return this;
         }
 
-        public CharacterBuilder WithNaturalStats(
+        public ManualCharacterBuilder WithNaturalStats(
             short attack = 0,
             short defense = 0,
             short hitPoints = 0,
@@ -62,7 +62,7 @@ namespace SuperMarioRpg.Domain.Combat
             return this;
         }
 
-        public CharacterBuilder WithProgressionStats(byte level, ushort experiencePoints)
+        public ManualCharacterBuilder WithProgressionStats(byte level, ushort experiencePoints)
         {
             Level = level;
             ExperiencePoints = experiencePoints;
