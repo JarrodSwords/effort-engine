@@ -53,7 +53,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region ICharacterBuilder
 
-        public void CreateLoadout()
+        public override void CreateLoadout()
         {
             Loadout = new Loadout(Equipment.ToArray());
         }

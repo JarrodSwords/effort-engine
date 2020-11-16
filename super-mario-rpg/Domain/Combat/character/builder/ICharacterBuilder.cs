@@ -4,5 +4,6 @@ namespace SuperMarioRpg.Domain.Combat
     {
         void CreateLoadout();
         void CreateNaturalStats();
+        void InitializeGrowth();
     }
 }
