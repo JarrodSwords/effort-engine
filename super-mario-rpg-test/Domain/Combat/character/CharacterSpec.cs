@@ -38,8 +38,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
         #region Test Methods
 
-        protected override Entity CreateEntity() => new FluentCharacterBuilder().Build();
-        protected override Entity CreateEntity(Guid id) => new FluentCharacterBuilder().WithId(id).Build();
+        protected override Entity CreateEntity() => _builder.Build();
+        protected override Entity CreateEntity(Guid id) => _builder.WithId(id).Build();
 
         [Theory]
         [InlineData(EquipmentType.Hammer)]
