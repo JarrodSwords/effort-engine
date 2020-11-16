@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Battle
@@ -43,6 +42,8 @@ namespace SuperMarioRpg.Domain.Battle
         public Stats Stats { get; }
 
         public Equipment Clone() => new Equipment(this);
+
+        public bool IsCompatible(Characters character) => (character & CompatibleCharacters) > 0;
 
         public override string ToString() => Name.ToString();
 

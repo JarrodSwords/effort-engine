@@ -12,7 +12,14 @@ namespace SuperMarioRpg.Domain.Battle
 
             RuleFor(x => x.Loadout)
                 .NotNull()
-                .Must((character, loadout) => loadout.IsCompatible(character.CharacterType));
+                .Must((c, l) => l.IsCompatible(c.CharacterType))
+                .WithMessage(
+                    (c, l) =>
+                    {
+                        var equipment = string.Join(", ", l.GetIncompatible(c.CharacterType));
+                        return $"{c.CharacterType} cannot equip: {equipment}";
+                    }
+                );
 
             RuleFor(x => x.EffectiveStats)
                 .NotNull()

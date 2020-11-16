@@ -33,6 +33,11 @@ namespace SuperMarioRpg.Domain.Battle
         public Equipment Armor => GetEquipment(Slot.Armor);
         public Equipment Weapon => GetEquipment(Slot.Weapon);
 
+        public IEnumerable<Equipment> GetIncompatible(Characters character) =>
+            _equipment
+                .Where(x => !x.Value.IsCompatible(character))
+                .Select(x => x.Value);
+
         public bool IsCompatible(Characters character) =>
             _equipment
                 .Select(x => x.Value.CompatibleCharacters)

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Effort.Domain;
 using Effort.Test.Domain;
 using FluentAssertions;
@@ -30,7 +31,6 @@ namespace SuperMarioRpg.Test.Domain.Battle
         #region Test Methods
 
         protected override Entity CreateEntity() => new CharacterBuilder(Characters.Mario).Build();
-
         protected override Entity CreateEntity(Guid id) => new CharacterBuilder(Characters.Mario).WithId(id).Build();
 
         [Fact]
@@ -66,10 +66,13 @@ namespace SuperMarioRpg.Test.Domain.Battle
         [InlineData(EquipmentType.Hammer)]
         [InlineData(EquipmentType.Shirt)]
         [InlineData(EquipmentType.JumpShoes)]
-        public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(EquipmentType equipmentType)
+        [InlineData(EquipmentType.Hammer, EquipmentType.Shirt, EquipmentType.JumpShoes)]
+        public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
         {
-            var equipment = EquipmentFactory.Instance.Create(equipmentType);
-            var builder = new CharacterBuilder(Characters.Mallow).WithEquipment(equipment);
+            var equipment = equipmentTypes.Select(e => EquipmentFactory.Instance.Create(e));
+
+            var builder = new CharacterBuilder(Characters.Mallow)
+                .WithEquipment(equipment.ToArray());
 
             _director.ConfigureCharacter(builder);
 
