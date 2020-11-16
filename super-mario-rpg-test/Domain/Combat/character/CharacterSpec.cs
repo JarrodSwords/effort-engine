@@ -30,7 +30,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
         private Character CreateCharacter()
         {
-            _director.ConfigureCharacter(_builder);
+            _director.Configure(_builder);
             return _builder.Build();
         }
 
@@ -115,7 +115,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             var equipment = CreateEquipment(equipmentTypes).ToArray();
             _builder.For(CharacterTypes.Mallow).Add(equipment);
-            _director.ConfigureCharacter(_builder);
+            _director.Configure(_builder);
 
             Action createInvalidCharacter = () =>
             {
