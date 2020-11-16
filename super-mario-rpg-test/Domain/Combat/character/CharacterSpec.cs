@@ -46,15 +46,34 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
-        public void WhenEquipping_WithValidEquipment_LoadoutUpdateIsExpected()
+        public void WhenEquipping_WithEquipment_LoadoutIsExpected()
         {
             var builder = new CharacterBuilder(Characters.Mario);
             _director.ConfigureCharacter(builder);
             var character = builder.Build();
 
-            character.Equip(Hammer);
+            character.Equip(Hammer).Equip(Shirt).Equip(JumpShoes);
 
+            character.Accessory.Should().Be(JumpShoes);
+            character.Armor.Should().Be(Shirt);
             character.Weapon.Should().Be(Hammer);
+        }
+
+        [Theory]
+        [InlineData(EquipmentType.Hammer)]
+        [InlineData(EquipmentType.Shirt)]
+        [InlineData(EquipmentType.JumpShoes)]
+        public void WhenEquipping_WithInvalidEquipment_LoadoutIsExpected(EquipmentType equipmentType)
+        {
+            var builder = new CharacterBuilder(Characters.Mallow);
+            _director.ConfigureCharacter(builder);
+            var character = builder.Build();
+            var equipment = Create(equipmentType);
+
+            Action equipInvalidItem = () => { character.Equip(equipment); };
+
+            equipInvalidItem.Should().Throw<ValidationException>()
+                .WithMessage($"*Mallow cannot equip: {equipment}*");
         }
 
         [Fact]

@@ -7,14 +7,15 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Core
 
+        private static readonly CharacterValidator Validator = new CharacterValidator();
+
         public Character(CharacterBuilderBase builderBase) : base(builderBase.Id)
         {
             CharacterType = builderBase.CharacterType;
             Loadout = builderBase.Loadout;
             NaturalStats = builderBase.NaturalStats;
-            EffectiveStats = NaturalStats + Loadout.Stats;
 
-            new CharacterValidator().ValidateAndThrow(this);
+            Validator.ValidateAndThrow(this);
         }
 
         #endregion
@@ -22,14 +23,18 @@ namespace SuperMarioRpg.Domain.Combat
         #region Public Interface
 
         public Characters CharacterType { get; }
-        public Stats EffectiveStats { get; }
+        public Stats EffectiveStats => NaturalStats + Loadout.Stats;
         public Loadout Loadout { get; private set; }
         public Stats NaturalStats { get; }
+        public Equipment Accessory => Loadout.Accessory;
+        public Equipment Armor => Loadout.Armor;
         public Equipment Weapon => Loadout.Weapon;
 
-        public void Equip(Equipment equipment)
+        public Character Equip(Equipment equipment)
         {
             Loadout = Loadout.Equip(equipment);
+            Validator.ValidateAndThrow(this);
+            return this;
         }
 
         #endregion
