@@ -1,4 +1,5 @@
 using Effort.Domain;
+using FluentValidation;
 
 namespace SuperMarioRpg.Domain.Battle
 {
@@ -6,30 +7,27 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
-        public Character(CharacterBuilder builder) : base(builder.Id)
+        public Character(CharacterBuilderBase builderBase) : base(builderBase.Id)
         {
-            Loadout = builder.Loadout;
-            Stats = builder.Stats;
+            CharacterType = builderBase.CharacterType;
+            Loadout = builderBase.Loadout;
+            NaturalStats = builderBase.NaturalStats;
+            EffectiveStats = NaturalStats
+                           + Loadout.Accessory.Stats
+                           + Loadout.Armor.Stats
+                           + Loadout.Weapon.Stats;
 
-            EffectiveStats = Stats;
-
-            if (Loadout?.Accessory != null)
-                EffectiveStats += Loadout.Accessory.Stats;
-
-            if (Loadout?.Armor != null)
-                EffectiveStats += Loadout.Armor.Stats;
-
-            if (Loadout?.Weapon != null)
-                EffectiveStats += Loadout.Weapon.Stats;
+            new CharacterValidator().ValidateAndThrow(this);
         }
 
         #endregion
 
         #region Public Interface
 
+        public Characters CharacterType { get; }
         public Stats EffectiveStats { get; }
         public Loadout Loadout { get; }
-        public Stats Stats { get; }
+        public Stats NaturalStats { get; }
 
         #endregion
     }

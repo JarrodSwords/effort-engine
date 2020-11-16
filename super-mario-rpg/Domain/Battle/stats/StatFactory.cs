@@ -20,11 +20,15 @@ namespace SuperMarioRpg.Domain.Battle
 
         #region Public Interface
 
-        public Stats Create(CharacterType key)
+        public Stats Create(Characters key)
         {
             var stats = key switch
             {
-                CharacterType.Mario => new Stats(20, 0, 20, 10, 2, 20),
+                Characters.Bowser => new Stats(20, 0, 20, 10, 2, 20),
+                Characters.Geno => new Stats(),
+                Characters.Mallow => new Stats(22, 3, 20, 15, 10, 18),
+                Characters.Mario => new Stats(),
+                Characters.Toadstool => new Stats(),
                 _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
             };
 

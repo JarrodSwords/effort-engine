@@ -34,15 +34,30 @@ namespace SuperMarioRpg.Domain.Battle
         {
             _equipment.Add(
                 EquipmentType.Hammer,
-                new Equipment(Slot.Weapon, "Hammer", StatFactory.Instance.Create(EquipmentType.Hammer))
+                new Equipment(
+                    "Hammer",
+                    Slot.Weapon,
+                    StatFactory.Instance.Create(EquipmentType.Hammer),
+                    Characters.Mario
+                )
             );
             _equipment.Add(
                 EquipmentType.JumpShoes,
-                new Equipment(Slot.Accessory, "Jump Shoes", StatFactory.Instance.Create(EquipmentType.JumpShoes))
+                new Equipment(
+                    "Jump Shoes",
+                    Slot.Accessory,
+                    StatFactory.Instance.Create(EquipmentType.JumpShoes),
+                    Characters.Mario
+                )
             );
             _equipment.Add(
                 EquipmentType.Shirt,
-                new Equipment(Slot.Armor, "Shirt", StatFactory.Instance.Create(EquipmentType.Shirt))
+                new Equipment(
+                    "Shirt",
+                    Slot.Armor,
+                    StatFactory.Instance.Create(EquipmentType.Shirt),
+                    Characters.Mario
+                )
             );
         }
 

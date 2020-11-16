@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Effort.Domain;
 using Effort.Test.Domain;
 using FluentAssertions;
@@ -15,17 +14,14 @@ namespace SuperMarioRpg.Test.Domain.Battle
         protected override ValueObject<Loadout> CreateValueObject() => new Loadout();
 
         [Fact]
-        public void WhenInstantiating_WithDuplicateSlot_ExceptionIsThrown()
+        public void WhenInstantiating_WithMultipleItemsInSameSlot_ExceptionIsThrown()
         {
-            var equipment = new List<Equipment>
-            {
-                EquipmentFactory.Instance.Create(EquipmentType.Shirt),
-                EquipmentFactory.Instance.Create(EquipmentType.Shirt)
-            };
-
             Action createInvalidLoadout = () =>
             {
-                var loadout = new Loadout(equipment);
+                var loadout = new Loadout(
+                    EquipmentFactory.Instance.Create(EquipmentType.Shirt),
+                    EquipmentFactory.Instance.Create(EquipmentType.Shirt)
+                );
             };
 
             createInvalidLoadout.Should().Throw<ArgumentException>();

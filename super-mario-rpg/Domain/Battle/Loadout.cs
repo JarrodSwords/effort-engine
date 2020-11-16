@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Effort.Domain;
@@ -9,50 +8,47 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
-        public Loadout(Equipment accessory = null, Equipment armor = null, Equipment weapon = null)
-        {
-            Accessory = accessory;
-            Armor = armor;
-            Weapon = weapon;
-        }
+        private readonly Dictionary<Slot, Equipment> _equipment;
 
-        public Loadout(IReadOnlyCollection<Equipment> equipment)
+        private static readonly List<Equipment> NullEquipment = new List<Equipment>
         {
-            ValidateEquipment(equipment);
-            Accessory = equipment.FirstOrDefault(x => x.Slot == Slot.Accessory);
-            Armor = equipment.FirstOrDefault(x => x.Slot == Slot.Armor);
-            Weapon = equipment.FirstOrDefault(x => x.Slot == Slot.Weapon);
+            Equipment.NullAccessory,
+            Equipment.NullArmor,
+            Equipment.NullWeapon
+        };
+
+        public Loadout(params Equipment[] equipment)
+        {
+            _equipment = equipment.ToDictionary(x => x.Slot);
+
+            foreach (var e in NullEquipment.Where(x => !_equipment.ContainsKey(x.Slot)))
+                _equipment.Add(e.Slot, e);
         }
 
         #endregion
 
         #region Public Interface
 
-        public Equipment Accessory { get; }
-        public Equipment Armor { get; }
-        public Equipment Weapon { get; }
+        public Equipment Accessory => GetEquipment(Slot.Accessory);
+        public Equipment Armor => GetEquipment(Slot.Armor);
+        public Equipment Weapon => GetEquipment(Slot.Weapon);
+
+        public IEnumerable<Equipment> GetIncompatible(Characters character) =>
+            _equipment
+                .Where(x => !x.Value.IsCompatible(character))
+                .Select(x => x.Value);
+
+        public bool IsCompatible(Characters character) =>
+            _equipment
+                .Select(x => x.Value.CompatibleCharacters)
+                .Aggregate(character, (x, y) => x & y)
+          > 0;
 
         #endregion
 
         #region Private Interface
 
-        private void ValidateEquipment(IReadOnlyCollection<Equipment> equipment)
-        {
-            var equipmentBySlot = from e in equipment
-                                  group e by e.Slot
-                                  into g
-                                  select new
-                                  {
-                                      Equipment = g.Key,
-                                      Count = g.Count()
-                                  };
-
-            if (equipmentBySlot.Any(x => x.Count > 1))
-                throw new ArgumentException(
-                    $"Invalid {nameof(Loadout)}. Cannot have more than one item per slot.",
-                    nameof(equipment)
-                );
-        }
+        private Equipment GetEquipment(Slot slot) => _equipment[slot];
 
         #endregion
 

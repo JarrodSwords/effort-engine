@@ -2,21 +2,32 @@ using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Battle
 {
-    public class Equipment : ValueObject<Equipment>
+    public partial class Equipment : ValueObject<Equipment>
     {
         #region Core
 
-        public Equipment(Slot slot, string name, Stats stats)
+        public static Equipment NullAccessory = new NullEquipment(Slot.Accessory);
+        public static Equipment NullArmor = new NullEquipment(Slot.Armor);
+        public static Equipment NullWeapon = new NullEquipment(Slot.Weapon, "Unarmed");
+
+        public Equipment(
+            string name,
+            Slot slot,
+            Stats stats,
+            Characters compatibleCharacters
+        )
         {
+            Name = Name.Create(name);
             Slot = slot;
             Stats = stats;
-            Name = Name.Create(name);
+            CompatibleCharacters = compatibleCharacters;
         }
 
         private Equipment(Equipment equipment) : this(
-            equipment.Slot,
             equipment.Name.Value,
-            equipment.Stats
+            equipment.Slot,
+            equipment.Stats,
+            equipment.CompatibleCharacters
         )
         {
         }
@@ -25,11 +36,14 @@ namespace SuperMarioRpg.Domain.Battle
 
         #region Public Interface
 
+        public Characters CompatibleCharacters { get; }
         public Name Name { get; }
         public Slot Slot { get; }
         public Stats Stats { get; }
 
         public Equipment Clone() => new Equipment(this);
+
+        public bool IsCompatible(Characters character) => (character & CompatibleCharacters) > 0;
 
         public override string ToString() => Name.ToString();
 

@@ -1,5 +1,5 @@
-﻿using System;
-using Effort.Domain;
+﻿using Effort.Domain;
+using FluentValidation;
 
 namespace SuperMarioRpg.Domain.Battle
 {
@@ -12,19 +12,7 @@ namespace SuperMarioRpg.Domain.Battle
 
         public Stat(short value) : base(value)
         {
-            if (value > Max)
-                throw new ArgumentOutOfRangeException(
-                    nameof(value),
-                    value,
-                    $"\"{nameof(Stat)}\" cannot be greater than {Max}."
-                );
-
-            if (value < Min)
-                throw new ArgumentOutOfRangeException(
-                    nameof(value),
-                    value,
-                    $"\"{nameof(Stat)}\" cannot be less than {Min}."
-                );
+            new StatValidator().ValidateAndThrow(this);
         }
 
         #endregion
