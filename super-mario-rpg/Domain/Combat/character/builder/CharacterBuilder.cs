@@ -16,7 +16,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public Characters CharacterType { get; protected set; }
+        public CharacterTypes CharacterType { get; protected set; }
         public Guid Id { get; protected set; }
         public Loadout Loadout { get; protected set; }
         public Stats NaturalStats { get; protected set; }
@@ -48,7 +48,7 @@ namespace SuperMarioRpg.Domain.Combat
         private void Reset()
         {
             Id = Guid.Empty;
-            CharacterType = Characters.Mario;
+            CharacterType = CharacterTypes.Mario;
             Loadout = new Loadout();
             NaturalStats = new Stats();
             ResetExplicit();

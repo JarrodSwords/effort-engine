@@ -22,7 +22,7 @@ namespace SuperMarioRpg.Domain.Combat
             return this;
         }
 
-        public FluentCharacterBuilder For(Characters characterType)
+        public FluentCharacterBuilder For(CharacterTypes characterType)
         {
             CharacterType = characterType;
             return this;

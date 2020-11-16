@@ -55,15 +55,15 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Loadout Equip(Equipment equipment) => new Loadout(this, equipment);
 
-        public IEnumerable<Equipment> GetIncompatible(Characters character) =>
+        public IEnumerable<Equipment> GetIncompatible(CharacterTypes characterType) =>
             _equipment
-                .Where(x => !x.Value.IsCompatible(character))
+                .Where(x => !x.Value.IsCompatible(characterType))
                 .Select(x => x.Value);
 
-        public bool IsCompatible(Characters character) =>
+        public bool IsCompatible(CharacterTypes characterType) =>
             _equipment
-                .Select(x => x.Value.CompatibleCharacters)
-                .Aggregate(character, (x, y) => x & y)
+                .Select(x => x.Value.CompatibleCharacterTypes)
+                .Aggregate(characterType, (x, y) => x & y)
           > 0;
 
         public Loadout Unequip(Id id)

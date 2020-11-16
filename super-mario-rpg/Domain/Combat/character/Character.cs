@@ -24,7 +24,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public Characters CharacterType { get; }
+        public CharacterTypes CharacterType { get; }
         public Stats EffectiveStats { get; private set; }
 
         public ushort Experience { get; set; }

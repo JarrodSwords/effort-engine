@@ -16,7 +16,7 @@ namespace SuperMarioRpg.Domain.Combat
             string name,
             EquipmentType equipmentType,
             Slot slot,
-            Characters compatibleCharacters,
+            CharacterTypes compatibleCharacterTypes,
             Guid id = new Guid()
         ) : base(id)
         {
@@ -24,14 +24,14 @@ namespace SuperMarioRpg.Domain.Combat
             EquipmentType = equipmentType;
             Slot = slot;
             Stats = CreateStats(EquipmentType);
-            CompatibleCharacters = compatibleCharacters;
+            CompatibleCharacterTypes = compatibleCharacterTypes;
         }
 
         private Equipment(Equipment equipment) : this(
             equipment.Name.Value,
             equipment.EquipmentType,
             equipment.Slot,
-            equipment.CompatibleCharacters,
+            equipment.CompatibleCharacterTypes,
             equipment.Id.Value
         )
         {
@@ -41,7 +41,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public Characters CompatibleCharacters { get; }
+        public CharacterTypes CompatibleCharacterTypes { get; }
         public EquipmentType EquipmentType { get; }
         public Name Name { get; }
         public Slot Slot { get; }
@@ -49,7 +49,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Equipment Clone() => new Equipment(this);
 
-        public bool IsCompatible(Characters character) => (character & CompatibleCharacters) > 0;
+        public bool IsCompatible(CharacterTypes characterType) => (characterType & CompatibleCharacterTypes) > 0;
 
         public override string ToString() => Name.ToString();
 

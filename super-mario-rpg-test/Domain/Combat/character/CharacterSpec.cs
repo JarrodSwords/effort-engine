@@ -48,7 +48,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             var equipment = CreateEquipment(equipmentTypes).ToArray();
             _builder.Add(equipment);
-            var expectedStats = CreateStats(Characters.Mario)
+            var expectedStats = CreateStats(CharacterTypes.Mario)
                               + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
 
             var character = CreateCharacter();
@@ -75,7 +75,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [InlineData(EquipmentType.JumpShoes)]
         public void WhenEquipping_WithInvalidEquipment_LoadoutIsExpected(EquipmentType equipmentType)
         {
-            _builder.For(Characters.Mallow);
+            _builder.For(CharacterTypes.Mallow);
             var character = CreateCharacter();
             var equipment = CreateEquipment(equipmentType);
 
@@ -113,7 +113,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
         {
             var equipment = CreateEquipment(equipmentTypes).ToArray();
-            _builder.For(Characters.Mallow).Add(equipment);
+            _builder.For(CharacterTypes.Mallow).Add(equipment);
             _director.ConfigureCharacter(_builder);
 
             Action createInvalidCharacter = () =>
