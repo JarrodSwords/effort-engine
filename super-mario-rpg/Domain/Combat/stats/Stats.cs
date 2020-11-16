@@ -1,4 +1,5 @@
-﻿using Effort.Domain;
+﻿using System.Linq;
+using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -51,6 +52,11 @@ namespace SuperMarioRpg.Domain.Combat
         public Stat SpecialAttack { get; }
         public Stat SpecialDefense { get; }
         public Stat Speed { get; }
+
+        public static Stats Aggregate(params Stats[] stats)
+        {
+            return stats.Aggregate((x, y) => x + y);
+        }
 
         #endregion
 

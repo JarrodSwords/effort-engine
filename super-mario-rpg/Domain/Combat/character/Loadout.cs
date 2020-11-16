@@ -23,12 +23,15 @@ namespace SuperMarioRpg.Domain.Combat
 
             foreach (var e in NullEquipment.Where(x => !_equipment.ContainsKey(x.Slot)))
                 _equipment.Add(e.Slot, e);
+
+            Stats = Stats.Aggregate(_equipment.Select(x => x.Value.Stats).ToArray());
         }
 
         #endregion
 
         #region Public Interface
 
+        public Stats Stats { get; }
         public Equipment Accessory => GetEquipment(Slot.Accessory);
         public Equipment Armor => GetEquipment(Slot.Armor);
         public Equipment Weapon => GetEquipment(Slot.Weapon);

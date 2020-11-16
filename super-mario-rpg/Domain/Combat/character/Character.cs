@@ -12,10 +12,7 @@ namespace SuperMarioRpg.Domain.Combat
             CharacterType = builderBase.CharacterType;
             Loadout = builderBase.Loadout;
             NaturalStats = builderBase.NaturalStats;
-            EffectiveStats = NaturalStats
-                           + Loadout.Accessory.Stats
-                           + Loadout.Armor.Stats
-                           + Loadout.Weapon.Stats;
+            EffectiveStats = NaturalStats + Loadout.Stats;
 
             new CharacterValidator().ValidateAndThrow(this);
         }
