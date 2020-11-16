@@ -8,13 +8,15 @@ namespace SuperMarioRpg.Domain.Combat
 
         private Equipment[] _equipment;
 
-        public CharacterBuilder(Characters characterType) : base(characterType)
-        {
-        }
-
         #endregion
 
         #region Public Interface
+
+        public CharacterBuilder WithCharacterType(Characters characterType)
+        {
+            CharacterType = characterType;
+            return this;
+        }
 
         public CharacterBuilder WithEquipment(params Equipment[] equipment)
         {
@@ -26,6 +28,15 @@ namespace SuperMarioRpg.Domain.Combat
         {
             Id = id;
             return this;
+        }
+
+        #endregion
+
+        #region Protected Interface
+
+        protected override void ResetExplicit()
+        {
+            Equipment = null;
         }
 
         #endregion

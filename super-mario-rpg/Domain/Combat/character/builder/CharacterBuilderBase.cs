@@ -7,38 +7,51 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Core
 
-        private Loadout _loadout;
-        private Stats _naturalStats;
-
-        protected CharacterBuilderBase(Characters characterType)
+        protected CharacterBuilderBase()
         {
-            CharacterType = characterType;
+            Reset();
         }
 
         #endregion
 
         #region Public Interface
 
-        public Characters CharacterType { get; }
+        public Characters CharacterType { get; protected set; }
         public Guid Id { get; protected set; }
+        public Loadout Loadout { get; protected set; }
+        public Stats NaturalStats { get; protected set; }
 
-        public Loadout Loadout
+        public Character Build()
         {
-            get => _loadout ??= new Loadout();
-            protected set => _loadout = value;
-        }
+            var character = new Character(this);
 
-        public Stats NaturalStats
-        {
-            get => _naturalStats ??= new Stats();
-            private set => _naturalStats = value;
-        }
+            Reset();
 
-        public Character Build() => new Character(this);
+            return character;
+        }
 
         public void CreateNaturalStats()
         {
             NaturalStats = CreateStats(CharacterType);
+        }
+
+        #endregion
+
+        #region Protected Interface
+
+        protected abstract void ResetExplicit();
+
+        #endregion
+
+        #region Private Interface
+
+        private void Reset()
+        {
+            Id = Guid.Empty;
+            CharacterType = Characters.Mario;
+            Loadout = new Loadout();
+            NaturalStats = new Stats();
+            ResetExplicit();
         }
 
         #endregion
