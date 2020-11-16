@@ -43,6 +43,8 @@ namespace SuperMarioRpg.Domain.Battle
 
         public Equipment Clone() => new Equipment(this);
 
+        public bool IsCompatible(Characters character) => (character & CompatibleCharacters) > 0;
+
         public override string ToString() => Name.ToString();
 
         #endregion

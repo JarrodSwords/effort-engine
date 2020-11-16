@@ -8,7 +8,6 @@ namespace SuperMarioRpg.Domain.Battle
         {
             builder.CreateLoadout();
             builder.CreateNaturalStats();
-            builder.CalculateEffectiveStats();
         }
 
         #endregion

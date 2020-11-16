@@ -5,7 +5,7 @@ namespace SuperMarioRpg.Domain.Battle
     [Flags]
     public enum Characters
     {
-        Bowser = 1 << 0,
+        Bowser = 1,
         Geno = 1 << 1,
         Mallow = 1 << 2,
         Mario = 1 << 3,

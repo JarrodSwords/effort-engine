@@ -6,20 +6,19 @@ namespace SuperMarioRpg.Domain.Battle
     {
         #region Core
 
-        private readonly Characters _character;
         private Loadout _loadout;
         private Stats _naturalStats;
 
-        protected CharacterBuilderBase(Characters character)
+        protected CharacterBuilderBase(Characters characterType)
         {
-            _character = character;
+            CharacterType = characterType;
         }
 
         #endregion
 
         #region Public Interface
 
-        public Stats EffectiveStats { get; private set; }
+        public Characters CharacterType { get; }
         public Guid Id { get; protected set; }
 
         public Loadout Loadout
@@ -34,33 +33,11 @@ namespace SuperMarioRpg.Domain.Battle
             private set => _naturalStats = value;
         }
 
-        public Character Build()
-        {
-            Validate();
-            return new Character(this);
-        }
-
-        public void CalculateEffectiveStats()
-        {
-            EffectiveStats = NaturalStats
-                           + Loadout.Accessory.Stats
-                           + Loadout.Armor.Stats
-                           + Loadout.Weapon.Stats;
-        }
+        public Character Build() => new Character(this);
 
         public void CreateNaturalStats()
         {
-            NaturalStats = StatFactory.Instance.Create(_character);
-        }
-
-        #endregion
-
-        #region Private Interface
-
-        private void Validate()
-        {
-            if (!Loadout.IsCompatible(_character))
-                throw new ArgumentException();
+            NaturalStats = StatFactory.Instance.Create(CharacterType);
         }
 
         #endregion

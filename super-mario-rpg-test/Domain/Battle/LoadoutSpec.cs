@@ -13,22 +13,14 @@ namespace SuperMarioRpg.Test.Domain.Battle
 
         protected override ValueObject<Loadout> CreateValueObject() => new Loadout();
 
-        [Theory]
-        [InlineData(EquipmentType.Shirt, EquipmentType.Shirt, EquipmentType.Hammer)]
-        [InlineData(EquipmentType.JumpShoes, EquipmentType.JumpShoes, EquipmentType.Hammer)]
-        [InlineData(EquipmentType.JumpShoes, EquipmentType.Shirt, EquipmentType.Shirt)]
-        public void WhenInstantiating_WithMismatchedEquipment_ExceptionIsThrown(
-            EquipmentType accessory,
-            EquipmentType armor,
-            EquipmentType weapon
-        )
+        [Fact]
+        public void WhenInstantiating_WithMultipleItemsInSameSlot_ExceptionIsThrown()
         {
             Action createInvalidLoadout = () =>
             {
                 var loadout = new Loadout(
-                    EquipmentFactory.Instance.Create(accessory),
-                    EquipmentFactory.Instance.Create(armor),
-                    EquipmentFactory.Instance.Create(weapon)
+                    EquipmentFactory.Instance.Create(EquipmentType.Shirt),
+                    EquipmentFactory.Instance.Create(EquipmentType.Shirt)
                 );
             };
 

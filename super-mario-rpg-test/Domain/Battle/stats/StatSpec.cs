@@ -2,6 +2,7 @@
 using Effort.Domain;
 using Effort.Test.Domain;
 using FluentAssertions;
+using FluentValidation;
 using SuperMarioRpg.Domain.Battle;
 using Xunit;
 
@@ -50,7 +51,7 @@ namespace SuperMarioRpg.Test.Domain.Battle
                 var stat = new Stat((short) (limit + addend));
             };
 
-            createInvalidStat.Should().Throw<ArgumentOutOfRangeException>();
+            createInvalidStat.Should().Throw<ValidationException>();
         }
 
         #endregion
