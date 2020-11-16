@@ -19,7 +19,7 @@ namespace SuperMarioRpg.Domain.Combat
         public CharacterTypes CharacterType { get; protected set; }
         public ExperiencePoints ExperiencePoints { get; protected set; }
         public Guid Id { get; protected set; }
-        public byte Level { get; protected set; }
+        public Level Level { get; protected set; }
         public Loadout Loadout { get; protected set; }
         public Stats NaturalStats { get; protected set; }
 
@@ -65,7 +65,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public void InitializeGrowth()
         {
-            Level = CharacterType switch
+            var level = CharacterType switch
             {
                 CharacterTypes.Bowser => 8,
                 CharacterTypes.Geno => 6,
@@ -75,7 +75,9 @@ namespace SuperMarioRpg.Domain.Combat
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            var startingExperiencePoints = CharacterType switch
+            Level = new Level((byte) level);
+
+            var experiencePoints = CharacterType switch
             {
                 CharacterTypes.Bowser => 470,
                 CharacterTypes.Geno => 234,
@@ -85,7 +87,7 @@ namespace SuperMarioRpg.Domain.Combat
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            ExperiencePoints = new ExperiencePoints((ushort) startingExperiencePoints);
+            ExperiencePoints = new ExperiencePoints((ushort) experiencePoints);
         }
 
         #endregion

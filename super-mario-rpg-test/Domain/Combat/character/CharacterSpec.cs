@@ -110,7 +110,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             var character = _builder.Build();
 
-            character.Level.Should().Be(expectedLevel);
+            character.Level.Value.Should().Be(expectedLevel);
             character.ExperiencePoints.Value.Should().Be(expectedExperiencePoints);
         }
 

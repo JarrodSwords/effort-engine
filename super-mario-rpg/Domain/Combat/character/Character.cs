@@ -15,8 +15,7 @@ namespace SuperMarioRpg.Domain.Combat
             CharacterType = builder.CharacterType;
             _loadout = builder.Loadout;
             NaturalStats = builder.NaturalStats;
-            Level = builder.Level;
-            ExperiencePoints = builder.ExperiencePoints;
+            ProgressionSystem = new ProgressionSystem(builder.Level, builder.ExperiencePoints);
             CalculateEffectiveStats();
 
             Validator.ValidateAndThrow(this);
@@ -28,9 +27,9 @@ namespace SuperMarioRpg.Domain.Combat
 
         public CharacterTypes CharacterType { get; }
         public Stats EffectiveStats { get; private set; }
-        public ExperiencePoints ExperiencePoints { get; set; }
-        public byte Level { get; set; }
         public Stats NaturalStats { get; }
+        public ExperiencePoints ExperiencePoints => ProgressionSystem.ExperiencePoints;
+        public Level Level => ProgressionSystem.Level;
 
         public Loadout Loadout
         {
@@ -48,7 +47,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Character Add(ExperiencePoints experiencePoints)
         {
-            ExperiencePoints += experiencePoints;
+            ProgressionSystem = ProgressionSystem.Add(experiencePoints);
             return this;
         }
 
@@ -68,6 +67,8 @@ namespace SuperMarioRpg.Domain.Combat
         #endregion
 
         #region Private Interface
+
+        private ProgressionSystem ProgressionSystem { get; set; }
 
         private void CalculateEffectiveStats()
         {
