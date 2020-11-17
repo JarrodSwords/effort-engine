@@ -99,6 +99,21 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Theory]
+        [InlineData(15, 0)]
+        [InlineData(16, 1)]
+        [InlineData(50, 2)]
+        public void WhenGainingExperience_LevelChanges(ushort experiencePoints, byte levelsGained)
+        {
+            _director.Configure(_newBuilder);
+            var character = _newBuilder.Build();
+            var expectedLevel = character.Level + new Level(levelsGained);
+
+            character.Add(new ExperiencePoints(experiencePoints));
+
+            character.Level.Should().Be(expectedLevel);
+        }
+
+        [Theory]
         [InlineData(CharacterTypes.Mario, 1, 0)]
         [InlineData(CharacterTypes.Mallow, 2, 30)]
         public void WhenInstantiating_NewCharacter(

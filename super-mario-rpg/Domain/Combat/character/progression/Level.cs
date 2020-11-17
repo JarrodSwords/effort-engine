@@ -11,5 +11,11 @@ namespace SuperMarioRpg.Domain.Combat
         }
 
         #endregion
+
+        #region Equality, Operators
+
+        public static Level operator +(Level left, Level right) => new Level((byte) (left.Value + right.Value));
+
+        #endregion
     }
 }
