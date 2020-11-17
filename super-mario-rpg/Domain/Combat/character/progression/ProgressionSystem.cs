@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Effort.Domain;
 
@@ -43,38 +42,11 @@ namespace SuperMarioRpg.Domain.Combat
         #endregion
 
         #region Equality, Operators
-
+         
         protected override bool EqualsExplicit(ProgressionSystem other) =>
             Level == other.Level && ExperiencePoints == other.ExperiencePoints;
 
         protected override int GetHashCodeExplicit() => (ExperiencePoints, Level).GetHashCode();
-
-        #endregion
-    }
-
-    public class LevelReward : ValueObject<LevelReward>
-    {
-        #region Core
-
-        public LevelReward(byte level, ushort experiencePoints)
-        {
-            Level = new Level(level);
-            Required = new ExperiencePoints(experiencePoints);
-        }
-
-        #endregion
-
-        #region Public Interface
-
-        public Level Level { get; }
-        public ExperiencePoints Required { get; }
-
-        #endregion
-
-        #region Equality, Operators
-
-        protected override bool EqualsExplicit(LevelReward other) => Level == other.Level && Required == other.Required;
-        protected override int GetHashCodeExplicit() => throw new NotImplementedException();
 
         #endregion
     }
