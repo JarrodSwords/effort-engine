@@ -10,10 +10,10 @@ namespace SuperMarioRpg.Domain.Combat
         {
             var stats = key switch
             {
-                CharacterTypes.Bowser => new Stats(20, 0, 20, 10, 2, 20),
+                CharacterTypes.Bowser => new Stats(),
                 CharacterTypes.Geno => new Stats(),
                 CharacterTypes.Mallow => new Stats(22, 3, 20, 15, 10, 18),
-                CharacterTypes.Mario => new Stats(),
+                CharacterTypes.Mario => new Stats(20, 0, 20, 10, 2, 20),
                 CharacterTypes.Toadstool => new Stats(),
                 _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
             };

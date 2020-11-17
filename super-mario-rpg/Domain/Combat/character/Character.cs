@@ -14,7 +14,6 @@ namespace SuperMarioRpg.Domain.Combat
         {
             CharacterType = builder.CharacterType;
             _loadout = builder.Loadout;
-            NaturalStats = builder.NaturalStats;
             ProgressionSystem = builder.ProgressionSystem;
             CalculateEffectiveStats();
 
@@ -27,7 +26,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public CharacterTypes CharacterType { get; }
         public Stats EffectiveStats { get; private set; }
-        public Stats NaturalStats { get; }
+        public Stats NaturalStats => ProgressionSystem.NaturalStats;
         public ExperiencePoints ExperiencePoints => ProgressionSystem.ExperiencePoints;
         public Level Level => ProgressionSystem.Level;
 

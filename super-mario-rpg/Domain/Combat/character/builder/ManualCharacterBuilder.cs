@@ -90,6 +90,7 @@ namespace SuperMarioRpg.Domain.Combat
             Equipment.Clear();
             Loadout = new Loadout();
             NaturalStats = new Stats();
+            ProgressionSystem = new ProgressionSystem(new Level(0), new ExperiencePoints(), NaturalStats);
         }
 
         #endregion
@@ -114,7 +115,11 @@ namespace SuperMarioRpg.Domain.Combat
 
         public void CreateProgressionSystem()
         {
-            ProgressionSystem = new ProgressionSystem(new Level(Level), new ExperiencePoints(ExperiencePoints));
+            ProgressionSystem = new ProgressionSystem(
+                new Level(Level),
+                new ExperiencePoints(ExperiencePoints),
+                NaturalStats
+            );
         }
 
         #endregion

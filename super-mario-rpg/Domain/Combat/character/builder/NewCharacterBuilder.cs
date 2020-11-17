@@ -84,7 +84,8 @@ namespace SuperMarioRpg.Domain.Combat
         {
             ProgressionSystem = new ProgressionSystem(
                 new Level(BaseLevel[CharacterType]),
-                new ExperiencePoints(BaseExp[CharacterType])
+                new ExperiencePoints(BaseExp[CharacterType]),
+                NaturalStats
             );
         }
 

@@ -49,11 +49,12 @@ namespace SuperMarioRpg.Test.Domain.Combat
         public void EffectiveStatsAreSumOfNaturalStatsAndLoadout(params EquipmentType[] equipmentTypes)
         {
             var equipment = CreateEquipment(equipmentTypes).ToArray();
-            _manualBuilder.Add(equipment);
+            _manualBuilder.Add(equipment).WithNaturalStats(20, 0, 20, 10, 2, 20);
+            var character = CreateCharacter();
+
             var expectedStats = CreateStats(CharacterTypes.Mario)
                               + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
 
-            var character = CreateCharacter();
 
             character.EffectiveStats.Should().BeEquivalentTo(expectedStats);
         }
@@ -161,6 +162,18 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             createInvalidCharacter.Should().Throw<ValidationException>()
                 .WithMessage($"*Mallow cannot equip: {string.Join(", ", equipment.ToList())}*");
+        }
+
+        [Fact]
+        public void WhenLevelingUp_StatsChange()
+        {
+            _director.Configure(_newBuilder);
+            var character = _newBuilder.Build();
+            var expectedNaturalStats = new Stats(23, 2, 25, 12, 4, 20);
+
+            character.Add(new ExperiencePoints(16));
+
+            character.NaturalStats.Should().Be(expectedNaturalStats);
         }
 
         [Fact]
