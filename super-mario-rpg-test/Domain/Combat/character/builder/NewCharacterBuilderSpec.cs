@@ -3,6 +3,7 @@ using SuperMarioRpg.Domain.Combat;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 using static SuperMarioRpg.Domain.Combat.StatFactory;
+using static SuperMarioRpg.Domain.Combat.Stats;
 
 namespace SuperMarioRpg.Test.Domain.Combat
 {
@@ -58,7 +59,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             toadstool.Armor.Should().Be(PolkaDress);
             toadstool.Weapon.Should().Be(SlapGlove);
-            toadstool.EffectiveStats.Should().Be(toadstool.NaturalStats + PolkaDress.Stats + SlapGlove.Stats);
+            toadstool.EffectiveStats.Should().Be(Aggregate(toadstool.NaturalStats, PolkaDress.Stats, SlapGlove.Stats));
         }
 
         #endregion
