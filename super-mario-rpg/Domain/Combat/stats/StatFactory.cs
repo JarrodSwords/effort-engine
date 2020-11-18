@@ -29,7 +29,9 @@ namespace SuperMarioRpg.Domain.Combat
                 EquipmentType.None => Default,
                 EquipmentType.Hammer => Stats.CreateStats(10),
                 EquipmentType.JumpShoes => Stats.CreateStats(0, 1, 0, 5, 1, 2),
+                EquipmentType.PolkaDress => Stats.CreateStats(defense: 24, specialDefense: 12),
                 EquipmentType.Shirt => Stats.CreateStats(0, 6, 0, 0, 6),
+                EquipmentType.SlapGlove => Stats.CreateStats(40),
                 _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
             };
 

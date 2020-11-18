@@ -5,6 +5,8 @@ namespace SuperMarioRpg.Domain.Combat
         None,
         Hammer,
         JumpShoes,
-        Shirt
+        PolkaDress,
+        Shirt,
+        SlapGlove
     }
 }

@@ -142,20 +142,6 @@ namespace SuperMarioRpg.Test.Domain.Combat
             character.NaturalStats.Should().Be(expectedStats);
         }
 
-        [Fact]
-        public void WhenInstantiating_WithEquipment_LoadoutIsExpected()
-        {
-            // todo: move to builder specs
-
-            _manualBuilder.Add(Hammer, JumpShoes, Shirt);
-
-            var character = CreateCharacter();
-
-            character.Accessory.Should().Be(JumpShoes);
-            character.Armor.Should().Be(Shirt);
-            character.Weapon.Should().Be(Hammer);
-        }
-
         [Theory]
         [InlineData(EquipmentType.Hammer)]
         [InlineData(EquipmentType.Hammer, EquipmentType.Shirt, EquipmentType.JumpShoes)]
