@@ -46,27 +46,12 @@ namespace SuperMarioRpg.Domain.Combat
         public Equipment Armor => Loadout.Armor;
         public Equipment Weapon => Loadout.Weapon;
 
-        /// <summary>
-        /// Adds experience points to a character.
-        /// </summary>
-        /// <param name="remainingXp">The experience points to add. Updated post-function.</param>
-        /// <returns></returns>
         public Character Add(ref ExperiencePoints remainingXp)
         {
             var xpToAdd = new ExperiencePoints(Math.Min(remainingXp.Value, ToNext.Value));
             remainingXp = new ExperiencePoints((ushort) (remainingXp.Value - xpToAdd.Value));
 
             ProgressionSystem = ProgressionSystem.Add(xpToAdd);
-            return this;
-        }
-
-        /// <summary>
-        /// Add ability points to a character.
-        /// </summary>
-        /// <param name="abilityPoints">The total Ability points to add.</param>
-        /// <returns></returns>
-        public Character Add(int abilityPoints)
-        {
             return this;
         }
 
