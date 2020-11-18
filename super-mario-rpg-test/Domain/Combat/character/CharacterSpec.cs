@@ -39,16 +39,6 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
         #endregion
 
-        #region Private Interface
-
-        private Character CreateCharacter()
-        {
-            _director.Configure(_manualBuilder);
-            return _manualBuilder.Build();
-        }
-
-        #endregion
-
         #region Test Methods
 
         protected override Entity CreateEntity() => _manualBuilder.Build();
@@ -61,10 +51,11 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             var equipment = CreateEquipment(equipmentTypes).ToArray();
             _manualBuilder.Add(equipment).WithNaturalStats(20, 0, 20, 10, 2, 20);
-            var character = CreateCharacter();
-
             var expectedStats = CreateStats(CharacterTypes.Mario)
                               + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
+
+            _director.Configure(_manualBuilder);
+            var character = _manualBuilder.Build();
 
             character.EffectiveStats.Should().BeEquivalentTo(expectedStats);
         }
