@@ -57,21 +57,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             var expectedStats = CreateStats(CharacterTypes.Mario)
                               + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
-
-
+            
             character.EffectiveStats.Should().BeEquivalentTo(expectedStats);
-        }
-
-        [Fact]
-        public void WhenAddingXp_XpIsUpdated()
-        {
-            _director.Configure(_newBuilder);
-            var character = _newBuilder.Build();
-
-            var remainder = character.Add(CreateXp(50));
-
-            character.Xp.Value.Should().Be(16);
-            remainder.Value.Should().Be(34);
         }
 
         [Fact]
@@ -86,6 +73,18 @@ namespace SuperMarioRpg.Test.Domain.Combat
             character.Add(xp);
 
             character.Level.Should().Be(expectedLevel);
+        }
+
+        [Fact]
+        public void WhenAddingXp_XpIsUpdated()
+        {
+            _director.Configure(_newBuilder);
+            var character = _newBuilder.Build();
+
+            var remainder = character.Add(CreateXp(50));
+
+            character.Xp.Value.Should().Be(16);
+            remainder.Value.Should().Be(34);
         }
 
         [Fact]
