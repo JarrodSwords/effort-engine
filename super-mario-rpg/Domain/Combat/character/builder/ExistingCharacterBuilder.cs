@@ -1,5 +1,7 @@
 using System;
+using static SuperMarioRpg.Domain.Combat.Level;
 using static SuperMarioRpg.Domain.Combat.Stats;
+using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -25,10 +27,10 @@ namespace SuperMarioRpg.Domain.Combat
 
         public CharacterTypes CharacterType => Dto.CharacterType;
         public Guid Id => Dto.Id;
-        public Level Level => Level.Create(Dto.Level);
+        public Level Level => CreateLevel(Dto.Level);
         public Loadout Loadout { get; private set; }
         public Stats NaturalStats { get; private set; }
-        public Xp Xp => Xp.Create(Dto.Xp);
+        public Xp Xp => CreateXp(Dto.Xp);
 
         public void CreateLoadout()
         {

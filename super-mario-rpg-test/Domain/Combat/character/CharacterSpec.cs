@@ -7,8 +7,10 @@ using FluentValidation;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
+using static SuperMarioRpg.Domain.Combat.Level;
 using static SuperMarioRpg.Domain.Combat.StatFactory;
 using static SuperMarioRpg.Domain.Combat.Stats;
+using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Test.Domain.Combat
 {
@@ -66,7 +68,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             _director.Configure(_newBuilder);
             var character = _newBuilder.Build();
 
-            var remainder = character.Add(Xp.Create(50));
+            var remainder = character.Add(CreateXp(50));
 
             character.Xp.Value.Should().Be(16);
             remainder.Value.Should().Be(34);
@@ -78,7 +80,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             var builder = new NewCharacterBuilder();
             new Director().Configure(builder);
             var character = builder.Build();
-            var expectedLevel = character.Level + Level.Create(1);
+            var expectedLevel = character.Level + CreateLevel(1);
             var xp = character.ToNext;
 
             character.Add(xp);
@@ -172,7 +174,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             var character = _newBuilder.Build();
             var expectedNaturalStats = CreateStats(23, 2, 25, 12, 4, 20);
 
-            character.Add(Xp.Create(16));
+            character.Add(CreateXp(16));
 
             character.NaturalStats.Should().Be(expectedNaturalStats);
         }

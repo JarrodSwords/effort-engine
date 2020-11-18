@@ -6,7 +6,7 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Core
 
-        private Xp(ushort value = default) : base(value)
+        private Xp(ushort value) : base(value)
         {
         }
 
@@ -14,13 +14,13 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public static Xp Create(ushort value = 0) => new Xp(value);
+        public static Xp CreateXp(ushort value = default) => new Xp(value);
 
         #endregion
 
         #region Equality, Operators
 
-        public static Xp operator +(Xp left, Xp right) => Create((ushort) (left.Value + right.Value));
+        public static Xp operator +(Xp left, Xp right) => CreateXp((ushort) (left.Value + right.Value));
 
         #endregion
     }

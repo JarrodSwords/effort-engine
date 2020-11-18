@@ -4,6 +4,7 @@ using System.Linq;
 using Effort.Domain;
 using FluentValidation;
 using static SuperMarioRpg.Domain.Combat.Stats;
+using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -69,12 +70,12 @@ namespace SuperMarioRpg.Domain.Combat
             };
 
         public Xp ToNext =>
-            Xp.Create((ushort) (LevelRewards.First(x => x.Level.Value > Level.Value).Required.Value - Xp.Value));
+            CreateXp((ushort) (LevelRewards.First(x => x.Level.Value > Level.Value).Required.Value - Xp.Value));
 
         public Xp Add(Xp xp)
         {
-            var delta = Xp.Create(Math.Min(xp.Value, ToNext.Value));
-            var remainder = Xp.Create((ushort) (xp.Value - delta.Value));
+            var delta = CreateXp(Math.Min(xp.Value, ToNext.Value));
+            var remainder = CreateXp((ushort) (xp.Value - delta.Value));
 
             Xp += delta;
 

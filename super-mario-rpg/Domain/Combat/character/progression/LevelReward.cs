@@ -1,5 +1,7 @@
 using System;
 using Effort.Domain;
+using static SuperMarioRpg.Domain.Combat.Level;
+using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -9,8 +11,8 @@ namespace SuperMarioRpg.Domain.Combat
 
         public LevelReward(byte level, ushort xp, Stats stats)
         {
-            Level = Level.Create(level);
-            Required = Xp.Create(xp);
+            Level = CreateLevel(level);
+            Required = CreateXp(xp);
             Stats = stats;
         }
 

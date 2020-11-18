@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using static SuperMarioRpg.Domain.Combat.Level;
+using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -65,11 +67,11 @@ namespace SuperMarioRpg.Domain.Combat
         #region ICharacterBuilder
 
         public CharacterTypes CharacterType { get; private set; }
-        public Guid Id { get; } = Guid.Empty;
-        public Level Level => Level.Create(BaseLevel[CharacterType]);
+        public Guid Id { get; }
+        public Level Level => CreateLevel(BaseLevel[CharacterType]);
         public Loadout Loadout { get; private set; }
         public Stats NaturalStats { get; private set; }
-        public Xp Xp => Xp.Create(BaseExp[CharacterType]);
+        public Xp Xp => CreateXp(BaseExp[CharacterType]);
 
         public void CreateLoadout()
         {

@@ -14,13 +14,13 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public static Level Create(byte value = default) => new Level(value);
+        public static Level CreateLevel(byte value = default) => new Level(value);
 
         #endregion
 
         #region Equality, Operators
 
-        public static Level operator +(Level left, Level right) => Create((byte) (left.Value + right.Value));
+        public static Level operator +(Level left, Level right) => CreateLevel((byte) (left.Value + right.Value));
 
         #endregion
     }
