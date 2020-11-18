@@ -185,7 +185,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             character.Unequip(Shirt.Id);
 
-            character.Armor.Should().Be(Equipment.NullArmor);
+            character.Armor.Should().Be(Equipment.DefaultArmor);
             character.EffectiveStats.Should().Be(character.NaturalStats + character.Loadout.Stats);
         }
 

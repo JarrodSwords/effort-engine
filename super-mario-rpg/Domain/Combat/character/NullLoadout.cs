@@ -9,9 +9,9 @@ namespace SuperMarioRpg.Domain.Combat
             #region Core
 
             public NullLoadout() : base(
-                Equipment.NullAccessory,
-                Equipment.NullArmor,
-                Equipment.NullWeapon
+                Equipment.DefaultAccessory,
+                Equipment.DefaultArmor,
+                Equipment.DefaultWeapon
             )
             {
             }
