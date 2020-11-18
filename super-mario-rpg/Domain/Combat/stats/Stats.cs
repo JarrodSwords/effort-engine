@@ -7,6 +7,8 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Core
 
+        public static Stats Default = new Stats();
+
         public Stats(
             short attack = 0,
             short defense = 0,

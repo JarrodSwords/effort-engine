@@ -15,13 +15,15 @@ namespace SuperMarioRpg.Test.Domain.Combat
     {
         #region Core
 
-        private readonly FluentCharacterBuilder _builder;
         private readonly Director _director;
+        private readonly ManualCharacterBuilder _manualBuilder;
+        private readonly NewCharacterBuilder _newBuilder;
 
         public CharacterSpec()
         {
-            _builder = new FluentCharacterBuilder();
             _director = new Director();
+            _manualBuilder = new ManualCharacterBuilder();
+            _newBuilder = new NewCharacterBuilder();
         }
 
         #endregion
@@ -30,16 +32,16 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
         private Character CreateCharacter()
         {
-            _director.Configure(_builder);
-            return _builder.Build();
+            _director.Configure(_manualBuilder);
+            return _manualBuilder.Build();
         }
 
         #endregion
 
         #region Test Methods
 
-        protected override Entity CreateEntity() => _builder.Build();
-        protected override Entity CreateEntity(Guid id) => _builder.WithId(id).Build();
+        protected override Entity CreateEntity() => _manualBuilder.Build();
+        protected override Entity CreateEntity(Guid id) => _manualBuilder.WithId(id).Build();
 
         [Theory]
         [InlineData(EquipmentType.Hammer)]
@@ -47,11 +49,12 @@ namespace SuperMarioRpg.Test.Domain.Combat
         public void EffectiveStatsAreSumOfNaturalStatsAndLoadout(params EquipmentType[] equipmentTypes)
         {
             var equipment = CreateEquipment(equipmentTypes).ToArray();
-            _builder.Add(equipment);
+            _manualBuilder.Add(equipment).WithNaturalStats(20, 0, 20, 10, 2, 20);
+            var character = CreateCharacter();
+
             var expectedStats = CreateStats(CharacterTypes.Mario)
                               + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
 
-            var character = CreateCharacter();
 
             character.EffectiveStats.Should().BeEquivalentTo(expectedStats);
         }
@@ -75,7 +78,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [InlineData(EquipmentType.JumpShoes)]
         public void WhenEquipping_WithInvalidEquipment_LoadoutIsExpected(EquipmentType equipmentType)
         {
-            _builder.For(CharacterTypes.Mallow);
+            _manualBuilder.For(CharacterTypes.Mallow);
             var character = CreateCharacter();
             var equipment = CreateEquipment(equipmentType);
 
@@ -88,18 +91,53 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenGainingExperience_ExperienceIsExpected()
         {
-            var character = CreateCharacter();
-            var exp = new ExperiencePoints(50);
+            _director.Configure(_newBuilder);
+            var character = _newBuilder.Build();
+            var service = new GrowthService();
 
-            character.Add(exp).Add(exp);
+            service.DistributeExperience(new ExperiencePoints(50), character);
 
-            character.ExperiencePoints.Value.Should().Be(100);
+            character.ExperiencePoints.Value.Should().Be(50);
+        }
+
+        [Fact]
+        public void WhenGainingExperience_WithToNextExperience_LevelIncrements()
+        {
+            var builder = new NewCharacterBuilder();
+            new Director().Configure(builder);
+            var character = builder.Build();
+            var expectedLevel = character.Level + new Level(1);
+            var xp = character.ToNext;
+
+            character.Add(xp);
+
+            character.Level.Should().Be(expectedLevel);
+        }
+
+        [Theory]
+        [InlineData(CharacterTypes.Mario, 1, 0)]
+        [InlineData(CharacterTypes.Mallow, 2, 30)]
+        public void WhenInstantiating_NewCharacter(
+            CharacterTypes characterType,
+            byte expectedLevel,
+            ushort expectedExperiencePoints
+        )
+        {
+            _newBuilder.For(characterType);
+            _director.Configure(_newBuilder);
+            var expectedStats = CreateStats(characterType);
+
+            var character = _newBuilder.Build();
+
+            character.Level.Value.Should().Be(expectedLevel);
+            character.ExperiencePoints.Value.Should().Be(expectedExperiencePoints);
+            character.NaturalStats.Should().Be(expectedStats);
         }
 
         [Fact]
         public void WhenInstantiating_WithEquipment_LoadoutIsExpected()
         {
-            _builder.Add(Hammer, JumpShoes, Shirt);
+            _manualBuilder.Add(Hammer, JumpShoes, Shirt);
 
             var character = CreateCharacter();
 
@@ -114,12 +152,12 @@ namespace SuperMarioRpg.Test.Domain.Combat
         public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
         {
             var equipment = CreateEquipment(equipmentTypes).ToArray();
-            _builder.For(CharacterTypes.Mallow).Add(equipment);
-            _director.Configure(_builder);
+            _manualBuilder.For(CharacterTypes.Mallow).Add(equipment);
+            _director.Configure(_manualBuilder);
 
             Action createInvalidCharacter = () =>
             {
-                var character = _builder.Build();
+                var character = _manualBuilder.Build();
             };
 
             createInvalidCharacter.Should().Throw<ValidationException>()
@@ -127,14 +165,27 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
+        public void WhenLevelingUp_StatsChange()
+        {
+            _director.Configure(_newBuilder);
+            var character = _newBuilder.Build();
+            var expectedNaturalStats = new Stats(23, 2, 25, 12, 4, 20);
+            var service = new GrowthService();
+
+            service.DistributeExperience(new ExperiencePoints(16), character);
+
+            character.NaturalStats.Should().Be(expectedNaturalStats);
+        }
+
+        [Fact]
         public void WhenUnequipping_WithEquipmentId_LoadoutIsExpected()
         {
-            _builder.Add(Shirt);
+            _manualBuilder.Add(Shirt);
             var character = CreateCharacter();
 
             character.Unequip(Shirt.Id);
 
-            character.Armor.Should().Be(Equipment.NullArmor);
+            character.Armor.Should().Be(Equipment.DefaultArmor);
             character.EffectiveStats.Should().Be(character.NaturalStats + character.Loadout.Stats);
         }
 

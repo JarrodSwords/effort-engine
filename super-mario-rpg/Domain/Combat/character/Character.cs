@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Effort.Domain;
 using FluentValidation;
 
@@ -8,15 +11,16 @@ namespace SuperMarioRpg.Domain.Combat
         #region Core
 
         private static readonly CharacterValidator Validator = new CharacterValidator();
+        private ExperiencePoints _experiencePoints;
         private Loadout _loadout;
 
-        public Character(CharacterBuilder builder) : base(builder.Id)
+        public Character(ICharacterBuilder builder) : base(builder.Id)
         {
             CharacterType = builder.CharacterType;
-            _loadout = builder.Loadout;
+            _experiencePoints = builder.ExperiencePoints;
+            Level = builder.Level;
             NaturalStats = builder.NaturalStats;
-            ExperiencePoints = new ExperiencePoints();
-            CalculateEffectiveStats();
+            Loadout = builder.Loadout;
 
             Validator.ValidateAndThrow(this);
         }
@@ -27,8 +31,18 @@ namespace SuperMarioRpg.Domain.Combat
 
         public CharacterTypes CharacterType { get; }
         public Stats EffectiveStats { get; private set; }
-        public ExperiencePoints ExperiencePoints { get; set; }
-        public Stats NaturalStats { get; }
+        public Level Level { get; private set; }
+        public Stats NaturalStats { get; private set; }
+
+        public ExperiencePoints ExperiencePoints
+        {
+            get => _experiencePoints;
+            private set
+            {
+                _experiencePoints = value;
+                LevelUp();
+            }
+        }
 
         public Loadout Loadout
         {
@@ -44,10 +58,28 @@ namespace SuperMarioRpg.Domain.Combat
         public Equipment Armor => Loadout.Armor;
         public Equipment Weapon => Loadout.Weapon;
 
-        public Character Add(ExperiencePoints experiencePoints)
+        public List<LevelReward> LevelRewards =>
+            new List<LevelReward>
+            {
+                new LevelReward(1, 0, Stats.Default),
+                new LevelReward(2, 16, new Stats(3, 2, 5, 2, 2)),
+                new LevelReward(3, 48, new Stats(3, 2, 5, 2, 2)),
+                new LevelReward(4, 84, new Stats(3, 2, 5, 2, 2))
+            };
+
+        public ExperiencePoints ToNext =>
+            new ExperiencePoints(
+                (ushort) (LevelRewards.First(x => x.Level.Value > Level.Value).Required.Value - ExperiencePoints.Value)
+            );
+
+        public ExperiencePoints Add(ExperiencePoints experiencePoints)
         {
-            ExperiencePoints += experiencePoints;
-            return this;
+            var xpToAdd = new ExperiencePoints(Math.Min(experiencePoints.Value, ToNext.Value));
+            var remainder = new ExperiencePoints((ushort) (experiencePoints.Value - xpToAdd.Value));
+
+            ExperiencePoints += xpToAdd;
+
+            return remainder;
         }
 
         public Character Equip(Equipment equipment)
@@ -70,6 +102,17 @@ namespace SuperMarioRpg.Domain.Combat
         private void CalculateEffectiveStats()
         {
             EffectiveStats = NaturalStats + Loadout.Stats;
+        }
+
+        private void LevelUp()
+        {
+            var rewards = LevelRewards.SingleOrDefault(x => x.Required == ExperiencePoints);
+
+            if (rewards is null || Level == rewards.Level)
+                return;
+
+            Level = rewards.Level;
+            NaturalStats += rewards.Stats;
         }
 
         #endregion

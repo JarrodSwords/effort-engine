@@ -12,9 +12,11 @@ namespace SuperMarioRpg.Domain.Combat
 
         #endregion
 
-        public static ExperiencePoints operator +(ExperiencePoints left, ExperiencePoints right)
-        {
-            return new ExperiencePoints((ushort) (left.Value + right.Value));
-        }
+        #region Equality, Operators
+
+        public static ExperiencePoints operator +(ExperiencePoints left, ExperiencePoints right) =>
+            new ExperiencePoints((ushort) (left.Value + right.Value));
+
+        #endregion
     }
 }
