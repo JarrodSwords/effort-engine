@@ -62,13 +62,6 @@ namespace SuperMarioRpg.Domain.Combat
             return this;
         }
 
-        public ManualCharacterBuilder WithProgressionStats(byte level, ushort experiencePoints)
-        {
-            Level = new Level(level);
-            ExperiencePoints = new ExperiencePoints(experiencePoints);
-            return this;
-        }
-
         #endregion
 
         #region Private Interface
@@ -86,7 +79,7 @@ namespace SuperMarioRpg.Domain.Combat
             Id = Guid.Empty;
             CharacterType = CharacterTypes.Mario;
             Equipment.Clear();
-            Loadout = new Loadout();
+            Loadout = Loadout.Default;
             NaturalStats = Stats.Default;
         }
 

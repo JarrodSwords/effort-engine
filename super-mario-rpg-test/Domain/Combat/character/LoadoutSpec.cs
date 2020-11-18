@@ -12,7 +12,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
     {
         #region Test Methods
 
-        protected override ValueObject<Loadout> CreateValueObject() => new Loadout();
+        protected override ValueObject<Loadout> CreateValueObject() => Loadout.Default;
 
         [Fact]
         public void WhenInstantiating_WithMultipleItemsInSameSlot_ExceptionIsThrown()

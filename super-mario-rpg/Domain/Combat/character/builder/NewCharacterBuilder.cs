@@ -73,7 +73,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public void CreateLoadout()
         {
-            Loadout = new Loadout();
+            Loadout = Loadout.Default;
         }
 
         public void CreateNaturalStats()
