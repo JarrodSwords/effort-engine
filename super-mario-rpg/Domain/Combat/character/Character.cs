@@ -76,6 +76,8 @@ namespace SuperMarioRpg.Domain.Combat
             return this;
         }
 
+        public Equipment GetEquipment(Slot slot) => Loadout.GetEquipment(slot);
+
         public Character Unequip(Id id)
         {
             Loadout = Loadout.Unequip(id);

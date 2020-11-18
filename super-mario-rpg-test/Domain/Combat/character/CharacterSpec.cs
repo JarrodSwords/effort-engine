@@ -87,32 +87,35 @@ namespace SuperMarioRpg.Test.Domain.Combat
             remainder.Value.Should().Be(34);
         }
 
-        [Fact]
-        public void WhenEquipping_WithEquipment_LoadoutIsExpected()
+        [Theory]
+        [InlineData(EquipmentType.Hammer)]
+        [InlineData(EquipmentType.Shirt)]
+        [InlineData(EquipmentType.JumpShoes)]
+        public void WhenEquipping_CompatibleItem_ItemIsEquipped(EquipmentType equipmentType)
         {
-            var character = CreateCharacter();
+            _director.Configure(_newBuilder);
+            var character = _newBuilder.Build();
+            var equipment = CreateEquipment(equipmentType);
 
-            character.Equip(Hammer).Equip(Shirt).Equip(JumpShoes);
+            character.Equip(equipment);
 
-            character.Accessory.Should().Be(JumpShoes);
-            character.Armor.Should().Be(Shirt);
-            character.Weapon.Should().Be(Hammer);
-            character.EffectiveStats.Should().Be(character.NaturalStats + Shirt.Stats + Hammer.Stats + JumpShoes.Stats);
+            character.GetEquipment(equipment.Slot).Should().Be(equipment);
+            character.EffectiveStats.Should().Be(character.NaturalStats + equipment.Stats);
         }
 
         [Theory]
         [InlineData(EquipmentType.Hammer)]
         [InlineData(EquipmentType.Shirt)]
         [InlineData(EquipmentType.JumpShoes)]
-        public void WhenEquipping_WithInvalidEquipment_LoadoutIsExpected(EquipmentType equipmentType)
+        public void WhenEquipping_IncompatibleItem_ExceptionIsThrown(EquipmentType equipmentType)
         {
             _manualBuilder.For(CharacterTypes.Mallow);
             var character = CreateCharacter();
             var equipment = CreateEquipment(equipmentType);
 
-            Action equipInvalidItem = () => { character.Equip(equipment); };
+            Action equipIncompatibleItem = () => { character.Equip(equipment); };
 
-            equipInvalidItem.Should().Throw<ValidationException>()
+            equipIncompatibleItem.Should().Throw<ValidationException>()
                 .WithMessage($"*Mallow cannot equip {equipment}.*");
         }
 
@@ -125,6 +128,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
             ushort expectedXp
         )
         {
+            // todo: move to builder specs
+
             _newBuilder.For(characterType);
             _director.Configure(_newBuilder);
             var expectedStats = CreateStats(characterType);
@@ -139,6 +144,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenInstantiating_WithEquipment_LoadoutIsExpected()
         {
+            // todo: move to builder specs
+
             _manualBuilder.Add(Hammer, JumpShoes, Shirt);
 
             var character = CreateCharacter();
@@ -153,6 +160,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [InlineData(EquipmentType.Hammer, EquipmentType.Shirt, EquipmentType.JumpShoes)]
         public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
         {
+            // todo: move to builder specs
+
             var equipment = CreateEquipment(equipmentTypes).ToArray();
             _manualBuilder.For(CharacterTypes.Mallow).Add(equipment);
             _director.Configure(_manualBuilder);
@@ -175,15 +184,19 @@ namespace SuperMarioRpg.Test.Domain.Combat
             character.NaturalStats.Should().Be(expectedNaturalStats);
         }
 
-        [Fact]
-        public void WhenUnequipping_WithEquipmentId_LoadoutIsExpected()
+        [Theory]
+        [InlineData(EquipmentType.Hammer)]
+        [InlineData(EquipmentType.Shirt)]
+        [InlineData(EquipmentType.JumpShoes)]
+        public void WhenUnequipping_WithEquipmentId_ItemIsUnequipped(EquipmentType equipmentType)
         {
-            _manualBuilder.Add(Shirt);
-            var character = CreateCharacter();
+            var equipment = CreateEquipment(equipmentType);
+            _director.Configure(_newBuilder);
+            var character = _newBuilder.Build();
 
-            character.Unequip(Shirt.Id);
+            character.Equip(equipment).Unequip(equipment.Id);
 
-            character.Armor.Should().Be(Equipment.DefaultArmor);
+            character.GetEquipment(equipment.Slot).Should().NotBe(equipment);
             character.EffectiveStats.Should().Be(character.NaturalStats);
         }
 
