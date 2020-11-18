@@ -6,13 +6,15 @@ namespace Effort.Domain
     {
         #region Core
 
-        public Id(Guid value = new Guid()) : base(
-            value == Guid.Empty
-                ? Guid.NewGuid()
-                : value
-        )
+        private Id(Guid value) : base(value == default ? Guid.NewGuid() : value)
         {
         }
+
+        #endregion
+
+        #region Public Interface
+
+        public static Id Create(Guid value = default) => new Id(value);
 
         #endregion
     }

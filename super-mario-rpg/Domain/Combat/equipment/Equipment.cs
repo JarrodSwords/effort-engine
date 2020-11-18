@@ -1,5 +1,6 @@
 using System;
 using Effort.Domain;
+using static Effort.Domain.Name;
 using static SuperMarioRpg.Domain.Combat.StatFactory;
 
 namespace SuperMarioRpg.Domain.Combat
@@ -17,10 +18,10 @@ namespace SuperMarioRpg.Domain.Combat
             EquipmentType equipmentType,
             Slot slot,
             CharacterTypes compatibleCharacterTypes,
-            Guid id = new Guid()
+            Guid id = default
         ) : base(id)
         {
-            Name = Name.Create(name);
+            Name = CreateName(name);
             EquipmentType = equipmentType;
             Slot = slot;
             Stats = CreateStats(EquipmentType);

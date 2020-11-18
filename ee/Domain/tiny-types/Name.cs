@@ -12,7 +12,7 @@ namespace Effort.Domain
 
         #region Public Interface
 
-        public static Name Create(string value) => new Name(value);
+        public static Name CreateName(string value) => new Name(value);
 
         #endregion
     }
