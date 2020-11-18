@@ -20,7 +20,12 @@ namespace SuperMarioRpg.Domain.Combat
         {
             var equipment = equipmentType switch
             {
-                EquipmentType.Hammer => new Equipment("Hammer", EquipmentType.Hammer, Slot.Weapon, CharacterTypes.Mario),
+                EquipmentType.Hammer => new Equipment(
+                    "Hammer",
+                    EquipmentType.Hammer,
+                    Slot.Weapon,
+                    CharacterTypes.Mario
+                ),
                 EquipmentType.JumpShoes => new Equipment(
                     "Jump Shoes",
                     EquipmentType.JumpShoes,
