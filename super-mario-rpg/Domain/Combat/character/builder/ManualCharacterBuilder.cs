@@ -44,12 +44,12 @@ namespace SuperMarioRpg.Domain.Combat
         }
 
         public ManualCharacterBuilder WithNaturalStats(
-            short attack = 0,
-            short defense = 0,
-            short hp = 0,
-            short specialAttack = 0,
-            short specialDefense = 0,
-            short speed = 0
+            short attack = default,
+            short defense = default,
+            short hp = default,
+            short specialAttack = default,
+            short specialDefense = default,
+            short speed = default
         )
         {
             Attack = attack;
