@@ -158,10 +158,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             _manualBuilder.For(CharacterTypes.Mallow).Add(equipment);
             _director.Configure(_manualBuilder);
 
-            Action createInvalidCharacter = () =>
-            {
-                var character = _manualBuilder.Build();
-            };
+            Action createInvalidCharacter = () => { _manualBuilder.Build(); };
 
             createInvalidCharacter.Should().Throw<ValidationException>()
                 .WithMessage($"*Mallow cannot equip: {string.Join(", ", equipment.ToList())}*");

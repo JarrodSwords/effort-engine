@@ -46,10 +46,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [InlineData(Min, -1)]
         public void WhenInstantiating_WithValueOutOfRange_ExceptionIsThrown(short limit, short addend)
         {
-            Action createInvalidStat = () =>
-            {
-                var stat = CreateStat((short) (limit + addend));
-            };
+            Action createInvalidStat = () => { CreateStat((short) (limit + addend)); };
 
             createInvalidStat.Should().Throw<ValidationException>();
         }
