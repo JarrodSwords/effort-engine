@@ -41,7 +41,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
         #region Test Methods
 
-        protected override Entity CreateEntity() => _manualBuilder.Build();
+        protected override Entity CreateEntity() => _mario;
         protected override Entity CreateEntity(Guid id) => _manualBuilder.WithId(id).Build();
 
         [Theory]
@@ -63,15 +63,12 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenAddingXp_WithSufficientXpToLevel_LevelIncrements()
         {
-            var builder = new NewCharacterBuilder();
-            new Director().Configure(builder);
-            var character = builder.Build();
-            var expectedLevel = character.Level + CreateLevel(1);
-            var xp = character.ToNext;
+            var expectedLevel = _mario.Level + CreateLevel(1);
+            var xp = _mario.ToNext;
 
-            character.Add(xp);
+            _mario.Add(xp);
 
-            character.Level.Should().Be(expectedLevel);
+            _mario.Level.Should().Be(expectedLevel);
         }
 
         [Fact]
