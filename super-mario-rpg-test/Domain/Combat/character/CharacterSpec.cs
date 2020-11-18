@@ -65,7 +65,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             _director.Configure(_newBuilder);
             var character = _newBuilder.Build();
 
-            var remainder = character.Add(new ExperiencePoints(50));
+            var remainder = character.Add(ExperiencePoints.Create(50));
 
             character.ExperiencePoints.Value.Should().Be(16);
             remainder.Value.Should().Be(34);
@@ -77,7 +77,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             var builder = new NewCharacterBuilder();
             new Director().Configure(builder);
             var character = builder.Build();
-            var expectedLevel = character.Level + new Level(1);
+            var expectedLevel = character.Level + Level.Create(1);
             var xp = character.ToNext;
 
             character.Add(xp);
@@ -171,7 +171,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             var character = _newBuilder.Build();
             var expectedNaturalStats = new Stats(23, 2, 25, 12, 4, 20);
 
-            character.Add(new ExperiencePoints(16));
+            character.Add(ExperiencePoints.Create(16));
 
             character.NaturalStats.Should().Be(expectedNaturalStats);
         }

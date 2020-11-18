@@ -9,8 +9,8 @@ namespace SuperMarioRpg.Domain.Combat
 
         public LevelReward(byte level, ushort experiencePoints, Stats stats)
         {
-            Level = new Level(level);
-            Required = new ExperiencePoints(experiencePoints);
+            Level = Level.Create(level);
+            Required = ExperiencePoints.Create(experiencePoints);
             Stats = stats;
         }
 

@@ -6,16 +6,22 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Core
 
-        public ExperiencePoints(ushort value = 0) : base(value)
+        private ExperiencePoints(ushort value = default) : base(value)
         {
         }
+
+        #endregion
+
+        #region Public Interface
+
+        public static ExperiencePoints Create(ushort value = 0) => new ExperiencePoints(value);
 
         #endregion
 
         #region Equality, Operators
 
         public static ExperiencePoints operator +(ExperiencePoints left, ExperiencePoints right) =>
-            new ExperiencePoints((ushort) (left.Value + right.Value));
+            Create((ushort) (left.Value + right.Value));
 
         #endregion
     }

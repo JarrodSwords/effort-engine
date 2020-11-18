@@ -68,14 +68,12 @@ namespace SuperMarioRpg.Domain.Combat
             };
 
         public ExperiencePoints ToNext =>
-            new ExperiencePoints(
-                (ushort) (LevelRewards.First(x => x.Level.Value > Level.Value).Required.Value - ExperiencePoints.Value)
-            );
+            ExperiencePoints.Create((ushort) (LevelRewards.First(x => x.Level.Value > Level.Value).Required.Value - ExperiencePoints.Value));
 
         public ExperiencePoints Add(ExperiencePoints experiencePoints)
         {
-            var delta = new ExperiencePoints(Math.Min(experiencePoints.Value, ToNext.Value));
-            var remainder = new ExperiencePoints((ushort) (experiencePoints.Value - delta.Value));
+            var delta = ExperiencePoints.Create(Math.Min(experiencePoints.Value, ToNext.Value));
+            var remainder = ExperiencePoints.Create((ushort) (experiencePoints.Value - delta.Value));
 
             ExperiencePoints += delta;
 
