@@ -9,6 +9,8 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Public Interface
 
+        public Loadout Loadout { get; private set; }
+
         public ExistingCharacterBuilder For(CharacterDto dto)
         {
             Dto = dto;
@@ -25,16 +27,17 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region ICharacterBuilder
 
+        public Equipment Accessory { get; }
+        public Equipment Armor { get; }
         public CharacterTypes CharacterType => Dto.CharacterType;
         public Guid Id => Dto.Id;
         public Level Level => CreateLevel(Dto.Level);
-        public Loadout Loadout { get; private set; }
         public Stats NaturalStats { get; private set; }
+        public Equipment Weapon { get; }
         public Xp Xp => CreateXp(Dto.Xp);
 
         public void CreateLoadout()
         {
-            Loadout = new Loadout();
         }
 
         public void CreateNaturalStats()

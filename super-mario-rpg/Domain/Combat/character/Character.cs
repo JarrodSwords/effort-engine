@@ -22,7 +22,8 @@ namespace SuperMarioRpg.Domain.Combat
             _xp = builder.Xp;
             Level = builder.Level;
             NaturalStats = builder.NaturalStats;
-            Loadout = builder.Loadout;
+            _loadout = new SimpleLoadout(builder.Accessory, builder.Armor, builder.Weapon);
+            CalculateEffectiveStats();
 
             Validator.ValidateAndThrow(this);
         }
@@ -75,7 +76,6 @@ namespace SuperMarioRpg.Domain.Combat
         public Character Equip(Equipment equipment)
         {
             Loadout = Loadout.Equip(equipment);
-            Validator.ValidateAndThrow(this);
             return this;
         }
 
@@ -96,6 +96,7 @@ namespace SuperMarioRpg.Domain.Combat
             {
                 _loadout = value;
                 CalculateEffectiveStats();
+                Validator.ValidateAndThrow(this);
             }
         }
 

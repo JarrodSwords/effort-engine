@@ -4,16 +4,6 @@ using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public interface ILoadout
-    {
-        Loadout Equip(Equipment equipment);
-        Equipment GetEquipment(Slot slot);
-        IEnumerable<Equipment> GetIncompatible(CharacterTypes characterType);
-        Stats GetStats();
-        bool IsCompatible(CharacterTypes characterType);
-        Loadout Unequip(Id id);
-    }
-
     public partial class Loadout : ValueObject<Loadout>, ILoadout
     {
         #region Core
@@ -64,24 +54,13 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region ILoadout
 
-        public Loadout Equip(Equipment equipment) => new Loadout(this, equipment);
+        public ILoadout Equip(Equipment equipment) => new Loadout(this, equipment);
 
         public Equipment GetEquipment(Slot slot) => _equipment[slot];
 
-        public IEnumerable<Equipment> GetIncompatible(CharacterTypes characterType) =>
-            _equipment
-                .Where(x => !x.Value.IsCompatible(characterType))
-                .Select(x => x.Value);
-
         public Stats GetStats() => Stats;
 
-        public bool IsCompatible(CharacterTypes characterType) =>
-            _equipment
-                .Select(x => x.Value.CompatibleCharacterTypes)
-                .Aggregate(characterType, (x, y) => x & y)
-          > 0;
-
-        public Loadout Unequip(Id id)
+        public ILoadout Unequip(Id id)
         {
             return new Loadout(_equipment.Select(x => x.Value).Where(x => x.Id != id).ToArray());
         }

@@ -66,16 +66,17 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region ICharacterBuilder
 
+        public Equipment Accessory { get; }
+        public Equipment Armor { get; }
         public CharacterTypes CharacterType { get; private set; }
         public Guid Id { get; }
         public Level Level => CreateLevel(BaseLevel[CharacterType]);
-        public Loadout Loadout { get; private set; }
         public Stats NaturalStats { get; private set; }
+        public Equipment Weapon { get; }
         public Xp Xp => CreateXp(BaseExp[CharacterType]);
 
         public void CreateLoadout()
         {
-            Loadout = Loadout.Default;
         }
 
         public void CreateNaturalStats()

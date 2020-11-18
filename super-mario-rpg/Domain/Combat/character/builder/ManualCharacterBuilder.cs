@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static SuperMarioRpg.Domain.Combat.Stats;
 
 namespace SuperMarioRpg.Domain.Combat
@@ -80,7 +81,6 @@ namespace SuperMarioRpg.Domain.Combat
             Id = Guid.Empty;
             CharacterType = CharacterTypes.Mario;
             Equipment.Clear();
-            Loadout = Loadout.Default;
             NaturalStats = Default;
         }
 
@@ -88,16 +88,20 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region ICharacterBuilder
 
+        public Equipment Accessory { get; private set; }
+        public Equipment Armor { get; private set; }
         public CharacterTypes CharacterType { get; protected set; }
         public Guid Id { get; protected set; }
         public Level Level { get; protected set; }
-        public Loadout Loadout { get; protected set; }
         public Stats NaturalStats { get; protected set; }
+        public Equipment Weapon { get; private set; }
         public Xp Xp { get; protected set; }
 
         public void CreateLoadout()
         {
-            Loadout = new Loadout(Equipment.ToArray());
+            Accessory = Equipment.SingleOrDefault(x => x.Slot == Slot.Accessory);
+            Armor = Equipment.SingleOrDefault(x => x.Slot == Slot.Armor);
+            Weapon = Equipment.SingleOrDefault(x => x.Slot == Slot.Weapon);
         }
 
         public void CreateNaturalStats()
