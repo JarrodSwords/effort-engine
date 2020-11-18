@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using static SuperMarioRpg.Domain.Combat.Stats;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -80,7 +81,7 @@ namespace SuperMarioRpg.Domain.Combat
             CharacterType = CharacterTypes.Mario;
             Equipment.Clear();
             Loadout = Loadout.Default;
-            NaturalStats = Stats.Default;
+            NaturalStats = Default;
         }
 
         #endregion
@@ -101,7 +102,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public void CreateNaturalStats()
         {
-            NaturalStats = Stats.Create(Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed);
+            NaturalStats = CreateStats(Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed);
         }
 
         #endregion

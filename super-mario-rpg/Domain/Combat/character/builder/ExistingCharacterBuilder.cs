@@ -1,4 +1,5 @@
 using System;
+using static SuperMarioRpg.Domain.Combat.Stats;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -36,7 +37,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public void CreateNaturalStats()
         {
-            NaturalStats = Stats.Create(
+            NaturalStats = CreateStats(
                 Dto.Attack,
                 Dto.Defense,
                 Dto.Hp,

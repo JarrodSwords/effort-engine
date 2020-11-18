@@ -2,6 +2,7 @@ using FluentAssertions;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
+using static SuperMarioRpg.Domain.Combat.Stats;
 
 namespace SuperMarioRpg.Test.Domain.Combat
 {
@@ -23,7 +24,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             short speed = 0
         )
         {
-            var expectedStats = Stats.Create(attack, defense, hp, specialAttack, specialDefense, speed);
+            var expectedStats = CreateStats(attack, defense, hp, specialAttack, specialDefense, speed);
 
             var equipment = CreateEquipment(equipmentType);
 

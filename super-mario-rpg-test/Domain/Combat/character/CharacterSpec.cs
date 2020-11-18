@@ -8,6 +8,7 @@ using SuperMarioRpg.Domain.Combat;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 using static SuperMarioRpg.Domain.Combat.StatFactory;
+using static SuperMarioRpg.Domain.Combat.Stats;
 
 namespace SuperMarioRpg.Test.Domain.Combat
 {
@@ -169,7 +170,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             _director.Configure(_newBuilder);
             var character = _newBuilder.Build();
-            var expectedNaturalStats = Stats.Create(23, 2, 25, 12, 4, 20);
+            var expectedNaturalStats = CreateStats(23, 2, 25, 12, 4, 20);
 
             character.Add(Xp.Create(16));
 

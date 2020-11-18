@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Effort.Domain;
 using FluentValidation;
+using static SuperMarioRpg.Domain.Combat.Stats;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -61,10 +62,10 @@ namespace SuperMarioRpg.Domain.Combat
         public List<LevelReward> LevelRewards =>
             new List<LevelReward>
             {
-                new LevelReward(1, 0, Stats.Default),
-                new LevelReward(2, 16, Stats.Create(3, 2, 5, 2, 2)),
-                new LevelReward(3, 48, Stats.Create(3, 2, 5, 2, 2)),
-                new LevelReward(4, 84, Stats.Create(3, 2, 5, 2, 2))
+                new LevelReward(1, 0, Default),
+                new LevelReward(2, 16, CreateStats(3, 2, 5, 2, 2)),
+                new LevelReward(3, 48, CreateStats(3, 2, 5, 2, 2)),
+                new LevelReward(4, 84, CreateStats(3, 2, 5, 2, 2))
             };
 
         public Xp ToNext =>

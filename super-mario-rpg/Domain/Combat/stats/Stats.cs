@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Effort.Domain;
+using static SuperMarioRpg.Domain.Combat.Stat;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -7,7 +8,7 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Core
 
-        public static Stats Default = Create();
+        public static Stats Default = CreateStats();
 
         private Stats(
             Stat attack,
@@ -34,12 +35,12 @@ namespace SuperMarioRpg.Domain.Combat
             short specialDefense,
             short speed
         ) : this(
-            Stat.Create(attack),
-            Stat.Create(defense),
-            Stat.Create(hp),
-            Stat.Create(specialAttack),
-            Stat.Create(specialDefense),
-            Stat.Create(speed)
+            CreateStat(attack),
+            CreateStat(defense),
+            CreateStat(hp),
+            CreateStat(specialAttack),
+            CreateStat(specialDefense),
+            CreateStat(speed)
         )
         {
         }
@@ -60,7 +61,7 @@ namespace SuperMarioRpg.Domain.Combat
             return stats.Aggregate((x, y) => x + y);
         }
 
-        public static Stats Create(
+        public static Stats CreateStats(
             short attack = default,
             short defense = default,
             short hp = default,
@@ -70,7 +71,7 @@ namespace SuperMarioRpg.Domain.Combat
         ) =>
             new Stats(attack, defense, hp, specialAttack, specialDefense, speed);
 
-        public static Stats Create(
+        public static Stats CreateStats(
             Stat attack,
             Stat defense,
             Stat hp,
@@ -96,7 +97,7 @@ namespace SuperMarioRpg.Domain.Combat
             (Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed).GetHashCode();
 
         public static Stats operator +(Stats left, Stats right) =>
-            Create(
+            CreateStats(
                 left.Attack + right.Attack,
                 left.Defense + right.Defense,
                 left.Hp + right.Hp,

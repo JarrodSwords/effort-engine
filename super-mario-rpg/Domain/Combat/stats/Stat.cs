@@ -19,7 +19,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public static Stat Create(short value = default) => new Stat(value);
+        public static Stat CreateStat(short value = default) => new Stat(value);
 
         #endregion
 
@@ -32,7 +32,7 @@ namespace SuperMarioRpg.Domain.Combat
             // clamp
             sum = sum < Min ? Min : sum > Max ? Max : sum;
 
-            return Create(sum);
+            return CreateStat(sum);
         }
 
         #endregion
