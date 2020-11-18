@@ -5,6 +5,7 @@ using FluentValidation;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
+using static SuperMarioRpg.Domain.Combat.Stats;
 
 namespace SuperMarioRpg.Test.Domain.Combat
 {
@@ -42,9 +43,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             mario.Accessory.Should().Be(JumpShoes);
             mario.Armor.Should().Be(Shirt);
             mario.Weapon.Should().Be(Hammer);
-            mario.EffectiveStats.Should().Be(
-                mario.NaturalStats + Hammer.Stats + JumpShoes.Stats + Shirt.Stats
-            );
+            mario.EffectiveStats.Should().Be(Aggregate(mario.NaturalStats, Hammer.Stats, JumpShoes.Stats, Shirt.Stats));
         }
 
         [Theory]
