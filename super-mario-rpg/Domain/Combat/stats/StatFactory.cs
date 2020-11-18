@@ -12,8 +12,8 @@ namespace SuperMarioRpg.Domain.Combat
             {
                 CharacterTypes.Bowser => Stats.Default,
                 CharacterTypes.Geno => Stats.Default,
-                CharacterTypes.Mallow => new Stats(22, 3, 20, 15, 10, 18),
-                CharacterTypes.Mario => new Stats(20, 0, 20, 10, 2, 20),
+                CharacterTypes.Mallow => Stats.Create(22, 3, 20, 15, 10, 18),
+                CharacterTypes.Mario => Stats.Create(20, 0, 20, 10, 2, 20),
                 CharacterTypes.Toadstool => Stats.Default,
                 _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
             };
@@ -26,9 +26,9 @@ namespace SuperMarioRpg.Domain.Combat
             var stats = key switch
             {
                 EquipmentType.None => Stats.Default,
-                EquipmentType.Hammer => new Stats(10),
-                EquipmentType.JumpShoes => new Stats(0, 1, 0, 5, 1, 2),
-                EquipmentType.Shirt => new Stats(0, 6, 0, 0, 6),
+                EquipmentType.Hammer => Stats.Create(10),
+                EquipmentType.JumpShoes => Stats.Create(0, 1, 0, 5, 1, 2),
+                EquipmentType.Shirt => Stats.Create(0, 6, 0, 0, 6),
                 _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
             };
 

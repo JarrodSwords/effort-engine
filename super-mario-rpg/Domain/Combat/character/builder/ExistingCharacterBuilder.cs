@@ -36,14 +36,12 @@ namespace SuperMarioRpg.Domain.Combat
 
         public void CreateNaturalStats()
         {
-            NaturalStats = new Stats(
-                Dto.Attack,
+            NaturalStats = Stats.Create(Dto.Attack,
                 Dto.Defense,
                 Dto.Hp,
                 Dto.SpecialAttack,
                 Dto.SpecialDefense,
-                Dto.Speed
-            );
+                Dto.Speed);
         }
 
         #endregion

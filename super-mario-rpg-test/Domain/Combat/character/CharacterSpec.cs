@@ -169,7 +169,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             _director.Configure(_newBuilder);
             var character = _newBuilder.Build();
-            var expectedNaturalStats = new Stats(23, 2, 25, 12, 4, 20);
+            var expectedNaturalStats = Stats.Create(23, 2, 25, 12, 4, 20);
 
             character.Add(Xp.Create(16));
 

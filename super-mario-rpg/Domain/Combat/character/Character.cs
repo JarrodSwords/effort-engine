@@ -62,9 +62,9 @@ namespace SuperMarioRpg.Domain.Combat
             new List<LevelReward>
             {
                 new LevelReward(1, 0, Stats.Default),
-                new LevelReward(2, 16, new Stats(3, 2, 5, 2, 2)),
-                new LevelReward(3, 48, new Stats(3, 2, 5, 2, 2)),
-                new LevelReward(4, 84, new Stats(3, 2, 5, 2, 2))
+                new LevelReward(2, 16, Stats.Create(3, 2, 5, 2, 2)),
+                new LevelReward(3, 48, Stats.Create(3, 2, 5, 2, 2)),
+                new LevelReward(4, 84, Stats.Create(3, 2, 5, 2, 2))
             };
 
         public Xp ToNext =>

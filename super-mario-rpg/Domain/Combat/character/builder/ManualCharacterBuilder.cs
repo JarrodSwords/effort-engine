@@ -101,7 +101,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public void CreateNaturalStats()
         {
-            NaturalStats = new Stats(Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed);
+            NaturalStats = Stats.Create(Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed);
         }
 
         #endregion

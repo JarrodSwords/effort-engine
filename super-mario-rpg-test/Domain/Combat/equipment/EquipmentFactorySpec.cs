@@ -23,7 +23,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             short speed = 0
         )
         {
-            var expectedStats = new Stats(attack, defense, hp, specialAttack, specialDefense, speed);
+            var expectedStats = Stats.Create(attack, defense, hp, specialAttack, specialDefense, speed);
 
             var equipment = CreateEquipment(equipmentType);
 

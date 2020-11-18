@@ -17,7 +17,7 @@ namespace SuperMarioRpg.Domain.Combat
             EquipmentType equipmentType,
             Slot slot,
             CharacterTypes compatibleCharacterTypes,
-            Guid id = new Guid()
+            Guid id = default
         ) : base(id)
         {
             Name = Name.Create(name);

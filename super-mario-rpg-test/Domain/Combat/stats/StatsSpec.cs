@@ -10,13 +10,13 @@ namespace SuperMarioRpg.Test.Domain.Combat
     {
         #region Test Methods
 
-        protected override ValueObject<Stats> CreateValueObject() => new Stats(20, 0, 20, 10, 2, 20);
+        protected override ValueObject<Stats> CreateValueObject() => Stats.Create(20, 0, 20, 10, 2, 20);
 
         [Fact]
         public void WhenAdding_EachStatIsSummed()
         {
-            var addend1 = new Stats(20, 0, 20, 10, 2, 20);
-            var addend2 = new Stats(1, 2, 3, 4, 5, 6);
+            var addend1 = Stats.Create(20, 0, 20, 10, 2, 20);
+            var addend2 = Stats.Create(1, 2, 3, 4, 5, 6);
 
             var sum = addend1 + addend2;
 
