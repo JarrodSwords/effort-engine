@@ -11,12 +11,13 @@ namespace SuperMarioRpg.Domain.Combat
         #region Core
 
         private static readonly CharacterValidator Validator = new CharacterValidator();
+        private ExperiencePoints _experiencePoints;
         private Loadout _loadout;
 
         public Character(ICharacterBuilder builder) : base(builder.Id)
         {
             CharacterType = builder.CharacterType;
-            ExperiencePoints = builder.ExperiencePoints;
+            _experiencePoints = builder.ExperiencePoints;
             Level = builder.Level;
             _loadout = builder.Loadout;
             NaturalStats = builder.NaturalStats;
@@ -31,9 +32,18 @@ namespace SuperMarioRpg.Domain.Combat
 
         public CharacterTypes CharacterType { get; }
         public Stats EffectiveStats { get; private set; }
-        public ExperiencePoints ExperiencePoints { get; private set; }
         public Level Level { get; private set; }
         public Stats NaturalStats { get; private set; }
+
+        public ExperiencePoints ExperiencePoints
+        {
+            get => _experiencePoints;
+            private set
+            {
+                _experiencePoints = value;
+                LevelUp();
+            }
+        }
 
         public Loadout Loadout
         {
@@ -70,16 +80,6 @@ namespace SuperMarioRpg.Domain.Combat
 
             ExperiencePoints += xpToAdd;
 
-            var previousLevel = Level;
-
-            Level = LevelRewards.FindLast(x => x.Required.Value <= ExperiencePoints.Value).Level;
-
-            NaturalStats = LevelRewards
-                .SkipWhile(x => x.Level.Value <= previousLevel.Value)
-                .TakeWhile(x => x.Level.Value <= Level.Value)
-                .Select(x => x.Stats)
-                .Aggregate(NaturalStats, (x, y) => x + y);
-
             return this;
         }
 
@@ -103,6 +103,17 @@ namespace SuperMarioRpg.Domain.Combat
         private void CalculateEffectiveStats()
         {
             EffectiveStats = NaturalStats + Loadout.Stats;
+        }
+
+        private void LevelUp()
+        {
+            var rewards = LevelRewards.SingleOrDefault(x => x.Required == ExperiencePoints);
+
+            if (rewards is null || Level == rewards.Level)
+                return;
+
+            Level = rewards.Level;
+            NaturalStats += rewards.Stats;
         }
 
         #endregion
