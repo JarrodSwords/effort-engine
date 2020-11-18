@@ -1,6 +1,8 @@
 using FluentAssertions;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
+using static SuperMarioRpg.Domain.Combat.Level;
+using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Test.Domain.Combat
 {
@@ -27,12 +29,14 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [InlineData(15, 1)]
         [InlineData(16, 2)]
         [InlineData(50, 3)]
-        public void WhenDistributingExperience_CharacterIsUpdated(ushort experiencePoints, byte expectedLevel)
+        public void WhenDistributingXp_CharacterIsUpdated(ushort xpValue, byte expectedLevel)
         {
-            _service.DistributeExperience(new ExperiencePoints(experiencePoints), _character);
+            var xp = CreateXp(xpValue);
 
-            _character.ExperiencePoints.Value.Should().Be(experiencePoints);
-            _character.Level.Should().Be(new Level(expectedLevel));
+            _service.DistributeXp(xp, _character);
+
+            _character.Level.Should().Be(CreateLevel(expectedLevel));
+            _character.Xp.Should().Be(xp);
         }
 
         #endregion

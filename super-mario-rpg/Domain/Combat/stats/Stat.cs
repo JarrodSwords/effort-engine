@@ -10,10 +10,16 @@ namespace SuperMarioRpg.Domain.Combat
         public const short Max = 255;
         public const short Min = -255;
 
-        public Stat(short value) : base(value)
+        private Stat(short value) : base(value)
         {
             new StatValidator().ValidateAndThrow(this);
         }
+
+        #endregion
+
+        #region Public Interface
+
+        public static Stat CreateStat(short value = default) => new Stat(value);
 
         #endregion
 
@@ -26,7 +32,7 @@ namespace SuperMarioRpg.Domain.Combat
             // clamp
             sum = sum < Min ? Min : sum > Max ? Max : sum;
 
-            return new Stat(sum);
+            return CreateStat(sum);
         }
 
         #endregion

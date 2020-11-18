@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Effort.Domain;
+using static SuperMarioRpg.Domain.Combat.Stat;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -7,39 +8,39 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Core
 
-        public static Stats Default = new Stats();
+        public static Stats Default = CreateStats();
 
-        public Stats(
-            short attack = 0,
-            short defense = 0,
-            short hitPoints = 0,
-            short specialAttack = 0,
-            short specialDefense = 0,
-            short speed = 0
-        )
-        {
-            Attack = new Stat(attack);
-            Defense = new Stat(defense);
-            HitPoints = new Stat(hitPoints);
-            SpecialAttack = new Stat(specialAttack);
-            SpecialDefense = new Stat(specialDefense);
-            Speed = new Stat(speed);
-        }
-
-        public Stats(
+        private Stats(
             Stat attack,
             Stat defense,
-            Stat hitPoints,
+            Stat hp,
             Stat specialAttack,
             Stat specialDefense,
             Stat speed
+        )
+        {
+            Attack = attack;
+            Defense = defense;
+            Hp = hp;
+            SpecialAttack = specialAttack;
+            SpecialDefense = specialDefense;
+            Speed = speed;
+        }
+
+        private Stats(
+            short attack,
+            short defense,
+            short hp,
+            short specialAttack,
+            short specialDefense,
+            short speed
         ) : this(
-            attack.Value,
-            defense.Value,
-            hitPoints.Value,
-            specialAttack.Value,
-            specialDefense.Value,
-            speed.Value
+            CreateStat(attack),
+            CreateStat(defense),
+            CreateStat(hp),
+            CreateStat(specialAttack),
+            CreateStat(specialDefense),
+            CreateStat(speed)
         )
         {
         }
@@ -50,7 +51,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Stat Attack { get; }
         public Stat Defense { get; }
-        public Stat HitPoints { get; }
+        public Stat Hp { get; }
         public Stat SpecialAttack { get; }
         public Stat SpecialDefense { get; }
         public Stat Speed { get; }
@@ -60,6 +61,26 @@ namespace SuperMarioRpg.Domain.Combat
             return stats.Aggregate((x, y) => x + y);
         }
 
+        public static Stats CreateStats(
+            short attack = default,
+            short defense = default,
+            short hp = default,
+            short specialAttack = default,
+            short specialDefense = default,
+            short speed = default
+        ) =>
+            new Stats(attack, defense, hp, specialAttack, specialDefense, speed);
+
+        public static Stats CreateStats(
+            Stat attack,
+            Stat defense,
+            Stat hp,
+            Stat specialAttack,
+            Stat specialDefense,
+            Stat speed
+        ) =>
+            new Stats(attack, defense, hp, specialAttack, specialDefense, speed);
+
         #endregion
 
         #region Equality, Operators
@@ -67,22 +88,22 @@ namespace SuperMarioRpg.Domain.Combat
         protected override bool EqualsExplicit(Stats other) =>
             Attack == other.Attack
          && Defense == other.Defense
-         && HitPoints == other.HitPoints
+         && Hp == other.Hp
          && SpecialAttack == other.SpecialAttack
          && SpecialDefense == other.SpecialDefense
          && Speed == other.Speed;
 
         protected override int GetHashCodeExplicit() =>
-            (Attack, Defense, HitPoints, SpecialAttack, SpecialDefense, Speed).GetHashCode();
+            (Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed).GetHashCode();
 
-        public static Stats operator +(Stats addend1, Stats addend2) =>
-            new Stats(
-                addend1.Attack + addend2.Attack,
-                addend1.Defense + addend2.Defense,
-                addend1.HitPoints + addend2.HitPoints,
-                addend1.SpecialAttack + addend2.SpecialAttack,
-                addend1.SpecialDefense + addend2.SpecialDefense,
-                addend1.Speed + addend2.Speed
+        public static Stats operator +(Stats left, Stats right) =>
+            CreateStats(
+                left.Attack + right.Attack,
+                left.Defense + right.Defense,
+                left.Hp + right.Hp,
+                left.SpecialAttack + right.SpecialAttack,
+                left.SpecialDefense + right.SpecialDefense,
+                left.Speed + right.Speed
             );
 
         #endregion

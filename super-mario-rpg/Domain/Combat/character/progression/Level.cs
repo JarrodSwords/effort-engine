@@ -6,15 +6,21 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Core
 
-        public Level(byte value = 0) : base(value)
+        private Level(byte value) : base(value)
         {
         }
 
         #endregion
 
+        #region Public Interface
+
+        public static Level CreateLevel(byte value = default) => new Level(value);
+
+        #endregion
+
         #region Equality, Operators
 
-        public static Level operator +(Level left, Level right) => new Level((byte) (left.Value + right.Value));
+        public static Level operator +(Level left, Level right) => CreateLevel((byte) (left.Value + right.Value));
 
         #endregion
     }

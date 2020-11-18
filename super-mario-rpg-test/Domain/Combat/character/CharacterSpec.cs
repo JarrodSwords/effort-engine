@@ -7,7 +7,10 @@ using FluentValidation;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
+using static SuperMarioRpg.Domain.Combat.Level;
 using static SuperMarioRpg.Domain.Combat.StatFactory;
+using static SuperMarioRpg.Domain.Combat.Stats;
+using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Test.Domain.Combat
 {
@@ -54,35 +57,34 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             var expectedStats = CreateStats(CharacterTypes.Mario)
                               + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
-
-
+            
             character.EffectiveStats.Should().BeEquivalentTo(expectedStats);
         }
 
         [Fact]
-        public void WhenAddingExperience_ExperienceIsExpected()
-        {
-            _director.Configure(_newBuilder);
-            var character = _newBuilder.Build();
-
-            var remainder = character.Add(new ExperiencePoints(50));
-
-            character.ExperiencePoints.Value.Should().Be(16);
-            remainder.Value.Should().Be(34);
-        }
-
-        [Fact]
-        public void WhenAddingExperience_WithToNextExperience_LevelIncrements()
+        public void WhenAddingXp_WithSufficientXpToLevel_LevelIncrements()
         {
             var builder = new NewCharacterBuilder();
             new Director().Configure(builder);
             var character = builder.Build();
-            var expectedLevel = character.Level + new Level(1);
+            var expectedLevel = character.Level + CreateLevel(1);
             var xp = character.ToNext;
 
             character.Add(xp);
 
             character.Level.Should().Be(expectedLevel);
+        }
+
+        [Fact]
+        public void WhenAddingXp_XpIsUpdated()
+        {
+            _director.Configure(_newBuilder);
+            var character = _newBuilder.Build();
+
+            var remainder = character.Add(CreateXp(50));
+
+            character.Xp.Value.Should().Be(16);
+            remainder.Value.Should().Be(34);
         }
 
         [Fact]
@@ -120,7 +122,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         public void WhenInstantiating_NewCharacter(
             CharacterTypes characterType,
             byte expectedLevel,
-            ushort expectedExperiencePoints
+            ushort expectedXp
         )
         {
             _newBuilder.For(characterType);
@@ -130,7 +132,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             var character = _newBuilder.Build();
 
             character.Level.Value.Should().Be(expectedLevel);
-            character.ExperiencePoints.Value.Should().Be(expectedExperiencePoints);
+            character.Xp.Value.Should().Be(expectedXp);
             character.NaturalStats.Should().Be(expectedStats);
         }
 
@@ -155,10 +157,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             _manualBuilder.For(CharacterTypes.Mallow).Add(equipment);
             _director.Configure(_manualBuilder);
 
-            Action createInvalidCharacter = () =>
-            {
-                var character = _manualBuilder.Build();
-            };
+            Action createInvalidCharacter = () => { _manualBuilder.Build(); };
 
             createInvalidCharacter.Should().Throw<ValidationException>()
                 .WithMessage($"*Mallow cannot equip: {string.Join(", ", equipment.ToList())}*");
@@ -169,9 +168,9 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             _director.Configure(_newBuilder);
             var character = _newBuilder.Build();
-            var expectedNaturalStats = new Stats(23, 2, 25, 12, 4, 20);
+            var expectedNaturalStats = CreateStats(23, 2, 25, 12, 4, 20);
 
-            character.Add(new ExperiencePoints(16));
+            character.Add(CreateXp(16));
 
             character.NaturalStats.Should().Be(expectedNaturalStats);
         }
