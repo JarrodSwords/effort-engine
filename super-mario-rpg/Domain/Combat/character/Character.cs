@@ -74,10 +74,10 @@ namespace SuperMarioRpg.Domain.Combat
 
         public ExperiencePoints Add(ExperiencePoints experiencePoints)
         {
-            var xpToAdd = new ExperiencePoints(Math.Min(experiencePoints.Value, ToNext.Value));
-            var remainder = new ExperiencePoints((ushort) (experiencePoints.Value - xpToAdd.Value));
+            var delta = new ExperiencePoints(Math.Min(experiencePoints.Value, ToNext.Value));
+            var remainder = new ExperiencePoints((ushort) (experiencePoints.Value - delta.Value));
 
-            ExperiencePoints += xpToAdd;
+            ExperiencePoints += delta;
 
             return remainder;
         }
