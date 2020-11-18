@@ -4,7 +4,17 @@ using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public partial class Loadout : ValueObject<Loadout>
+    public interface ILoadout
+    {
+        Loadout Equip(Equipment equipment);
+        Equipment GetEquipment(Slot slot);
+        IEnumerable<Equipment> GetIncompatible(CharacterTypes characterType);
+        Stats GetStats();
+        bool IsCompatible(CharacterTypes characterType);
+        Loadout Unequip(Id id);
+    }
+
+    public partial class Loadout : ValueObject<Loadout>, ILoadout
     {
         #region Core
 
@@ -39,16 +49,31 @@ namespace SuperMarioRpg.Domain.Combat
         #region Public Interface
 
         public Stats Stats { get; }
+
         public Equipment Accessory => GetEquipment(Slot.Accessory);
         public Equipment Armor => GetEquipment(Slot.Armor);
         public Equipment Weapon => GetEquipment(Slot.Weapon);
 
+        #endregion
+
+        #region Private Interface
+
+        private Stats CalculateStats() => Stats.Aggregate(_equipment.Select(x => x.Value.Stats).ToArray());
+
+        #endregion
+
+        #region ILoadout
+
         public Loadout Equip(Equipment equipment) => new Loadout(this, equipment);
+
+        public Equipment GetEquipment(Slot slot) => _equipment[slot];
 
         public IEnumerable<Equipment> GetIncompatible(CharacterTypes characterType) =>
             _equipment
                 .Where(x => !x.Value.IsCompatible(characterType))
                 .Select(x => x.Value);
+
+        public Stats GetStats() => Stats;
 
         public bool IsCompatible(CharacterTypes characterType) =>
             _equipment
@@ -60,14 +85,6 @@ namespace SuperMarioRpg.Domain.Combat
         {
             return new Loadout(_equipment.Select(x => x.Value).Where(x => x.Id != id).ToArray());
         }
-
-        #endregion
-
-        #region Private Interface
-
-        private Stats CalculateStats() => Stats.Aggregate(_equipment.Select(x => x.Value.Stats).ToArray());
-
-        private Equipment GetEquipment(Slot slot) => _equipment[slot];
 
         #endregion
 

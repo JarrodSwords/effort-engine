@@ -13,7 +13,7 @@ namespace SuperMarioRpg.Domain.Combat
         #region Core
 
         private static readonly CharacterValidator Validator = new CharacterValidator();
-        private Loadout _loadout;
+        private ILoadout _loadout;
         private Xp _xp;
 
         public Character(ICharacterBuilder builder) : base(builder.Id)
@@ -46,19 +46,9 @@ namespace SuperMarioRpg.Domain.Combat
             }
         }
 
-        public Loadout Loadout
-        {
-            get => _loadout;
-            private set
-            {
-                _loadout = value;
-                CalculateEffectiveStats();
-            }
-        }
-
-        public Equipment Accessory => Loadout.Accessory;
-        public Equipment Armor => Loadout.Armor;
-        public Equipment Weapon => Loadout.Weapon;
+        public Equipment Accessory => Loadout.GetEquipment(Slot.Accessory);
+        public Equipment Armor => Loadout.GetEquipment(Slot.Armor);
+        public Equipment Weapon => Loadout.GetEquipment(Slot.Weapon);
 
         public List<LevelReward> LevelRewards =>
             new List<LevelReward>
@@ -99,9 +89,19 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Private Interface
 
+        private ILoadout Loadout
+        {
+            get => _loadout;
+            set
+            {
+                _loadout = value;
+                CalculateEffectiveStats();
+            }
+        }
+
         private void CalculateEffectiveStats()
         {
-            EffectiveStats = NaturalStats + Loadout.Stats;
+            EffectiveStats = NaturalStats + Loadout.GetStats();
         }
 
         private void LevelUp()

@@ -57,7 +57,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             var expectedStats = CreateStats(CharacterTypes.Mario)
                               + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
-            
+
             character.EffectiveStats.Should().BeEquivalentTo(expectedStats);
         }
 
@@ -97,7 +97,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             character.Accessory.Should().Be(JumpShoes);
             character.Armor.Should().Be(Shirt);
             character.Weapon.Should().Be(Hammer);
-            character.EffectiveStats.Should().Be(character.NaturalStats + character.Loadout.Stats);
+            character.EffectiveStats.Should().Be(character.NaturalStats + Shirt.Stats + Hammer.Stats + JumpShoes.Stats);
         }
 
         [Theory]
@@ -113,7 +113,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             Action equipInvalidItem = () => { character.Equip(equipment); };
 
             equipInvalidItem.Should().Throw<ValidationException>()
-                .WithMessage($"*Mallow cannot equip: {equipment}*");
+                .WithMessage($"*Mallow cannot equip {equipment}.*");
         }
 
         [Theory]
@@ -160,7 +160,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             Action createInvalidCharacter = () => { _manualBuilder.Build(); };
 
             createInvalidCharacter.Should().Throw<ValidationException>()
-                .WithMessage($"*Mallow cannot equip: {string.Join(", ", equipment.ToList())}*");
+                .WithMessage($"*Mallow cannot equip {Hammer}*");
         }
 
         [Fact]
@@ -184,7 +184,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             character.Unequip(Shirt.Id);
 
             character.Armor.Should().Be(Equipment.DefaultArmor);
-            character.EffectiveStats.Should().Be(character.NaturalStats + character.Loadout.Stats);
+            character.EffectiveStats.Should().Be(character.NaturalStats);
         }
 
         #endregion
