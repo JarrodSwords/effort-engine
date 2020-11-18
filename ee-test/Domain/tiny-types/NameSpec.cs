@@ -1,6 +1,7 @@
 using Effort.Domain;
 using FluentAssertions;
 using Xunit;
+using static Effort.Domain.Name;
 
 namespace Effort.Test.Domain
 {
@@ -8,7 +9,7 @@ namespace Effort.Test.Domain
     {
         #region Test Methods
 
-        protected override TinyType<string> CreateTinyType(string value) => Name.Create(value);
+        protected override TinyType<string> CreateTinyType(string value) => CreateName(value);
         protected override string CreateValue() => "Mario's Pad";
 
         [Theory]
@@ -16,8 +17,8 @@ namespace Effort.Test.Domain
         [InlineData("Name", "nAME")]
         public void IsCaseInsensitive(string value1, string value2)
         {
-            var name1 = Name.Create(value1);
-            var name2 = Name.Create(value2);
+            var name1 = CreateName(value1);
+            var name2 = CreateName(value2);
 
             name2.Should().BeEquivalentTo(name1);
         }

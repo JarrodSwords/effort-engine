@@ -6,7 +6,7 @@ namespace Effort.Domain
     {
         #region Core
 
-        protected Entity(Guid id = default)
+        protected Entity(Guid id)
         {
             Id = Id.Create(id);
         }

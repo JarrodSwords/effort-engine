@@ -6,7 +6,7 @@ namespace Effort.Domain
     {
         #region Core
 
-        protected AggregateRoot(Guid id = new Guid()) : base(id)
+        protected AggregateRoot(Guid id) : base(id)
         {
         }
 
