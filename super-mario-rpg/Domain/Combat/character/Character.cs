@@ -19,9 +19,8 @@ namespace SuperMarioRpg.Domain.Combat
             CharacterType = builder.CharacterType;
             _experiencePoints = builder.ExperiencePoints;
             Level = builder.Level;
-            _loadout = builder.Loadout;
             NaturalStats = builder.NaturalStats;
-            CalculateEffectiveStats();
+            Loadout = builder.Loadout;
 
             Validator.ValidateAndThrow(this);
         }
