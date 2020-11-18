@@ -22,7 +22,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             sum.Attack.Value.Should().Be(21);
             sum.Defense.Value.Should().Be(2);
-            sum.HitPoints.Value.Should().Be(23);
+            sum.Hp.Value.Should().Be(23);
             sum.SpecialAttack.Value.Should().Be(14);
             sum.SpecialDefense.Value.Should().Be(7);
             sum.Speed.Value.Should().Be(26);

@@ -46,7 +46,7 @@ namespace SuperMarioRpg.Domain.Combat
         public ManualCharacterBuilder WithNaturalStats(
             short attack = 0,
             short defense = 0,
-            short hitPoints = 0,
+            short hp = 0,
             short specialAttack = 0,
             short specialDefense = 0,
             short speed = 0
@@ -54,7 +54,7 @@ namespace SuperMarioRpg.Domain.Combat
         {
             Attack = attack;
             Defense = defense;
-            HitPoints = hitPoints;
+            Hp = hp;
             SpecialAttack = specialAttack;
             SpecialDefense = specialDefense;
             Speed = speed;
@@ -69,7 +69,7 @@ namespace SuperMarioRpg.Domain.Combat
         private short Attack { get; set; }
         private short Defense { get; set; }
         private List<Equipment> Equipment { get; } = new List<Equipment>();
-        private short HitPoints { get; set; }
+        private short Hp { get; set; }
         private short SpecialAttack { get; set; }
         private short SpecialDefense { get; set; }
         private short Speed { get; set; }
@@ -101,7 +101,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public void CreateNaturalStats()
         {
-            NaturalStats = new Stats(Attack, Defense, HitPoints, SpecialAttack, SpecialDefense, Speed);
+            NaturalStats = new Stats(Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed);
         }
 
         #endregion

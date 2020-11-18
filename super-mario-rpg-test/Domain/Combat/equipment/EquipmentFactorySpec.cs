@@ -17,13 +17,13 @@ namespace SuperMarioRpg.Test.Domain.Combat
             EquipmentType equipmentType,
             short attack = 0,
             short defense = 0,
-            short hitPoints = 0,
+            short hp = 0,
             short specialAttack = 0,
             short specialDefense = 0,
             short speed = 0
         )
         {
-            var expectedStats = new Stats(attack, defense, hitPoints, specialAttack, specialDefense, speed);
+            var expectedStats = new Stats(attack, defense, hp, specialAttack, specialDefense, speed);
 
             var equipment = CreateEquipment(equipmentType);
 

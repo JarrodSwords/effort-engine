@@ -13,7 +13,7 @@ namespace SuperMarioRpg.Domain.Combat
             ushort xp = default,
             short attack = default,
             short defense = default,
-            short hitPoints = default,
+            short hp = default,
             short specialAttack = default,
             short specialDefense = default,
             short speed = default,
@@ -28,7 +28,7 @@ namespace SuperMarioRpg.Domain.Combat
             Level = level;
             Attack = attack;
             Defense = defense;
-            HitPoints = hitPoints;
+            Hp = hp;
             SpecialAttack = specialAttack;
             SpecialDefense = specialDefense;
             Speed = speed;
@@ -46,7 +46,7 @@ namespace SuperMarioRpg.Domain.Combat
         public short Attack { get; }
         public CharacterTypes CharacterType { get; }
         public short Defense { get; }
-        public short HitPoints { get; }
+        public short Hp { get; }
         public Guid Id { get; }
         public byte Level { get; }
         public short SpecialAttack { get; }

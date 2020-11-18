@@ -12,7 +12,7 @@ namespace SuperMarioRpg.Domain.Combat
         public Stats(
             short attack = 0,
             short defense = 0,
-            short hitPoints = 0,
+            short hp = 0,
             short specialAttack = 0,
             short specialDefense = 0,
             short speed = 0
@@ -20,7 +20,7 @@ namespace SuperMarioRpg.Domain.Combat
         {
             Attack = new Stat(attack);
             Defense = new Stat(defense);
-            HitPoints = new Stat(hitPoints);
+            Hp = new Stat(hp);
             SpecialAttack = new Stat(specialAttack);
             SpecialDefense = new Stat(specialDefense);
             Speed = new Stat(speed);
@@ -29,14 +29,14 @@ namespace SuperMarioRpg.Domain.Combat
         public Stats(
             Stat attack,
             Stat defense,
-            Stat hitPoints,
+            Stat hp,
             Stat specialAttack,
             Stat specialDefense,
             Stat speed
         ) : this(
             attack.Value,
             defense.Value,
-            hitPoints.Value,
+            hp.Value,
             specialAttack.Value,
             specialDefense.Value,
             speed.Value
@@ -50,7 +50,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Stat Attack { get; }
         public Stat Defense { get; }
-        public Stat HitPoints { get; }
+        public Stat Hp { get; }
         public Stat SpecialAttack { get; }
         public Stat SpecialDefense { get; }
         public Stat Speed { get; }
@@ -67,19 +67,19 @@ namespace SuperMarioRpg.Domain.Combat
         protected override bool EqualsExplicit(Stats other) =>
             Attack == other.Attack
          && Defense == other.Defense
-         && HitPoints == other.HitPoints
+         && Hp == other.Hp
          && SpecialAttack == other.SpecialAttack
          && SpecialDefense == other.SpecialDefense
          && Speed == other.Speed;
 
         protected override int GetHashCodeExplicit() =>
-            (Attack, Defense, HitPoints, SpecialAttack, SpecialDefense, Speed).GetHashCode();
+            (Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed).GetHashCode();
 
         public static Stats operator +(Stats addend1, Stats addend2) =>
             new Stats(
                 addend1.Attack + addend2.Attack,
                 addend1.Defense + addend2.Defense,
-                addend1.HitPoints + addend2.HitPoints,
+                addend1.Hp + addend2.Hp,
                 addend1.SpecialAttack + addend2.SpecialAttack,
                 addend1.SpecialDefense + addend2.SpecialDefense,
                 addend1.Speed + addend2.Speed

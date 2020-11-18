@@ -39,7 +39,7 @@ namespace SuperMarioRpg.Domain.Combat
             NaturalStats = new Stats(
                 Dto.Attack,
                 Dto.Defense,
-                Dto.HitPoints,
+                Dto.Hp,
                 Dto.SpecialAttack,
                 Dto.SpecialDefense,
                 Dto.Speed
