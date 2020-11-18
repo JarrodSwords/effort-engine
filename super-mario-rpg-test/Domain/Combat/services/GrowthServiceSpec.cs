@@ -23,22 +23,15 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
         #region Test Methods
 
-        [Fact]
-        public void WhenGainingExperience_ExperienceIsExpected()
-        {
-            _service.DistributeExperience(new ExperiencePoints(50), _character);
-
-            _character.ExperiencePoints.Value.Should().Be(50);
-        }
-
         [Theory]
         [InlineData(15, 1)]
         [InlineData(16, 2)]
         [InlineData(50, 3)]
-        public void WhenGainingExperience_LevelChanges(ushort experiencePoints, byte expectedLevel)
+        public void WhenDistributingExperience_CharacterIsUpdated(ushort experiencePoints, byte expectedLevel)
         {
             _service.DistributeExperience(new ExperiencePoints(experiencePoints), _character);
 
+            _character.ExperiencePoints.Value.Should().Be(experiencePoints);
             _character.Level.Should().Be(new Level(expectedLevel));
         }
 

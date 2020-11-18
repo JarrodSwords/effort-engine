@@ -60,6 +60,32 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
+        public void WhenAddingExperience_ExperienceIsExpected()
+        {
+            _director.Configure(_newBuilder);
+            var character = _newBuilder.Build();
+
+            var remainder = character.Add(new ExperiencePoints(50));
+
+            character.ExperiencePoints.Value.Should().Be(16);
+            remainder.Value.Should().Be(34);
+        }
+
+        [Fact]
+        public void WhenAddingExperience_WithToNextExperience_LevelIncrements()
+        {
+            var builder = new NewCharacterBuilder();
+            new Director().Configure(builder);
+            var character = builder.Build();
+            var expectedLevel = character.Level + new Level(1);
+            var xp = character.ToNext;
+
+            character.Add(xp);
+
+            character.Level.Should().Be(expectedLevel);
+        }
+
+        [Fact]
         public void WhenEquipping_WithEquipment_LoadoutIsExpected()
         {
             var character = CreateCharacter();
@@ -86,32 +112,6 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             equipInvalidItem.Should().Throw<ValidationException>()
                 .WithMessage($"*Mallow cannot equip: {equipment}*");
-        }
-
-        [Fact]
-        public void WhenGainingExperience_ExperienceIsExpected()
-        {
-            _director.Configure(_newBuilder);
-            var character = _newBuilder.Build();
-            var service = new GrowthService();
-
-            service.DistributeExperience(new ExperiencePoints(50), character);
-
-            character.ExperiencePoints.Value.Should().Be(50);
-        }
-
-        [Fact]
-        public void WhenGainingExperience_WithToNextExperience_LevelIncrements()
-        {
-            var builder = new NewCharacterBuilder();
-            new Director().Configure(builder);
-            var character = builder.Build();
-            var expectedLevel = character.Level + new Level(1);
-            var xp = character.ToNext;
-
-            character.Add(xp);
-
-            character.Level.Should().Be(expectedLevel);
         }
 
         [Theory]
@@ -170,9 +170,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
             _director.Configure(_newBuilder);
             var character = _newBuilder.Build();
             var expectedNaturalStats = new Stats(23, 2, 25, 12, 4, 20);
-            var service = new GrowthService();
 
-            service.DistributeExperience(new ExperiencePoints(16), character);
+            character.Add(new ExperiencePoints(16));
 
             character.NaturalStats.Should().Be(expectedNaturalStats);
         }
