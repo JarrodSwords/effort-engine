@@ -6,24 +6,40 @@ namespace SuperMarioRpg.Test.Domain.Combat
 {
     public class GrowthServiceSpec
     {
-        #region Test Methods
+        #region Core
 
-        [Theory]
-        [InlineData(15, 0)]
-        [InlineData(16, 1)]
-        [InlineData(50, 2)]
-        public void WhenGainingExperience_LevelChanges(ushort experiencePoints, byte levelsGained)
+        private readonly Character _character;
+        private readonly GrowthService _service;
+
+        public GrowthServiceSpec()
         {
             var builder = new NewCharacterBuilder();
             new Director().Configure(builder);
-            var character = builder.Build();
+            _character = builder.Build();
+            _service = new GrowthService();
+        }
 
-            var expectedLevel = character.Level + new Level(levelsGained);
+        #endregion
 
-            var service = new GrowthService();
-            service.DistributeExperience(new ExperiencePoints(experiencePoints), character);
+        #region Test Methods
 
-            character.Level.Should().Be(expectedLevel);
+        [Fact]
+        public void WhenGainingExperience_ExperienceIsExpected()
+        {
+            _service.DistributeExperience(new ExperiencePoints(50), _character);
+
+            _character.ExperiencePoints.Value.Should().Be(50);
+        }
+
+        [Theory]
+        [InlineData(15, 1)]
+        [InlineData(16, 2)]
+        [InlineData(50, 3)]
+        public void WhenGainingExperience_LevelChanges(ushort experiencePoints, byte expectedLevel)
+        {
+            _service.DistributeExperience(new ExperiencePoints(experiencePoints), _character);
+
+            _character.Level.Should().Be(new Level(expectedLevel));
         }
 
         #endregion
