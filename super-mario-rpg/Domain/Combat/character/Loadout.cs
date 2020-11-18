@@ -15,8 +15,9 @@ namespace SuperMarioRpg.Domain.Combat
         {
             _equipment = equipment.ToDictionary(x => x.Slot);
 
-            foreach (var e in Default._equipment.Select(x => x.Value).Where(x => !_equipment.ContainsKey(x.Slot)))
-                _equipment.Add(e.Slot, e);
+            if (_equipment.Count < 3)
+                foreach (var e in Default._equipment.Select(x => x.Value).Where(x => !_equipment.ContainsKey(x.Slot)))
+                    _equipment.Add(e.Slot, e);
 
             Stats = CalculateStats();
         }

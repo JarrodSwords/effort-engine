@@ -100,18 +100,16 @@ namespace SuperMarioRpg.Test.Domain.Combat
             character.ExperiencePoints.Value.Should().Be(50);
         }
 
-        [Theory]
-        [InlineData(15, 0)]
-        [InlineData(16, 1)]
-        [InlineData(50, 2)]
-        public void WhenGainingExperience_LevelChanges(ushort experiencePoints, byte levelsGained)
+        [Fact]
+        public void WhenGainingExperience_WithToNextExperience_LevelIncrements()
         {
-            _director.Configure(_newBuilder);
-            var character = _newBuilder.Build();
-            var expectedLevel = character.Level + new Level(levelsGained);
+            var builder = new NewCharacterBuilder();
+            new Director().Configure(builder);
+            var character = builder.Build();
+            var expectedLevel = character.Level + new Level(1);
+            var xp = character.ToNext;
 
-            var service = new GrowthService();
-            service.DistributeExperience(new ExperiencePoints(experiencePoints), character);
+            character.Add(ref xp);
 
             character.Level.Should().Be(expectedLevel);
         }
