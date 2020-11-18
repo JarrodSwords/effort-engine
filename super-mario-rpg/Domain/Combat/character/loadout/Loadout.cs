@@ -3,11 +3,11 @@ using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class SimpleLoadout : ValueObject<SimpleLoadout>, ILoadout
+    public class Loadout : ValueObject<Loadout>, ILoadout
     {
         #region Core
 
-        public SimpleLoadout(Equipment accessory = null, Equipment armor = null, Equipment weapon = null)
+        public Loadout(Equipment accessory = null, Equipment armor = null, Equipment weapon = null)
         {
             Accessory = accessory ?? Equipment.DefaultAccessory;
             Armor = armor ?? Equipment.DefaultArmor;
@@ -30,9 +30,9 @@ namespace SuperMarioRpg.Domain.Combat
         {
             return equipment.Slot switch
             {
-                Slot.Accessory => new SimpleLoadout(equipment, Armor, Weapon),
-                Slot.Armor => new SimpleLoadout(Accessory, equipment, Weapon),
-                Slot.Weapon => new SimpleLoadout(Accessory, Armor, equipment),
+                Slot.Accessory => new Loadout(equipment, Armor, Weapon),
+                Slot.Armor => new Loadout(Accessory, equipment, Weapon),
+                Slot.Weapon => new Loadout(Accessory, Armor, equipment),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
@@ -53,13 +53,13 @@ namespace SuperMarioRpg.Domain.Combat
         public ILoadout Unequip(Id id)
         {
             if (Accessory.Id == id)
-                return new SimpleLoadout(armor: Armor, weapon: Weapon);
+                return new Loadout(armor: Armor, weapon: Weapon);
 
             if (Armor.Id == id)
-                return new SimpleLoadout(Accessory, weapon: Weapon);
+                return new Loadout(Accessory, weapon: Weapon);
 
             if (Weapon.Id == id)
-                return new SimpleLoadout(Accessory, Armor);
+                return new Loadout(Accessory, Armor);
 
             return this;
         }
@@ -68,7 +68,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Equality, Operators
 
-        protected override bool EqualsExplicit(SimpleLoadout other) => throw new NotImplementedException();
+        protected override bool EqualsExplicit(Loadout other) => throw new NotImplementedException();
 
         protected override int GetHashCodeExplicit() => throw new NotImplementedException();
 
