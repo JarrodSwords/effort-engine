@@ -62,13 +62,6 @@ namespace SuperMarioRpg.Domain.Combat
             return this;
         }
 
-        public ManualCharacterBuilder WithProgressionStats(byte level, ushort experiencePoints)
-        {
-            Level = level;
-            ExperiencePoints = experiencePoints;
-            return this;
-        }
-
         #endregion
 
         #region Private Interface
@@ -76,9 +69,7 @@ namespace SuperMarioRpg.Domain.Combat
         private short Attack { get; set; }
         private short Defense { get; set; }
         private List<Equipment> Equipment { get; } = new List<Equipment>();
-        private ushort ExperiencePoints { get; set; }
         private short HitPoints { get; set; }
-        private byte Level { get; set; }
         private short SpecialAttack { get; set; }
         private short SpecialDefense { get; set; }
         private short Speed { get; set; }
@@ -88,9 +79,8 @@ namespace SuperMarioRpg.Domain.Combat
             Id = Guid.Empty;
             CharacterType = CharacterTypes.Mario;
             Equipment.Clear();
-            Loadout = new Loadout();
+            Loadout = Loadout.Default;
             NaturalStats = Stats.Default;
-            ProgressionSystem = new ProgressionSystem(new Level(0), new ExperiencePoints(), NaturalStats);
         }
 
         #endregion
@@ -98,10 +88,11 @@ namespace SuperMarioRpg.Domain.Combat
         #region ICharacterBuilder
 
         public CharacterTypes CharacterType { get; protected set; }
+        public ExperiencePoints ExperiencePoints { get; protected set; }
         public Guid Id { get; protected set; }
+        public Level Level { get; protected set; }
         public Loadout Loadout { get; protected set; }
         public Stats NaturalStats { get; protected set; }
-        public ProgressionSystem ProgressionSystem { get; protected set; }
 
         public void CreateLoadout()
         {
@@ -111,15 +102,6 @@ namespace SuperMarioRpg.Domain.Combat
         public void CreateNaturalStats()
         {
             NaturalStats = new Stats(Attack, Defense, HitPoints, SpecialAttack, SpecialDefense, Speed);
-        }
-
-        public void CreateProgressionSystem()
-        {
-            ProgressionSystem = new ProgressionSystem(
-                new Level(Level),
-                new ExperiencePoints(ExperiencePoints),
-                NaturalStats
-            );
         }
 
         #endregion

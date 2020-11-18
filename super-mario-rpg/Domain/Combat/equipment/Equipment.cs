@@ -8,9 +8,9 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Core
 
-        public static Equipment NullAccessory = new NullEquipment(Slot.Accessory);
-        public static Equipment NullArmor = new NullEquipment(Slot.Armor);
-        public static Equipment NullWeapon = new NullEquipment(Slot.Weapon, "Unarmed");
+        public static Equipment DefaultAccessory = new NullEquipment(Slot.Accessory);
+        public static Equipment DefaultArmor = new NullEquipment(Slot.Armor);
+        public static Equipment DefaultWeapon = new NullEquipment(Slot.Weapon, "Unarmed");
 
         public Equipment(
             string name,

@@ -6,7 +6,7 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Core
 
-        public Level(byte value) : base(value)
+        public Level(byte value = 0) : base(value)
         {
         }
 

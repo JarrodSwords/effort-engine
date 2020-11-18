@@ -4,30 +4,20 @@ using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Loadout : ValueObject<Loadout>
+    public partial class Loadout : ValueObject<Loadout>
     {
         #region Core
 
         private readonly Dictionary<Slot, Equipment> _equipment;
-
-        public static Loadout NullLoadout = new Loadout();
-
-        private Loadout()
-        {
-            _equipment = new List<Equipment>
-            {
-                Equipment.NullAccessory,
-                Equipment.NullArmor,
-                Equipment.NullWeapon
-            }.ToDictionary(x => x.Slot);
-        }
+        public static Loadout Default = new NullLoadout();
 
         public Loadout(params Equipment[] equipment)
         {
             _equipment = equipment.ToDictionary(x => x.Slot);
 
-            foreach (var e in NullLoadout._equipment.Select(x => x.Value).Where(x => !_equipment.ContainsKey(x.Slot)))
-                _equipment.Add(e.Slot, e);
+            if (_equipment.Count < 3)
+                foreach (var e in Default._equipment.Select(x => x.Value).Where(x => !_equipment.ContainsKey(x.Slot)))
+                    _equipment.Add(e.Slot, e);
 
             Stats = CalculateStats();
         }

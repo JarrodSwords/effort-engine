@@ -91,25 +91,25 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenGainingExperience_ExperienceIsExpected()
         {
-            var character = CreateCharacter();
-            var exp = new ExperiencePoints(50);
-
-            character.Add(exp).Add(exp);
-
-            character.ExperiencePoints.Value.Should().Be(100);
-        }
-
-        [Theory]
-        [InlineData(15, 0)]
-        [InlineData(16, 1)]
-        [InlineData(50, 2)]
-        public void WhenGainingExperience_LevelChanges(ushort experiencePoints, byte levelsGained)
-        {
             _director.Configure(_newBuilder);
             var character = _newBuilder.Build();
-            var expectedLevel = character.Level + new Level(levelsGained);
+            var service = new GrowthService();
 
-            character.Add(new ExperiencePoints(experiencePoints));
+            service.DistributeExperience(new ExperiencePoints(50), character);
+
+            character.ExperiencePoints.Value.Should().Be(50);
+        }
+
+        [Fact]
+        public void WhenGainingExperience_WithToNextExperience_LevelIncrements()
+        {
+            var builder = new NewCharacterBuilder();
+            new Director().Configure(builder);
+            var character = builder.Build();
+            var expectedLevel = character.Level + new Level(1);
+            var xp = character.ToNext;
+
+            character.Add(xp);
 
             character.Level.Should().Be(expectedLevel);
         }
@@ -170,8 +170,9 @@ namespace SuperMarioRpg.Test.Domain.Combat
             _director.Configure(_newBuilder);
             var character = _newBuilder.Build();
             var expectedNaturalStats = new Stats(23, 2, 25, 12, 4, 20);
+            var service = new GrowthService();
 
-            character.Add(new ExperiencePoints(16));
+            service.DistributeExperience(new ExperiencePoints(16), character);
 
             character.NaturalStats.Should().Be(expectedNaturalStats);
         }
@@ -184,7 +185,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             character.Unequip(Shirt.Id);
 
-            character.Armor.Should().Be(Equipment.NullArmor);
+            character.Armor.Should().Be(Equipment.DefaultArmor);
             character.EffectiveStats.Should().Be(character.NaturalStats + character.Loadout.Stats);
         }
 

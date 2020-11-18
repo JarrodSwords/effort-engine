@@ -65,28 +65,20 @@ namespace SuperMarioRpg.Domain.Combat
         #region ICharacterBuilder
 
         public CharacterTypes CharacterType { get; private set; }
+        public ExperiencePoints ExperiencePoints => new ExperiencePoints(BaseExp[CharacterType]);
         public Guid Id { get; } = Guid.Empty;
+        public Level Level => new Level(BaseLevel[CharacterType]);
         public Loadout Loadout { get; private set; }
         public Stats NaturalStats { get; private set; }
-        public ProgressionSystem ProgressionSystem { get; set; }
 
         public void CreateLoadout()
         {
-            Loadout = new Loadout();
+            Loadout = Loadout.Default;
         }
 
         public void CreateNaturalStats()
         {
             NaturalStats = StatFactory.CreateStats(CharacterType);
-        }
-
-        public void CreateProgressionSystem()
-        {
-            ProgressionSystem = new ProgressionSystem(
-                new Level(BaseLevel[CharacterType]),
-                new ExperiencePoints(BaseExp[CharacterType]),
-                NaturalStats
-            );
         }
 
         #endregion

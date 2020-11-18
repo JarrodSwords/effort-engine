@@ -5,9 +5,9 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class Stats : ValueObject<Stats>
     {
-        public static Stats Default = new Stats();
-
         #region Core
+
+        public static Stats Default = new Stats();
 
         public Stats(
             short attack = 0,
