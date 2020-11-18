@@ -89,7 +89,7 @@ namespace SuperMarioRpg.Domain.Combat
             CharacterType = CharacterTypes.Mario;
             Equipment.Clear();
             Loadout = new Loadout();
-            NaturalStats = new Stats();
+            NaturalStats = Stats.Default;
             ProgressionSystem = new ProgressionSystem(new Level(0), new ExperiencePoints(), NaturalStats);
         }
 
