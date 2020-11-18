@@ -23,11 +23,11 @@ namespace SuperMarioRpg.Domain.Combat
         #region ICharacterBuilder
 
         public CharacterTypes CharacterType => Dto.CharacterType;
-        public ExperiencePoints ExperiencePoints => ExperiencePoints.Create(Dto.ExperiencePoints);
         public Guid Id => Dto.Id;
         public Level Level => Level.Create(Dto.Level);
         public Loadout Loadout { get; private set; }
         public Stats NaturalStats { get; private set; }
+        public Xp Xp => Xp.Create(Dto.Xp);
 
         public void CreateLoadout()
         {

@@ -65,11 +65,11 @@ namespace SuperMarioRpg.Domain.Combat
         #region ICharacterBuilder
 
         public CharacterTypes CharacterType { get; private set; }
-        public ExperiencePoints ExperiencePoints => ExperiencePoints.Create(BaseExp[CharacterType]);
         public Guid Id { get; } = Guid.Empty;
         public Level Level => Level.Create(BaseLevel[CharacterType]);
         public Loadout Loadout { get; private set; }
         public Stats NaturalStats { get; private set; }
+        public Xp Xp => Xp.Create(BaseExp[CharacterType]);
 
         public void CreateLoadout()
         {

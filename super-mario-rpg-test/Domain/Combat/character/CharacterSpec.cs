@@ -60,19 +60,19 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
-        public void WhenAddingExperience_ExperienceIsExpected()
+        public void WhenAddingXp_XpIsUpdated()
         {
             _director.Configure(_newBuilder);
             var character = _newBuilder.Build();
 
-            var remainder = character.Add(ExperiencePoints.Create(50));
+            var remainder = character.Add(Xp.Create(50));
 
-            character.ExperiencePoints.Value.Should().Be(16);
+            character.Xp.Value.Should().Be(16);
             remainder.Value.Should().Be(34);
         }
 
         [Fact]
-        public void WhenAddingExperience_WithToNextExperience_LevelIncrements()
+        public void WhenAddingXp_WithSufficientXpToLevel_LevelIncrements()
         {
             var builder = new NewCharacterBuilder();
             new Director().Configure(builder);
@@ -120,7 +120,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         public void WhenInstantiating_NewCharacter(
             CharacterTypes characterType,
             byte expectedLevel,
-            ushort expectedExperiencePoints
+            ushort expectedXp
         )
         {
             _newBuilder.For(characterType);
@@ -130,7 +130,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             var character = _newBuilder.Build();
 
             character.Level.Value.Should().Be(expectedLevel);
-            character.ExperiencePoints.Value.Should().Be(expectedExperiencePoints);
+            character.Xp.Value.Should().Be(expectedXp);
             character.NaturalStats.Should().Be(expectedStats);
         }
 
@@ -171,7 +171,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             var character = _newBuilder.Build();
             var expectedNaturalStats = new Stats(23, 2, 25, 12, 4, 20);
 
-            character.Add(ExperiencePoints.Create(16));
+            character.Add(Xp.Create(16));
 
             character.NaturalStats.Should().Be(expectedNaturalStats);
         }

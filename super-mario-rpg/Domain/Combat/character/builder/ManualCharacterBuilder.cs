@@ -88,11 +88,11 @@ namespace SuperMarioRpg.Domain.Combat
         #region ICharacterBuilder
 
         public CharacterTypes CharacterType { get; protected set; }
-        public ExperiencePoints ExperiencePoints { get; protected set; }
         public Guid Id { get; protected set; }
         public Level Level { get; protected set; }
         public Loadout Loadout { get; protected set; }
         public Stats NaturalStats { get; protected set; }
+        public Xp Xp { get; protected set; }
 
         public void CreateLoadout()
         {

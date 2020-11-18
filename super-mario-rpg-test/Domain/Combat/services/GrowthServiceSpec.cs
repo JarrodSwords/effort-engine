@@ -27,12 +27,12 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [InlineData(15, 1)]
         [InlineData(16, 2)]
         [InlineData(50, 3)]
-        public void WhenDistributingExperience_CharacterIsUpdated(ushort experiencePoints, byte expectedLevel)
+        public void WhenDistributingXp_CharacterIsUpdated(ushort xp, byte expectedLevel)
         {
-            _service.DistributeExperience(ExperiencePoints.Create(experiencePoints), _character);
+            _service.DistributeXp(Xp.Create(xp), _character);
 
-            _character.ExperiencePoints.Value.Should().Be(experiencePoints);
             _character.Level.Should().Be(Level.Create(expectedLevel));
+            _character.Xp.Value.Should().Be(xp);
         }
 
         #endregion

@@ -7,10 +7,10 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Core
 
-        public LevelReward(byte level, ushort experiencePoints, Stats stats)
+        public LevelReward(byte level, ushort xp, Stats stats)
         {
             Level = Level.Create(level);
-            Required = ExperiencePoints.Create(experiencePoints);
+            Required = Xp.Create(xp);
             Stats = stats;
         }
 
@@ -19,7 +19,7 @@ namespace SuperMarioRpg.Domain.Combat
         #region Public Interface
 
         public Level Level { get; }
-        public ExperiencePoints Required { get; }
+        public Xp Required { get; }
         public Stats Stats { get; }
 
         #endregion

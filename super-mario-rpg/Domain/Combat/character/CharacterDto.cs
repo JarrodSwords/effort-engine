@@ -9,8 +9,8 @@ namespace SuperMarioRpg.Domain.Combat
         public CharacterDto(
             Guid id = default,
             CharacterTypes characterType = default,
-            ushort experiencePoints = default,
             byte level = default,
+            ushort xp = default,
             short attack = default,
             short defense = default,
             short hitPoints = default,
@@ -24,7 +24,7 @@ namespace SuperMarioRpg.Domain.Combat
         {
             Id = id;
             CharacterType = characterType;
-            ExperiencePoints = experiencePoints;
+            Xp = xp;
             Level = level;
             Attack = attack;
             Defense = defense;
@@ -46,7 +46,6 @@ namespace SuperMarioRpg.Domain.Combat
         public short Attack { get; }
         public CharacterTypes CharacterType { get; }
         public short Defense { get; }
-        public ushort ExperiencePoints { get; }
         public short HitPoints { get; }
         public Guid Id { get; }
         public byte Level { get; }
@@ -54,6 +53,7 @@ namespace SuperMarioRpg.Domain.Combat
         public short SpecialDefense { get; }
         public short Speed { get; set; }
         public Guid WeaponId { get; }
+        public ushort Xp { get; }
 
         #endregion
     }

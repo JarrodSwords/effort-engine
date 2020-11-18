@@ -11,13 +11,13 @@ namespace SuperMarioRpg.Domain.Combat
         #region Core
 
         private static readonly CharacterValidator Validator = new CharacterValidator();
-        private ExperiencePoints _experiencePoints;
         private Loadout _loadout;
+        private Xp _xp;
 
         public Character(ICharacterBuilder builder) : base(builder.Id)
         {
             CharacterType = builder.CharacterType;
-            _experiencePoints = builder.ExperiencePoints;
+            _xp = builder.Xp;
             Level = builder.Level;
             NaturalStats = builder.NaturalStats;
             Loadout = builder.Loadout;
@@ -34,12 +34,12 @@ namespace SuperMarioRpg.Domain.Combat
         public Level Level { get; private set; }
         public Stats NaturalStats { get; private set; }
 
-        public ExperiencePoints ExperiencePoints
+        public Xp Xp
         {
-            get => _experiencePoints;
+            get => _xp;
             private set
             {
-                _experiencePoints = value;
+                _xp = value;
                 LevelUp();
             }
         }
@@ -67,15 +67,15 @@ namespace SuperMarioRpg.Domain.Combat
                 new LevelReward(4, 84, new Stats(3, 2, 5, 2, 2))
             };
 
-        public ExperiencePoints ToNext =>
-            ExperiencePoints.Create((ushort) (LevelRewards.First(x => x.Level.Value > Level.Value).Required.Value - ExperiencePoints.Value));
+        public Xp ToNext =>
+            Xp.Create((ushort) (LevelRewards.First(x => x.Level.Value > Level.Value).Required.Value - Xp.Value));
 
-        public ExperiencePoints Add(ExperiencePoints experiencePoints)
+        public Xp Add(Xp xp)
         {
-            var delta = ExperiencePoints.Create(Math.Min(experiencePoints.Value, ToNext.Value));
-            var remainder = ExperiencePoints.Create((ushort) (experiencePoints.Value - delta.Value));
+            var delta = Xp.Create(Math.Min(xp.Value, ToNext.Value));
+            var remainder = Xp.Create((ushort) (xp.Value - delta.Value));
 
-            ExperiencePoints += delta;
+            Xp += delta;
 
             return remainder;
         }
@@ -104,7 +104,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         private void LevelUp()
         {
-            var rewards = LevelRewards.SingleOrDefault(x => x.Required == ExperiencePoints);
+            var rewards = LevelRewards.SingleOrDefault(x => x.Required == Xp);
 
             if (rewards is null || Level == rewards.Level)
                 return;
