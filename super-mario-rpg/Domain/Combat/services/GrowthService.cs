@@ -4,12 +4,12 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Public Interface
 
-        public void DistributeExperience(ExperiencePoints remainingXp, Character character)
+        public void DistributeExperience(ExperiencePoints experiencePoints, Character character)
         {
             do
             {
-                character.Add(ref remainingXp);
-            } while (remainingXp.Value > 0);
+                experiencePoints = character.Add(experiencePoints);
+            } while (experiencePoints.Value > 0);
         }
 
         #endregion

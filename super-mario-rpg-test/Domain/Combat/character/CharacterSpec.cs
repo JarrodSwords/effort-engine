@@ -109,7 +109,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             var expectedLevel = character.Level + new Level(1);
             var xp = character.ToNext;
 
-            character.Add(ref xp);
+            character.Add(xp);
 
             character.Level.Should().Be(expectedLevel);
         }

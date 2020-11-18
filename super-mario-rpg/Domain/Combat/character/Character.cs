@@ -72,14 +72,14 @@ namespace SuperMarioRpg.Domain.Combat
                 (ushort) (LevelRewards.First(x => x.Level.Value > Level.Value).Required.Value - ExperiencePoints.Value)
             );
 
-        public Character Add(ref ExperiencePoints remainingXp)
+        public ExperiencePoints Add(ExperiencePoints experiencePoints)
         {
-            var xpToAdd = new ExperiencePoints(Math.Min(remainingXp.Value, ToNext.Value));
-            remainingXp = new ExperiencePoints((ushort) (remainingXp.Value - xpToAdd.Value));
+            var xpToAdd = new ExperiencePoints(Math.Min(experiencePoints.Value, ToNext.Value));
+            var remainder = new ExperiencePoints((ushort) (experiencePoints.Value - xpToAdd.Value));
 
             ExperiencePoints += xpToAdd;
 
-            return this;
+            return remainder;
         }
 
         public Character Equip(Equipment equipment)
