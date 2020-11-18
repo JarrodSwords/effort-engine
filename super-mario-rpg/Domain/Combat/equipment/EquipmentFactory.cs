@@ -10,7 +10,9 @@ namespace SuperMarioRpg.Domain.Combat
 
         public static Equipment Hammer = CreateEquipment(EquipmentType.Hammer);
         public static Equipment JumpShoes = CreateEquipment(EquipmentType.JumpShoes);
+        public static Equipment PolkaDress = CreateEquipment(EquipmentType.PolkaDress);
         public static Equipment Shirt = CreateEquipment(EquipmentType.Shirt);
+        public static Equipment SlapGlove = CreateEquipment(EquipmentType.SlapGlove);
 
         #endregion
 
@@ -32,7 +34,24 @@ namespace SuperMarioRpg.Domain.Combat
                     Slot.Accessory,
                     CharacterTypes.Mario
                 ),
-                EquipmentType.Shirt => new Equipment("Shirt", EquipmentType.Shirt, Slot.Armor, CharacterTypes.Mario),
+                EquipmentType.PolkaDress => new Equipment(
+                    "Polka Dress",
+                    EquipmentType.PolkaDress,
+                    Slot.Armor,
+                    CharacterTypes.Toadstool
+                ),
+                EquipmentType.Shirt => new Equipment(
+                    "Shirt",
+                    EquipmentType.Shirt,
+                    Slot.Armor,
+                    CharacterTypes.Mario
+                ),
+                EquipmentType.SlapGlove => new Equipment(
+                    "Slap Glove",
+                    EquipmentType.SlapGlove,
+                    Slot.Weapon,
+                    CharacterTypes.Toadstool
+                ),
                 _ => throw new ArgumentOutOfRangeException(nameof(equipmentType), equipmentType, null)
             };
 

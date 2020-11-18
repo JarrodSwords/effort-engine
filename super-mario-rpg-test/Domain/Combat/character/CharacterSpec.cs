@@ -19,31 +19,29 @@ namespace SuperMarioRpg.Test.Domain.Combat
         #region Core
 
         private readonly Director _director;
+        private readonly Character _mallow;
         private readonly ManualCharacterBuilder _manualBuilder;
-        private readonly NewCharacterBuilder _newBuilder;
+        private readonly Character _mario;
 
         public CharacterSpec()
         {
             _director = new Director();
             _manualBuilder = new ManualCharacterBuilder();
-            _newBuilder = new NewCharacterBuilder();
-        }
 
-        #endregion
+            var builder = new NewCharacterBuilder();
+            _director.Configure(builder);
+            _mario = builder.Build();
 
-        #region Private Interface
-
-        private Character CreateCharacter()
-        {
-            _director.Configure(_manualBuilder);
-            return _manualBuilder.Build();
+            builder.For(CharacterTypes.Mallow);
+            _director.Configure(builder);
+            _mallow = builder.Build();
         }
 
         #endregion
 
         #region Test Methods
 
-        protected override Entity CreateEntity() => _manualBuilder.Build();
+        protected override Entity CreateEntity() => _mario;
         protected override Entity CreateEntity(Guid id) => _manualBuilder.WithId(id).Build();
 
         [Theory]
@@ -53,138 +51,85 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             var equipment = CreateEquipment(equipmentTypes).ToArray();
             _manualBuilder.Add(equipment).WithNaturalStats(20, 0, 20, 10, 2, 20);
-            var character = CreateCharacter();
-
             var expectedStats = CreateStats(CharacterTypes.Mario)
                               + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
-            
+
+            _director.Configure(_manualBuilder);
+            var character = _manualBuilder.Build();
+
             character.EffectiveStats.Should().BeEquivalentTo(expectedStats);
         }
 
         [Fact]
         public void WhenAddingXp_WithSufficientXpToLevel_LevelIncrements()
         {
-            var builder = new NewCharacterBuilder();
-            new Director().Configure(builder);
-            var character = builder.Build();
-            var expectedLevel = character.Level + CreateLevel(1);
-            var xp = character.ToNext;
+            var expectedLevel = _mario.Level + CreateLevel(1);
+            var xp = _mario.ToNext;
 
-            character.Add(xp);
+            _mario.Add(xp);
 
-            character.Level.Should().Be(expectedLevel);
+            _mario.Level.Should().Be(expectedLevel);
         }
 
         [Fact]
         public void WhenAddingXp_XpIsUpdated()
         {
-            _director.Configure(_newBuilder);
-            var character = _newBuilder.Build();
+            var remainder = _mario.Add(CreateXp(50));
 
-            var remainder = character.Add(CreateXp(50));
-
-            character.Xp.Value.Should().Be(16);
+            _mario.Xp.Value.Should().Be(16);
             remainder.Value.Should().Be(34);
-        }
-
-        [Fact]
-        public void WhenEquipping_WithEquipment_LoadoutIsExpected()
-        {
-            var character = CreateCharacter();
-
-            character.Equip(Hammer).Equip(Shirt).Equip(JumpShoes);
-
-            character.Accessory.Should().Be(JumpShoes);
-            character.Armor.Should().Be(Shirt);
-            character.Weapon.Should().Be(Hammer);
-            character.EffectiveStats.Should().Be(character.NaturalStats + character.Loadout.Stats);
         }
 
         [Theory]
         [InlineData(EquipmentType.Hammer)]
         [InlineData(EquipmentType.Shirt)]
         [InlineData(EquipmentType.JumpShoes)]
-        public void WhenEquipping_WithInvalidEquipment_LoadoutIsExpected(EquipmentType equipmentType)
+        public void WhenEquipping_CompatibleItem_ItemIsEquipped(EquipmentType equipmentType)
         {
-            _manualBuilder.For(CharacterTypes.Mallow);
-            var character = CreateCharacter();
             var equipment = CreateEquipment(equipmentType);
 
-            Action equipInvalidItem = () => { character.Equip(equipment); };
+            _mario.Equip(equipment);
 
-            equipInvalidItem.Should().Throw<ValidationException>()
-                .WithMessage($"*Mallow cannot equip: {equipment}*");
-        }
-
-        [Theory]
-        [InlineData(CharacterTypes.Mario, 1, 0)]
-        [InlineData(CharacterTypes.Mallow, 2, 30)]
-        public void WhenInstantiating_NewCharacter(
-            CharacterTypes characterType,
-            byte expectedLevel,
-            ushort expectedXp
-        )
-        {
-            _newBuilder.For(characterType);
-            _director.Configure(_newBuilder);
-            var expectedStats = CreateStats(characterType);
-
-            var character = _newBuilder.Build();
-
-            character.Level.Value.Should().Be(expectedLevel);
-            character.Xp.Value.Should().Be(expectedXp);
-            character.NaturalStats.Should().Be(expectedStats);
-        }
-
-        [Fact]
-        public void WhenInstantiating_WithEquipment_LoadoutIsExpected()
-        {
-            _manualBuilder.Add(Hammer, JumpShoes, Shirt);
-
-            var character = CreateCharacter();
-
-            character.Accessory.Should().Be(JumpShoes);
-            character.Armor.Should().Be(Shirt);
-            character.Weapon.Should().Be(Hammer);
+            _mario.GetEquipment(equipment.Slot).Should().Be(equipment);
+            _mario.EffectiveStats.Should().Be(_mario.NaturalStats + equipment.Stats);
         }
 
         [Theory]
         [InlineData(EquipmentType.Hammer)]
-        [InlineData(EquipmentType.Hammer, EquipmentType.Shirt, EquipmentType.JumpShoes)]
-        public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
+        [InlineData(EquipmentType.Shirt)]
+        [InlineData(EquipmentType.JumpShoes)]
+        public void WhenEquipping_IncompatibleItem_ExceptionIsThrown(EquipmentType equipmentType)
         {
-            var equipment = CreateEquipment(equipmentTypes).ToArray();
-            _manualBuilder.For(CharacterTypes.Mallow).Add(equipment);
-            _director.Configure(_manualBuilder);
+            var equipment = CreateEquipment(equipmentType);
 
-            Action createInvalidCharacter = () => { _manualBuilder.Build(); };
+            Action equipIncompatibleItem = () => { _mallow.Equip(equipment); };
 
-            createInvalidCharacter.Should().Throw<ValidationException>()
-                .WithMessage($"*Mallow cannot equip: {string.Join(", ", equipment.ToList())}*");
+            equipIncompatibleItem.Should().Throw<ValidationException>()
+                .WithMessage($"*Mallow cannot equip {equipment}.*");
         }
 
         [Fact]
         public void WhenLevelingUp_StatsChange()
         {
-            _director.Configure(_newBuilder);
-            var character = _newBuilder.Build();
             var expectedNaturalStats = CreateStats(23, 2, 25, 12, 4, 20);
 
-            character.Add(CreateXp(16));
+            _mario.Add(CreateXp(16));
 
-            character.NaturalStats.Should().Be(expectedNaturalStats);
+            _mario.NaturalStats.Should().Be(expectedNaturalStats);
         }
 
-        [Fact]
-        public void WhenUnequipping_WithEquipmentId_LoadoutIsExpected()
+        [Theory]
+        [InlineData(EquipmentType.Hammer)]
+        [InlineData(EquipmentType.Shirt)]
+        [InlineData(EquipmentType.JumpShoes)]
+        public void WhenUnequipping_WithEquipmentId_ItemIsUnequipped(EquipmentType equipmentType)
         {
-            _manualBuilder.Add(Shirt);
-            var character = CreateCharacter();
+            var equipment = CreateEquipment(equipmentType);
 
-            character.Unequip(Shirt.Id);
+            _mario.Equip(equipment).Unequip(equipment.Id);
 
-            character.Armor.Should().Be(Equipment.DefaultArmor);
-            character.EffectiveStats.Should().Be(character.NaturalStats + character.Loadout.Stats);
+            _mario.GetEquipment(equipment.Slot).Should().NotBe(equipment);
+            _mario.EffectiveStats.Should().Be(_mario.NaturalStats);
         }
 
         #endregion
