@@ -91,12 +91,13 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenGainingExperience_ExperienceIsExpected()
         {
-            var character = CreateCharacter();
-            var exp = new ExperiencePoints(50);
+            _director.Configure(_newBuilder);
+            var character = _newBuilder.Build();
+            var service = new GrowthService();
 
-            character.Add(exp).Add(exp);
+            service.DistributeExperience(new ExperiencePoints(50), character);
 
-            character.ExperiencePoints.Value.Should().Be(100);
+            character.ExperiencePoints.Value.Should().Be(50);
         }
 
         [Theory]
@@ -109,7 +110,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
             var character = _newBuilder.Build();
             var expectedLevel = character.Level + new Level(levelsGained);
 
-            character.Add(new ExperiencePoints(experiencePoints));
+            var service = new GrowthService();
+            service.DistributeExperience(new ExperiencePoints(experiencePoints), character);
 
             character.Level.Should().Be(expectedLevel);
         }
@@ -170,8 +172,9 @@ namespace SuperMarioRpg.Test.Domain.Combat
             _director.Configure(_newBuilder);
             var character = _newBuilder.Build();
             var expectedNaturalStats = new Stats(23, 2, 25, 12, 4, 20);
+            var service = new GrowthService();
 
-            character.Add(new ExperiencePoints(16));
+            service.DistributeExperience(new ExperiencePoints(16), character);
 
             character.NaturalStats.Should().Be(expectedNaturalStats);
         }

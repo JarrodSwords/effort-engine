@@ -27,12 +27,18 @@ namespace SuperMarioRpg.Domain.Combat
         public Level Level { get; }
         public Stats NaturalStats { get; }
 
+        public ExperiencePoints ToNext =>
+            new ExperiencePoints(
+                (ushort) (LevelRewards.First(x => x.Level.Value > Level.Value).Required.Value - ExperiencePoints.Value)
+            );
+
         public List<LevelReward> LevelRewards =>
             new List<LevelReward>
             {
                 new LevelReward(1, 0, Stats.Default),
                 new LevelReward(2, 16, new Stats(3, 2, 5, 2, 2)),
-                new LevelReward(3, 48, new Stats(3, 2, 5, 2, 2))
+                new LevelReward(3, 48, new Stats(3, 2, 5, 2, 2)),
+                new LevelReward(4, 84, new Stats(3, 2, 5, 2, 2))
             };
 
         public ProgressionSystem Add(ExperiencePoints experiencePoints)

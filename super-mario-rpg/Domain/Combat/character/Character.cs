@@ -1,3 +1,4 @@
+using System;
 using Effort.Domain;
 using FluentValidation;
 
@@ -28,6 +29,7 @@ namespace SuperMarioRpg.Domain.Combat
         public Stats EffectiveStats { get; private set; }
         public Stats NaturalStats => ProgressionSystem.NaturalStats;
         public ExperiencePoints ExperiencePoints => ProgressionSystem.ExperiencePoints;
+        public ExperiencePoints ToNext => ProgressionSystem.ToNext;
         public Level Level => ProgressionSystem.Level;
 
         public Loadout Loadout
@@ -44,9 +46,27 @@ namespace SuperMarioRpg.Domain.Combat
         public Equipment Armor => Loadout.Armor;
         public Equipment Weapon => Loadout.Weapon;
 
-        public Character Add(ExperiencePoints experiencePoints)
+        /// <summary>
+        /// Adds experience points to a character.
+        /// </summary>
+        /// <param name="remainingXp">The experience points to add. Updated post-function.</param>
+        /// <returns></returns>
+        public Character Add(ref ExperiencePoints remainingXp)
         {
-            ProgressionSystem = ProgressionSystem.Add(experiencePoints);
+            var xpToAdd = new ExperiencePoints(Math.Min(remainingXp.Value, ToNext.Value));
+            remainingXp = new ExperiencePoints((ushort) (remainingXp.Value - xpToAdd.Value));
+
+            ProgressionSystem = ProgressionSystem.Add(xpToAdd);
+            return this;
+        }
+
+        /// <summary>
+        /// Add ability points to a character.
+        /// </summary>
+        /// <param name="abilityPoints">The total Ability points to add.</param>
+        /// <returns></returns>
+        public Character Add(int abilityPoints)
+        {
             return this;
         }
 
