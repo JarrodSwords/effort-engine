@@ -19,7 +19,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         #region Test Methods
 
         [Fact]
-        public abstract void WhenInstantiating_WithEquipment_ItemsAreEquipped();
+        public abstract void WhenBuilding_WithEquipment_ItemsAreEquipped();
 
         #endregion
     }

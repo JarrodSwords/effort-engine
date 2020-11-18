@@ -120,45 +120,6 @@ namespace SuperMarioRpg.Test.Domain.Combat
                 .WithMessage($"*Mallow cannot equip {equipment}.*");
         }
 
-        [Theory]
-        [InlineData(CharacterTypes.Mario, 1, 0)]
-        [InlineData(CharacterTypes.Mallow, 2, 30)]
-        public void WhenInstantiating_NewCharacter(
-            CharacterTypes characterType,
-            byte expectedLevel,
-            ushort expectedXp
-        )
-        {
-            // todo: move to builder specs
-
-            var builder = new NewCharacterBuilder().For(characterType);
-            _director.Configure(builder);
-            var expectedStats = CreateStats(characterType);
-
-            var character = builder.Build();
-
-            character.Level.Value.Should().Be(expectedLevel);
-            character.Xp.Value.Should().Be(expectedXp);
-            character.NaturalStats.Should().Be(expectedStats);
-        }
-
-        [Theory]
-        [InlineData(EquipmentType.Hammer)]
-        [InlineData(EquipmentType.Hammer, EquipmentType.Shirt, EquipmentType.JumpShoes)]
-        public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
-        {
-            // todo: move to builder specs
-
-            var equipment = CreateEquipment(equipmentTypes).ToArray();
-            _manualBuilder.For(CharacterTypes.Mallow).Add(equipment);
-            _director.Configure(_manualBuilder);
-
-            Action createInvalidCharacter = () => { _manualBuilder.Build(); };
-
-            createInvalidCharacter.Should().Throw<ValidationException>()
-                .WithMessage($"*Mallow cannot equip {Hammer}*");
-        }
-
         [Fact]
         public void WhenLevelingUp_StatsChange()
         {
