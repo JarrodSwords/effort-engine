@@ -19,14 +19,22 @@ namespace SuperMarioRpg.Test.Domain.Combat
         #region Core
 
         private readonly Director _director;
+        private readonly Character _mallow;
         private readonly ManualCharacterBuilder _manualBuilder;
-        private readonly NewCharacterBuilder _newBuilder;
+        private readonly Character _mario;
 
         public CharacterSpec()
         {
             _director = new Director();
             _manualBuilder = new ManualCharacterBuilder();
-            _newBuilder = new NewCharacterBuilder();
+
+            var builder = new NewCharacterBuilder();
+            _director.Configure(builder);
+            _mario = builder.Build();
+
+            builder.For(CharacterTypes.Mallow);
+            _director.Configure(builder);
+            _mallow = builder.Build();
         }
 
         #endregion
@@ -78,12 +86,9 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenAddingXp_XpIsUpdated()
         {
-            _director.Configure(_newBuilder);
-            var character = _newBuilder.Build();
+            var remainder = _mario.Add(CreateXp(50));
 
-            var remainder = character.Add(CreateXp(50));
-
-            character.Xp.Value.Should().Be(16);
+            _mario.Xp.Value.Should().Be(16);
             remainder.Value.Should().Be(34);
         }
 
@@ -93,14 +98,12 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [InlineData(EquipmentType.JumpShoes)]
         public void WhenEquipping_CompatibleItem_ItemIsEquipped(EquipmentType equipmentType)
         {
-            _director.Configure(_newBuilder);
-            var character = _newBuilder.Build();
             var equipment = CreateEquipment(equipmentType);
 
-            character.Equip(equipment);
+            _mario.Equip(equipment);
 
-            character.GetEquipment(equipment.Slot).Should().Be(equipment);
-            character.EffectiveStats.Should().Be(character.NaturalStats + equipment.Stats);
+            _mario.GetEquipment(equipment.Slot).Should().Be(equipment);
+            _mario.EffectiveStats.Should().Be(_mario.NaturalStats + equipment.Stats);
         }
 
         [Theory]
@@ -109,11 +112,9 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [InlineData(EquipmentType.JumpShoes)]
         public void WhenEquipping_IncompatibleItem_ExceptionIsThrown(EquipmentType equipmentType)
         {
-            _manualBuilder.For(CharacterTypes.Mallow);
-            var character = CreateCharacter();
             var equipment = CreateEquipment(equipmentType);
 
-            Action equipIncompatibleItem = () => { character.Equip(equipment); };
+            Action equipIncompatibleItem = () => { _mallow.Equip(equipment); };
 
             equipIncompatibleItem.Should().Throw<ValidationException>()
                 .WithMessage($"*Mallow cannot equip {equipment}.*");
@@ -130,11 +131,11 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             // todo: move to builder specs
 
-            _newBuilder.For(characterType);
-            _director.Configure(_newBuilder);
+            var builder = new NewCharacterBuilder().For(characterType);
+            _director.Configure(builder);
             var expectedStats = CreateStats(characterType);
 
-            var character = _newBuilder.Build();
+            var character = builder.Build();
 
             character.Level.Value.Should().Be(expectedLevel);
             character.Xp.Value.Should().Be(expectedXp);
@@ -175,13 +176,11 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenLevelingUp_StatsChange()
         {
-            _director.Configure(_newBuilder);
-            var character = _newBuilder.Build();
             var expectedNaturalStats = CreateStats(23, 2, 25, 12, 4, 20);
 
-            character.Add(CreateXp(16));
+            _mario.Add(CreateXp(16));
 
-            character.NaturalStats.Should().Be(expectedNaturalStats);
+            _mario.NaturalStats.Should().Be(expectedNaturalStats);
         }
 
         [Theory]
@@ -191,13 +190,11 @@ namespace SuperMarioRpg.Test.Domain.Combat
         public void WhenUnequipping_WithEquipmentId_ItemIsUnequipped(EquipmentType equipmentType)
         {
             var equipment = CreateEquipment(equipmentType);
-            _director.Configure(_newBuilder);
-            var character = _newBuilder.Build();
 
-            character.Equip(equipment).Unequip(equipment.Id);
+            _mario.Equip(equipment).Unequip(equipment.Id);
 
-            character.GetEquipment(equipment.Slot).Should().NotBe(equipment);
-            character.EffectiveStats.Should().Be(character.NaturalStats);
+            _mario.GetEquipment(equipment.Slot).Should().NotBe(equipment);
+            _mario.EffectiveStats.Should().Be(_mario.NaturalStats);
         }
 
         #endregion
