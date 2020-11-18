@@ -9,8 +9,6 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Public Interface
 
-        public Loadout Loadout { get; private set; }
-
         public ExistingCharacterBuilder For(CharacterDto dto)
         {
             Dto = dto;

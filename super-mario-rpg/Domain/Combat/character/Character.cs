@@ -22,10 +22,7 @@ namespace SuperMarioRpg.Domain.Combat
             _xp = builder.Xp;
             Level = builder.Level;
             NaturalStats = builder.NaturalStats;
-            _loadout = new SimpleLoadout(builder.Accessory, builder.Armor, builder.Weapon);
-            CalculateEffectiveStats();
-
-            Validator.ValidateAndThrow(this);
+            Loadout = new SimpleLoadout(builder.Accessory, builder.Armor, builder.Weapon);
         }
 
         #endregion
