@@ -21,6 +21,7 @@ namespace SuperMarioRpg.Domain.Combat
         #region Equality, Operators
 
         public static Xp operator +(Xp left, Xp right) => CreateXp((ushort) (left.Value + right.Value));
+        public static Xp operator -(Xp left, Xp right) => CreateXp((ushort) (left.Value - right.Value));
 
         #endregion
     }

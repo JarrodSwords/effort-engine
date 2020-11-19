@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using static SuperMarioRpg.Domain.Combat.Stats;
+using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -90,12 +91,22 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Equipment Accessory { get; private set; }
         public Equipment Armor { get; private set; }
-        public CharacterTypes CharacterType { get; protected set; }
-        public Guid Id { get; protected set; }
-        public Level Level { get; protected set; }
-        public Stats NaturalStats { get; protected set; }
+        public CharacterTypes CharacterType { get; private set; }
+        public Guid Id { get; private set; }
+
+        public ICollection<Level> Levels =>
+            new List<Level>
+            {
+                new Level(1, 0, Default),
+                new Level(2, 16, CreateStats(3, 2, 5, 2, 2)),
+                new Level(3, 48, CreateStats(3, 2, 5, 2, 2)),
+                new Level(4, 84, CreateStats(3, 2, 5, 2, 2))
+            };
+
+        public Stats NaturalStats { get; private set; }
         public Equipment Weapon { get; private set; }
-        public Xp Xp { get; protected set; }
+
+        public Xp Xp => CreateXp();
 
         public void CreateLoadout()
         {

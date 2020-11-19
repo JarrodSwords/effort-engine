@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -8,7 +9,7 @@ namespace SuperMarioRpg.Domain.Combat
         Equipment Armor { get; }
         CharacterTypes CharacterType { get; }
         Guid Id { get; }
-        Level Level { get; }
+        ICollection<Level> Levels { get; }
         Stats NaturalStats { get; }
         Equipment Weapon { get; }
         Xp Xp { get; }

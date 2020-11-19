@@ -1,5 +1,5 @@
 using System;
-using static SuperMarioRpg.Domain.Combat.Level;
+using System.Collections.Generic;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
@@ -29,7 +29,16 @@ namespace SuperMarioRpg.Domain.Combat
         public Equipment Armor { get; }
         public CharacterTypes CharacterType => Dto.CharacterType;
         public Guid Id => Dto.Id;
-        public Level Level => CreateLevel(Dto.Level);
+
+        public ICollection<Level> Levels =>
+            new List<Level>
+            {
+                new Level(1, 0, Default),
+                new Level(2, 16, CreateStats(3, 2, 5, 2, 2)),
+                new Level(3, 48, CreateStats(3, 2, 5, 2, 2)),
+                new Level(4, 84, CreateStats(3, 2, 5, 2, 2))
+            };
+
         public Stats NaturalStats { get; private set; }
         public Equipment Weapon { get; }
         public Xp Xp => CreateXp(Dto.Xp);

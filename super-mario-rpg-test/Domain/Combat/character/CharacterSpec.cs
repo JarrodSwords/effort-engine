@@ -7,7 +7,6 @@ using FluentValidation;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
-using static SuperMarioRpg.Domain.Combat.Level;
 using static SuperMarioRpg.Domain.Combat.StatFactory;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
@@ -63,12 +62,9 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenAddingXp_WithSufficientXpToLevel_LevelIncrements()
         {
-            var expectedLevel = _mario.Level + CreateLevel(1);
-            var xp = _mario.ToNext;
+            _mario.Add(CreateXp(16));
 
-            _mario.Add(xp);
-
-            _mario.Level.Should().Be(expectedLevel);
+            _mario.Level.Value.Should().Be(2);
         }
 
         [Fact]
@@ -111,7 +107,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenLevelingUp_StatsChange()
         {
-            var expectedNaturalStats = CreateStats(23, 2, 25, 12, 4, 20);
+            var rewardStats = CreateStats(3, 2, 5, 2, 2);
+            var expectedNaturalStats = _mario.NaturalStats + rewardStats;
 
             _mario.Add(CreateXp(16));
 

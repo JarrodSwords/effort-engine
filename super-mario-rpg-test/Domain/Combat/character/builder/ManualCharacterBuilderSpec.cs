@@ -49,10 +49,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Theory]
         [InlineData(EquipmentType.Hammer)]
         [InlineData(EquipmentType.Hammer, EquipmentType.Shirt, EquipmentType.JumpShoes)]
-        public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
+        public void WhenBuilding_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
         {
-            // todo: move to builder specs
-
             var equipment = CreateEquipment(equipmentTypes).ToArray();
             _builder.For(CharacterTypes.Mallow).Add(equipment);
             Director.Configure(_builder);

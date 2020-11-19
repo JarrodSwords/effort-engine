@@ -1,26 +1,34 @@
+using System;
 using Effort.Domain;
+using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Level : TinyType<byte>
+    public class Level : ValueObject<Level>
     {
         #region Core
 
-        private Level(byte value) : base(value)
+        public Level(byte value, ushort required, Stats combatStatReward)
         {
+            Value = value;
+            Required = CreateXp(required);
+            CombatStatReward = combatStatReward;
         }
 
         #endregion
 
         #region Public Interface
 
-        public static Level CreateLevel(byte value = default) => new Level(value);
+        public Stats CombatStatReward { get; }
+        public Xp Required { get; }
+        public byte Value { get; }
 
         #endregion
 
         #region Equality, Operators
 
-        public static Level operator +(Level left, Level right) => CreateLevel((byte) (left.Value + right.Value));
+        protected override bool EqualsExplicit(Level other) => throw new NotImplementedException();
+        protected override int GetHashCodeExplicit() => throw new NotImplementedException();
 
         #endregion
     }

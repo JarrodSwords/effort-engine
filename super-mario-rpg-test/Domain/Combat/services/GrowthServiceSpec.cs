@@ -1,7 +1,6 @@
 using FluentAssertions;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
-using static SuperMarioRpg.Domain.Combat.Level;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Test.Domain.Combat
@@ -35,7 +34,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             _service.DistributeXp(xp, _character);
 
-            _character.Level.Should().Be(CreateLevel(expectedLevel));
+            _character.Level.Value.Should().Be(expectedLevel);
             _character.Xp.Should().Be(xp);
         }
 
