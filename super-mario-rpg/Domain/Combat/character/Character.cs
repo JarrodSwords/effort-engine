@@ -11,12 +11,12 @@ namespace SuperMarioRpg.Domain.Combat
 
         private static readonly CharacterValidator Validator = new CharacterValidator();
         private ILoadout _loadout;
-        private ProgressionStats _progressionStats;
+        private IProgressionSystem _progressionSystem;
 
         public Character(ICharacterBuilder builder) : base(builder.Id)
         {
             CharacterType = builder.CharacterType;
-            ProgressionStats = new ProgressionStats(builder.Xp, builder.Levels);
+            ProgressionSystem = new ProgressionSystem(builder.Xp);
             NaturalStats = builder.NaturalStats;
             Loadout = new Loadout(builder.Accessory, builder.Armor, builder.Weapon);
         }
@@ -29,18 +29,18 @@ namespace SuperMarioRpg.Domain.Combat
         public Stats EffectiveStats { get; private set; }
         public Stats NaturalStats { get; private set; }
 
-        public Level Level => ProgressionStats.CurrentLevel;
-        public Xp Xp => ProgressionStats.CurrentXp;
+        public Level Level => ProgressionSystem.CurrentLevel;
+        public Xp Xp => ProgressionSystem.Xp;
         public Equipment Accessory => Loadout.GetEquipment(Slot.Accessory);
         public Equipment Armor => Loadout.GetEquipment(Slot.Armor);
         public Equipment Weapon => Loadout.GetEquipment(Slot.Weapon);
 
         public Xp Add(Xp xp)
         {
-            var delta = CreateXp(Min(xp.Value, ProgressionStats.ToNext.Value));
+            var delta = CreateXp(Min(xp.Value, ProgressionSystem.ToNext.Value));
             var remainder = CreateXp((ushort) (xp.Value - delta.Value));
 
-            ProgressionStats = ProgressionStats.Add(delta);
+            ProgressionSystem = ProgressionSystem.Add(delta);
 
             return remainder;
         }
@@ -63,13 +63,13 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Private Interface
 
-        private ProgressionStats ProgressionStats
+        private IProgressionSystem ProgressionSystem
         {
-            get => _progressionStats;
+            get => _progressionSystem;
             set
             {
-                _progressionStats = value;
-                ProgressionStats.LeveledUp += Add;
+                _progressionSystem = value;
+                ProgressionSystem.LeveledUp += Add;
             }
         }
 
