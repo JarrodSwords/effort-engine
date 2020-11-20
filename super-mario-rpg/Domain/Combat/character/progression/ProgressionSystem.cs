@@ -16,16 +16,23 @@ namespace SuperMarioRpg.Domain.Combat
 
             _currentNode = Level.Levels.First;
 
-            while (_currentNode.Next.Value.Required.Value <= xp.Value)
+            while (CanIncrementLevel())
                 _currentNode = _currentNode.Next;
 
             ToNext = NextLevel.Required - Xp;
         }
 
-        private ProgressionSystem(Xp xp, LinkedListNode<Level> currentNode)
+        private ProgressionSystem(Xp xp, LinkedListNode<Level> currentNode, EventHandler<Stats> leveledUp)
         {
             Xp = xp;
             _currentNode = currentNode;
+
+            while (CanIncrementLevel())
+            {
+                _currentNode = _currentNode.Next;
+                leveledUp?.Invoke(this, _currentNode.Value.CombatStatReward);
+            }
+
             ToNext = NextLevel.Required - Xp;
         }
 
@@ -37,6 +44,12 @@ namespace SuperMarioRpg.Domain.Combat
 
         #endregion
 
+        #region Private Interface
+
+        private bool CanIncrementLevel() => _currentNode.Next.Value.Required.Value <= Xp.Value;
+
+        #endregion
+
         #region IProgressionSystem Implementation
 
         public Level CurrentLevel => _currentNode.Value;
@@ -45,18 +58,7 @@ namespace SuperMarioRpg.Domain.Combat
         public Xp ToNext { get; }
         public Xp Xp { get; }
 
-        public IProgressionSystem Add(Xp xp)
-        {
-            var newXp = Xp + xp;
-
-            var leveledUp = newXp.Value > Xp.Value && newXp == NextLevel.Required;
-
-            if (!leveledUp)
-                return new ProgressionSystem(newXp, _currentNode);
-
-            LeveledUp?.Invoke(this, NextLevel.CombatStatReward);
-            return new ProgressionSystem(newXp, _currentNode.Next);
-        }
+        public IProgressionSystem Add(Xp xp) => new ProgressionSystem(Xp + xp, _currentNode, LeveledUp);
 
         #endregion
 

@@ -45,11 +45,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Character Add(Xp xp)
         {
-            do
-            {
-                xp = AddToNextLevel(xp);
-            } while (xp.Value > 0);
-
+            ProgressionSystem = ProgressionSystem.Add(xp);
             return this;
         }
 
@@ -84,16 +80,6 @@ namespace SuperMarioRpg.Domain.Combat
         private void Add(object sender, Stats reward)
         {
             NaturalStats += reward;
-        }
-
-        private Xp AddToNextLevel(Xp xp)
-        {
-            var delta = CreateXp(Min(xp.Value, ProgressionSystem.ToNext.Value));
-            var remainder = CreateXp((ushort) (xp.Value - delta.Value));
-
-            ProgressionSystem = ProgressionSystem.Add(delta);
-
-            return remainder;
         }
 
         private void CalculateEffectiveStats()
