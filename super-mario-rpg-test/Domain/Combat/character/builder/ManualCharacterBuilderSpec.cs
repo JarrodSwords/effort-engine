@@ -40,9 +40,9 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             var mario = CreateCharacter();
 
-            mario.Accessory.Should().Be(JumpShoes);
-            mario.Armor.Should().Be(Shirt);
-            mario.Weapon.Should().Be(Hammer);
+            mario.IsEquipped(Hammer).Should().BeTrue();
+            mario.IsEquipped(JumpShoes).Should().BeTrue();
+            mario.IsEquipped(Shirt).Should().BeTrue();
             mario.EffectiveStats.Should().Be(Aggregate(mario.NaturalStats, Hammer.Stats, JumpShoes.Stats, Shirt.Stats));
         }
 

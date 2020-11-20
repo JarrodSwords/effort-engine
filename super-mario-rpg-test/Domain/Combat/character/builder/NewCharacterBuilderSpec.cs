@@ -57,8 +57,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             var toadstool = CreateCharacter();
 
-            toadstool.Armor.Should().Be(PolkaDress);
-            toadstool.Weapon.Should().Be(SlapGlove);
+            toadstool.IsEquipped(PolkaDress).Should().BeTrue();
+            toadstool.IsEquipped(SlapGlove).Should().BeTrue();
             toadstool.EffectiveStats.Should().Be(Aggregate(toadstool.NaturalStats, PolkaDress.Stats, SlapGlove.Stats));
         }
 

@@ -9,13 +9,13 @@ namespace SuperMarioRpg.Domain.Combat
 
         public CharacterValidator()
         {
-            RuleFor(x => x.Accessory).NotNull().MustBeCompatibleWithCharacter();
-            RuleFor(x => x.Armor).NotNull().MustBeCompatibleWithCharacter();
-            RuleFor(x => x.Weapon).NotNull().MustBeCompatibleWithCharacter();
+            RuleFor(x => x.Loadout.Accessory).NotNull().MustBeCompatibleWithCharacter();
+            RuleFor(x => x.Loadout.Armor).NotNull().MustBeCompatibleWithCharacter();
+            RuleFor(x => x.Loadout.Weapon).NotNull().MustBeCompatibleWithCharacter();
             RuleFor(x => x.NaturalStats).NotNull();
             RuleFor(x => x.EffectiveStats)
                 .NotNull()
-                .Must((x, y) => y == Aggregate(x.NaturalStats, x.Accessory.Stats, x.Armor.Stats, x.Weapon.Stats));
+                .Must((x, y) => y == Aggregate(x.NaturalStats, x.Loadout.GetStats()));
         }
 
         #endregion

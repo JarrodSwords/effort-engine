@@ -5,7 +5,7 @@ using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Character : AggregateRoot, IEquippable<Character>
+    public class Character : AggregateRoot
     {
         private readonly CharacterValidator _validator = new CharacterValidator();
         private Loadout _loadout;
@@ -25,13 +25,22 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public Equipment Accessory => Loadout.Accessory;
-        public Equipment Armor => Loadout.Armor;
         public CharacterTypes CharacterType { get; }
         public Stats EffectiveStats { get; private set; }
         public Level Level => ProgressionSystem.CurrentLevel;
+
+        public Loadout Loadout
+        {
+            get => _loadout;
+            set
+            {
+                _loadout = value;
+                CalculateEffectiveStats();
+                _validator.ValidateAndThrow(this);
+            }
+        }
+
         public Stats NaturalStats { get; private set; }
-        public Equipment Weapon => Loadout.Weapon;
         public Xp Xp => ProgressionSystem.Xp;
 
         public Xp Add(Xp xp)
@@ -44,20 +53,23 @@ namespace SuperMarioRpg.Domain.Combat
             return remainder;
         }
 
+        public Character Equip(Equipment equipment)
+        {
+            Loadout = Loadout.Equip(equipment);
+            return this;
+        }
+
+        public bool IsEquipped(Equipment equipment) => Loadout.IsEquipped(equipment);
+
+        public Character Unequip(Id id)
+        {
+            Loadout = Loadout.Unequip(id);
+            return this;
+        }
+
         #endregion
 
         #region Private Interface
-
-        private Loadout Loadout
-        {
-            get => _loadout;
-            set
-            {
-                _loadout = value;
-                CalculateEffectiveStats();
-                _validator.ValidateAndThrow(this);
-            }
-        }
 
         private IProgressionSystem ProgressionSystem
         {
@@ -77,24 +89,6 @@ namespace SuperMarioRpg.Domain.Combat
         private void CalculateEffectiveStats()
         {
             EffectiveStats = NaturalStats + Loadout.GetStats();
-        }
-
-        #endregion
-
-        #region IEquippable<Character> Implementation
-
-        public Character Equip(Equipment equipment)
-        {
-            Loadout = Loadout.Equip(equipment);
-            return this;
-        }
-
-        public bool IsEquipped(Equipment equipment) => Loadout.IsEquipped(equipment);
-
-        public Character Unequip(Id id)
-        {
-            Loadout = Loadout.Unequip(id);
-            return this;
         }
 
         #endregion
