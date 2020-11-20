@@ -1,3 +1,4 @@
+using System;
 using Effort.Domain;
 using FluentValidation;
 using static System.Math;
@@ -5,13 +6,13 @@ using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Character : AggregateRoot
+    public class Character : AggregateRoot, ICloneable
     {
-        #region Core
-
-        private static readonly CharacterValidator Validator = new CharacterValidator();
+        private readonly CharacterValidator _validator = new CharacterValidator();
         private ILoadout _loadout;
         private IProgressionSystem _progressionSystem;
+
+        #region Creation
 
         public Character(ICharacterBuilder builder) : base(builder.Id)
         {
@@ -25,15 +26,21 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
+        public Equipment Accessory => Loadout.GetEquipment(Slot.Accessory);
+
+        public Equipment Armor => Loadout.GetEquipment(Slot.Armor);
+
         public CharacterTypes CharacterType { get; }
+
         public Stats EffectiveStats { get; private set; }
-        public Stats NaturalStats { get; private set; }
 
         public Level Level => ProgressionSystem.CurrentLevel;
-        public Xp Xp => ProgressionSystem.Xp;
-        public Equipment Accessory => Loadout.GetEquipment(Slot.Accessory);
-        public Equipment Armor => Loadout.GetEquipment(Slot.Armor);
+
+        public Stats NaturalStats { get; private set; }
+
         public Equipment Weapon => Loadout.GetEquipment(Slot.Weapon);
+
+        public Xp Xp => ProgressionSystem.Xp;
 
         public Xp Add(Xp xp)
         {
@@ -63,16 +70,6 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Private Interface
 
-        private IProgressionSystem ProgressionSystem
-        {
-            get => _progressionSystem;
-            set
-            {
-                _progressionSystem = value;
-                ProgressionSystem.LeveledUp += Add;
-            }
-        }
-
         private ILoadout Loadout
         {
             get => _loadout;
@@ -80,7 +77,17 @@ namespace SuperMarioRpg.Domain.Combat
             {
                 _loadout = value;
                 CalculateEffectiveStats();
-                Validator.ValidateAndThrow(this);
+                _validator.ValidateAndThrow(this);
+            }
+        }
+
+        private IProgressionSystem ProgressionSystem
+        {
+            get => _progressionSystem;
+            set
+            {
+                _progressionSystem = value;
+                ProgressionSystem.LeveledUp += Add;
             }
         }
 
@@ -93,6 +100,12 @@ namespace SuperMarioRpg.Domain.Combat
         {
             EffectiveStats = NaturalStats + Loadout.GetStats();
         }
+
+        #endregion
+
+        #region ICloneable Implementation
+
+        public object Clone() => throw new NotImplementedException();
 
         #endregion
     }

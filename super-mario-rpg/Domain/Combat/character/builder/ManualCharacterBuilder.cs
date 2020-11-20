@@ -8,7 +8,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class ManualCharacterBuilder : ICharacterBuilder
     {
-        #region Core
+        #region Creation
 
         public ManualCharacterBuilder()
         {
@@ -87,7 +87,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #endregion
 
-        #region ICharacterBuilder
+        #region ICharacterBuilder Implementation
 
         public Equipment Accessory { get; private set; }
         public Equipment Armor { get; private set; }

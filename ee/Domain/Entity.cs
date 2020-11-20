@@ -4,7 +4,7 @@ namespace Effort.Domain
 {
     public abstract class Entity : IEquatable<Entity>
     {
-        #region Core
+        #region Creation
 
         protected Entity(Guid id)
         {

@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
-using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
     public class NewCharacterBuilder : ICharacterBuilder
     {
-        #region Core
-
         private static readonly IReadOnlyDictionary<CharacterTypes, ushort> BaseExp =
             new Dictionary<CharacterTypes, ushort>
             {
@@ -18,6 +15,8 @@ namespace SuperMarioRpg.Domain.Combat
                 {CharacterTypes.Mario, 0},
                 {CharacterTypes.Toadstool, 600}
             };
+
+        #region Creation
 
         public NewCharacterBuilder()
         {
@@ -54,7 +53,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #endregion
 
-        #region ICharacterBuilder
+        #region ICharacterBuilder Implementation
 
         public Equipment Accessory { get; }
         public Equipment Armor { get; private set; }

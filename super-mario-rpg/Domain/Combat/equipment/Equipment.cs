@@ -7,11 +7,11 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public partial class Equipment : Entity
     {
-        #region Core
-
         public static Equipment DefaultAccessory = new NullEquipment(Slot.Accessory);
         public static Equipment DefaultArmor = new NullEquipment(Slot.Armor);
         public static Equipment DefaultWeapon = new NullEquipment(Slot.Weapon, "Unarmed");
+
+        #region Creation
 
         public Equipment(
             string name,

@@ -2,11 +2,11 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public partial class Equipment
     {
-        #region Nested type: NullEquipment
+        #region Nested Types
 
         private class NullEquipment : Equipment
         {
-            #region Core
+            #region Creation
 
             public NullEquipment(Slot slot, string name = "None") : base(
                 name,

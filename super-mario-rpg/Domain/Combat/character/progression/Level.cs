@@ -8,8 +8,6 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class Level : ValueObject<Level>
     {
-        #region Core
-
         public static LinkedList<Level> Levels =
             new LinkedList<Level>(
                 new[]
@@ -46,6 +44,8 @@ namespace SuperMarioRpg.Domain.Combat
                     new Level(30, 9999, CreateStats(3, 2, 5, 2, 2))
                 }
             );
+
+        #region Creation
 
         public Level(byte value, ushort required, Stats combatStatReward)
         {

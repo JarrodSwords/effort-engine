@@ -4,9 +4,9 @@ namespace Effort.Domain
 {
     public abstract class TinyTypeOfString : TinyType<string>
     {
-        #region Core
-
         private readonly StringComparison _stringComparison;
+
+        #region Creation
 
         protected TinyTypeOfString(
             string value,

@@ -2,15 +2,11 @@ namespace Effort.Domain
 {
     public class Name : TinyTypeOfString
     {
-        #region Core
+        #region Creation
 
         private Name(string value) : base(value)
         {
         }
-
-        #endregion
-
-        #region Public Interface
 
         public static Name CreateName(string value) => new Name(value);
 

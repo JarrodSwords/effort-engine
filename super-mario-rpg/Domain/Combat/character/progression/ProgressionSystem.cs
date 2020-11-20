@@ -6,9 +6,9 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class ProgressionSystem : ValueObject<ProgressionSystem>, IProgressionSystem
     {
-        #region Core
-
         private readonly LinkedListNode<Level> _currentNode;
+
+        #region Creation
 
         public ProgressionSystem(Xp xp)
         {
@@ -31,11 +31,15 @@ namespace SuperMarioRpg.Domain.Combat
 
         #endregion
 
-        #region IProgressionSystem
-
-        public Level CurrentLevel => _currentNode.Value;
+        #region Public Interface
 
         public event EventHandler<Stats> LeveledUp;
+
+        #endregion
+
+        #region IProgressionSystem Implementation
+
+        public Level CurrentLevel => _currentNode.Value;
         public Level NextLevel => _currentNode.Next.Value;
 
         public Xp ToNext { get; }

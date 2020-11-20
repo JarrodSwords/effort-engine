@@ -5,7 +5,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class Loadout : ValueObject<Loadout>, ILoadout
     {
-        #region Core
+        #region Creation
 
         public Loadout(Equipment accessory = null, Equipment armor = null, Equipment weapon = null)
         {
@@ -24,7 +24,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #endregion
 
-        #region ILoadout
+        #region ILoadout Implementation
 
         public ILoadout Equip(Equipment equipment)
         {

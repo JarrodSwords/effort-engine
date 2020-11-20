@@ -5,7 +5,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class CharacterValidator : AbstractValidator<Character>
     {
-        #region Core
+        #region Creation
 
         public CharacterValidator()
         {

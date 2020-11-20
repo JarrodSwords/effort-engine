@@ -4,15 +4,11 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class Xp : TinyType<ushort>
     {
-        #region Core
+        #region Creation
 
         private Xp(ushort value) : base(value)
         {
         }
-
-        #endregion
-
-        #region Public Interface
 
         public static Xp CreateXp(ushort value = default) => new Xp(value);
 
