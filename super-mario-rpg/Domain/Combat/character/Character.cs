@@ -43,14 +43,14 @@ namespace SuperMarioRpg.Domain.Combat
         public Stats NaturalStats { get; private set; }
         public Xp Xp => ProgressionSystem.Xp;
 
-        public Xp Add(Xp xp)
+        public Character Add(Xp xp)
         {
-            var delta = CreateXp(Min(xp.Value, ProgressionSystem.ToNext.Value));
-            var remainder = CreateXp((ushort) (xp.Value - delta.Value));
+            do
+            {
+                xp = AddToNextLevel(xp);
+            } while (xp.Value > 0);
 
-            ProgressionSystem = ProgressionSystem.Add(delta);
-
-            return remainder;
+            return this;
         }
 
         public Character Equip(Equipment equipment)
@@ -84,6 +84,16 @@ namespace SuperMarioRpg.Domain.Combat
         private void Add(object sender, Stats reward)
         {
             NaturalStats += reward;
+        }
+
+        private Xp AddToNextLevel(Xp xp)
+        {
+            var delta = CreateXp(Min(xp.Value, ProgressionSystem.ToNext.Value));
+            var remainder = CreateXp((ushort) (xp.Value - delta.Value));
+
+            ProgressionSystem = ProgressionSystem.Add(delta);
+
+            return remainder;
         }
 
         private void CalculateEffectiveStats()

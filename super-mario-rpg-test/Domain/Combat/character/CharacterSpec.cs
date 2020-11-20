@@ -67,13 +67,18 @@ namespace SuperMarioRpg.Test.Domain.Combat
             _mario.Level.Value.Should().Be(2);
         }
 
-        [Fact]
-        public void WhenAddingXp_XpIsUpdated()
+        [Theory]
+        [InlineData(15, 1)]
+        [InlineData(16, 2)]
+        [InlineData(50, 3)]
+        public void WhenAddingXp_XpIsUpdated(ushort xpValue, byte expectedLevel)
         {
-            var remainder = _mario.Add(CreateXp(50));
+            var xp = CreateXp(xpValue); 
+            
+            _mario.Add(xp);
 
-            _mario.Xp.Value.Should().Be(16);
-            remainder.Value.Should().Be(34);
+            _mario.Level.Value.Should().Be(expectedLevel);
+            _mario.Xp.Should().Be(xp);
         }
 
         [Theory]
