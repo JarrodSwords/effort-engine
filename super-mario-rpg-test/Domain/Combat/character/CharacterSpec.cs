@@ -86,7 +86,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             _mario.Equip(equipment);
 
-            _mario.GetEquipment(equipment.Slot).Should().Be(equipment);
+            _mario.IsEquipped(equipment).Should().BeTrue();
             _mario.EffectiveStats.Should().Be(_mario.NaturalStats + equipment.Stats);
         }
 
@@ -125,7 +125,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             _mario.Equip(equipment).Unequip(equipment.Id);
 
-            _mario.GetEquipment(equipment.Slot).Should().NotBe(equipment);
+            _mario.IsEquipped(equipment).Should().BeFalse();
             _mario.EffectiveStats.Should().Be(_mario.NaturalStats);
         }
 

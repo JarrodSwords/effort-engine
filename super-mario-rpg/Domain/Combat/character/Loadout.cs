@@ -3,7 +3,7 @@ using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Loadout : ValueObject<Loadout>, ILoadout
+    public class Loadout : ValueObject<Loadout>
     {
         #region Creation
 
@@ -22,11 +22,7 @@ namespace SuperMarioRpg.Domain.Combat
         public Equipment Armor { get; }
         public Equipment Weapon { get; }
 
-        #endregion
-
-        #region ILoadout Implementation
-
-        public ILoadout Equip(Equipment equipment)
+        public Loadout Equip(Equipment equipment)
         {
             return equipment.Slot switch
             {
@@ -48,9 +44,11 @@ namespace SuperMarioRpg.Domain.Combat
             };
         }
 
-        public Stats GetStats() => Accessory.Stats + Armor.Stats + Weapon.Stats;
+        public Stats GetStats() => Stats.Aggregate(Accessory.Stats, Armor.Stats, Weapon.Stats);
 
-        public ILoadout Unequip(Id id)
+        public bool IsEquipped(Equipment equipment) => equipment == GetEquipment(equipment.Slot);
+
+        public Loadout Unequip(Id id)
         {
             if (Accessory.Id == id)
                 return new Loadout(armor: Armor, weapon: Weapon);

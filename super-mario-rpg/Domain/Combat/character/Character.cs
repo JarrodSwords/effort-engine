@@ -5,10 +5,10 @@ using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Character : AggregateRoot
+    public class Character : AggregateRoot, IEquippable<Character>
     {
         private readonly CharacterValidator _validator = new CharacterValidator();
-        private ILoadout _loadout;
+        private Loadout _loadout;
         private IProgressionSystem _progressionSystem;
 
         #region Creation
@@ -25,13 +25,13 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public Equipment Accessory => Loadout.GetEquipment(Slot.Accessory);
-        public Equipment Armor => Loadout.GetEquipment(Slot.Armor);
+        public Equipment Accessory => Loadout.Accessory;
+        public Equipment Armor => Loadout.Armor;
         public CharacterTypes CharacterType { get; }
         public Stats EffectiveStats { get; private set; }
         public Level Level => ProgressionSystem.CurrentLevel;
         public Stats NaturalStats { get; private set; }
-        public Equipment Weapon => Loadout.GetEquipment(Slot.Weapon);
+        public Equipment Weapon => Loadout.Weapon;
         public Xp Xp => ProgressionSystem.Xp;
 
         public Xp Add(Xp xp)
@@ -44,25 +44,11 @@ namespace SuperMarioRpg.Domain.Combat
             return remainder;
         }
 
-        public Character Equip(Equipment equipment)
-        {
-            Loadout = Loadout.Equip(equipment);
-            return this;
-        }
-
-        public Equipment GetEquipment(Slot slot) => Loadout.GetEquipment(slot);
-
-        public Character Unequip(Id id)
-        {
-            Loadout = Loadout.Unequip(id);
-            return this;
-        }
-
         #endregion
 
         #region Private Interface
 
-        private ILoadout Loadout
+        private Loadout Loadout
         {
             get => _loadout;
             set
@@ -91,6 +77,24 @@ namespace SuperMarioRpg.Domain.Combat
         private void CalculateEffectiveStats()
         {
             EffectiveStats = NaturalStats + Loadout.GetStats();
+        }
+
+        #endregion
+
+        #region IEquippable<Character> Implementation
+
+        public Character Equip(Equipment equipment)
+        {
+            Loadout = Loadout.Equip(equipment);
+            return this;
+        }
+
+        public bool IsEquipped(Equipment equipment) => Loadout.IsEquipped(equipment);
+
+        public Character Unequip(Id id)
+        {
+            Loadout = Loadout.Unequip(id);
+            return this;
         }
 
         #endregion
