@@ -26,11 +26,12 @@ namespace SuperMarioRpg.Domain.Combat
         {
             Xp = xp;
             _currentNode = currentNode;
+            LeveledUp = leveledUp;
 
             while (CanIncrementLevel())
             {
                 _currentNode = _currentNode.Next;
-                leveledUp?.Invoke(this, _currentNode.Value.CombatStatReward);
+                LeveledUp?.Invoke(this, _currentNode.Value.CombatStatReward);
             }
 
             ToNext = NextLevel.Required - Xp;
@@ -54,7 +55,6 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Level CurrentLevel => _currentNode.Value;
         public Level NextLevel => _currentNode.Next.Value;
-
         public Xp ToNext { get; }
         public Xp Xp { get; }
 

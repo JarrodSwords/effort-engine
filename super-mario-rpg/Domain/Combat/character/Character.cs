@@ -1,7 +1,5 @@
 using Effort.Domain;
 using FluentValidation;
-using static System.Math;
-using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -9,7 +7,6 @@ namespace SuperMarioRpg.Domain.Combat
     {
         private static readonly CharacterValidator Validator = new CharacterValidator();
         private Loadout _loadout;
-        private IProgressionSystem _progressionSystem;
 
         #region Creation
 
@@ -17,6 +14,7 @@ namespace SuperMarioRpg.Domain.Combat
         {
             CharacterType = builder.CharacterType;
             ProgressionSystem = new ProgressionSystem(builder.Xp);
+            ProgressionSystem.LeveledUp += Add;
             NaturalStats = builder.NaturalStats;
             Loadout = new Loadout(builder.Accessory, builder.Armor, builder.Weapon);
         }
@@ -67,15 +65,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Private Interface
 
-        private IProgressionSystem ProgressionSystem
-        {
-            get => _progressionSystem;
-            set
-            {
-                _progressionSystem = value;
-                ProgressionSystem.LeveledUp += Add;
-            }
-        }
+        private IProgressionSystem ProgressionSystem { get; set; }
 
         private void Add(object sender, Stats reward)
         {
