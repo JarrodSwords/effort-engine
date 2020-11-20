@@ -7,7 +7,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class Character : AggregateRoot
     {
-        private readonly CharacterValidator _validator = new CharacterValidator();
+        private static readonly CharacterValidator Validator = new CharacterValidator();
         private Loadout _loadout;
         private IProgressionSystem _progressionSystem;
 
@@ -36,7 +36,7 @@ namespace SuperMarioRpg.Domain.Combat
             {
                 _loadout = value;
                 CalculateEffectiveStats();
-                _validator.ValidateAndThrow(this);
+                Validator.ValidateAndThrow(this);
             }
         }
 
