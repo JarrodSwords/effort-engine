@@ -1,4 +1,3 @@
-using System;
 using Effort.Domain;
 using FluentValidation;
 using static System.Math;
@@ -6,7 +5,7 @@ using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Character : AggregateRoot, ICloneable
+    public class Character : AggregateRoot
     {
         private readonly CharacterValidator _validator = new CharacterValidator();
         private ILoadout _loadout;
@@ -27,19 +26,12 @@ namespace SuperMarioRpg.Domain.Combat
         #region Public Interface
 
         public Equipment Accessory => Loadout.GetEquipment(Slot.Accessory);
-
         public Equipment Armor => Loadout.GetEquipment(Slot.Armor);
-
         public CharacterTypes CharacterType { get; }
-
         public Stats EffectiveStats { get; private set; }
-
         public Level Level => ProgressionSystem.CurrentLevel;
-
         public Stats NaturalStats { get; private set; }
-
         public Equipment Weapon => Loadout.GetEquipment(Slot.Weapon);
-
         public Xp Xp => ProgressionSystem.Xp;
 
         public Xp Add(Xp xp)
@@ -100,12 +92,6 @@ namespace SuperMarioRpg.Domain.Combat
         {
             EffectiveStats = NaturalStats + Loadout.GetStats();
         }
-
-        #endregion
-
-        #region ICloneable Implementation
-
-        public object Clone() => throw new NotImplementedException();
 
         #endregion
     }
