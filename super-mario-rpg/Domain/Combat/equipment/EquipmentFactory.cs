@@ -6,6 +6,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class EquipmentFactory
     {
+        public static Equipment ExpBooster = CreateEquipment(EquipmentType.ExpBooster);
         public static Equipment Hammer = CreateEquipment(EquipmentType.Hammer);
         public static Equipment JumpShoes = CreateEquipment(EquipmentType.JumpShoes);
         public static Equipment PolkaDress = CreateEquipment(EquipmentType.PolkaDress);
@@ -18,6 +19,12 @@ namespace SuperMarioRpg.Domain.Combat
         {
             var equipment = equipmentType switch
             {
+                EquipmentType.ExpBooster => new Equipment(
+                    "Exp. Booster",
+                    EquipmentType.ExpBooster,
+                    Slot.Accessory,
+                    CharacterTypes.All
+                ),
                 EquipmentType.Hammer => new Equipment(
                     "Hammer",
                     EquipmentType.Hammer,

@@ -71,14 +71,22 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [InlineData(15, 1)]
         [InlineData(16, 2)]
         [InlineData(50, 3)]
-        public void WhenAddingXp_XpIsUpdated(ushort xpValue, byte expectedLevel)
+        [InlineData(50, 4, true)]
+        public void WhenAddingXp_XpIsUpdated(ushort xpValue, byte expectedLevel, bool doubled = false)
         {
-            var xp = CreateXp(xpValue); 
-            
+            var xp = CreateXp(xpValue);
+            var expectedXp = xp;
+
+            if (doubled)
+            {
+                _mario.Equip(ExpBooster);
+                expectedXp = xp + xp;
+            }
+
             _mario.Add(xp);
 
             _mario.Level.Value.Should().Be(expectedLevel);
-            _mario.Xp.Should().Be(xp);
+            _mario.Xp.Should().Be(expectedXp);
         }
 
         [Theory]

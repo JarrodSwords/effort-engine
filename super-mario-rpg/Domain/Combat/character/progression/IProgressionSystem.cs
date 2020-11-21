@@ -11,5 +11,7 @@ namespace SuperMarioRpg.Domain.Combat
         event EventHandler<Stats> LeveledUp;
 
         IProgressionSystem Add(Xp xp);
+        IProgressionSystem Create(Xp xp);
+        IProgressionSystem Set(IGrowth growth);
     }
 }

@@ -50,6 +50,10 @@ namespace SuperMarioRpg.Domain.Combat
         public Character Equip(Equipment equipment)
         {
             Loadout = Loadout.Equip(equipment);
+
+            if (equipment.EquipmentType == EquipmentType.ExpBooster)
+                ProgressionSystem = ProgressionSystem.Set(new Boosted(ProgressionSystem));
+
             return this;
         }
 
