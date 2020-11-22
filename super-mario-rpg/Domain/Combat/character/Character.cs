@@ -7,14 +7,14 @@ namespace SuperMarioRpg.Domain.Combat
     {
         private static readonly CharacterValidator Validator = new CharacterValidator();
         private Loadout _loadout;
-        private ProgressionSystem _progressionSystem;
+        private Progression _progression;
 
         #region Creation
 
         public Character(ICharacterBuilder builder) : base(builder.Id)
         {
             CharacterType = builder.CharacterType;
-            ProgressionSystem = new Standard(this, builder.Xp);
+            Progression = new Standard(this, builder.Xp);
             NaturalStats = builder.NaturalStats;
             Loadout = new Loadout(builder.Accessory, builder.Armor, builder.Weapon);
         }
@@ -39,19 +39,19 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Stats NaturalStats { get; private set; }
 
-        public ProgressionSystem ProgressionSystem
+        public Progression Progression
         {
-            get => _progressionSystem;
+            get => _progression;
             private set
             {
-                _progressionSystem = value;
-                _progressionSystem.LeveledUp += Add;
+                _progression = value;
+                _progression.LeveledUp += Add;
             }
         }
 
         public Character Add(Xp xp)
         {
-            ProgressionSystem = ProgressionSystem.Add(xp);
+            Progression = Progression.Add(xp);
             return this;
         }
 
@@ -60,7 +60,7 @@ namespace SuperMarioRpg.Domain.Combat
             Loadout = Loadout.Equip(equipment);
 
             if (equipment.EquipmentType == EquipmentType.ExpBooster)
-                ProgressionSystem = new Boosted(this);
+                Progression = new Boosted(this);
 
             return this;
         }

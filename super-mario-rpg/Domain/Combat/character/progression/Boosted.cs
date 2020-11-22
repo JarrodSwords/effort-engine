@@ -1,6 +1,6 @@
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Boosted : ProgressionSystem
+    public class Boosted : Progression
     {
         #region Creation
 
@@ -16,7 +16,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public override ProgressionSystem Add(Xp xp)
+        public override Progression Add(Xp xp)
         {
             var newXp = Xp + xp + xp;
             LevelUp(newXp);

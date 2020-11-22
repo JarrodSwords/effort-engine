@@ -4,18 +4,18 @@ using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public abstract class ProgressionSystem : ValueObject<ProgressionSystem>
+    public abstract class Progression : ValueObject<Progression>
     {
         #region Creation
 
-        protected ProgressionSystem(Character character) : this(
+        protected Progression(Character character) : this(
             character,
-            character.ProgressionSystem.Xp
+            character.Progression.Xp
         )
         {
         }
 
-        protected ProgressionSystem(Character character, Xp xp)
+        protected Progression(Character character, Xp xp)
         {
             Character = character;
             CurrentNode = GetCurrentNode(xp);
@@ -28,13 +28,12 @@ namespace SuperMarioRpg.Domain.Combat
         #region Public Interface
 
         public Level CurrentLevel => CurrentNode.Value;
-        public Level NextLevel => CurrentNode.Next.Value;
         public Xp ToNext { get; }
         public Xp Xp { get; }
 
         public event EventHandler<Stats> LeveledUp;
 
-        public abstract ProgressionSystem Add(Xp xp);
+        public abstract Progression Add(Xp xp);
 
         #endregion
 
@@ -58,6 +57,8 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Private Interface
 
+        private Level NextLevel => CurrentNode.Next.Value;
+
         private static LinkedListNode<Level> GetCurrentNode(Xp xp)
         {
             var node = Level.Levels.First;
@@ -72,7 +73,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Equality, Operators
 
-        protected override bool EqualsExplicit(ProgressionSystem other) => throw new NotImplementedException();
+        protected override bool EqualsExplicit(Progression other) => throw new NotImplementedException();
         protected override int GetHashCodeExplicit() => throw new NotImplementedException();
 
         #endregion

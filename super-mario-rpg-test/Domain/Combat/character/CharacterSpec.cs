@@ -64,7 +64,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             _mario.Add(CreateXp(16));
 
-            _mario.ProgressionSystem.CurrentLevel.Value.Should().Be(2);
+            _mario.Progression.CurrentLevel.Value.Should().Be(2);
         }
 
         [Theory]
@@ -85,8 +85,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             _mario.Add(xp);
 
-            _mario.ProgressionSystem.CurrentLevel.Value.Should().Be(expectedLevel);
-            _mario.ProgressionSystem.Xp.Should().Be(expectedXp);
+            _mario.Progression.CurrentLevel.Value.Should().Be(expectedLevel);
+            _mario.Progression.Xp.Should().Be(expectedXp);
         }
 
         [Theory]
