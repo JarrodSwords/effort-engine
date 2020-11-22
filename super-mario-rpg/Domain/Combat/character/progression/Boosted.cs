@@ -1,10 +1,14 @@
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Boosted : Growth
+    public class Boosted : ProgressionSystem
     {
         #region Creation
 
-        public Boosted(IProgressionSystem progressionSystem) : base(progressionSystem)
+        public Boosted(Character character) : base(character)
+        {
+        }
+
+        public Boosted(Character character, Xp xp) : base(character, xp)
         {
         }
 
@@ -12,7 +16,12 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public override IProgressionSystem Add(Xp xp) => ProgressionSystem.Create(xp + xp);
+        public override ProgressionSystem Add(Xp xp)
+        {
+            var newXp = Xp + xp + xp;
+            LevelUp(newXp);
+            return new Boosted(Character, newXp);
+        }
 
         #endregion
     }

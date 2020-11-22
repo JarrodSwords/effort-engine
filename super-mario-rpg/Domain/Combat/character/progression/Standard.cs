@@ -1,10 +1,10 @@
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Standard : Growth
+    public class Standard : ProgressionSystem
     {
         #region Creation
 
-        public Standard(IProgressionSystem progressionSystem) : base(progressionSystem)
+        public Standard(Character character, Xp xp) : base(character, xp)
         {
         }
 
@@ -12,7 +12,12 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public override IProgressionSystem Add(Xp xp) => ProgressionSystem.Create(xp);
+        public override ProgressionSystem Add(Xp xp)
+        {
+            var newXp = Xp + xp;
+            LevelUp(newXp);
+            return new Standard(Character, newXp);
+        }
 
         #endregion
     }
