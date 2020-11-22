@@ -20,7 +20,7 @@ namespace SuperMarioRpg.Domain.Combat
             LevelUp(newXp);
 
             if (newXp.Value >= Max.Value)
-                return new Maxed(Character, Max, CreateXp());
+                return new Maxed(Character);
 
             return new Standard(Character, newXp);
         }

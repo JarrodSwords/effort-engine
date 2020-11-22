@@ -30,7 +30,7 @@ namespace SuperMarioRpg.Domain.Combat
         public static Progression CreateProgression(Character character)
         {
             if (character.Progression.Xp == Max)
-                return new Maxed(character, Max, CreateXp());
+                return new Maxed(character);
 
             return new Boosted(character);
         }
