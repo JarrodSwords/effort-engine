@@ -8,7 +8,10 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Creation
 
-        protected ProgressionSystem(Character character) : this(character, character.Xp)
+        protected ProgressionSystem(Character character) : this(
+            character,
+            character.ProgressionSystem.Xp
+        )
         {
         }
 

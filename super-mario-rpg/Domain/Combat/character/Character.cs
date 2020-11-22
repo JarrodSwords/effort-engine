@@ -7,6 +7,7 @@ namespace SuperMarioRpg.Domain.Combat
     {
         private static readonly CharacterValidator Validator = new CharacterValidator();
         private Loadout _loadout;
+        private ProgressionSystem _progressionSystem;
 
         #region Creation
 
@@ -14,7 +15,6 @@ namespace SuperMarioRpg.Domain.Combat
         {
             CharacterType = builder.CharacterType;
             ProgressionSystem = new Standard(this, builder.Xp);
-            ProgressionSystem.LeveledUp += Add;
             NaturalStats = builder.NaturalStats;
             Loadout = new Loadout(builder.Accessory, builder.Armor, builder.Weapon);
         }
@@ -25,7 +25,6 @@ namespace SuperMarioRpg.Domain.Combat
 
         public CharacterTypes CharacterType { get; }
         public Stats EffectiveStats { get; private set; }
-        public Level Level => ProgressionSystem.CurrentLevel;
 
         public Loadout Loadout
         {
@@ -39,7 +38,16 @@ namespace SuperMarioRpg.Domain.Combat
         }
 
         public Stats NaturalStats { get; private set; }
-        public Xp Xp => ProgressionSystem.Xp;
+
+        public ProgressionSystem ProgressionSystem
+        {
+            get => _progressionSystem;
+            private set
+            {
+                _progressionSystem = value;
+                _progressionSystem.LeveledUp += Add;
+            }
+        }
 
         public Character Add(Xp xp)
         {
@@ -68,8 +76,6 @@ namespace SuperMarioRpg.Domain.Combat
         #endregion
 
         #region Private Interface
-
-        private ProgressionSystem ProgressionSystem { get; set; }
 
         private void Add(object sender, Stats reward)
         {
