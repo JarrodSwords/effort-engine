@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using Effort.Domain;
+using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
     public abstract class Progression : ValueObject<Progression>
     {
+        private static Xp _max = CreateXp(9999);
+
         #region Creation
 
         protected Progression(Character character) : this(
@@ -19,8 +22,8 @@ namespace SuperMarioRpg.Domain.Combat
         {
             Character = character;
             CurrentNode = GetCurrentNode(xp);
-            Xp = xp;
-            ToNext = NextLevel.Required - Xp;
+            Xp = CreateXp(Math.Min(xp.Value, _max.Value));
+            ToNext = NextLevel is null ? CreateXp() : NextLevel.Required - Xp;
         }
 
         #endregion
@@ -49,6 +52,10 @@ namespace SuperMarioRpg.Domain.Combat
             while (node.Value.Required.Value <= xp.Value)
             {
                 node = node.Next;
+
+                if (node is null)
+                    return;
+
                 LeveledUp?.Invoke(this, node.Value.CombatStatReward);
             }
         }
@@ -57,13 +64,13 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Private Interface
 
-        private Level NextLevel => CurrentNode.Next.Value;
+        private Level NextLevel => CurrentNode.Next?.Value;
 
         private static LinkedListNode<Level> GetCurrentNode(Xp xp)
         {
             var node = Level.Levels.First;
 
-            while (node.Next.Value.Required.Value <= xp.Value)
+            while (node.Next?.Value.Required.Value <= xp.Value)
                 node = node.Next;
 
             return node;

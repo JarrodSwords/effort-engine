@@ -86,6 +86,14 @@ namespace SuperMarioRpg.Test.Domain.Combat
             _mario.Progression.Xp.Value.Should().Be(500);
         }
 
+        [Fact]
+        public void WhenAddingXp_OverMaximum_XpIsLimited()
+        {
+            _mario.Add(CreateXp(10000));
+
+            _mario.Progression.Xp.Value.Should().Be(9999);
+        }
+
         [Theory]
         [InlineData(EquipmentType.Hammer)]
         [InlineData(EquipmentType.Shirt)]
