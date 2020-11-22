@@ -88,7 +88,11 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Equality, Operators
 
-        protected override bool EqualsExplicit(Progression other) => throw new NotImplementedException();
+        protected override bool EqualsExplicit(Progression other) =>
+            Xp == other.Xp
+         && ToNext == other.ToNext
+         && CurrentLevel == other.CurrentLevel;
+
         protected override int GetHashCodeExplicit() => throw new NotImplementedException();
 
         #endregion

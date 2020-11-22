@@ -60,7 +60,7 @@ namespace SuperMarioRpg.Domain.Combat
             Loadout = Loadout.Equip(equipment);
 
             if (equipment.EquipmentType == EquipmentType.ExpBooster)
-                Progression = new Boosted(this);
+                Progression = Boosted.CreateProgression(this);
 
             return this;
         }

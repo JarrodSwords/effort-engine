@@ -83,7 +83,19 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             _mario.Add(CreateXp(9999));
             var progression = _mario.Progression;
+
             _mario.Add(CreateXp(1));
+
+            _mario.Progression.Should().Be(progression);
+        }
+
+        [Fact]
+        public void WhenAddingXp_WhileMaxedWithExpBooster_NothingChanges()
+        {
+            _mario.Add(CreateXp(9999));
+            var progression = _mario.Progression;
+
+            _mario.Equip(ExpBooster).Add(CreateXp(1));
 
             _mario.Progression.Should().Be(progression);
         }
