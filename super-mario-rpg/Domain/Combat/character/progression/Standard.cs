@@ -1,3 +1,5 @@
+using static SuperMarioRpg.Domain.Combat.Xp;
+
 namespace SuperMarioRpg.Domain.Combat
 {
     public class Standard : Progression
@@ -16,6 +18,10 @@ namespace SuperMarioRpg.Domain.Combat
         {
             var newXp = Xp + xp;
             LevelUp(newXp);
+
+            if (newXp.Value >= Max.Value)
+                return new Maxed(Character, Max, CreateXp());
+
             return new Standard(Character, newXp);
         }
 

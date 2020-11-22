@@ -7,7 +7,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public abstract class Progression : ValueObject<Progression>
     {
-        private static Xp _max = CreateXp(9999);
+        protected static readonly Xp Max = CreateXp(9999);
 
         #region Creation
 
@@ -22,8 +22,16 @@ namespace SuperMarioRpg.Domain.Combat
         {
             Character = character;
             CurrentNode = GetCurrentNode(xp);
-            Xp = CreateXp(Math.Min(xp.Value, _max.Value));
-            ToNext = NextLevel is null ? CreateXp() : NextLevel.Required - Xp;
+            Xp = xp;
+            ToNext = NextLevel.Required - Xp;
+        }
+
+        protected Progression(Character character, Xp xp, Xp toNext)
+        {
+            CurrentNode = GetCurrentNode(xp);
+            Character = character;
+            Xp = xp;
+            ToNext = toNext;
         }
 
         #endregion

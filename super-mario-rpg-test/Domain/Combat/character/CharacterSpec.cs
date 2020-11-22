@@ -71,6 +71,24 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
+        public void WhenAddingXp_OverMaximum_XpIsLimited()
+        {
+            _mario.Add(CreateXp(10000));
+
+            _mario.Progression.Xp.Value.Should().Be(9999);
+        }
+
+        [Fact]
+        public void WhenAddingXp_WhileMaxed_NothingChanges()
+        {
+            _mario.Add(CreateXp(9999));
+            var progression = _mario.Progression;
+            _mario.Add(CreateXp(1));
+
+            _mario.Progression.Should().Be(progression);
+        }
+
+        [Fact]
         public void WhenAddingXp_WithExpBooster_GainDoubleXp()
         {
             _mario.Equip(ExpBooster).Add(CreateXp(500));
@@ -84,14 +102,6 @@ namespace SuperMarioRpg.Test.Domain.Combat
             _mario.Add(CreateXp(500));
 
             _mario.Progression.Xp.Value.Should().Be(500);
-        }
-
-        [Fact]
-        public void WhenAddingXp_OverMaximum_XpIsLimited()
-        {
-            _mario.Add(CreateXp(10000));
-
-            _mario.Progression.Xp.Value.Should().Be(9999);
         }
 
         [Theory]
