@@ -59,34 +59,31 @@ namespace SuperMarioRpg.Test.Domain.Combat
             character.EffectiveStats.Should().BeEquivalentTo(expectedStats);
         }
 
-        [Fact]
-        public void WhenAddingXp_WithSufficientXpToLevel_LevelIncrements()
-        {
-            _mario.Add(CreateXp(16));
-
-            _mario.Progression.CurrentLevel.Value.Should().Be(2);
-        }
-
         [Theory]
         [InlineData(15, 1)]
         [InlineData(16, 2)]
         [InlineData(50, 3)]
-        [InlineData(50, 4, true)]
-        public void WhenAddingXp_XpIsUpdated(ushort xpValue, byte expectedLevel, bool doubled = false)
+        public void WhenAddingXp_LevelIsUpdated(ushort xpValue, byte expectedLevel)
         {
-            var xp = CreateXp(xpValue);
-            var expectedXp = xp;
-
-            if (doubled)
-            {
-                _mario.Equip(ExpBooster);
-                expectedXp = xp + xp;
-            }
-
-            _mario.Add(xp);
+            _mario.Add(CreateXp(xpValue));
 
             _mario.Progression.CurrentLevel.Value.Should().Be(expectedLevel);
-            _mario.Progression.Xp.Should().Be(expectedXp);
+        }
+
+        [Fact]
+        public void WhenAddingXp_WithExpBooster_GainDoubleXp()
+        {
+            _mario.Equip(ExpBooster).Add(CreateXp(500));
+
+            _mario.Progression.Xp.Value.Should().Be(1000);
+        }
+
+        [Fact]
+        public void WhenAddingXp_XpIsUpdated()
+        {
+            _mario.Add(CreateXp(500));
+
+            _mario.Progression.Xp.Value.Should().Be(500);
         }
 
         [Theory]
