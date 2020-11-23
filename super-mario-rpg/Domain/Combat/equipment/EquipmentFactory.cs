@@ -23,7 +23,7 @@ namespace SuperMarioRpg.Domain.Combat
                     "Exp. Booster",
                     EquipmentType.ExpBooster,
                     Slot.Accessory,
-                    CharacterTypes.All, 
+                    CharacterTypes.All,
                     new Status(Buffs.DoubleExperience)
                 ),
                 EquipmentType.Hammer => new Equipment(

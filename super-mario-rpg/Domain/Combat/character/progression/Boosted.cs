@@ -1,5 +1,3 @@
-using static SuperMarioRpg.Domain.Combat.Xp;
-
 namespace SuperMarioRpg.Domain.Combat
 {
     public class Boosted : Progression
@@ -14,6 +12,14 @@ namespace SuperMarioRpg.Domain.Combat
         {
         }
 
+        public static Progression CreateProgression(Character character)
+        {
+            if (character.Progression.Xp == Max)
+                return new Maxed(character);
+
+            return new Boosted(character);
+        }
+
         #endregion
 
         #region Public Interface
@@ -26,13 +32,5 @@ namespace SuperMarioRpg.Domain.Combat
         }
 
         #endregion
-
-        public static Progression CreateProgression(Character character)
-        {
-            if (character.Progression.Xp == Max)
-                return new Maxed(character);
-
-            return new Boosted(character);
-        }
     }
 }
