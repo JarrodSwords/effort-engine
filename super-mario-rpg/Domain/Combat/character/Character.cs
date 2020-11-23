@@ -34,8 +34,8 @@ namespace SuperMarioRpg.Domain.Combat
             set
             {
                 _loadout = value;
-                CalculateEffectiveStats();
-                CalculateStatus();
+                EffectiveStats = CreateEffectiveStats();
+                Status = CreateStatus();
                 Validator.ValidateAndThrow(this);
             }
         }
@@ -62,7 +62,7 @@ namespace SuperMarioRpg.Domain.Combat
 
                 _status = value;
 
-                UpdateProgression();
+                Progression = CreateProgression();
             }
         }
 
@@ -96,22 +96,14 @@ namespace SuperMarioRpg.Domain.Combat
             NaturalStats += reward;
         }
 
-        private void CalculateEffectiveStats()
-        {
-            EffectiveStats = NaturalStats + Loadout.GetStats();
-        }
+        private Stats CreateEffectiveStats() => NaturalStats + Loadout.GetStats();
 
-        private void CalculateStatus()
-        {
-            Status = Loadout.GetStatuses();
-        }
-
-        private void UpdateProgression()
-        {
-            Progression = (Status.Buffs & Buffs.DoubleExperience) > 0
+        private Progression CreateProgression() =>
+            (Status.Buffs & Buffs.DoubleExperience) > 0
                 ? Boosted.CreateProgression(this)
                 : new Standard(this);
-        }
+
+        private Status CreateStatus() => Loadout.GetStatuses();
 
         #endregion
     }
