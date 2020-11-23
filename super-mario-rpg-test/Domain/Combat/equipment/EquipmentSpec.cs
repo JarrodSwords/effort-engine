@@ -25,7 +25,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
             new Equipment("Shirt", EquipmentType.Shirt, Slot.Armor, CharacterTypes.Mario);
 
         protected override Entity CreateEntity(Guid id) =>
-            new Equipment("Shirt", EquipmentType.Shirt, Slot.Armor, CharacterTypes.Mario, id);
+            new Equipment("Shirt", EquipmentType.Shirt, Slot.Armor, CharacterTypes.Mario, null, id);
 
         #endregion
     }

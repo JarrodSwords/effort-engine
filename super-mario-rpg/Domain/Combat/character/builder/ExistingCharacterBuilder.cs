@@ -1,5 +1,4 @@
 using System;
-using static SuperMarioRpg.Domain.Combat.Level;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
@@ -23,13 +22,13 @@ namespace SuperMarioRpg.Domain.Combat
 
         #endregion
 
-        #region ICharacterBuilder
+        #region ICharacterBuilder Implementation
 
         public Equipment Accessory { get; }
         public Equipment Armor { get; }
         public CharacterTypes CharacterType => Dto.CharacterType;
         public Guid Id => Dto.Id;
-        public Level Level => CreateLevel(Dto.Level);
+
         public Stats NaturalStats { get; private set; }
         public Equipment Weapon { get; }
         public Xp Xp => CreateXp(Dto.Xp);

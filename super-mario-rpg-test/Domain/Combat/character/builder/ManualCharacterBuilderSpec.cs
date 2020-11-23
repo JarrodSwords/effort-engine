@@ -40,19 +40,17 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             var mario = CreateCharacter();
 
-            mario.Accessory.Should().Be(JumpShoes);
-            mario.Armor.Should().Be(Shirt);
-            mario.Weapon.Should().Be(Hammer);
+            mario.IsEquipped(Hammer).Should().BeTrue();
+            mario.IsEquipped(JumpShoes).Should().BeTrue();
+            mario.IsEquipped(Shirt).Should().BeTrue();
             mario.EffectiveStats.Should().Be(Aggregate(mario.NaturalStats, Hammer.Stats, JumpShoes.Stats, Shirt.Stats));
         }
 
         [Theory]
         [InlineData(EquipmentType.Hammer)]
         [InlineData(EquipmentType.Hammer, EquipmentType.Shirt, EquipmentType.JumpShoes)]
-        public void WhenInstantiating_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
+        public void WhenBuilding_WithInvalidEquipment_ExceptionIsThrown(params EquipmentType[] equipmentTypes)
         {
-            // todo: move to builder specs
-
             var equipment = CreateEquipment(equipmentTypes).ToArray();
             _builder.For(CharacterTypes.Mallow).Add(equipment);
             Director.Configure(_builder);

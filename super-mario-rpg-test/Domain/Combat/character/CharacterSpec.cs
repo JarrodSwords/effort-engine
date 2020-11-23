@@ -7,7 +7,6 @@ using FluentValidation;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
-using static SuperMarioRpg.Domain.Combat.Level;
 using static SuperMarioRpg.Domain.Combat.StatFactory;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
@@ -61,23 +60,68 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
-        public void WhenAddingXp_WithSufficientXpToLevel_LevelIncrements()
+        public void WhenAddingXp_AfterUnequippingExpBooster_GainStandardXp()
         {
-            var expectedLevel = _mario.Level + CreateLevel(1);
-            var xp = _mario.ToNext;
+            _mario.Equip(ExpBooster).Unequip(ExpBooster.Id).Add(CreateXp(500));
 
-            _mario.Add(xp);
+            _mario.Progression.Xp.Value.Should().Be(500);
+        }
 
-            _mario.Level.Should().Be(expectedLevel);
+        [Theory]
+        [InlineData(15, 1)]
+        [InlineData(16, 2)]
+        [InlineData(50, 3)]
+        public void WhenAddingXp_LevelIsUpdated(ushort xpValue, byte expectedLevel)
+        {
+            _mario.Add(CreateXp(xpValue));
+
+            _mario.Progression.CurrentLevel.Value.Should().Be(expectedLevel);
+        }
+
+        [Fact]
+        public void WhenAddingXp_OverMaximum_XpIsLimited()
+        {
+            _mario.Add(CreateXp(10000));
+
+            _mario.Progression.Xp.Value.Should().Be(9999);
+        }
+
+        [Fact]
+        public void WhenAddingXp_WhileMaxed_NothingChanges()
+        {
+            _mario.Add(CreateXp(9999));
+            var progression = _mario.Progression;
+
+            _mario.Add(CreateXp(1));
+
+            _mario.Progression.Should().Be(progression);
+        }
+
+        [Fact]
+        public void WhenAddingXp_WhileMaxedWithExpBooster_NothingChanges()
+        {
+            _mario.Add(CreateXp(9999));
+            var progression = _mario.Progression;
+
+            _mario.Equip(ExpBooster).Add(CreateXp(1));
+
+            _mario.Progression.Should().Be(progression);
+        }
+
+        [Fact]
+        public void WhenAddingXp_WithExpBooster_GainDoubleXp()
+        {
+            _mario.Equip(ExpBooster).Add(CreateXp(500));
+
+            _mario.Progression.Xp.Value.Should().Be(1000);
         }
 
         [Fact]
         public void WhenAddingXp_XpIsUpdated()
         {
-            var remainder = _mario.Add(CreateXp(50));
+            _mario.Add(CreateXp(500));
 
-            _mario.Xp.Value.Should().Be(16);
-            remainder.Value.Should().Be(34);
+            _mario.Progression.Xp.Value.Should().Be(500);
         }
 
         [Theory]
@@ -90,7 +134,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             _mario.Equip(equipment);
 
-            _mario.GetEquipment(equipment.Slot).Should().Be(equipment);
+            _mario.IsEquipped(equipment).Should().BeTrue();
             _mario.EffectiveStats.Should().Be(_mario.NaturalStats + equipment.Stats);
         }
 
@@ -111,7 +155,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenLevelingUp_StatsChange()
         {
-            var expectedNaturalStats = CreateStats(23, 2, 25, 12, 4, 20);
+            var rewardStats = CreateStats(3, 2, 5, 2, 2);
+            var expectedNaturalStats = _mario.NaturalStats + rewardStats;
 
             _mario.Add(CreateXp(16));
 
@@ -128,7 +173,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             _mario.Equip(equipment).Unequip(equipment.Id);
 
-            _mario.GetEquipment(equipment.Slot).Should().NotBe(equipment);
+            _mario.IsEquipped(equipment).Should().BeFalse();
             _mario.EffectiveStats.Should().Be(_mario.NaturalStats);
         }
 

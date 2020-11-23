@@ -8,7 +8,6 @@ namespace SuperMarioRpg.Domain.Combat
         Equipment Armor { get; }
         CharacterTypes CharacterType { get; }
         Guid Id { get; }
-        Level Level { get; }
         Stats NaturalStats { get; }
         Equipment Weapon { get; }
         Xp Xp { get; }

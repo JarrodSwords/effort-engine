@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using static SuperMarioRpg.Domain.Combat.Stats;
+using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
     public class ManualCharacterBuilder : ICharacterBuilder
     {
-        #region Core
+        #region Creation
 
         public ManualCharacterBuilder()
         {
@@ -86,16 +87,16 @@ namespace SuperMarioRpg.Domain.Combat
 
         #endregion
 
-        #region ICharacterBuilder
+        #region ICharacterBuilder Implementation
 
         public Equipment Accessory { get; private set; }
         public Equipment Armor { get; private set; }
-        public CharacterTypes CharacterType { get; protected set; }
-        public Guid Id { get; protected set; }
-        public Level Level { get; protected set; }
-        public Stats NaturalStats { get; protected set; }
+        public CharacterTypes CharacterType { get; private set; }
+        public Guid Id { get; private set; }
+        public Stats NaturalStats { get; private set; }
         public Equipment Weapon { get; private set; }
-        public Xp Xp { get; protected set; }
+
+        public Xp Xp => CreateXp();
 
         public void CreateLoadout()
         {

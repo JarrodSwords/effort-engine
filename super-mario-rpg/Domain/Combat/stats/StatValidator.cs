@@ -4,7 +4,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class StatValidator : AbstractValidator<Stat>
     {
-        #region Core
+        #region Creation
 
         public StatValidator()
         {

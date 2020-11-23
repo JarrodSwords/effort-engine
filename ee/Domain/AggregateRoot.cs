@@ -4,7 +4,7 @@ namespace Effort.Domain
 {
     public abstract class AggregateRoot : Entity
     {
-        #region Core
+        #region Creation
 
         protected AggregateRoot(Guid id) : base(id)
         {
