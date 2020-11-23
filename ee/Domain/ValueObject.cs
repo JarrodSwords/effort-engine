@@ -8,17 +8,17 @@ namespace Effort.Domain
     {
         #region Equality, Operators
 
-        public override bool Equals(object obj)
+        public override bool Equals(object other)
         {
-            if (obj is null)
+            if (other is null)
                 return false;
 
-            if (GetType() != obj.GetType())
+            if (GetType() != other.GetType())
                 return false;
 
-            var valueObject = (ValueObject) obj;
+            var otherValueObject = (ValueObject) other;
 
-            return GetEqualityComponents().SequenceEqual(valueObject.GetEqualityComponents());
+            return GetEqualityComponents().SequenceEqual(otherValueObject.GetEqualityComponents());
         }
 
         protected abstract IEnumerable<object> GetEqualityComponents();
