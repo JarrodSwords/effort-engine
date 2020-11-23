@@ -5,7 +5,7 @@ namespace Effort.Domain
 {
     public abstract class TinyType<T> : IEquatable<TinyType<T>>
     {
-        #region Core
+        #region Creation
 
         protected TinyType(T value)
         {

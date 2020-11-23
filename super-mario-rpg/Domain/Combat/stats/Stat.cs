@@ -5,19 +5,15 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class Stat : TinyType<short>
     {
-        #region Core
-
         public const short Max = 255;
         public const short Min = -255;
+
+        #region Creation
 
         private Stat(short value) : base(value)
         {
             new StatValidator().ValidateAndThrow(this);
         }
-
-        #endregion
-
-        #region Public Interface
 
         public static Stat CreateStat(short value = default) => new Stat(value);
 

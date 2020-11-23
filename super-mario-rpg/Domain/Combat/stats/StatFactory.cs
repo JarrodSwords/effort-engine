@@ -5,7 +5,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class StatFactory
     {
-        #region Public Interface
+        #region Creation
 
         public static Stats CreateStats(CharacterTypes key)
         {
@@ -32,7 +32,7 @@ namespace SuperMarioRpg.Domain.Combat
                 EquipmentType.PolkaDress => Stats.CreateStats(defense: 24, specialDefense: 12),
                 EquipmentType.Shirt => Stats.CreateStats(0, 6, 0, 0, 6),
                 EquipmentType.SlapGlove => Stats.CreateStats(40),
-                _ => throw new ArgumentOutOfRangeException(nameof(key), key, null)
+                _ => Default
             };
 
             return stats;

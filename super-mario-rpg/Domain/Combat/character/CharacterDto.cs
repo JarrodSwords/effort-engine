@@ -4,7 +4,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class CharacterDto
     {
-        #region Core
+        #region Creation
 
         public CharacterDto(
             Guid id = default,

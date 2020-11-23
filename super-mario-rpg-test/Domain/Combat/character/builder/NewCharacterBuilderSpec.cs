@@ -46,8 +46,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
             _builder.For(characterType);
             var character = CreateCharacter();
 
-            character.Level.Value.Should().Be(expectedLevel);
-            character.Xp.Value.Should().Be(expectedXp);
+            character.Progression.CurrentLevel.Value.Should().Be(expectedLevel);
+            character.Progression.Xp.Value.Should().Be(expectedXp);
             character.NaturalStats.Should().Be(expectedStats);
         }
 
@@ -57,8 +57,8 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             var toadstool = CreateCharacter();
 
-            toadstool.Armor.Should().Be(PolkaDress);
-            toadstool.Weapon.Should().Be(SlapGlove);
+            toadstool.IsEquipped(PolkaDress).Should().BeTrue();
+            toadstool.IsEquipped(SlapGlove).Should().BeTrue();
             toadstool.EffectiveStats.Should().Be(Aggregate(toadstool.NaturalStats, PolkaDress.Stats, SlapGlove.Stats));
         }
 

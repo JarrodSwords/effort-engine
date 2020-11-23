@@ -4,7 +4,7 @@ namespace SuperMarioRpg.Domain.Overworld
 {
     public class Region : ValueObject<Region>
     {
-        #region Core
+        #region Creation
 
         public Region(string name)
         {

@@ -1,27 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Effort.Domain;
 using FluentValidation;
-using static SuperMarioRpg.Domain.Combat.Stats;
-using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
     public class Character : AggregateRoot
     {
-        #region Core
-
         private static readonly CharacterValidator Validator = new CharacterValidator();
-        private ILoadout _loadout;
-        private Xp _xp;
+        private Loadout _loadout;
+        private Progression _progression;
+        private Status _status;
+
+        #region Creation
 
         public Character(ICharacterBuilder builder) : base(builder.Id)
         {
             CharacterType = builder.CharacterType;
-            _xp = builder.Xp;
-            Level = builder.Level;
+            Progression = new Standard(this, builder.Xp);
             NaturalStats = builder.NaturalStats;
+            Status = new Status();
             Loadout = new Loadout(builder.Accessory, builder.Armor, builder.Weapon);
         }
 
@@ -31,43 +27,49 @@ namespace SuperMarioRpg.Domain.Combat
 
         public CharacterTypes CharacterType { get; }
         public Stats EffectiveStats { get; private set; }
-        public Level Level { get; private set; }
-        public Stats NaturalStats { get; private set; }
 
-        public Xp Xp
+        public Loadout Loadout
         {
-            get => _xp;
-            private set
+            get => _loadout;
+            set
             {
-                _xp = value;
-                LevelUp();
+                _loadout = value;
+                EffectiveStats = CreateEffectiveStats();
+                Status = CreateStatus();
+                Validator.ValidateAndThrow(this);
             }
         }
 
-        public Equipment Accessory => Loadout.GetEquipment(Slot.Accessory);
-        public Equipment Armor => Loadout.GetEquipment(Slot.Armor);
-        public Equipment Weapon => Loadout.GetEquipment(Slot.Weapon);
+        public Stats NaturalStats { get; private set; }
 
-        public List<LevelReward> LevelRewards =>
-            new List<LevelReward>
-            {
-                new LevelReward(1, 0, Default),
-                new LevelReward(2, 16, CreateStats(3, 2, 5, 2, 2)),
-                new LevelReward(3, 48, CreateStats(3, 2, 5, 2, 2)),
-                new LevelReward(4, 84, CreateStats(3, 2, 5, 2, 2))
-            };
-
-        public Xp ToNext =>
-            CreateXp((ushort) (LevelRewards.First(x => x.Level.Value > Level.Value).Required.Value - Xp.Value));
-
-        public Xp Add(Xp xp)
+        public Progression Progression
         {
-            var delta = CreateXp(Math.Min(xp.Value, ToNext.Value));
-            var remainder = CreateXp((ushort) (xp.Value - delta.Value));
+            get => _progression;
+            private set
+            {
+                _progression = value;
+                _progression.LeveledUp += Add;
+            }
+        }
 
-            Xp += delta;
+        public Status Status
+        {
+            get => _status;
+            private set
+            {
+                if (_status == value)
+                    return;
 
-            return remainder;
+                _status = value;
+
+                Progression = CreateProgression();
+            }
+        }
+
+        public Character Add(Xp xp)
+        {
+            Progression = Progression.Add(xp);
+            return this;
         }
 
         public Character Equip(Equipment equipment)
@@ -76,7 +78,8 @@ namespace SuperMarioRpg.Domain.Combat
             return this;
         }
 
-        public Equipment GetEquipment(Slot slot) => Loadout.GetEquipment(slot);
+
+        public bool IsEquipped(Equipment equipment) => Loadout.IsEquipped(equipment);
 
         public Character Unequip(Id id)
         {
@@ -88,32 +91,19 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Private Interface
 
-        private ILoadout Loadout
+        private void Add(object sender, Stats reward)
         {
-            get => _loadout;
-            set
-            {
-                _loadout = value;
-                CalculateEffectiveStats();
-                Validator.ValidateAndThrow(this);
-            }
+            NaturalStats += reward;
         }
 
-        private void CalculateEffectiveStats()
-        {
-            EffectiveStats = NaturalStats + Loadout.GetStats();
-        }
+        private Stats CreateEffectiveStats() => NaturalStats + Loadout.GetStats();
 
-        private void LevelUp()
-        {
-            var rewards = LevelRewards.SingleOrDefault(x => x.Required == Xp);
+        private Progression CreateProgression() =>
+            (Status.Buffs & Buffs.DoubleExperience) > 0
+                ? Boosted.CreateProgression(this)
+                : new Standard(this);
 
-            if (rewards is null || Level == rewards.Level)
-                return;
-
-            Level = rewards.Level;
-            NaturalStats += rewards.Stats;
-        }
+        private Status CreateStatus() => Loadout.GetStatuses();
 
         #endregion
     }
