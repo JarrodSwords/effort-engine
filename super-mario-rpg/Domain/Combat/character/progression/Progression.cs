@@ -5,7 +5,7 @@ using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public abstract class Progression : ValueObject<Progression>
+    public abstract class Progression : ValueObject
     {
         protected static readonly Xp Max = CreateXp(9999);
 
@@ -88,12 +88,12 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Equality, Operators
 
-        protected override bool EqualsExplicit(Progression other) =>
-            Xp == other.Xp
-         && ToNext == other.ToNext
-         && CurrentLevel == other.CurrentLevel;
-
-        protected override int GetHashCodeExplicit() => throw new NotImplementedException();
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return CurrentLevel;
+            yield return ToNext;
+            yield return Xp;
+        }
 
         #endregion
     }

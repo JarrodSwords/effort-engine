@@ -1,8 +1,9 @@
-﻿using Effort.Domain;
+﻿using System.Collections.Generic;
+using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Overworld
 {
-    public class Region : ValueObject<Region>
+    public class Region : ValueObject
     {
         #region Creation
 
@@ -21,8 +22,10 @@ namespace SuperMarioRpg.Domain.Overworld
 
         #region Equality, Operators
 
-        protected override bool EqualsExplicit(Region other) => Name == other.Name;
-        protected override int GetHashCodeExplicit() => Name.GetHashCode();
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Name;
+        }
 
         #endregion
     }

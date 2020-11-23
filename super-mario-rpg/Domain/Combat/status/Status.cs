@@ -1,10 +1,10 @@
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Status : ValueObject<Status>
+    public class Status : ValueObject
     {
         #region Creation
 
@@ -28,8 +28,11 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Equality, Operators
 
-        protected override bool EqualsExplicit(Status other) => Buffs == other.Buffs;
-        protected override int GetHashCodeExplicit() => throw new NotImplementedException();
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Buffs;
+        }
+
         public static Status operator +(Status left, Status right) => new Status(left.Buffs | right.Buffs);
 
         #endregion

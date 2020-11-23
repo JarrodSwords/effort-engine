@@ -4,12 +4,11 @@ using Xunit;
 
 namespace Effort.Test.Domain
 {
-    public abstract class ValueObjectSpec<T>
-        where T : ValueObject<T>
+    public abstract class ValueObjectSpec
     {
         #region Protected Interface
 
-        protected abstract ValueObject<T> CreateValueObject();
+        protected abstract ValueObject CreateValueObject();
 
         #endregion
 

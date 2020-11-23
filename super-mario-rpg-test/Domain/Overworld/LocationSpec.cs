@@ -4,11 +4,11 @@ using SuperMarioRpg.Domain.Overworld;
 
 namespace SuperMarioRpg.Test.Domain.Overworld
 {
-    public class LocationSpec : ValueObjectSpec<Location>
+    public class LocationSpec : ValueObjectSpec
     {
         #region Protected Interface
 
-        protected override ValueObject<Location> CreateValueObject() => new Location("Mario's Pad");
+        protected override ValueObject CreateValueObject() => new Location("Mario's Pad");
 
         #endregion
     }

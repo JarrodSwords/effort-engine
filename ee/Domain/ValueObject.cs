@@ -1,29 +1,55 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Effort.Domain
 {
-    public abstract class ValueObject<T> :
-        IEquatable<ValueObject<T>> where T : ValueObject<T>
+    /// <remarks>https://enterprisecraftsmanship.com/posts/value-object-better-implementation/</remarks>
+    public abstract class ValueObject
     {
         #region Equality, Operators
 
         public override bool Equals(object obj)
         {
-            if (!(obj is T valueObject))
+            if (obj is null)
                 return false;
-            if (ReferenceEquals(this, valueObject))
-                return true;
-            if (valueObject.GetType() != GetType())
+
+            if (GetType() != obj.GetType())
                 return false;
-            return EqualsExplicit(valueObject);
+
+            var valueObject = (ValueObject) obj;
+
+            return GetEqualityComponents().SequenceEqual(valueObject.GetEqualityComponents());
         }
 
-        public bool Equals(ValueObject<T> other) => throw new NotImplementedException();
-        protected abstract bool EqualsExplicit(T other);
-        public override int GetHashCode() => GetHashCodeExplicit();
-        protected abstract int GetHashCodeExplicit();
-        public static bool operator ==(ValueObject<T> left, ValueObject<T> right) => Equals(left, right);
-        public static bool operator !=(ValueObject<T> left, ValueObject<T> right) => !Equals(left, right);
+        protected abstract IEnumerable<object> GetEqualityComponents();
+
+        public override int GetHashCode()
+        {
+            return GetEqualityComponents()
+                .Aggregate(
+                    1,
+                    (current, obj) =>
+                    {
+                        unchecked
+                        {
+                            return current * 23 + (obj?.GetHashCode() ?? 0);
+                        }
+                    }
+                );
+        }
+
+        public static bool operator ==(ValueObject left, ValueObject right)
+        {
+            if (left is null && right is null)
+                return true;
+
+            if (left is null || right is null)
+                return false;
+
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(ValueObject left, ValueObject right) => !(left == right);
 
         #endregion
     }

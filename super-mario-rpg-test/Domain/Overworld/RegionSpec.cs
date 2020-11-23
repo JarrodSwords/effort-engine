@@ -4,11 +4,11 @@ using SuperMarioRpg.Domain.Overworld;
 
 namespace SuperMarioRpg.Test.Domain.Overworld
 {
-    public class RegionSpec : ValueObjectSpec<Region>
+    public class RegionSpec : ValueObjectSpec
     {
         #region Protected Interface
 
-        protected override ValueObject<Region> CreateValueObject() => new Region("Mushroom Kingdom");
+        protected override ValueObject CreateValueObject() => new Region("Mushroom Kingdom");
 
         #endregion
     }

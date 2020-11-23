@@ -1,9 +1,10 @@
 using System;
+using System.Collections.Generic;
 using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Loadout : ValueObject<Loadout>
+    public class Loadout : ValueObject
     {
         #region Creation
 
@@ -67,9 +68,12 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Equality, Operators
 
-        protected override bool EqualsExplicit(Loadout other) => throw new NotImplementedException();
-
-        protected override int GetHashCodeExplicit() => throw new NotImplementedException();
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Accessory;
+            yield return Armor;
+            yield return Weapon;
+        }
 
         #endregion
     }
