@@ -8,6 +8,7 @@ namespace SuperMarioRpg.Domain.Combat
         private static readonly CharacterValidator Validator = new CharacterValidator();
         private Loadout _loadout;
         private Progression _progression;
+        private Status _status;
 
         #region Creation
 
@@ -16,6 +17,7 @@ namespace SuperMarioRpg.Domain.Combat
             CharacterType = builder.CharacterType;
             Progression = new Standard(this, builder.Xp);
             NaturalStats = builder.NaturalStats;
+            Status = new Status();
             Loadout = new Loadout(builder.Accessory, builder.Armor, builder.Weapon);
         }
 
@@ -33,6 +35,7 @@ namespace SuperMarioRpg.Domain.Combat
             {
                 _loadout = value;
                 CalculateEffectiveStats();
+                CalculateStatus();
                 Validator.ValidateAndThrow(this);
             }
         }
@@ -49,6 +52,20 @@ namespace SuperMarioRpg.Domain.Combat
             }
         }
 
+        public Status Status
+        {
+            get => _status;
+            private set
+            {
+                if (_status == value)
+                    return;
+
+                _status = value;
+
+                UpdateProgression();
+            }
+        }
+
         public Character Add(Xp xp)
         {
             Progression = Progression.Add(xp);
@@ -58,12 +75,9 @@ namespace SuperMarioRpg.Domain.Combat
         public Character Equip(Equipment equipment)
         {
             Loadout = Loadout.Equip(equipment);
-
-            if (equipment.EquipmentType == EquipmentType.ExpBooster)
-                Progression = Boosted.CreateProgression(this);
-
             return this;
         }
+
 
         public bool IsEquipped(Equipment equipment) => Loadout.IsEquipped(equipment);
 
@@ -85,6 +99,18 @@ namespace SuperMarioRpg.Domain.Combat
         private void CalculateEffectiveStats()
         {
             EffectiveStats = NaturalStats + Loadout.GetStats();
+        }
+
+        private void CalculateStatus()
+        {
+            Status = Loadout.GetStatuses();
+        }
+
+        private void UpdateProgression()
+        {
+            Progression = (Status.Buffs & Buffs.DoubleExperience) > 0
+                ? Boosted.CreateProgression(this)
+                : new Standard(this);
         }
 
         #endregion

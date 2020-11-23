@@ -18,6 +18,7 @@ namespace SuperMarioRpg.Domain.Combat
             EquipmentType equipmentType,
             Slot slot,
             CharacterTypes compatibleCharacterTypes,
+            Status status = default,
             Guid id = default
         ) : base(id)
         {
@@ -26,6 +27,7 @@ namespace SuperMarioRpg.Domain.Combat
             Slot = slot;
             Stats = CreateStats(EquipmentType);
             CompatibleCharacterTypes = compatibleCharacterTypes;
+            Status = status ?? new Status();
         }
 
         private Equipment(Equipment equipment) : this(
@@ -33,6 +35,7 @@ namespace SuperMarioRpg.Domain.Combat
             equipment.EquipmentType,
             equipment.Slot,
             equipment.CompatibleCharacterTypes,
+            equipment.Status,
             equipment.Id.Value
         )
         {
@@ -47,6 +50,7 @@ namespace SuperMarioRpg.Domain.Combat
         public Name Name { get; }
         public Slot Slot { get; }
         public Stats Stats { get; }
+        public Status Status { get; }
 
         public Equipment Clone() => new Equipment(this);
 

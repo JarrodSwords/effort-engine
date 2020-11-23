@@ -59,6 +59,14 @@ namespace SuperMarioRpg.Test.Domain.Combat
             character.EffectiveStats.Should().BeEquivalentTo(expectedStats);
         }
 
+        [Fact]
+        public void WhenAddingXp_AfterUnequippingExpBooster_GainStandardXp()
+        {
+            _mario.Equip(ExpBooster).Unequip(ExpBooster.Id).Add(CreateXp(500));
+
+            _mario.Progression.Xp.Value.Should().Be(500);
+        }
+
         [Theory]
         [InlineData(15, 1)]
         [InlineData(16, 2)]

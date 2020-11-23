@@ -45,6 +45,7 @@ namespace SuperMarioRpg.Domain.Combat
         }
 
         public Stats GetStats() => Stats.Aggregate(Accessory.Stats, Armor.Stats, Weapon.Stats);
+        public Status GetStatuses() => Status.Aggregate(Accessory.Status, Armor.Status, Weapon.Status);
 
         public bool IsEquipped(Equipment equipment) => equipment == GetEquipment(equipment.Slot);
 
