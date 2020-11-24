@@ -19,7 +19,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
                 EquipmentSlot.Armor,
                 CharacterTypes.Mario,
                 "Shirt",
-                null,
+                Buffs.None,
                 id
             );
 

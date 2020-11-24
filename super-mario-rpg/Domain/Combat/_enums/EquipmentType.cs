@@ -3,7 +3,7 @@ namespace SuperMarioRpg.Domain.Combat
     public enum EquipmentType
     {
         None,
-        
+
         // mario weapons
         Hammer,
         NokNokShell,
@@ -15,7 +15,7 @@ namespace SuperMarioRpg.Domain.Combat
         MegaGlove,
         UltraHammer,
         LazyShellWeapon,
-        
+
         // mallow weapons
         FroggieStick,
         Cymbals,

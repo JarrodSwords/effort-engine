@@ -103,7 +103,7 @@ namespace SuperMarioRpg.Domain.Combat
                 ? Boosted.CreateProgression(this)
                 : new Standard(this);
 
-        private Status CreateStatus() => Loadout.GetStatuses();
+        private Status CreateStatus() => Loadout.GetStatus();
 
         #endregion
     }

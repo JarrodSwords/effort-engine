@@ -4,7 +4,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     /// <remarks>Highest number is highest priority</remarks>
     [Flags]
-    public enum StatusEffects
+    public enum Ailments
     {
         None = 0,
         Silence = 1,

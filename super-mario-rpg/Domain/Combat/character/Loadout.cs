@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Effort.Domain;
+using static SuperMarioRpg.Domain.Combat.Status;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Loadout : ValueObject
+    public class Loadout : ValueObject, IStatusProvider
     {
         #region Creation
 
@@ -46,7 +47,6 @@ namespace SuperMarioRpg.Domain.Combat
         }
 
         public Stats GetStats() => Stats.Aggregate(Accessory.Stats, Armor.Stats, Weapon.Stats);
-        public Status GetStatuses() => Status.Aggregate(Accessory.Status, Armor.Status, Weapon.Status);
 
         public bool IsEquipped(Equipment equipment) => equipment == GetEquipment(equipment.EquipmentSlot);
 
@@ -63,6 +63,12 @@ namespace SuperMarioRpg.Domain.Combat
 
             return this;
         }
+
+        #endregion
+
+        #region IStatusProvider Implementation
+
+        public Status GetStatus() => Aggregate(Accessory, Armor, Weapon);
 
         #endregion
 
