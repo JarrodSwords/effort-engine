@@ -1,3 +1,5 @@
+using System;
+
 namespace SuperMarioRpg.Domain.Combat
 {
     public partial class Equipment
@@ -8,11 +10,13 @@ namespace SuperMarioRpg.Domain.Combat
         {
             #region Creation
 
-            public NullEquipment(Slot slot, string name = "None") : base(
-                name,
+            public NullEquipment(EquipmentSlot equipmentSlot, string name = "None") : base(
+                Guid.Empty,
                 EquipmentType.None,
-                slot,
-                CharacterTypes.All
+                equipmentSlot,
+                CharacterTypes.All,
+                name,
+                null
             )
             {
             }

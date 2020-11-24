@@ -25,30 +25,30 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Loadout Equip(Equipment equipment)
         {
-            return equipment.Slot switch
+            return equipment.EquipmentSlot switch
             {
-                Slot.Accessory => new Loadout(equipment, Armor, Weapon),
-                Slot.Armor => new Loadout(Accessory, equipment, Weapon),
-                Slot.Weapon => new Loadout(Accessory, Armor, equipment),
+                EquipmentSlot.Accessory => new Loadout(equipment, Armor, Weapon),
+                EquipmentSlot.Armor => new Loadout(Accessory, equipment, Weapon),
+                EquipmentSlot.Weapon => new Loadout(Accessory, Armor, equipment),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        public Equipment GetEquipment(Slot slot)
+        public Equipment GetEquipment(EquipmentSlot equipmentSlot)
         {
-            return slot switch
+            return equipmentSlot switch
             {
-                Slot.Accessory => Accessory,
-                Slot.Armor => Armor,
-                Slot.Weapon => Weapon,
-                _ => throw new ArgumentOutOfRangeException(nameof(slot), slot, null)
+                EquipmentSlot.Accessory => Accessory,
+                EquipmentSlot.Armor => Armor,
+                EquipmentSlot.Weapon => Weapon,
+                _ => throw new ArgumentOutOfRangeException(nameof(equipmentSlot), equipmentSlot, null)
             };
         }
 
         public Stats GetStats() => Stats.Aggregate(Accessory.Stats, Armor.Stats, Weapon.Stats);
         public Status GetStatuses() => Status.Aggregate(Accessory.Status, Armor.Status, Weapon.Status);
 
-        public bool IsEquipped(Equipment equipment) => equipment == GetEquipment(equipment.Slot);
+        public bool IsEquipped(Equipment equipment) => equipment == GetEquipment(equipment.EquipmentSlot);
 
         public Loadout Unequip(Id id)
         {
