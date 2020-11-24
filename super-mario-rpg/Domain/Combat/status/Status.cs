@@ -34,8 +34,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public static Status Aggregate(params IStatusProvider[] statusProviders)
         {
-            var status = Default;
-            return statusProviders.Aggregate(status, (current, statusProvider) => current + statusProvider.GetStatus());
+            return statusProviders.Aggregate(Default, (current, statusProvider) => current + statusProvider.GetStatus());
         }
 
         #endregion
