@@ -99,7 +99,7 @@ namespace SuperMarioRpg.Domain.Combat
         private Stats CreateEffectiveStats() => NaturalStats + Loadout.GetStats();
 
         private Progression CreateProgression() =>
-            Status.Buffs.Contains(Buffs.DoubleExperience)
+            Status.Buffs.Contains(Buffs.DoubleXp)
                 ? Boosted.CreateProgression(this)
                 : new Standard(this);
 
