@@ -17,7 +17,7 @@ namespace SuperMarioRpg.Domain.Combat
             string name,
             EquipmentType equipmentType,
             Slot slot,
-            CharacterTypes compatibleCharacterTypes,
+            CharacterTypes characterTypes,
             Status status = default,
             Guid id = default
         ) : base(id)
@@ -26,7 +26,7 @@ namespace SuperMarioRpg.Domain.Combat
             EquipmentType = equipmentType;
             Slot = slot;
             Stats = CreateStats(EquipmentType);
-            CompatibleCharacterTypes = compatibleCharacterTypes;
+            CharacterTypes = characterTypes;
             Status = status ?? new Status();
         }
 
@@ -34,7 +34,7 @@ namespace SuperMarioRpg.Domain.Combat
             equipment.Name.Value,
             equipment.EquipmentType,
             equipment.Slot,
-            equipment.CompatibleCharacterTypes,
+            equipment.CharacterTypes,
             equipment.Status,
             equipment.Id.Value
         )
@@ -45,7 +45,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public CharacterTypes CompatibleCharacterTypes { get; }
+        public CharacterTypes CharacterTypes { get; }
         public EquipmentType EquipmentType { get; }
         public Name Name { get; }
         public Slot Slot { get; }
@@ -54,7 +54,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Equipment Clone() => new Equipment(this);
 
-        public bool IsCompatible(CharacterTypes characterType) => (characterType & CompatibleCharacterTypes) > 0;
+        public bool IsCompatible(CharacterTypes characterType) => CharacterTypes.Contains(characterType);
 
         public override string ToString() => Name.ToString();
 
