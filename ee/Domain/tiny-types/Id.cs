@@ -10,7 +10,7 @@ namespace Effort.Domain
         {
         }
 
-        public static Id Create(Guid value = default) => new Id(value);
+        public static Id CreateId(Guid value = default) => new Id(value);
 
         #endregion
     }

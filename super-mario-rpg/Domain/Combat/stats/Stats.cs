@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Effort.Domain;
 using static SuperMarioRpg.Domain.Combat.Stat;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Stats : ValueObject<Stats>
+    public class Stats : ValueObject
     {
         public static Stats Default = CreateStats();
 
@@ -85,16 +86,15 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Equality, Operators
 
-        protected override bool EqualsExplicit(Stats other) =>
-            Attack == other.Attack
-         && Defense == other.Defense
-         && Hp == other.Hp
-         && SpecialAttack == other.SpecialAttack
-         && SpecialDefense == other.SpecialDefense
-         && Speed == other.Speed;
-
-        protected override int GetHashCodeExplicit() =>
-            (Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed).GetHashCode();
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Attack;
+            yield return Defense;
+            yield return Hp;
+            yield return SpecialAttack;
+            yield return SpecialDefense;
+            yield return Speed;
+        }
 
         public static Stats operator +(Stats left, Stats right) =>
             CreateStats(

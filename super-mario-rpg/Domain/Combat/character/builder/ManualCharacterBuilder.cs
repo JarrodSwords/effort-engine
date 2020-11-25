@@ -100,9 +100,9 @@ namespace SuperMarioRpg.Domain.Combat
 
         public void CreateLoadout()
         {
-            Accessory = Equipment.SingleOrDefault(x => x.Slot == Slot.Accessory);
-            Armor = Equipment.SingleOrDefault(x => x.Slot == Slot.Armor);
-            Weapon = Equipment.SingleOrDefault(x => x.Slot == Slot.Weapon);
+            Accessory = Equipment.SingleOrDefault(x => x.EquipmentSlot == EquipmentSlot.Accessory);
+            Armor = Equipment.SingleOrDefault(x => x.EquipmentSlot == EquipmentSlot.Armor);
+            Weapon = Equipment.SingleOrDefault(x => x.EquipmentSlot == EquipmentSlot.Weapon);
         }
 
         public void CreateNaturalStats()
