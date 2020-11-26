@@ -1,5 +1,6 @@
 using System;
 using Effort.Domain;
+using static SuperMarioRpg.Domain.Combat.Equipment;
 using static SuperMarioRpg.Domain.Combat.Status;
 
 namespace SuperMarioRpg.Domain.Combat
@@ -10,26 +11,26 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Loadout(Equipment accessory = null, Equipment armor = null, Equipment weapon = null)
         {
-            Accessory = accessory ?? Equipment.DefaultAccessory;
-            Armor = armor ?? Equipment.DefaultArmor;
-            Weapon = weapon ?? Equipment.DefaultWeapon;
+            Accessory = accessory ?? DefaultAccessory;
+            Armor = armor ?? DefaultArmor;
+            Weapon = weapon ?? DefaultWeapon;
         }
 
         #endregion
 
         #region Public Interface
 
-        public Equipment Accessory { get; }
-        public Equipment Armor { get; }
-        public Equipment Weapon { get; }
+        public Equipment Accessory { get; init; }
+        public Equipment Armor { get; init; }
+        public Equipment Weapon { get; init; }
 
         public Loadout Equip(Equipment equipment)
         {
             return equipment.EquipmentSlot switch
             {
-                EquipmentSlot.Accessory => new Loadout(equipment, Armor, Weapon),
-                EquipmentSlot.Armor => new Loadout(Accessory, equipment, Weapon),
-                EquipmentSlot.Weapon => new Loadout(Accessory, Armor, equipment),
+                EquipmentSlot.Accessory => this with { Accessory = equipment },
+                EquipmentSlot.Armor => this with { Armor = equipment },
+                EquipmentSlot.Weapon => this with { Weapon = equipment },
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
@@ -52,13 +53,13 @@ namespace SuperMarioRpg.Domain.Combat
         public Loadout Unequip(Id id)
         {
             if (Accessory.Id == id)
-                return new Loadout(armor: Armor, weapon: Weapon);
+                return this with { Accessory = DefaultAccessory };
 
             if (Armor.Id == id)
-                return new Loadout(Accessory, weapon: Weapon);
+                return this with { Armor = DefaultArmor };
 
             if (Weapon.Id == id)
-                return new Loadout(Accessory, Armor);
+                return this with { Weapon = DefaultWeapon };
 
             return this;
         }
