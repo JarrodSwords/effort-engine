@@ -13,7 +13,7 @@ namespace SuperMarioRpg.Domain.Combat
         public static Equipment Shirt = CreateEquipment(EquipmentType.Shirt);
         public static Equipment SlapGlove = CreateEquipment(EquipmentType.SlapGlove);
 
-        #region Creation
+        #region Public Interface
 
         public static Equipment CreateEquipment(EquipmentType equipmentType)
         {

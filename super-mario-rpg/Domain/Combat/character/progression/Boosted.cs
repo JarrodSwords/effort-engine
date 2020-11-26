@@ -1,6 +1,6 @@
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Boosted : Progression
+    public record Boosted : Progression
     {
         #region Creation
 

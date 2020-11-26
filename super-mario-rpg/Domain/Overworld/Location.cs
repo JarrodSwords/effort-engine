@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Effort.Domain;
+﻿using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Overworld
 {
-    public class Location : ValueObject
+    public record Location
     {
         #region Creation
 
@@ -17,15 +16,6 @@ namespace SuperMarioRpg.Domain.Overworld
         #region Public Interface
 
         public Name Name { get; }
-
-        #endregion
-
-        #region Equality, Operators
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Name;
-        }
 
         #endregion
     }

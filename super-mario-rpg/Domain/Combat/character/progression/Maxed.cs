@@ -2,7 +2,7 @@ using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Maxed : Progression
+    public record Maxed : Progression
     {
         #region Creation
 
@@ -14,7 +14,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public override Progression Add(Xp xp) => Character.Progression;
+        public override Progression Add(Xp xp) => this;
 
         #endregion
     }

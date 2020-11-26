@@ -5,7 +5,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class Character : AggregateRoot
     {
-        private static readonly CharacterValidator Validator = new CharacterValidator();
+        private static readonly CharacterValidator Validator = new();
         private Loadout _loadout;
         private Progression _progression;
         private Status _status;

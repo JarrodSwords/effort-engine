@@ -2,7 +2,7 @@ using System;
 
 namespace Effort.Domain
 {
-    public class Id : TinyType<Guid>
+    public record Id : TinyType<Guid>
     {
         #region Creation
 
@@ -10,7 +10,7 @@ namespace Effort.Domain
         {
         }
 
-        public static Id CreateId(Guid value = default) => new Id(value);
+        public static Id CreateId(Guid value = default) => new(value);
 
         #endregion
     }

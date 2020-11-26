@@ -1,11 +1,10 @@
 using System;
-using System.Collections.Generic;
 using Effort.Domain;
 using static SuperMarioRpg.Domain.Combat.Status;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Loadout : ValueObject, IStatusProvider
+    public record Loadout : IStatusProvider
     {
         #region Creation
 
@@ -69,17 +68,6 @@ namespace SuperMarioRpg.Domain.Combat
         #region IStatusProvider Implementation
 
         public Status GetStatus() => Aggregate(Accessory, Armor, Weapon);
-
-        #endregion
-
-        #region Equality, Operators
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Accessory;
-            yield return Armor;
-            yield return Weapon;
-        }
 
         #endregion
     }

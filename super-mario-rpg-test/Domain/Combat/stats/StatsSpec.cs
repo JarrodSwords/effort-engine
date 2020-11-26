@@ -1,16 +1,12 @@
-﻿using Effort.Domain;
-using Effort.Test.Domain;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.Stats;
 
 namespace SuperMarioRpg.Test.Domain.Combat
 {
-    public class StatsSpec : ValueObjectSpec
+    public class StatsSpec
     {
         #region Test Methods
-
-        protected override ValueObject CreateValueObject() => CreateStats(20, 0, 20, 10, 2, 20);
 
         [Fact]
         public void WhenAdding_EachStatIsSummed()

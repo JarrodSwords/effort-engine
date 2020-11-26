@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Effort.Domain;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public abstract class Progression : ValueObject
+    public abstract record Progression
     {
         protected static readonly Xp Max = CreateXp(9999);
 
@@ -82,17 +81,6 @@ namespace SuperMarioRpg.Domain.Combat
                 node = node.Next;
 
             return node;
-        }
-
-        #endregion
-
-        #region Equality, Operators
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return CurrentLevel;
-            yield return ToNext;
-            yield return Xp;
         }
 
         #endregion

@@ -1,12 +1,10 @@
-using System.Collections.Generic;
 using System.Linq;
-using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Status : ValueObject
+    public record Status
     {
-        public static Status Default = new Status();
+        public static Status Default = new();
 
         #region Creation
 
@@ -34,23 +32,18 @@ namespace SuperMarioRpg.Domain.Combat
 
         public static Status Aggregate(params IStatusProvider[] statusProviders)
         {
-            return statusProviders.Aggregate(Default, (current, statusProvider) => current + statusProvider.GetStatus());
+            return statusProviders.Aggregate(
+                Default,
+                (current, statusProvider) => current + statusProvider.GetStatus()
+            );
         }
 
         #endregion
 
         #region Equality, Operators
 
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return AilmentImmunities;
-            yield return Buffs;
-            yield return ElementalImmunities;
-            yield return ElementalResistances;
-        }
-
         public static Status operator +(Status left, Status right) =>
-            new Status(
+            new(
                 left.AilmentImmunities | right.AilmentImmunities,
                 left.Buffs | right.Buffs,
                 left.ElementalImmunities | right.ElementalImmunities,

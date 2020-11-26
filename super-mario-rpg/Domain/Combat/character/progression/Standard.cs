@@ -1,6 +1,6 @@
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Standard : Progression
+    public record Standard : Progression
     {
         #region Creation
 
