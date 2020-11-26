@@ -50,15 +50,15 @@ namespace SuperMarioRpg.Domain.Combat
 
         public bool IsEquipped(Equipment equipment) => equipment == GetEquipment(equipment.EquipmentSlot);
 
-        public Loadout Unequip(Id id)
+        public Loadout Unequip(Equipment equipment)
         {
-            if (Accessory.Id == id)
+            if (Accessory == equipment)
                 return this with { Accessory = DefaultAccessory };
 
-            if (Armor.Id == id)
+            if (Armor == equipment)
                 return this with { Armor = DefaultArmor };
 
-            if (Weapon.Id == id)
+            if (Weapon == equipment)
                 return this with { Weapon = DefaultWeapon };
 
             return this;

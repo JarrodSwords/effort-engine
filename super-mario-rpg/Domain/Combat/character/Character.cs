@@ -81,9 +81,9 @@ namespace SuperMarioRpg.Domain.Combat
 
         public bool IsEquipped(Equipment equipment) => Loadout.IsEquipped(equipment);
 
-        public Character Unequip(Id id)
+        public Character Unequip(Equipment equipment)
         {
-            Loadout = Loadout.Unequip(id);
+            Loadout = Loadout.Unequip(equipment);
             return this;
         }
 
