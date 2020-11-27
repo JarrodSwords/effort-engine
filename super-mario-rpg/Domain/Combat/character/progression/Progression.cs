@@ -22,15 +22,6 @@ namespace SuperMarioRpg.Domain.Combat
             Character = character;
             CurrentNode = GetCurrentNode(xp);
             Xp = xp;
-            ToNext = NextLevel.Required - Xp;
-        }
-
-        protected Progression(Character character, Xp xp, Xp toNext)
-        {
-            CurrentNode = GetCurrentNode(xp);
-            Character = character;
-            Xp = xp;
-            ToNext = toNext;
         }
 
         #endregion
@@ -38,7 +29,7 @@ namespace SuperMarioRpg.Domain.Combat
         #region Public Interface
 
         public Level CurrentLevel => CurrentNode.Value;
-        public Xp ToNext { get; }
+        public Xp ToNext => CurrentNode.Next.Value.Required - Xp;
         public Xp Xp { get; }
 
         public event EventHandler<Stats> LeveledUp;
@@ -70,8 +61,6 @@ namespace SuperMarioRpg.Domain.Combat
         #endregion
 
         #region Private Interface
-
-        private Level NextLevel => CurrentNode.Next?.Value;
 
         private static LinkedListNode<Level> GetCurrentNode(Xp xp)
         {
