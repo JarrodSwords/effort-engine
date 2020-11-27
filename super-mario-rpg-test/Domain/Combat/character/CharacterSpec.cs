@@ -7,6 +7,7 @@ using FluentValidation;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
+using static SuperMarioRpg.Domain.Combat.Progression;
 using static SuperMarioRpg.Domain.Combat.StatFactory;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
@@ -85,14 +86,13 @@ namespace SuperMarioRpg.Test.Domain.Combat
         {
             _mario.Add(CreateXp(10000));
 
-            _mario.Progression.Xp.Value.Should().Be(9999);
+            _mario.Progression.Xp.Should().Be(Max);
         }
 
         [Fact]
         public void WhenAddingXp_WhileMaxed_NothingChanges()
         {
-            _mario.Add(CreateXp(9999));
-            var progression = _mario.Progression;
+            var progression = _mario.Add(Max).Progression;
 
             _mario.Add(CreateXp(1));
 
@@ -102,7 +102,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenAddingXp_WhileMaxedWithExpBooster_NothingChanges()
         {
-            var p1 = _mario.Add(CreateXp(9999)).Equip(ExpBooster).Progression;
+            var p1 = _mario.Add(Max).Equip(ExpBooster).Progression;
             var p2 = _mario.Add(CreateXp(1)).Progression;
             p2.Should().Be(p1);
         }
