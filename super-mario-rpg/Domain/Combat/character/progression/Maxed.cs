@@ -4,7 +4,7 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Creation
 
-        public Maxed(Character character) : base(character, Max)
+        public Maxed() : base(Max)
         {
         }
 

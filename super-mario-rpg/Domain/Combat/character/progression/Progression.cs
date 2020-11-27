@@ -6,20 +6,12 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public abstract record Progression
     {
-        protected static readonly Xp Max = CreateXp(9999);
+        public static readonly Xp Max = CreateXp(9999);
 
         #region Creation
 
-        protected Progression(Character character) : this(
-            character,
-            character.Progression.Xp
-        )
+        protected Progression(Xp xp)
         {
-        }
-
-        protected Progression(Character character, Xp xp)
-        {
-            Character = character;
             CurrentNode = GetCurrentNode(xp);
             Xp = xp;
         }
@@ -40,7 +32,6 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Protected Interface
 
-        protected Character Character { get; }
         protected LinkedListNode<Level> CurrentNode { get; }
 
         protected void LevelUp(Xp xp)

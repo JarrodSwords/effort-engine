@@ -15,7 +15,7 @@ namespace SuperMarioRpg.Domain.Combat
         public Character(ICharacterBuilder builder) : base(builder.Id)
         {
             CharacterType = builder.CharacterType;
-            Progression = new Standard(this, builder.Xp);
+            Progression = new Standard(builder.Xp);
             NaturalStats = builder.NaturalStats;
             Status = new Status();
             Loadout = new Loadout(builder.Accessory, builder.Armor, builder.Weapon);
@@ -95,10 +95,16 @@ namespace SuperMarioRpg.Domain.Combat
             NaturalStats += reward;
         }
 
-        private Progression CreateProgression() =>
-            Status.Buffs.Contains(Buffs.DoubleXp)
-                ? Boosted.CreateProgression(this)
-                : new Standard(this);
+        private Progression CreateProgression()
+        {
+            if (Progression.Xp == Progression.Max)
+                return new Maxed();
+
+            if (Status.Buffs.Contains(Buffs.DoubleXp))
+                return new Boosted(Progression.Xp);
+
+            return new Standard(Progression.Xp);
+        }
 
         private Status CreateStatus() => Loadout.GetStatus();
 

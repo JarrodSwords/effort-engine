@@ -4,20 +4,8 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Creation
 
-        public Boosted(Character character) : base(character)
+        public Boosted(Xp xp) : base(xp)
         {
-        }
-
-        public Boosted(Character character, Xp xp) : base(character, xp)
-        {
-        }
-
-        public static Progression CreateProgression(Character character)
-        {
-            if (character.Progression.Xp == Max)
-                return new Maxed(character);
-
-            return new Boosted(character);
         }
 
         #endregion
@@ -28,7 +16,7 @@ namespace SuperMarioRpg.Domain.Combat
         {
             var newXp = Xp + xp + xp;
             LevelUp(newXp);
-            return new Boosted(Character, newXp);
+            return new Boosted(newXp);
         }
 
         #endregion
