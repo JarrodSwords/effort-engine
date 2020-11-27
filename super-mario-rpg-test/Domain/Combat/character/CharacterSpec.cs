@@ -66,8 +66,10 @@ namespace SuperMarioRpg.Test.Domain.Combat
         public void WhenAddingXp_OverMaximum_XpIsLimited()
         {
             _mario.Add(CreateXp(10000));
+            _mallow.Equip(ExpBooster).Add(CreateXp(5000));
 
             _mario.Progression.Xp.Should().Be(Max);
+            _mallow.Progression.Xp.Should().Be(Max);
         }
 
         [Fact]
