@@ -83,9 +83,9 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [Fact]
         public void WhenAddingXp_WhileMaxedWithExpBooster_NothingChanges()
         {
-            var p1 = _mario.Add(Max).Equip(ExpBooster).Progression;
-            var p2 = _mario.Add(CreateXp(1)).Progression;
-            p2.Should().Be(p1);
+            var p1 = _mario.Add(Max).Progression;
+            var p2 = _mario.Equip(ExpBooster).Add(CreateXp(1)).Progression;
+            p2.Should().BeEquivalentTo(p1);
         }
 
         [Fact]
