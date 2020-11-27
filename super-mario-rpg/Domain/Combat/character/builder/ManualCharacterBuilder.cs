@@ -71,7 +71,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         private short Attack { get; set; }
         private short Defense { get; set; }
-        private List<Equipment> Equipment { get; } = new List<Equipment>();
+        private List<Equipment> Equipment { get; } = new();
         private short Hp { get; set; }
         private short SpecialAttack { get; set; }
         private short SpecialDefense { get; set; }

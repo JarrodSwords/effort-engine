@@ -1,36 +1,36 @@
 using System;
-using System.Collections.Generic;
 using Effort.Domain;
+using static SuperMarioRpg.Domain.Combat.Equipment;
 using static SuperMarioRpg.Domain.Combat.Status;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Loadout : ValueObject, IStatusProvider
+    public record Loadout : IStatusProvider
     {
         #region Creation
 
         public Loadout(Equipment accessory = null, Equipment armor = null, Equipment weapon = null)
         {
-            Accessory = accessory ?? Equipment.DefaultAccessory;
-            Armor = armor ?? Equipment.DefaultArmor;
-            Weapon = weapon ?? Equipment.DefaultWeapon;
+            Accessory = accessory ?? DefaultAccessory;
+            Armor = armor ?? DefaultArmor;
+            Weapon = weapon ?? DefaultWeapon;
         }
 
         #endregion
 
         #region Public Interface
 
-        public Equipment Accessory { get; }
-        public Equipment Armor { get; }
-        public Equipment Weapon { get; }
+        public Equipment Accessory { get; init; }
+        public Equipment Armor { get; init; }
+        public Equipment Weapon { get; init; }
 
         public Loadout Equip(Equipment equipment)
         {
             return equipment.EquipmentSlot switch
             {
-                EquipmentSlot.Accessory => new Loadout(equipment, Armor, Weapon),
-                EquipmentSlot.Armor => new Loadout(Accessory, equipment, Weapon),
-                EquipmentSlot.Weapon => new Loadout(Accessory, Armor, equipment),
+                EquipmentSlot.Accessory => this with { Accessory = equipment },
+                EquipmentSlot.Armor => this with { Armor = equipment },
+                EquipmentSlot.Weapon => this with { Weapon = equipment },
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
@@ -50,16 +50,16 @@ namespace SuperMarioRpg.Domain.Combat
 
         public bool IsEquipped(Equipment equipment) => equipment == GetEquipment(equipment.EquipmentSlot);
 
-        public Loadout Unequip(Id id)
+        public Loadout Unequip(Equipment equipment)
         {
-            if (Accessory.Id == id)
-                return new Loadout(armor: Armor, weapon: Weapon);
+            if (Accessory == equipment)
+                return this with { Accessory = DefaultAccessory };
 
-            if (Armor.Id == id)
-                return new Loadout(Accessory, weapon: Weapon);
+            if (Armor == equipment)
+                return this with { Armor = DefaultArmor };
 
-            if (Weapon.Id == id)
-                return new Loadout(Accessory, Armor);
+            if (Weapon == equipment)
+                return this with { Weapon = DefaultWeapon };
 
             return this;
         }
@@ -69,17 +69,6 @@ namespace SuperMarioRpg.Domain.Combat
         #region IStatusProvider Implementation
 
         public Status GetStatus() => Aggregate(Accessory, Armor, Weapon);
-
-        #endregion
-
-        #region Equality, Operators
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Accessory;
-            yield return Armor;
-            yield return Weapon;
-        }
 
         #endregion
     }

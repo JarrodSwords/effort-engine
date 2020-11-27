@@ -1,37 +1,19 @@
 using System;
 using System.Collections.Generic;
-using Effort.Domain;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public abstract class Progression : ValueObject
+    public abstract record Progression
     {
-        protected static readonly Xp Max = CreateXp(9999);
+        public static readonly Xp Max = CreateXp(9999);
 
         #region Creation
 
-        protected Progression(Character character) : this(
-            character,
-            character.Progression.Xp
-        )
-        {
-        }
-
-        protected Progression(Character character, Xp xp)
-        {
-            Character = character;
-            CurrentNode = GetCurrentNode(xp);
-            Xp = xp;
-            ToNext = NextLevel.Required - Xp;
-        }
-
-        protected Progression(Character character, Xp xp, Xp toNext)
+        protected Progression(Xp xp)
         {
             CurrentNode = GetCurrentNode(xp);
-            Character = character;
             Xp = xp;
-            ToNext = toNext;
         }
 
         #endregion
@@ -39,7 +21,7 @@ namespace SuperMarioRpg.Domain.Combat
         #region Public Interface
 
         public Level CurrentLevel => CurrentNode.Value;
-        public Xp ToNext { get; }
+        public Xp ToNext => CurrentNode.Next is null ? CreateXp() : CurrentNode.Next?.Value.Required - Xp;
         public Xp Xp { get; }
 
         public event EventHandler<Stats> LeveledUp;
@@ -50,7 +32,6 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Protected Interface
 
-        protected Character Character { get; }
         protected LinkedListNode<Level> CurrentNode { get; }
 
         protected void LevelUp(Xp xp)
@@ -72,8 +53,6 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Private Interface
 
-        private Level NextLevel => CurrentNode.Next?.Value;
-
         private static LinkedListNode<Level> GetCurrentNode(Xp xp)
         {
             var node = Level.Levels.First;
@@ -82,17 +61,6 @@ namespace SuperMarioRpg.Domain.Combat
                 node = node.Next;
 
             return node;
-        }
-
-        #endregion
-
-        #region Equality, Operators
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return CurrentLevel;
-            yield return ToNext;
-            yield return Xp;
         }
 
         #endregion

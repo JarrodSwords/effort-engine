@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-
 namespace Effort.Domain
 {
-    public class Name : TinyType<string>
+    public record Name : TinyType<string>
     {
         #region Creation
 
@@ -10,16 +8,7 @@ namespace Effort.Domain
         {
         }
 
-        public static Name CreateName(string value) => new Name(value);
-
-        #endregion
-
-        #region Equality, Operators
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value.ToUpper();
-        }
+        public static Name CreateName(string value) => new(value);
 
         #endregion
     }

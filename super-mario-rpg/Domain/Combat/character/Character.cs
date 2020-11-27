@@ -5,7 +5,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class Character : AggregateRoot
     {
-        private static readonly CharacterValidator Validator = new CharacterValidator();
+        private static readonly CharacterValidator Validator = new();
         private Loadout _loadout;
         private Progression _progression;
         private Status _status;
@@ -15,7 +15,7 @@ namespace SuperMarioRpg.Domain.Combat
         public Character(ICharacterBuilder builder) : base(builder.Id)
         {
             CharacterType = builder.CharacterType;
-            Progression = new Standard(this, builder.Xp);
+            Progression = new Standard(builder.Xp);
             NaturalStats = builder.NaturalStats;
             Status = new Status();
             Loadout = new Loadout(builder.Accessory, builder.Armor, builder.Weapon);
@@ -26,7 +26,7 @@ namespace SuperMarioRpg.Domain.Combat
         #region Public Interface
 
         public CharacterTypes CharacterType { get; }
-        public Stats EffectiveStats { get; private set; }
+        public Stats EffectiveStats => NaturalStats + Loadout.GetStats();
 
         public Loadout Loadout
         {
@@ -34,7 +34,6 @@ namespace SuperMarioRpg.Domain.Combat
             set
             {
                 _loadout = value;
-                EffectiveStats = CreateEffectiveStats();
                 Status = CreateStatus();
                 Validator.ValidateAndThrow(this);
             }
@@ -81,9 +80,9 @@ namespace SuperMarioRpg.Domain.Combat
 
         public bool IsEquipped(Equipment equipment) => Loadout.IsEquipped(equipment);
 
-        public Character Unequip(Id id)
+        public Character Unequip(Equipment equipment)
         {
-            Loadout = Loadout.Unequip(id);
+            Loadout = Loadout.Unequip(equipment);
             return this;
         }
 
@@ -96,12 +95,16 @@ namespace SuperMarioRpg.Domain.Combat
             NaturalStats += reward;
         }
 
-        private Stats CreateEffectiveStats() => NaturalStats + Loadout.GetStats();
+        private Progression CreateProgression()
+        {
+            if (Progression.Xp == Progression.Max)
+                return new Maxed();
 
-        private Progression CreateProgression() =>
-            Status.Buffs.Contains(Buffs.DoubleXp)
-                ? Boosted.CreateProgression(this)
-                : new Standard(this);
+            if (Status.Buffs.Contains(Buffs.DoubleXp))
+                return new Boosted(Progression.Xp);
+
+            return new Standard(Progression.Xp);
+        }
 
         private Status CreateStatus() => Loadout.GetStatus();
 

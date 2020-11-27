@@ -1,14 +1,10 @@
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Standard : Progression
+    public record Standard : Progression
     {
         #region Creation
 
-        public Standard(Character character) : base(character, character.Progression.Xp)
-        {
-        }
-
-        public Standard(Character character, Xp xp) : base(character, xp)
+        public Standard(Xp xp) : base(xp)
         {
         }
 
@@ -22,9 +18,9 @@ namespace SuperMarioRpg.Domain.Combat
             LevelUp(newXp);
 
             if (newXp.Value >= Max.Value)
-                return new Maxed(Character);
+                return new Maxed();
 
-            return new Standard(Character, newXp);
+            return new Standard(newXp);
         }
 
         #endregion

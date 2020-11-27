@@ -5,7 +5,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class StatFactory
     {
-        #region Creation
+        #region Public Interface
 
         public static Stats CreateStats(CharacterTypes key)
         {
