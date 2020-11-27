@@ -26,7 +26,7 @@ namespace SuperMarioRpg.Domain.Combat
         #region Public Interface
 
         public CharacterTypes CharacterType { get; }
-        public Stats EffectiveStats { get; private set; }
+        public Stats EffectiveStats => NaturalStats + Loadout.GetStats();
 
         public Loadout Loadout
         {
@@ -34,7 +34,6 @@ namespace SuperMarioRpg.Domain.Combat
             set
             {
                 _loadout = value;
-                EffectiveStats = CreateEffectiveStats();
                 Status = CreateStatus();
                 Validator.ValidateAndThrow(this);
             }
@@ -95,8 +94,6 @@ namespace SuperMarioRpg.Domain.Combat
         {
             NaturalStats += reward;
         }
-
-        private Stats CreateEffectiveStats() => NaturalStats + Loadout.GetStats();
 
         private Progression CreateProgression() =>
             Status.Buffs.Contains(Buffs.DoubleXp)

@@ -60,11 +60,13 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
-        public void WhenAddingXp_AfterUnequippingExpBooster_GainStandardXp()
+        public void WhenAddingXp_GainXp()
         {
-            _mario.Equip(ExpBooster).Unequip(ExpBooster).Add(CreateXp(500));
+            var xp = CreateXp(500);
 
-            _mario.Progression.Xp.Value.Should().Be(500);
+            _mario.Add(xp);
+
+            _mario.Progression.Xp.Should().Be(xp);
         }
 
         [Theory]
@@ -111,14 +113,6 @@ namespace SuperMarioRpg.Test.Domain.Combat
             _mario.Equip(ExpBooster).Add(CreateXp(500));
 
             _mario.Progression.Xp.Value.Should().Be(1000);
-        }
-
-        [Fact]
-        public void WhenAddingXp_XpIsUpdated()
-        {
-            _mario.Add(CreateXp(500));
-
-            _mario.Progression.Xp.Value.Should().Be(500);
         }
 
         [Theory]
