@@ -46,6 +46,9 @@ namespace SuperMarioRpg.Domain.Combat
             get => _progression;
             private set
             {
+                if (_progression == value)
+                    return;
+
                 _progression = value;
                 _progression.LeveledUp += Add;
             }
