@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Effort.Domain;
 using Effort.Test.Domain;
 using FluentAssertions;
@@ -8,7 +7,6 @@ using SuperMarioRpg.Domain.Combat;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 using static SuperMarioRpg.Domain.Combat.Progression;
-using static SuperMarioRpg.Domain.Combat.StatFactory;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
@@ -18,22 +16,21 @@ namespace SuperMarioRpg.Test.Domain.Combat
     {
         #region Core
 
-        private readonly Director _director;
         private readonly Character _mallow;
         private readonly ManualCharacterBuilder _manualBuilder;
         private readonly Character _mario;
 
         public CharacterSpec()
         {
-            _director = new Director();
+            var director = new Director();
             _manualBuilder = new ManualCharacterBuilder();
 
             var builder = new NewCharacterBuilder();
-            _director.Configure(builder);
+            director.Configure(builder);
             _mario = builder.Build();
 
             builder.For(CharacterTypes.Mallow);
-            _director.Configure(builder);
+            director.Configure(builder);
             _mallow = builder.Build();
         }
 
@@ -43,22 +40,6 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
         protected override Entity CreateEntity() => _mario;
         protected override Entity CreateEntity(Guid id) => _manualBuilder.WithId(id).Build();
-
-        [Theory]
-        [InlineData(EquipmentType.Hammer)]
-        [InlineData(EquipmentType.Hammer, EquipmentType.Shirt, EquipmentType.JumpShoes)]
-        public void EffectiveStatsAreSumOfNaturalStatsAndLoadout(params EquipmentType[] equipmentTypes)
-        {
-            var equipment = CreateEquipment(equipmentTypes).ToArray();
-            _manualBuilder.Add(equipment).WithNaturalStats(20, 0, 20, 10, 2, 20);
-            var expectedStats = CreateStats(CharacterTypes.Mario)
-                              + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
-
-            _director.Configure(_manualBuilder);
-            var character = _manualBuilder.Build();
-
-            character.EffectiveStats.Should().BeEquivalentTo(expectedStats);
-        }
 
         [Fact]
         public void WhenAddingXp_GainXp()
@@ -144,6 +125,14 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
+        public void WhenEquipping_ItemWithNewStatus_StatusIsAdded()
+        {
+            _mario.Equip(ExpBooster);
+
+            _mario.Status.Buffs.Contains(ExpBooster.Buffs).Should().BeTrue();
+        }
+
+        [Fact]
         public void WhenLevelingUp_StatsChange()
         {
             var rewardStats = CreateStats(3, 2, 5, 2, 2);
@@ -158,7 +147,7 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [InlineData(EquipmentType.Hammer)]
         [InlineData(EquipmentType.Shirt)]
         [InlineData(EquipmentType.JumpShoes)]
-        public void WhenUnequipping_WithEquipmentId_ItemIsUnequipped(EquipmentType equipmentType)
+        public void WhenUnequipping_ItemIsUnequipped(EquipmentType equipmentType)
         {
             var equipment = CreateEquipment(equipmentType);
 
@@ -166,6 +155,14 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
             _mario.IsEquipped(equipment).Should().BeFalse();
             _mario.EffectiveStats.Should().Be(_mario.NaturalStats);
+        }
+
+        [Fact]
+        public void WhenUnequipping_ItemProvidingStatus_StatusIsRemoved()
+        {
+            _mario.Equip(ExpBooster).Unequip(ExpBooster);
+
+            _mario.Status.Buffs.Contains(ExpBooster.Buffs).Should().BeFalse();
         }
 
         #endregion

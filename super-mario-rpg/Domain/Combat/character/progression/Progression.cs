@@ -21,7 +21,7 @@ namespace SuperMarioRpg.Domain.Combat
         #region Public Interface
 
         public Level CurrentLevel => CurrentNode.Value;
-        public Xp ToNext => CurrentNode.Next is null ? CreateXp() : CurrentNode.Next?.Value.Required - Xp;
+        public Xp ToNext => CurrentNode.Next is null ? CreateXp() : CurrentNode.Next.Value.Required - Xp;
         public Xp Xp { get; }
 
         public event EventHandler<Stats> LeveledUp;
