@@ -41,16 +41,6 @@ namespace SuperMarioRpg.Test.Domain.Combat
         protected override Entity CreateEntity() => _mario;
         protected override Entity CreateEntity(Guid id) => _manualBuilder.WithId(id).Build();
 
-        [Fact]
-        public void WhenAddingXp_GainXp()
-        {
-            var xp = CreateXp(500);
-
-            _mario.Add(xp);
-
-            _mario.Progression.Xp.Should().Be(xp);
-        }
-
         [Theory]
         [InlineData(15, 1)]
         [InlineData(16, 2)]
@@ -63,39 +53,49 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
-        public void WhenAddingXp_OverMaximum_XpIsLimited()
+        public void WhenAddingXp_OverMaximum_XpIsCapped()
         {
-            _mario.Add(CreateXp(10000));
-            _mallow.Equip(ExpBooster).Add(CreateXp(5000));
+            var xp = CreateXp(10000);
+
+            _mario.Add(xp);
+            _mallow.Equip(ExpBooster).Add(xp);
 
             _mario.Progression.Xp.Should().Be(Max);
+            _mario.Progression.Should().BeOfType<Maxed>();
             _mallow.Progression.Xp.Should().Be(Max);
+            _mallow.Progression.Should().BeOfType<Maxed>();
         }
 
         [Fact]
-        public void WhenAddingXp_WhileMaxed_NothingChanges()
-        {
-            var progression = _mario.Add(Max).Progression;
-
-            _mario.Add(CreateXp(1));
-
-            _mario.Progression.Should().Be(progression);
-        }
-
-        [Fact]
-        public void WhenAddingXp_WhileMaxedWithExpBooster_NothingChanges()
-        {
-            var p1 = _mario.Add(Max).Progression;
-            var p2 = _mario.Equip(ExpBooster).Add(CreateXp(1)).Progression;
-            p2.Should().BeEquivalentTo(p1);
-        }
-
-        [Fact]
-        public void WhenAddingXp_WithExpBooster_GainDoubleXp()
+        public void WhenAddingXp_WhileBoosted_GainDoubleXp()
         {
             _mario.Equip(ExpBooster).Add(CreateXp(500));
 
             _mario.Progression.Xp.Value.Should().Be(1000);
+        }
+
+        [Fact]
+        public void WhenAddingXp_WhileMaxed_NoChange()
+        {
+            var marioProgression = _mario.Add(Max).Progression;
+            var mallowProgression = _mallow.Add(Max).Equip(ExpBooster).Progression;
+            var xp = CreateXp(1);
+
+            _mario.Add(xp);
+            _mallow.Add(xp);
+
+            _mario.Progression.Should().Be(marioProgression);
+            _mallow.Progression.Should().Be(mallowProgression);
+        }
+
+        [Fact]
+        public void WhenAddingXp_WhileStandard_GainXp()
+        {
+            var xp = CreateXp(500);
+
+            _mario.Add(xp);
+
+            _mario.Progression.Xp.Should().Be(xp);
         }
 
         [Theory]
