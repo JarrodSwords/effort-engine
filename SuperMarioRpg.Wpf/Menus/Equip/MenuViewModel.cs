@@ -1,14 +1,14 @@
 ﻿using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Wpf.EquipMenu
+namespace SuperMarioRpg.Wpf.Menus.Equip
 {
-    public class EquipMenuViewModel : ViewModel
+    public class MenuViewModel : ViewModel
     {
         private readonly Character _character;
 
         #region Creation
 
-        public EquipMenuViewModel(Character character)
+        public MenuViewModel(Character character)
         {
             _character = character;
         }

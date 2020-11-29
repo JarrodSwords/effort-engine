@@ -1,6 +1,6 @@
 ﻿using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Wpf.EquipMenu
+namespace SuperMarioRpg.Wpf.Menus.Equip
 {
     public class StatsViewModel : ViewModel
     {

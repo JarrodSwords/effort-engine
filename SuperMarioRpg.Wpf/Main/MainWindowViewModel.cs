@@ -1,5 +1,5 @@
 ﻿using SuperMarioRpg.Domain.Combat;
-using SuperMarioRpg.Wpf.EquipMenu;
+using SuperMarioRpg.Wpf.Menus.Equip;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 
 namespace SuperMarioRpg.Wpf.Main
@@ -18,14 +18,14 @@ namespace SuperMarioRpg.Wpf.Main
                 .Equip(Shirt)
                 .Equip(ExpBooster);
 
-            EquipMenuViewModel = new EquipMenuViewModel(character);
+            MenuViewModel = new MenuViewModel(character);
         }
 
         #endregion
 
         #region Public Interface
 
-        public EquipMenuViewModel EquipMenuViewModel { get; }
+        public MenuViewModel MenuViewModel { get; }
 
         #endregion
     }

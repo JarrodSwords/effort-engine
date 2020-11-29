@@ -1,15 +1,15 @@
 ﻿using System.Windows.Controls;
 
-namespace SuperMarioRpg.Wpf.EquipMenu
+namespace SuperMarioRpg.Wpf.Menus.Equip
 {
     /// <summary>
-    ///     Interaction logic for EquipMenuView.xaml
+    ///     Interaction logic for MenuView.xaml
     /// </summary>
-    public partial class EquipMenuView : Page
+    public partial class MenuView : Page
     {
         #region Creation
 
-        public EquipMenuView()
+        public MenuView()
         {
             InitializeComponent();
         }
