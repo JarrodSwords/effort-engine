@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Effort.Domain;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
@@ -93,6 +94,7 @@ namespace SuperMarioRpg.Domain.Combat
         public Equipment Armor { get; private set; }
         public CharacterTypes CharacterType { get; private set; }
         public Guid Id { get; private set; }
+        public Name Name { get; }
         public Stats NaturalStats { get; private set; }
         public Equipment Weapon { get; private set; }
 

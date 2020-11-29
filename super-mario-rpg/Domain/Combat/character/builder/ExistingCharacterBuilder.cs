@@ -1,4 +1,5 @@
 using System;
+using Effort.Domain;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
@@ -28,6 +29,7 @@ namespace SuperMarioRpg.Domain.Combat
         public Equipment Armor { get; }
         public CharacterTypes CharacterType => Dto.CharacterType;
         public Guid Id => Dto.Id;
+        public Name Name { get; }
 
         public Stats NaturalStats { get; private set; }
         public Equipment Weapon { get; }

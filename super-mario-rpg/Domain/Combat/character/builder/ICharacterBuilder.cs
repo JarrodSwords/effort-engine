@@ -1,4 +1,5 @@
 using System;
+using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -10,6 +11,7 @@ namespace SuperMarioRpg.Domain.Combat
         Equipment Armor { get; }
         CharacterTypes CharacterType { get; }
         Guid Id { get; }
+        Name Name { get; }
         Stats NaturalStats { get; }
         Equipment Weapon { get; }
         Xp Xp { get; }

@@ -8,10 +8,6 @@
     <ProjectReference Include="..\super-mario-rpg\SuperMarioRpg.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Menus\Status\" />
-  </ItemGroup>
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>

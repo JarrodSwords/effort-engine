@@ -14,6 +14,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Character(ICharacterBuilder builder) : base(builder.Id)
         {
+            Name = builder.Name;
             CharacterType = builder.CharacterType;
             Progression = new Standard(builder.Xp);
             NaturalStats = builder.NaturalStats;
@@ -39,6 +40,7 @@ namespace SuperMarioRpg.Domain.Combat
             }
         }
 
+        public Name Name { get; }
         public Stats NaturalStats { get; private set; }
 
         public Progression Progression
