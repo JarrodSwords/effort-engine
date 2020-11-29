@@ -2,7 +2,7 @@ using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Xp : TinyType<ushort>
+    public record Xp : TinyType<ushort>
     {
         #region Creation
 
@@ -10,7 +10,11 @@ namespace SuperMarioRpg.Domain.Combat
         {
         }
 
-        public static Xp CreateXp(ushort value = default) => new Xp(value);
+        #endregion
+
+        #region Public Interface
+
+        public static Xp CreateXp(ushort value = default) => new(value);
 
         #endregion
 

@@ -2,7 +2,7 @@
 
 namespace SuperMarioRpg.Domain.Overworld
 {
-    public class Location : ValueObject<Location>
+    public record Location
     {
         #region Creation
 
@@ -16,13 +16,6 @@ namespace SuperMarioRpg.Domain.Overworld
         #region Public Interface
 
         public Name Name { get; }
-
-        #endregion
-
-        #region Equality, Operators
-
-        protected override bool EqualsExplicit(Location other) => Name == other.Name;
-        protected override int GetHashCodeExplicit() => Name.GetHashCode();
 
         #endregion
     }

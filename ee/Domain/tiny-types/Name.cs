@@ -1,6 +1,6 @@
 namespace Effort.Domain
 {
-    public class Name : TinyTypeOfString
+    public record Name : TinyType<string>
     {
         #region Creation
 
@@ -8,7 +8,11 @@ namespace Effort.Domain
         {
         }
 
-        public static Name CreateName(string value) => new Name(value);
+        #endregion
+
+        #region Public Interface
+
+        public static Name CreateName(string value) => new(value);
 
         #endregion
     }

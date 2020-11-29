@@ -13,48 +13,48 @@ namespace SuperMarioRpg.Domain.Combat
         public static Equipment Shirt = CreateEquipment(EquipmentType.Shirt);
         public static Equipment SlapGlove = CreateEquipment(EquipmentType.SlapGlove);
 
-        #region Creation
+        #region Public Interface
 
         public static Equipment CreateEquipment(EquipmentType equipmentType)
         {
             var equipment = equipmentType switch
             {
-                EquipmentType.ExpBooster => new Equipment(
-                    "Exp. Booster",
-                    EquipmentType.ExpBooster,
-                    Slot.Accessory,
+                EquipmentType.ExpBooster => Equipment.CreateEquipment(
+                    equipmentType,
+                    EquipmentSlot.Accessory,
                     CharacterTypes.All,
-                    new Status(Buffs.DoubleExperience)
+                    "Exp. Booster",
+                    Buffs.DoubleXp
                 ),
-                EquipmentType.Hammer => new Equipment(
-                    "Hammer",
-                    EquipmentType.Hammer,
-                    Slot.Weapon,
-                    CharacterTypes.Mario
+                EquipmentType.Hammer => Equipment.CreateEquipment(
+                    equipmentType,
+                    EquipmentSlot.Weapon,
+                    CharacterTypes.Mario,
+                    "Hammer"
                 ),
-                EquipmentType.JumpShoes => new Equipment(
-                    "Jump Shoes",
-                    EquipmentType.JumpShoes,
-                    Slot.Accessory,
-                    CharacterTypes.Mario
+                EquipmentType.JumpShoes => Equipment.CreateEquipment(
+                    equipmentType,
+                    EquipmentSlot.Accessory,
+                    CharacterTypes.Mario,
+                    "Jump Shoes"
                 ),
-                EquipmentType.PolkaDress => new Equipment(
-                    "Polka Dress",
-                    EquipmentType.PolkaDress,
-                    Slot.Armor,
-                    CharacterTypes.Toadstool
+                EquipmentType.PolkaDress => Equipment.CreateEquipment(
+                    equipmentType,
+                    EquipmentSlot.Armor,
+                    CharacterTypes.Toadstool,
+                    "Polka Dress"
                 ),
-                EquipmentType.Shirt => new Equipment(
-                    "Shirt",
-                    EquipmentType.Shirt,
-                    Slot.Armor,
-                    CharacterTypes.Mario
+                EquipmentType.Shirt => Equipment.CreateEquipment(
+                    equipmentType,
+                    EquipmentSlot.Armor,
+                    CharacterTypes.Mario,
+                    "Shirt"
                 ),
-                EquipmentType.SlapGlove => new Equipment(
-                    "Slap Glove",
-                    EquipmentType.SlapGlove,
-                    Slot.Weapon,
-                    CharacterTypes.Toadstool
+                EquipmentType.SlapGlove => Equipment.CreateEquipment(
+                    equipmentType,
+                    EquipmentSlot.Weapon,
+                    CharacterTypes.Toadstool,
+                    "Slap Glove"
                 ),
                 _ => throw new ArgumentOutOfRangeException(nameof(equipmentType), equipmentType, null)
             };

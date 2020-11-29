@@ -1,10 +1,9 @@
 ﻿using System.Linq;
-using Effort.Domain;
 using static SuperMarioRpg.Domain.Combat.Stat;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Stats : ValueObject<Stats>
+    public record Stats
     {
         public static Stats Default = CreateStats();
 
@@ -45,26 +44,6 @@ namespace SuperMarioRpg.Domain.Combat
         {
         }
 
-        public static Stats CreateStats(
-            short attack = default,
-            short defense = default,
-            short hp = default,
-            short specialAttack = default,
-            short specialDefense = default,
-            short speed = default
-        ) =>
-            new Stats(attack, defense, hp, specialAttack, specialDefense, speed);
-
-        public static Stats CreateStats(
-            Stat attack,
-            Stat defense,
-            Stat hp,
-            Stat specialAttack,
-            Stat specialDefense,
-            Stat speed
-        ) =>
-            new Stats(attack, defense, hp, specialAttack, specialDefense, speed);
-
         #endregion
 
         #region Public Interface
@@ -81,20 +60,29 @@ namespace SuperMarioRpg.Domain.Combat
             return stats.Aggregate((x, y) => x + y);
         }
 
+        public static Stats CreateStats(
+            short attack = default,
+            short defense = default,
+            short hp = default,
+            short specialAttack = default,
+            short specialDefense = default,
+            short speed = default
+        ) =>
+            new(attack, defense, hp, specialAttack, specialDefense, speed);
+
+        public static Stats CreateStats(
+            Stat attack,
+            Stat defense,
+            Stat hp,
+            Stat specialAttack,
+            Stat specialDefense,
+            Stat speed
+        ) =>
+            new(attack, defense, hp, specialAttack, specialDefense, speed);
+
         #endregion
 
         #region Equality, Operators
-
-        protected override bool EqualsExplicit(Stats other) =>
-            Attack == other.Attack
-         && Defense == other.Defense
-         && Hp == other.Hp
-         && SpecialAttack == other.SpecialAttack
-         && SpecialDefense == other.SpecialDefense
-         && Speed == other.Speed;
-
-        protected override int GetHashCodeExplicit() =>
-            (Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed).GetHashCode();
 
         public static Stats operator +(Stats left, Stats right) =>
             CreateStats(

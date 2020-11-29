@@ -5,58 +5,64 @@ using static SuperMarioRpg.Domain.Combat.StatFactory;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public partial class Equipment : Entity
+    public class Equipment : Entity, IStatusProvider
     {
-        public static Equipment DefaultAccessory = new NullEquipment(Slot.Accessory);
-        public static Equipment DefaultArmor = new NullEquipment(Slot.Armor);
-        public static Equipment DefaultWeapon = new NullEquipment(Slot.Weapon, "Unarmed");
+        public static Equipment DefaultAccessory = CreateEquipment(EquipmentSlot.Accessory);
+        public static Equipment DefaultArmor = CreateEquipment(EquipmentSlot.Armor);
+        public static Equipment DefaultWeapon = CreateEquipment(EquipmentSlot.Weapon);
 
         #region Creation
 
-        public Equipment(
-            string name,
+        private Equipment(
+            Guid id,
             EquipmentType equipmentType,
-            Slot slot,
-            CharacterTypes compatibleCharacterTypes,
-            Status status = default,
-            Guid id = default
+            EquipmentSlot equipmentSlot,
+            CharacterTypes characterTypes,
+            string name,
+            Buffs buffs
         ) : base(id)
         {
             Name = CreateName(name);
             EquipmentType = equipmentType;
-            Slot = slot;
+            EquipmentSlot = equipmentSlot;
             Stats = CreateStats(EquipmentType);
-            CompatibleCharacterTypes = compatibleCharacterTypes;
-            Status = status ?? new Status();
-        }
-
-        private Equipment(Equipment equipment) : this(
-            equipment.Name.Value,
-            equipment.EquipmentType,
-            equipment.Slot,
-            equipment.CompatibleCharacterTypes,
-            equipment.Status,
-            equipment.Id.Value
-        )
-        {
+            CharacterTypes = characterTypes;
+            Buffs = buffs;
         }
 
         #endregion
 
         #region Public Interface
 
-        public CharacterTypes CompatibleCharacterTypes { get; }
+        public Buffs Buffs { get; }
+        public CharacterTypes CharacterTypes { get; }
+        public EquipmentSlot EquipmentSlot { get; }
         public EquipmentType EquipmentType { get; }
         public Name Name { get; }
-        public Slot Slot { get; }
         public Stats Stats { get; }
-        public Status Status { get; }
 
-        public Equipment Clone() => new Equipment(this);
+        public static Equipment CreateEquipment(EquipmentSlot equipmentSlot) =>
+            new(Guid.Empty, EquipmentType.None, equipmentSlot, CharacterTypes.All, null, Buffs.None);
 
-        public bool IsCompatible(CharacterTypes characterType) => (characterType & CompatibleCharacterTypes) > 0;
+        public static Equipment CreateEquipment(
+            EquipmentType equipmentType,
+            EquipmentSlot equipmentSlot,
+            CharacterTypes characterTypes,
+            string name,
+            Buffs buffs = default,
+            Guid id = default
+        ) =>
+            new(id, equipmentType, equipmentSlot, characterTypes, name, buffs);
+
+        public bool IsCompatible(CharacterTypes characterType) => CharacterTypes.Contains(characterType);
 
         public override string ToString() => Name.ToString();
+
+        #endregion
+
+        #region IStatusProvider Implementation
+
+        public Status GetStatus() => new(buffs: Buffs);
 
         #endregion
     }

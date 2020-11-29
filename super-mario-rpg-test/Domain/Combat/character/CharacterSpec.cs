@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Effort.Domain;
 using Effort.Test.Domain;
 using FluentAssertions;
@@ -7,7 +6,7 @@ using FluentValidation;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
-using static SuperMarioRpg.Domain.Combat.StatFactory;
+using static SuperMarioRpg.Domain.Combat.Progression;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
@@ -17,22 +16,21 @@ namespace SuperMarioRpg.Test.Domain.Combat
     {
         #region Core
 
-        private readonly Director _director;
         private readonly Character _mallow;
         private readonly ManualCharacterBuilder _manualBuilder;
         private readonly Character _mario;
 
         public CharacterSpec()
         {
-            _director = new Director();
+            var director = new Director();
             _manualBuilder = new ManualCharacterBuilder();
 
             var builder = new NewCharacterBuilder();
-            _director.Configure(builder);
+            director.Configure(builder);
             _mario = builder.Build();
 
             builder.For(CharacterTypes.Mallow);
-            _director.Configure(builder);
+            director.Configure(builder);
             _mallow = builder.Build();
         }
 
@@ -42,30 +40,6 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
         protected override Entity CreateEntity() => _mario;
         protected override Entity CreateEntity(Guid id) => _manualBuilder.WithId(id).Build();
-
-        [Theory]
-        [InlineData(EquipmentType.Hammer)]
-        [InlineData(EquipmentType.Hammer, EquipmentType.Shirt, EquipmentType.JumpShoes)]
-        public void EffectiveStatsAreSumOfNaturalStatsAndLoadout(params EquipmentType[] equipmentTypes)
-        {
-            var equipment = CreateEquipment(equipmentTypes).ToArray();
-            _manualBuilder.Add(equipment).WithNaturalStats(20, 0, 20, 10, 2, 20);
-            var expectedStats = CreateStats(CharacterTypes.Mario)
-                              + equipment.Select(x => x.Stats).Aggregate((x, y) => x + y);
-
-            _director.Configure(_manualBuilder);
-            var character = _manualBuilder.Build();
-
-            character.EffectiveStats.Should().BeEquivalentTo(expectedStats);
-        }
-
-        [Fact]
-        public void WhenAddingXp_AfterUnequippingExpBooster_GainStandardXp()
-        {
-            _mario.Equip(ExpBooster).Unequip(ExpBooster.Id).Add(CreateXp(500));
-
-            _mario.Progression.Xp.Value.Should().Be(500);
-        }
 
         [Theory]
         [InlineData(15, 1)]
@@ -79,37 +53,21 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
-        public void WhenAddingXp_OverMaximum_XpIsLimited()
+        public void WhenAddingXp_OverMaximum_XpIsCapped()
         {
-            _mario.Add(CreateXp(10000));
+            var xp = CreateXp(10000);
 
-            _mario.Progression.Xp.Value.Should().Be(9999);
+            _mario.Add(xp);
+            _mallow.Equip(ExpBooster).Add(xp);
+
+            _mario.Progression.Xp.Should().Be(Max);
+            _mario.Progression.Should().BeOfType<Maxed>();
+            _mallow.Progression.Xp.Should().Be(Max);
+            _mallow.Progression.Should().BeOfType<Maxed>();
         }
 
         [Fact]
-        public void WhenAddingXp_WhileMaxed_NothingChanges()
-        {
-            _mario.Add(CreateXp(9999));
-            var progression = _mario.Progression;
-
-            _mario.Add(CreateXp(1));
-
-            _mario.Progression.Should().Be(progression);
-        }
-
-        [Fact]
-        public void WhenAddingXp_WhileMaxedWithExpBooster_NothingChanges()
-        {
-            _mario.Add(CreateXp(9999));
-            var progression = _mario.Progression;
-
-            _mario.Equip(ExpBooster).Add(CreateXp(1));
-
-            _mario.Progression.Should().Be(progression);
-        }
-
-        [Fact]
-        public void WhenAddingXp_WithExpBooster_GainDoubleXp()
+        public void WhenAddingXp_WhileBoosted_GainDoubleXp()
         {
             _mario.Equip(ExpBooster).Add(CreateXp(500));
 
@@ -117,11 +75,27 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
-        public void WhenAddingXp_XpIsUpdated()
+        public void WhenAddingXp_WhileMaxed_NoChange()
         {
-            _mario.Add(CreateXp(500));
+            var marioProgression = _mario.Add(Max).Progression;
+            var mallowProgression = _mallow.Add(Max).Equip(ExpBooster).Progression;
+            var xp = CreateXp(1);
 
-            _mario.Progression.Xp.Value.Should().Be(500);
+            _mario.Add(xp);
+            _mallow.Add(xp);
+
+            _mario.Progression.Should().Be(marioProgression);
+            _mallow.Progression.Should().Be(mallowProgression);
+        }
+
+        [Fact]
+        public void WhenAddingXp_WhileStandard_GainXp()
+        {
+            var xp = CreateXp(500);
+
+            _mario.Add(xp);
+
+            _mario.Progression.Xp.Should().Be(xp);
         }
 
         [Theory]
@@ -153,6 +127,14 @@ namespace SuperMarioRpg.Test.Domain.Combat
         }
 
         [Fact]
+        public void WhenEquipping_ItemWithNewStatus_StatusIsAdded()
+        {
+            _mario.Equip(ExpBooster);
+
+            _mario.Status.Buffs.Contains(ExpBooster.Buffs).Should().BeTrue();
+        }
+
+        [Fact]
         public void WhenLevelingUp_StatsChange()
         {
             var rewardStats = CreateStats(3, 2, 5, 2, 2);
@@ -167,14 +149,22 @@ namespace SuperMarioRpg.Test.Domain.Combat
         [InlineData(EquipmentType.Hammer)]
         [InlineData(EquipmentType.Shirt)]
         [InlineData(EquipmentType.JumpShoes)]
-        public void WhenUnequipping_WithEquipmentId_ItemIsUnequipped(EquipmentType equipmentType)
+        public void WhenUnequipping_ItemIsUnequipped(EquipmentType equipmentType)
         {
             var equipment = CreateEquipment(equipmentType);
 
-            _mario.Equip(equipment).Unequip(equipment.Id);
+            _mario.Equip(equipment).Unequip(equipment);
 
             _mario.IsEquipped(equipment).Should().BeFalse();
             _mario.EffectiveStats.Should().Be(_mario.NaturalStats);
+        }
+
+        [Fact]
+        public void WhenUnequipping_ItemProvidingStatus_StatusIsRemoved()
+        {
+            _mario.Equip(ExpBooster).Unequip(ExpBooster);
+
+            _mario.Status.Buffs.Contains(ExpBooster.Buffs).Should().BeFalse();
         }
 
         #endregion

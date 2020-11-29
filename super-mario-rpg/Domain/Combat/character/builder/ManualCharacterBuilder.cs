@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Effort.Domain;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
@@ -71,7 +72,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         private short Attack { get; set; }
         private short Defense { get; set; }
-        private List<Equipment> Equipment { get; } = new List<Equipment>();
+        private List<Equipment> Equipment { get; } = new();
         private short Hp { get; set; }
         private short SpecialAttack { get; set; }
         private short SpecialDefense { get; set; }
@@ -93,6 +94,7 @@ namespace SuperMarioRpg.Domain.Combat
         public Equipment Armor { get; private set; }
         public CharacterTypes CharacterType { get; private set; }
         public Guid Id { get; private set; }
+        public Name Name { get; }
         public Stats NaturalStats { get; private set; }
         public Equipment Weapon { get; private set; }
 
@@ -100,9 +102,9 @@ namespace SuperMarioRpg.Domain.Combat
 
         public void CreateLoadout()
         {
-            Accessory = Equipment.SingleOrDefault(x => x.Slot == Slot.Accessory);
-            Armor = Equipment.SingleOrDefault(x => x.Slot == Slot.Armor);
-            Weapon = Equipment.SingleOrDefault(x => x.Slot == Slot.Weapon);
+            Accessory = Equipment.SingleOrDefault(x => x.EquipmentSlot == EquipmentSlot.Accessory);
+            Armor = Equipment.SingleOrDefault(x => x.EquipmentSlot == EquipmentSlot.Armor);
+            Weapon = Equipment.SingleOrDefault(x => x.EquipmentSlot == EquipmentSlot.Weapon);
         }
 
         public void CreateNaturalStats()

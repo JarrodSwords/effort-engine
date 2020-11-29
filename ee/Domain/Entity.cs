@@ -2,13 +2,13 @@ using System;
 
 namespace Effort.Domain
 {
-    public abstract class Entity : IEquatable<Entity>
+    public abstract class Entity
     {
         #region Creation
 
         protected Entity(Guid id)
         {
-            Id = Id.Create(id);
+            Id = Id.CreateId(id);
         }
 
         #endregion
@@ -21,28 +21,32 @@ namespace Effort.Domain
 
         #region Equality, Operators
 
-        public bool Equals(Entity other)
+        public override bool Equals(object other)
         {
             if (other is null)
                 return false;
-            if (ReferenceEquals(this, other))
-                return true;
-            return Equals(Id, other.Id);
+
+            if (GetType() != other.GetType())
+                return false;
+
+            var otherEntity = (Entity) other;
+
+            return Id == otherEntity.Id;
         }
 
-        public override bool Equals(object obj)
+        public override int GetHashCode() => Id.GetHashCode();
+
+        public static bool operator ==(Entity left, Entity right)
         {
-            if (obj is null)
-                return false;
-            if (ReferenceEquals(this, obj))
+            if (left is null && right is null)
                 return true;
-            if (obj.GetType() != GetType())
+
+            if (left is null || right is null)
                 return false;
-            return Equals((Entity) obj);
+
+            return Equals(left, right);
         }
 
-        public override int GetHashCode() => Id != null ? Id.GetHashCode() : 0;
-        public static bool operator ==(Entity left, Entity right) => Equals(left, right);
         public static bool operator !=(Entity left, Entity right) => !Equals(left, right);
 
         #endregion

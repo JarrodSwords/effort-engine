@@ -1,0 +1,183 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:equip="clr-namespace:SuperMarioRpg.Wpf.Menus.Equip"
+                    xmlns:status="clr-namespace:SuperMarioRpg.Wpf.Menus.Status">
+
+    <DataTemplate x:Key="CharacterView" DataType="status:CharacterViewModel">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                   Content="{Binding Path=Name}" />
+
+            <Label Grid.Row="1" Grid.Column="0">LV</Label>
+            <Label Grid.Row="1" Grid.Column="1"
+                   Content="{Binding Path=Level}" />
+
+            <Label Grid.Row="2" Grid.Column="0">HP</Label>
+            <Label Grid.Row="2" Grid.Column="1"
+                   Content="{Binding Path=Hp}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="LoadoutView" DataType="equip:LoadoutViewModel">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="1"
+                   Content="{Binding Path=Weapon}" />
+
+            <Label Grid.Row="1" Grid.Column="1"
+                   Content="{Binding Path=Armor}" />
+
+            <Label Grid.Row="2" Grid.Column="1"
+                   Content="{Binding Path=Accessory}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="StatsView" DataType="equip:StatsViewModel">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0">Attack</Label>
+            <Label Grid.Row="0" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=Attack}" />
+
+            <Label Grid.Row="1" Grid.Column="0">Defense</Label>
+            <Label Grid.Row="1" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=Defense}" />
+
+            <Label Grid.Row="2" Grid.Column="0">Mg.Attack</Label>
+            <Label Grid.Row="2" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=MagicAttack}" />
+
+            <Label Grid.Row="3" Grid.Column="0">Mg.Defense</Label>
+            <Label Grid.Row="3" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=MagicDefense}" />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="StatusView" DataType="status:StatsViewModel">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0"
+                   HorizontalAlignment="Right">
+                Speed
+            </Label>
+            <Label Grid.Row="0" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=NaturalSpeed}" />
+            <Label Grid.Row="1" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=EffectiveSpeed}" />
+
+            <Label Grid.Row="2" Grid.Column="0"
+                   HorizontalAlignment="Right">
+                Attack
+            </Label>
+            <Label Grid.Row="2" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=NaturalAttack}" />
+            <Label Grid.Row="3" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=EffectiveAttack}" />
+
+            <Label Grid.Row="4" Grid.Column="0"
+                   HorizontalAlignment="Right">
+                Defense
+            </Label>
+            <Label Grid.Row="4" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=NaturalDefense}" />
+            <Label Grid.Row="5" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=EffectiveDefense}" />
+
+            <Label Grid.Row="6" Grid.Column="0"
+                   HorizontalAlignment="Right">
+                Mg.Attack
+            </Label>
+            <Label Grid.Row="6" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=NaturalMagicAttack}" />
+            <Label Grid.Row="7" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=EffectiveMagicAttack}" />
+
+            <Label Grid.Row="8" Grid.Column="0"
+                   HorizontalAlignment="Right">
+                Mg.Defense
+            </Label>
+            <Label Grid.Row="8" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=NaturalMagicDefense}" />
+            <Label Grid.Row="9" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=EffectiveMagicDefense}" />
+
+            <Label Grid.Row="10" Grid.Column="0"
+                   HorizontalAlignment="Right">
+                Exp.Level
+            </Label>
+            <Label Grid.Row="10" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=Xp}" />
+
+            <Label Grid.Row="11" Grid.Column="0"
+                   HorizontalAlignment="Right">
+                Next Level at
+            </Label>
+            <Label Grid.Row="11" Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Content="{Binding Path=NextLevelAt}" />
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

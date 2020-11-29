@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Stat : TinyType<short>
+    public record Stat : TinyType<short>
     {
         public const short Max = 255;
         public const short Min = -255;
@@ -15,7 +15,11 @@ namespace SuperMarioRpg.Domain.Combat
             new StatValidator().ValidateAndThrow(this);
         }
 
-        public static Stat CreateStat(short value = default) => new Stat(value);
+        #endregion
+
+        #region Public Interface
+
+        public static Stat CreateStat(short value = default) => new(value);
 
         #endregion
 

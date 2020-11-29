@@ -1,6 +1,6 @@
 namespace SuperMarioRpg.Domain.Combat
 {
-    public enum Slot
+    public enum EquipmentSlot
     {
         Accessory,
         Armor,

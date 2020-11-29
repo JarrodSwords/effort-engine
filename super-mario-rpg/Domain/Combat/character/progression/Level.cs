@@ -1,15 +1,13 @@
-using System;
 using System.Collections.Generic;
-using Effort.Domain;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Level : ValueObject<Level>
+    public record Level
     {
         public static LinkedList<Level> Levels =
-            new LinkedList<Level>(
+            new(
                 new[]
                 {
                     new Level(1, 0, Default),
@@ -61,13 +59,6 @@ namespace SuperMarioRpg.Domain.Combat
         public Stats CombatStatReward { get; }
         public Xp Required { get; }
         public byte Value { get; }
-
-        #endregion
-
-        #region Equality, Operators
-
-        protected override bool EqualsExplicit(Level other) => throw new NotImplementedException();
-        protected override int GetHashCodeExplicit() => throw new NotImplementedException();
 
         #endregion
     }
