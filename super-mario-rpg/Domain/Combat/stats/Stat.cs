@@ -15,6 +15,10 @@ namespace SuperMarioRpg.Domain.Combat
             new StatValidator().ValidateAndThrow(this);
         }
 
+        #endregion
+
+        #region Public Interface
+
         public static Stat CreateStat(short value = default) => new(value);
 
         #endregion

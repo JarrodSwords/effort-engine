@@ -10,6 +10,10 @@ namespace Effort.Domain
         {
         }
 
+        #endregion
+
+        #region Public Interface
+
         public static Id CreateId(Guid value = default) => new(value);
 
         #endregion

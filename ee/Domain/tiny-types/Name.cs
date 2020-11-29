@@ -8,6 +8,10 @@ namespace Effort.Domain
         {
         }
 
+        #endregion
+
+        #region Public Interface
+
         public static Name CreateName(string value) => new(value);
 
         #endregion
