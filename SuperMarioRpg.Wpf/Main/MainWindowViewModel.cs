@@ -1,5 +1,6 @@
 ﻿using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Wpf.EquipMenu;
+using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 
 namespace SuperMarioRpg.Wpf.Main
 {
@@ -11,7 +12,11 @@ namespace SuperMarioRpg.Wpf.Main
         {
             var builder = new NewCharacterBuilder();
             new Director().Configure(builder);
-            var character = builder.Build();
+            var character = builder
+                .Build()
+                .Equip(Hammer)
+                .Equip(Shirt)
+                .Equip(ExpBooster);
 
             EquipMenuViewModel = new EquipMenuViewModel(character);
         }

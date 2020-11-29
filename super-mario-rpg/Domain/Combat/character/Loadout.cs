@@ -1,5 +1,4 @@
 using System;
-using Effort.Domain;
 using static SuperMarioRpg.Domain.Combat.Equipment;
 using static SuperMarioRpg.Domain.Combat.Status;
 

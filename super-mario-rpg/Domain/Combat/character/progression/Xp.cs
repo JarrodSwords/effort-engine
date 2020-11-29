@@ -10,6 +10,10 @@ namespace SuperMarioRpg.Domain.Combat
         {
         }
 
+        #endregion
+
+        #region Public Interface
+
         public static Xp CreateXp(ushort value = default) => new(value);
 
         #endregion

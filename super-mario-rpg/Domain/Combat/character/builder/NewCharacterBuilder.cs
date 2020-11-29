@@ -9,11 +9,11 @@ namespace SuperMarioRpg.Domain.Combat
         private static readonly IReadOnlyDictionary<CharacterTypes, ushort> BaseExp =
             new Dictionary<CharacterTypes, ushort>
             {
-                {CharacterTypes.Bowser, 470},
-                {CharacterTypes.Geno, 234},
-                {CharacterTypes.Mallow, 30},
-                {CharacterTypes.Mario, 0},
-                {CharacterTypes.Toadstool, 600}
+                { CharacterTypes.Bowser, 470 },
+                { CharacterTypes.Geno, 234 },
+                { CharacterTypes.Mallow, 30 },
+                { CharacterTypes.Mario, 0 },
+                { CharacterTypes.Toadstool, 600 }
             };
 
         #region Creation

@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:equipMenu="clr-namespace:SuperMarioRpg.Wpf.EquipMenu"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
-    <ContentPresenter Content="{Binding Path=EquipMenuViewModel}"
-                      ContentTemplate="{StaticResource EquipMenuViewModel}" />
+    <equipMenu:EquipMenuView DataContext="{Binding Path=EquipMenuViewModel}" />
 
 </Window>

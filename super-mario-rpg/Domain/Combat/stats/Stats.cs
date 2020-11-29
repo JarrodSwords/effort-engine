@@ -44,6 +44,22 @@ namespace SuperMarioRpg.Domain.Combat
         {
         }
 
+        #endregion
+
+        #region Public Interface
+
+        public Stat Attack { get; }
+        public Stat Defense { get; }
+        public Stat Hp { get; }
+        public Stat SpecialAttack { get; }
+        public Stat SpecialDefense { get; }
+        public Stat Speed { get; }
+
+        public static Stats Aggregate(params Stats[] stats)
+        {
+            return stats.Aggregate((x, y) => x + y);
+        }
+
         public static Stats CreateStats(
             short attack = default,
             short defense = default,
@@ -63,22 +79,6 @@ namespace SuperMarioRpg.Domain.Combat
             Stat speed
         ) =>
             new(attack, defense, hp, specialAttack, specialDefense, speed);
-
-        #endregion
-
-        #region Public Interface
-
-        public Stat Attack { get; }
-        public Stat Defense { get; }
-        public Stat Hp { get; }
-        public Stat SpecialAttack { get; }
-        public Stat SpecialDefense { get; }
-        public Stat Speed { get; }
-
-        public static Stats Aggregate(params Stats[] stats)
-        {
-            return stats.Aggregate((x, y) => x + y);
-        }
 
         #endregion
 

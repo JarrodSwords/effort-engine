@@ -4,6 +4,8 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public interface ICharacterBuilder
     {
+        #region Public Interface
+
         Equipment Accessory { get; }
         Equipment Armor { get; }
         CharacterTypes CharacterType { get; }
@@ -14,5 +16,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         void CreateLoadout();
         void CreateNaturalStats();
+
+        #endregion
     }
 }

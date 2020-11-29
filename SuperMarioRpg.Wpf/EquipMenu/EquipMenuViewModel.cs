@@ -17,6 +17,7 @@ namespace SuperMarioRpg.Wpf.EquipMenu
 
         #region Public Interface
 
+        public LoadoutViewModel LoadoutViewModel => new(_character.Loadout);
         public StatsViewModel StatsViewModel => new(_character.EffectiveStats);
 
         #endregion
