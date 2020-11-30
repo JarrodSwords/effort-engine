@@ -6,6 +6,8 @@ namespace SuperMarioRpg.Wpf.Main
 {
     public class MainWindowViewModel : ViewModel
     {
+        private ViewModel _activeViewModel;
+
         #region Creation
 
         public MainWindowViewModel()
@@ -18,14 +20,25 @@ namespace SuperMarioRpg.Wpf.Main
                 .Equip(Shirt)
                 .Equip(ExpBooster);
 
-            MenuViewModel = new MenuViewModel(character);
+            ActiveViewModel = new MenuViewModel(character);
         }
 
         #endregion
 
         #region Public Interface
 
-        public MenuViewModel MenuViewModel { get; }
+        public ViewModel ActiveViewModel
+        {
+            get => _activeViewModel;
+            set
+            {
+                if (_activeViewModel == value)
+                    return;
+
+                _activeViewModel = value;
+                Notify(nameof(ActiveViewModel));
+            }
+        }
 
         #endregion
     }

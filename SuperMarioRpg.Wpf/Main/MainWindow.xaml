@@ -3,11 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:status="clr-namespace:SuperMarioRpg.Wpf.Menus.Status"
+        xmlns:main="clr-namespace:SuperMarioRpg.Wpf.Main"
         mc:Ignorable="d"
         Title="MainWindow" Height="480" Width="640">
-
-    <!--<equip:MenuView DataContext="{Binding Path=MenuViewModel}" />-->
-    <status:MenuView DataContext="{Binding Path=MenuViewModel}" />
-
+    <Window.DataContext>
+        <main:MainWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <ContentControl Content="{Binding Path=ActiveViewModel}" />
+    </Grid>
 </Window>

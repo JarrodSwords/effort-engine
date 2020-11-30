@@ -7,6 +7,10 @@
         <status:CharacterView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type TypeName=status:MenuViewModel}">
+        <status:MenuView />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type TypeName=equip:LoadoutViewModel}">
         <Grid>
             <Grid.ColumnDefinitions>
