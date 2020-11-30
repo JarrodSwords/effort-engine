@@ -3,10 +3,6 @@
                     xmlns:equip="clr-namespace:SuperMarioRpg.Wpf.Menus.Equip"
                     xmlns:status="clr-namespace:SuperMarioRpg.Wpf.Menus.Status">
 
-    <DataTemplate DataType="{x:Type TypeName=status:CharacterViewModel}">
-        <status:CharacterView />
-    </DataTemplate>
-
     <DataTemplate DataType="{x:Type TypeName=equip:LoadoutViewModel}">
         <equip:LoadoutView />
     </DataTemplate>
@@ -15,12 +11,16 @@
         <equip:MenuView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type TypeName=status:MenuViewModel}">
-        <status:MenuView />
-    </DataTemplate>
-
     <DataTemplate DataType="{x:Type TypeName=equip:StatsViewModel}">
         <equip:StatsView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type TypeName=status:CharacterViewModel}">
+        <status:CharacterView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type TypeName=status:MenuViewModel}">
+        <status:MenuView />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type TypeName=status:StatsViewModel}">
