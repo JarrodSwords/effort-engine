@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SuperMarioRpg.Wpf.Menus.Equip
 {
     /// <summary>
-    /// Interaction logic for MenuView.xaml
+    /// Interaction logic for StatsView.xaml
     /// </summary>
-    public partial class MenuView : UserControl
+    public partial class StatsView : UserControl
     {
-        public MenuView()
+        public StatsView()
         {
             InitializeComponent();
         }

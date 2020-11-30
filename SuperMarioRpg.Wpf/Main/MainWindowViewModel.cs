@@ -21,6 +21,7 @@ namespace SuperMarioRpg.Wpf.Main
                 .Equip(ExpBooster);
 
             ActiveViewModel = new MenuViewModel(character);
+            ActiveViewModel = new Menus.Equip.MenuViewModel(character);
         }
 
         #endregion

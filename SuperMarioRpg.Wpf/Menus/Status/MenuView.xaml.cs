@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace SuperMarioRpg.Wpf.Menus.Status
 {
     /// <summary>
-    /// Interaction logic for MenuView.xaml
+    /// Interaction logic for MenuView1.xaml
     /// </summary>
     public partial class MenuView : UserControl
     {
