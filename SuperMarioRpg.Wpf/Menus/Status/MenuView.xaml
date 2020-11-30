@@ -13,15 +13,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <ContentPresenter
-            Grid.Column="0"
-            Content="{Binding Path=CharacterViewModel}"
-            ContentTemplate="{StaticResource ResourceKey=CharacterView}" />
-
-        <ContentPresenter
-            Grid.Column="1"
-            Content="{Binding Path=StatsViewModel}"
-            ContentTemplate="{StaticResource ResourceKey=StatusView}" />
-
+        <ContentPresenter Grid.Column="0" Content="{Binding Path=CharacterViewModel}" />
+        <ContentPresenter Grid.Column="1" Content="{Binding Path=StatsViewModel}" />
     </Grid>
 </Page>
