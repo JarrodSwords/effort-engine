@@ -1,4 +1,5 @@
-﻿using SuperMarioRpg.Domain.Combat;
+﻿using System.Windows.Input;
+using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Wpf.Menus.Status;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 
@@ -22,6 +23,7 @@ namespace SuperMarioRpg.Wpf.Main
 
             ActiveViewModel = new MenuViewModel(character);
             ActiveViewModel = new Menus.Equip.MenuViewModel(character);
+            BCommand = new Command(DoSomething);
         }
 
         #endregion
@@ -39,6 +41,14 @@ namespace SuperMarioRpg.Wpf.Main
                 _activeViewModel = value;
                 Notify(nameof(ActiveViewModel));
             }
+        }
+
+
+        public ICommand BCommand { get; }
+
+        public void DoSomething()
+        {
+            var x = 10;
         }
 
         #endregion

@@ -6,6 +6,9 @@
         xmlns:main="clr-namespace:SuperMarioRpg.Wpf.Main"
         mc:Ignorable="d"
         Title="MainWindow" Height="480" Width="640">
+    <Window.InputBindings>
+        <KeyBinding Key="B" Command="{Binding Path=BCommand}" />
+    </Window.InputBindings>
     <Window.DataContext>
         <main:MainWindowViewModel />
     </Window.DataContext>
