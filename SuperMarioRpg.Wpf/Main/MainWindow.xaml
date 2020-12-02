@@ -7,8 +7,18 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="480" Width="640">
     <Window.InputBindings>
-        <KeyBinding Key="A" Command="{Binding Path=ACommand}" />
-        <KeyBinding Key="B" Command="{Binding Path=BCommand}" />
+        <KeyBinding Key="L" Command="{Binding Path=ACommand}" />
+        <KeyBinding Key="K" Command="{Binding Path=BCommand}" />
+        <KeyBinding Key="J" Command="{Binding Path=YCommand}" />
+        <KeyBinding Key="I" Command="{Binding Path=XCommand}" />
+        <KeyBinding Key="E" Command="{Binding Path=UpCommand}" />
+        <KeyBinding Key="D" Command="{Binding Path=DownCommand}" />
+        <KeyBinding Key="S" Command="{Binding Path=LeftCommand}" />
+        <KeyBinding Key="F" Command="{Binding Path=RightCommand}" />
+        <KeyBinding Key="G" Command="{Binding Path=SelectCommand}" />
+        <KeyBinding Key="H" Command="{Binding Path=StartCommand}" />
+        <KeyBinding Key="R" Command="{Binding Path=LCommand}" />
+        <KeyBinding Key="U" Command="{Binding Path=RCommand}" />
     </Window.InputBindings>
     <Window.DataContext>
         <main:MainWindowViewModel />
