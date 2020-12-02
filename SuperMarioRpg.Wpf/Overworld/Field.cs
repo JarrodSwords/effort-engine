@@ -12,7 +12,7 @@ namespace SuperMarioRpg.Wpf.Overworld
 
         public Field(MainWindowViewModel game) : base(game)
         {
-            SetControlState(new FieldControlState(this));
+            ControlState = new FieldControlState(this);
         }
 
         #endregion

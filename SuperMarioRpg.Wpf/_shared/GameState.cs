@@ -21,18 +21,7 @@ namespace SuperMarioRpg.Wpf
         public IControlState ControlState
         {
             get => _controlState;
-            set
-            {
-                if (_controlState == value)
-                    return;
-
-                _controlState = value;
-            }
-        }
-
-        public void SetControlState(IControlState state)
-        {
-            ControlState = state;
+            protected set => SetProperty(ref _controlState, value);
         }
 
         #endregion

@@ -13,7 +13,7 @@ namespace SuperMarioRpg.Wpf.Menus.Equip
         public MenuViewModel(MainWindowViewModel game, Character character) : base(game)
         {
             _character = character;
-            SetControlState(new MenuControlState());
+            ControlState = new MenuControlState();
         }
 
         #endregion
