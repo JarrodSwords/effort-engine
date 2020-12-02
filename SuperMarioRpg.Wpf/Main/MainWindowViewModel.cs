@@ -1,13 +1,12 @@
-﻿using System.Windows.Input;
-using SuperMarioRpg.Domain.Combat;
+﻿using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Wpf.Menus.Status;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 
 namespace SuperMarioRpg.Wpf.Main
 {
-    public class MainWindowViewModel : ViewModel
+    public class MainWindowViewModel : ViewModel, IControllerState
     {
-        private ViewModel _activeViewModel;
+        private ControllableViewModel _activeViewModel;
 
         #region Creation
 
@@ -22,15 +21,13 @@ namespace SuperMarioRpg.Wpf.Main
                 .Equip(ExpBooster);
 
             ActiveViewModel = new MenuViewModel(character);
-            ActiveViewModel = new Menus.Equip.MenuViewModel(character);
-            BCommand = new Command(DoSomething);
         }
 
         #endregion
 
         #region Public Interface
 
-        public ViewModel ActiveViewModel
+        public ControllableViewModel ActiveViewModel
         {
             get => _activeViewModel;
             set
@@ -43,13 +40,22 @@ namespace SuperMarioRpg.Wpf.Main
             }
         }
 
+        #endregion
 
-        public ICommand BCommand { get; }
+        #region IControllerState Implementation
 
-        public void DoSomething()
-        {
-            var x = 10;
-        }
+        public Command ACommand => _activeViewModel.ACommand;
+        public Command BCommand => _activeViewModel.BCommand;
+        public Command DownCommand => _activeViewModel.DownCommand;
+        public Command LCommand => _activeViewModel.LCommand;
+        public Command LeftCommand => _activeViewModel.LeftCommand;
+        public Command RCommand => _activeViewModel.RCommand;
+        public Command RightCommand => _activeViewModel.RightCommand;
+        public Command SelectCommand => _activeViewModel.SelectCommand;
+        public Command StartCommand => _activeViewModel.StartCommand;
+        public Command UpCommand => _activeViewModel.UpCommand;
+        public Command XCommand => _activeViewModel.XCommand;
+        public Command YCommand => _activeViewModel.YCommand;
 
         #endregion
     }

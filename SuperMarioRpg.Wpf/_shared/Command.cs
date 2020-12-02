@@ -5,6 +5,8 @@ namespace SuperMarioRpg.Wpf
 {
     public class Command : Command<object>
     {
+        public static Command Default = new(() => { });
+
         #region Creation
 
         public Command(Action execute) : this(execute, _ => true)
@@ -43,6 +45,15 @@ namespace SuperMarioRpg.Wpf
         #region Public Interface
 
         public event EventHandler CanExecuteChanged;
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        #endregion
+
+        #region ICommand Implementation
 
         public bool CanExecute(object parameter) => _canExecute((T) parameter);
         public void Execute(object parameter) => _execute((T) parameter);

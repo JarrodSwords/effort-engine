@@ -1,8 +1,9 @@
 ﻿using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Wpf.Menus.Equip;
 
 namespace SuperMarioRpg.Wpf.Menus.Status
 {
-    public class MenuViewModel : ViewModel
+    public class MenuViewModel : ControllableViewModel
     {
         private readonly Character _character;
 
@@ -11,6 +12,7 @@ namespace SuperMarioRpg.Wpf.Menus.Status
         public MenuViewModel(Character character)
         {
             _character = character;
+            SetControllerState(new MenuControllerState());
         }
 
         #endregion

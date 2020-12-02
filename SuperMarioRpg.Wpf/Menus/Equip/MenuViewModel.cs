@@ -2,7 +2,7 @@
 
 namespace SuperMarioRpg.Wpf.Menus.Equip
 {
-    public class MenuViewModel : ViewModel
+    public class MenuViewModel : ControllableViewModel
     {
         private readonly Character _character;
 
@@ -11,6 +11,7 @@ namespace SuperMarioRpg.Wpf.Menus.Equip
         public MenuViewModel(Character character)
         {
             _character = character;
+            SetControllerState(new MenuControllerState());
         }
 
         #endregion
@@ -21,5 +22,18 @@ namespace SuperMarioRpg.Wpf.Menus.Equip
         public StatsViewModel StatsViewModel => new(_character.EffectiveStats);
 
         #endregion
+    }
+
+    public class MenuControllerState : ControllerState
+    {
+        public MenuControllerState()
+        {
+            BCommand = new Command(Cancel);
+        }
+
+        public void Cancel()
+        {
+            var x = 10;
+        }
     }
 }
