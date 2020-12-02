@@ -1,10 +1,10 @@
 ﻿namespace SuperMarioRpg.Wpf.Controls
 {
-    public partial class ControllerState
+    public partial class ControlState
     {
         #region Nested Types
 
-        public class NullControllerState : ControllerState
+        public class NullControlState : ControlState
         {
         }
 

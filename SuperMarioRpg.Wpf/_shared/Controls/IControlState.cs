@@ -1,6 +1,6 @@
 ﻿namespace SuperMarioRpg.Wpf.Controls
 {
-    public interface IControllerState
+    public interface IControlState
     {
         #region Public Interface
 

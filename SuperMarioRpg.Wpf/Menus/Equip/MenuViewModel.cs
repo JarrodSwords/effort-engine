@@ -3,7 +3,7 @@ using SuperMarioRpg.Wpf.Controls;
 
 namespace SuperMarioRpg.Wpf.Menus.Equip
 {
-    public class MenuViewModel : ControllableViewModel
+    public class MenuViewModel : GameState
     {
         private readonly Character _character;
 
@@ -12,7 +12,7 @@ namespace SuperMarioRpg.Wpf.Menus.Equip
         public MenuViewModel(Character character)
         {
             _character = character;
-            SetControllerState(new MenuControllerState());
+            SetControllerState(new MenuControlState());
         }
 
         #endregion
@@ -25,11 +25,11 @@ namespace SuperMarioRpg.Wpf.Menus.Equip
         #endregion
     }
 
-    public class MenuControllerState : ControllerState
+    public class MenuControlState : ControlState
     {
         #region Creation
 
-        public MenuControllerState()
+        public MenuControlState()
         {
             BCommand = new Command(Cancel);
         }

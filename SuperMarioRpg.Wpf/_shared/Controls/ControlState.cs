@@ -1,10 +1,10 @@
 ﻿namespace SuperMarioRpg.Wpf.Controls
 {
-    public abstract partial class ControllerState : IControllerState
+    public abstract partial class ControlState : IControlState
     {
-        public static ControllerState Default = new NullControllerState();
+        public static ControlState Default = new NullControlState();
 
-        #region IControllerState Implementation
+        #region IControlState Implementation
 
         public Command ACommand { get; protected init; } = Command.Default;
         public Command BCommand { get; protected init; } = Command.Default;

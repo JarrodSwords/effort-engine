@@ -3,7 +3,7 @@ using SuperMarioRpg.Wpf.Menus.Equip;
 
 namespace SuperMarioRpg.Wpf.Menus.Status
 {
-    public class MenuViewModel : ControllableViewModel
+    public class MenuViewModel : GameState
     {
         private readonly Character _character;
 
@@ -12,7 +12,7 @@ namespace SuperMarioRpg.Wpf.Menus.Status
         public MenuViewModel(Character character)
         {
             _character = character;
-            SetControllerState(new MenuControllerState());
+            SetControllerState(new MenuControlState());
         }
 
         #endregion

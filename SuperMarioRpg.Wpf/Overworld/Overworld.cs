@@ -1,6 +1,6 @@
 ﻿namespace SuperMarioRpg.Wpf.Overworld
 {
-    public class Overworld : ControllableViewModel
+    public class Overworld : GameState
     {
 
     }

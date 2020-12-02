@@ -5,9 +5,9 @@ using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 
 namespace SuperMarioRpg.Wpf.Main
 {
-    public class MainWindowViewModel : ViewModel, IControllerState
+    public class MainWindowViewModel : ViewModel, IControlState
     {
-        private ControllableViewModel _activeViewModel;
+        private GameState _activeViewModel;
 
         #region Creation
 
@@ -28,7 +28,7 @@ namespace SuperMarioRpg.Wpf.Main
 
         #region Public Interface
 
-        public ControllableViewModel ActiveViewModel
+        public GameState ActiveViewModel
         {
             get => _activeViewModel;
             set
@@ -43,7 +43,7 @@ namespace SuperMarioRpg.Wpf.Main
 
         #endregion
 
-        #region IControllerState Implementation
+        #region IControlState Implementation
 
         public Command ACommand => _activeViewModel.ACommand;
         public Command BCommand => _activeViewModel.BCommand;
