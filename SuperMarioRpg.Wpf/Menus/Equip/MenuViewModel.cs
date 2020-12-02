@@ -26,14 +26,22 @@ namespace SuperMarioRpg.Wpf.Menus.Equip
 
     public class MenuControllerState : ControllerState
     {
+        #region Creation
+
         public MenuControllerState()
         {
             BCommand = new Command(Cancel);
         }
 
+        #endregion
+
+        #region Public Interface
+
         public void Cancel()
         {
             var x = 10;
         }
+
+        #endregion
     }
 }
