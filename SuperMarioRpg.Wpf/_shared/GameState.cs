@@ -1,10 +1,20 @@
 ﻿using SuperMarioRpg.Wpf.Controls;
+using SuperMarioRpg.Wpf.Main;
 
 namespace SuperMarioRpg.Wpf
 {
     public abstract class GameState : ViewModel, IControlState
     {
         private IControlState _controlState = Controls.ControlState.Default;
+
+        #region Creation
+
+        protected GameState(MainWindowViewModel game)
+        {
+            Game = game;
+        }
+
+        #endregion
 
         #region Public Interface
 
@@ -20,14 +30,20 @@ namespace SuperMarioRpg.Wpf
             }
         }
 
-        public void SetControllerState(IControlState state)
+        public void SetControlState(IControlState state)
         {
             ControlState = state;
         }
 
         #endregion
 
-        #region Implementation of IControlState
+        #region Protected Interface
+
+        protected MainWindowViewModel Game { get; }
+
+        #endregion
+
+        #region IControlState Implementation
 
         public Command ACommand => _controlState.ACommand;
         public Command BCommand => _controlState.BCommand;

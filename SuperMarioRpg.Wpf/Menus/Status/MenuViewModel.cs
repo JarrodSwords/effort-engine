@@ -1,4 +1,5 @@
 ﻿using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Wpf.Main;
 using SuperMarioRpg.Wpf.Menus.Equip;
 
 namespace SuperMarioRpg.Wpf.Menus.Status
@@ -9,10 +10,10 @@ namespace SuperMarioRpg.Wpf.Menus.Status
 
         #region Creation
 
-        public MenuViewModel(Character character)
+        public MenuViewModel(MainWindowViewModel game, Character character) : base(game)
         {
             _character = character;
-            SetControllerState(new MenuControlState());
+            SetControlState(new MenuControlState());
         }
 
         #endregion

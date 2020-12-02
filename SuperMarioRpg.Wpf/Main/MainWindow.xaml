@@ -24,6 +24,11 @@
         <main:MainWindowViewModel />
     </Window.DataContext>
     <Grid>
-        <ContentControl Content="{Binding Path=ActiveViewModel}" />
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <ContentControl Grid.Row="0" Content="{Binding Path=GameState}" />
+        <Label Grid.Row="1" Content="{Binding Path=Info}" />
     </Grid>
 </Window>

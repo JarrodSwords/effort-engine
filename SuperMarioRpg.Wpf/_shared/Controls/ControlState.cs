@@ -1,6 +1,6 @@
 ﻿namespace SuperMarioRpg.Wpf.Controls
 {
-    public abstract partial class ControlState : IControlState
+    public partial class ControlState : IControlState
     {
         public static ControlState Default = new NullControlState();
 
