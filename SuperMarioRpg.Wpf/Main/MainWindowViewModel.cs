@@ -1,4 +1,5 @@
 ﻿using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Wpf.Controls;
 using SuperMarioRpg.Wpf.Menus.Status;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 

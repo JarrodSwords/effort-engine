@@ -1,4 +1,5 @@
 ﻿using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Wpf.Controls;
 
 namespace SuperMarioRpg.Wpf.Menus.Equip
 {
