@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:equip="clr-namespace:SuperMarioRpg.Wpf.Menus.Equip"
-                    xmlns:status="clr-namespace:SuperMarioRpg.Wpf.Menus.Status">
+                    xmlns:status="clr-namespace:SuperMarioRpg.Wpf.Menus.Status"
+                    xmlns:root="clr-namespace:SuperMarioRpg.Wpf.Menus.Root">
 
     <DataTemplate DataType="{x:Type TypeName=equip:LoadoutViewModel}">
         <equip:LoadoutView />
@@ -25,6 +26,10 @@
 
     <DataTemplate DataType="{x:Type TypeName=status:StatsViewModel}">
         <status:StatsView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type TypeName=root:RootMenuViewModel}">
+        <root:RootMenuView />
     </DataTemplate>
 
 </ResourceDictionary>
