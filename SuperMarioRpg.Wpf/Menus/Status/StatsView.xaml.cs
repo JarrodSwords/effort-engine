@@ -3,13 +3,13 @@
 namespace SuperMarioRpg.Wpf.Menus.Status
 {
     /// <summary>
-    ///     Interaction logic for MenuView1.xaml
+    ///     Interaction logic for StatsView.xaml
     /// </summary>
-    public partial class MenuView : UserControl
+    public partial class StatsView : UserControl
     {
         #region Creation
 
-        public MenuView()
+        public StatsView()
         {
             InitializeComponent();
         }

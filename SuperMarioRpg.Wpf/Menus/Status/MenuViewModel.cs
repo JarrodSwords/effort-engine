@@ -1,16 +1,19 @@
 ﻿using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Wpf.Main;
+using SuperMarioRpg.Wpf.Menus.Equip;
 
 namespace SuperMarioRpg.Wpf.Menus.Status
 {
-    public class MenuViewModel : ViewModel
+    public class MenuViewModel : GameState
     {
         private readonly Character _character;
 
         #region Creation
 
-        public MenuViewModel(Character character)
+        public MenuViewModel(MainWindowViewModel game, Character character) : base(game)
         {
             _character = character;
+            ControlState = new MenuControlState();
         }
 
         #endregion

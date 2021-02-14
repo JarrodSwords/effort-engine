@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace SuperMarioRpg.Wpf
 {
-    public abstract class ViewModel
+    public abstract class ViewModel : INotifyPropertyChanged
     {
         #region Public Interface
 
@@ -13,8 +13,13 @@ namespace SuperMarioRpg.Wpf
 
         #region Protected Interface
 
-        protected void Notify([CallerMemberName] string propertyName = null)
+        protected void SetProperty<T>(ref T member, T val, [CallerMemberName] string propertyName = null)
         {
+            if (Equals(member, val))
+                return;
+
+            member = val;
+
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
