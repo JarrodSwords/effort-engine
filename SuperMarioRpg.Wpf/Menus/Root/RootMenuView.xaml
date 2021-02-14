@@ -16,7 +16,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <ListView Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" ItemsSource="{Binding Path=PartyMembers}" />
-        <ListView Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=Submenus}" />
+        <ListView Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=Submenus}" SelectedItem="{Binding Path=SelectedSubmenu}"/>
         <root:ResourcesView Grid.Row="1" Grid.Column="1" />
     </Grid>
 </UserControl>

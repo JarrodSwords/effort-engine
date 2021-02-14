@@ -22,14 +22,6 @@ namespace SuperMarioRpg.Wpf.Overworld
 
         public void OpenMenu()
         {
-            var builder = new NewCharacterBuilder();
-            new Director().Configure(builder);
-            var character = builder
-                .Build()
-                .Equip(Hammer)
-                .Equip(Shirt)
-                .Equip(ExpBooster);
-
             Game.SetGameState(new RootMenuViewModel(Game));
         }
 

@@ -6,18 +6,18 @@
 
         #region IControlState Implementation
 
-        public Command ACommand { get; protected init; } = Command.Default;
-        public Command BCommand { get; protected init; } = Command.Default;
-        public Command DownCommand { get; protected init; } = Command.Default;
-        public Command LCommand { get; protected init; } = Command.Default;
-        public Command LeftCommand { get; protected init; } = Command.Default;
-        public Command RCommand { get; protected init; } = Command.Default;
-        public Command RightCommand { get; protected init; } = Command.Default;
-        public Command SelectCommand { get; protected init; } = Command.Default;
-        public Command StartCommand { get; protected init; } = Command.Default;
-        public Command UpCommand { get; protected init; } = Command.Default;
-        public Command XCommand { get; protected init; } = Command.Default;
-        public Command YCommand { get; protected init; } = Command.Default;
+        public Command ACommand { get; init; } = Command.Default;
+        public Command BCommand { get; init; } = Command.Default;
+        public Command DownCommand { get; init; } = Command.Default;
+        public Command LCommand { get; init; } = Command.Default;
+        public Command LeftCommand { get; init; } = Command.Default;
+        public Command RCommand { get; init; } = Command.Default;
+        public Command RightCommand { get; init; } = Command.Default;
+        public Command SelectCommand { get; init; } = Command.Default;
+        public Command StartCommand { get; init; } = Command.Default;
+        public Command UpCommand { get; init; } = Command.Default;
+        public Command XCommand { get; init; } = Command.Default;
+        public Command YCommand { get; init; } = Command.Default;
 
         #endregion
     }

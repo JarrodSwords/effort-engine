@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Wpf.Controls;
 using SuperMarioRpg.Wpf.Main;
 using SuperMarioRpg.Wpf.Menus.Status;
+using SuperMarioRpg.Wpf.Overworld;
 
 namespace SuperMarioRpg.Wpf.Menus.Root
 {
@@ -10,6 +12,7 @@ namespace SuperMarioRpg.Wpf.Menus.Root
     {
         private readonly ObservableCollection<CharacterViewModel> _characters;
         private readonly ObservableCollection<string> _submenus;
+        private string _selectedSubmenu;
 
         #region Creation
 
@@ -28,6 +31,22 @@ namespace SuperMarioRpg.Wpf.Menus.Root
                 _submenus.Add(submenu);
 
             Submenus = new ReadOnlyObservableCollection<string>(_submenus);
+            
+            ControlState = new ControlState
+            {
+                XCommand = new Command(ExitMenu)
+            };
+        }
+
+        private void ExitMenu()
+        {
+            Game.SetGameState(new Field(Game));
+        }
+
+        public string SelectedSubmenu
+        {
+            get => _selectedSubmenu;
+            set => SetProperty(ref _selectedSubmenu, value);
         }
 
         #endregion
