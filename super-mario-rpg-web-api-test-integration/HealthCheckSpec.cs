@@ -9,12 +9,18 @@ namespace SuperMarioRpg.WebApi.Test.Integration
 {
     public class HealthCheckSpec : IClassFixture<WebApplicationFactory<Startup>>
     {
+        #region Core
+
         private readonly HttpClient _httpClient;
 
         public HealthCheckSpec(WebApplicationFactory<Startup> factory)
         {
             _httpClient = factory.CreateDefaultClient();
         }
+
+        #endregion
+
+        #region Test Methods
 
         [Fact]
         public async Task HealthCheck_ReturnsOk()
@@ -23,5 +29,7 @@ namespace SuperMarioRpg.WebApi.Test.Integration
 
             response.StatusCode.Should().Be(StatusCodes.Status200OK);
         }
+
+        #endregion
     }
 }
