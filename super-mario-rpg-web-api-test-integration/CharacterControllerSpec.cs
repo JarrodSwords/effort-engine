@@ -6,11 +6,11 @@ using Xunit;
 
 namespace SuperMarioRpg.WebApi.Test.Integration
 {
-    public class HealthCheckSpec : WebApiFixture
+    public class CharacterControllerSpec : WebApiFixture
     {
         #region Core
 
-        public HealthCheckSpec(WebApplicationFactory<Startup> factory) : base(factory)
+        public CharacterControllerSpec(WebApplicationFactory<Startup> factory) : base(factory)
         {
         }
 
@@ -19,9 +19,9 @@ namespace SuperMarioRpg.WebApi.Test.Integration
         #region Test Methods
 
         [Fact]
-        public async Task HealthCheck_ReturnsOk()
+        public async Task GetCharacters_Exists()
         {
-            var response = await HttpClient.GetAsync("/healthcheck");
+            var response = await HttpClient.GetAsync("/api/characters");
 
             response.StatusCode.Should().Be(StatusCodes.Status200OK);
         }
