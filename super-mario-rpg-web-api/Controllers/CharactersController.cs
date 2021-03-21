@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using SuperMarioRpg.Domain.Combat;
+﻿using Microsoft.AspNetCore.Mvc;
+using SuperMarioRpg.Application;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
@@ -8,10 +7,19 @@ namespace SuperMarioRpg.WebApi.Controllers
     [ApiController]
     public class CharactersController : ControllerBase
     {
+        private readonly ICharacterService _characterService;
+
+        public CharactersController(ICharacterService characterService)
+        {
+            _characterService = characterService;
+        }
+
         [HttpGet]
         public IActionResult GetCharacters()
         {
-            return Ok(new List<Character>());
+            var characters = _characterService.Fetch();
+
+            return Ok(characters);
         }
     }
 }
