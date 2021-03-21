@@ -11,5 +11,13 @@ namespace SuperMarioRpg.Application
         public CharacterDto Fetch(string recordName) => new();
 
         #endregion
+
+        #region ICommandHandler<CreateCharacterCommand> Implementation
+
+        public void Handle(CreateCharacterCommand command)
+        {
+        }
+
+        #endregion
     }
 }

@@ -2,7 +2,7 @@
 
 namespace SuperMarioRpg.Application
 {
-    public interface ICharacterService
+    public interface ICharacterService : ICommandHandler<CreateCharacterCommand>
     {
         #region Public Interface
 

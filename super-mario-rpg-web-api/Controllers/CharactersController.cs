@@ -20,6 +20,16 @@ namespace SuperMarioRpg.WebApi.Controllers
 
         #region Public Interface
 
+        [HttpPost]
+        public IActionResult CreateCharacter([FromBody] CharacterInfoDto dto)
+        {
+            var cmd = new CreateCharacterCommand(dto);
+
+            _characterService.Handle(cmd);
+
+            return Ok();
+        }
+
         [HttpGet]
         [Route("/{recordName}")]
         public ActionResult<CharacterDto> GetCharacter(string recordName)

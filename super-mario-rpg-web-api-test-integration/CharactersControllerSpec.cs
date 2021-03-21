@@ -22,6 +22,21 @@ namespace SuperMarioRpg.WebApi.Test.Integration
         #region Test Methods
 
         [Fact]
+        public async Task CreateCharacter_CreatesCharacter()
+        {
+            var character = new CharacterInfoDto
+            {
+                Name = "Mario"
+            };
+
+            await HttpClient.PostAsJsonAsync("", character);
+
+            var created = await HttpClient.GetFromJsonAsync<CharacterDto>("/mario");
+
+            created.Should().NotBeNull();
+        }
+
+        [Fact]
         public async Task GetCharacter_ReturnsCharacter()
         {
             var character = await HttpClient.GetFromJsonAsync<CharacterDto>("/mario");
