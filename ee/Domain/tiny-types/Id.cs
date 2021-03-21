@@ -14,7 +14,7 @@ namespace Effort.Domain
 
         #region Public Interface
 
-        public static Id CreateId(Guid value = default) => new(value);
+        public static Id Create(Guid value = default) => new(value);
 
         #endregion
     }

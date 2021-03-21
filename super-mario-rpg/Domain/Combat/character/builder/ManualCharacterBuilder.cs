@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Effort.Domain;
+using static Effort.Domain.Id;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
@@ -111,6 +112,22 @@ namespace SuperMarioRpg.Domain.Combat
         {
             NaturalStats = CreateStats(Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed);
         }
+
+        #endregion
+
+        #region Implementation of ICharacterBuilder
+
+        public CharacterTypes GetCharacterType() => CharacterType;
+
+        public Id GetId() => Create(Id);
+
+        public Name GetName() => Name;
+
+        public Loadout GetLoadout() => new (Accessory, Armor, Weapon);
+
+        public Stats GetNaturalStats() => NaturalStats;
+
+        public Xp GetXp() => Xp;
 
         #endregion
     }

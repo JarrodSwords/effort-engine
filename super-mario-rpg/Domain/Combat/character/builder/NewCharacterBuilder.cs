@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Effort.Domain;
+using static Effort.Domain.Id;
 using static Effort.Domain.Name;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
@@ -29,6 +30,15 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
+        public Equipment Accessory { get; }
+        public Equipment Armor { get; private set; }
+        public CharacterTypes CharacterType { get; private set; }
+        public Guid Id { get; }
+        public Name Name => CreateName(CharacterType.ToString());
+        public Stats NaturalStats { get; private set; }
+        public Equipment Weapon { get; private set; }
+        public Xp Xp => CreateXp(BaseExp[CharacterType]);
+
         public Character Build()
         {
             var character = new Character(this);
@@ -36,6 +46,20 @@ namespace SuperMarioRpg.Domain.Combat
             Reset();
 
             return character;
+        }
+
+        public void CreateLoadout()
+        {
+            if (CharacterType != CharacterTypes.Toadstool)
+                return;
+
+            Weapon = EquipmentFactory.SlapGlove;
+            Armor = EquipmentFactory.PolkaDress;
+        }
+
+        public void CreateNaturalStats()
+        {
+            NaturalStats = StatFactory.CreateStats(CharacterType);
         }
 
         public NewCharacterBuilder For(CharacterTypes characterType)
@@ -57,28 +81,17 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region ICharacterBuilder Implementation
 
-        public Equipment Accessory { get; }
-        public Equipment Armor { get; private set; }
-        public CharacterTypes CharacterType { get; private set; }
-        public Guid Id { get; }
-        public Name Name => CreateName(CharacterType.ToString());
-        public Stats NaturalStats { get; private set; }
-        public Equipment Weapon { get; private set; }
-        public Xp Xp => CreateXp(BaseExp[CharacterType]);
+        public CharacterTypes GetCharacterType() => CharacterType;
 
-        public void CreateLoadout()
-        {
-            if (CharacterType != CharacterTypes.Toadstool)
-                return;
+        public Id GetId() => Create(Id);
 
-            Weapon = EquipmentFactory.SlapGlove;
-            Armor = EquipmentFactory.PolkaDress;
-        }
+        public Loadout GetLoadout() => new (Accessory, Armor, Weapon);
 
-        public void CreateNaturalStats()
-        {
-            NaturalStats = StatFactory.CreateStats(CharacterType);
-        }
+        public Name GetName() => Name;
+
+        public Stats GetNaturalStats() => NaturalStats;
+
+        public Xp GetXp() => Xp;
 
         #endregion
     }
