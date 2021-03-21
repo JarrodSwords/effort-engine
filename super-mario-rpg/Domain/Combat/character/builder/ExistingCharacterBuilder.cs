@@ -54,7 +54,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public CharacterTypes GetCharacterType() => CharacterType;
 
-        public Id GetId() => CreateId(Id);
+        public Id GetId() => Create(Id);
 
         public Loadout GetLoadout() => new(Accessory, Armor, Weapon);
 

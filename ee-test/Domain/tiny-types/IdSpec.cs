@@ -7,7 +7,7 @@ namespace Effort.Test.Domain
     {
         #region Protected Interface
 
-        protected override TinyType<Guid> CreateTinyType(Guid value) => Id.CreateId(value);
+        protected override TinyType<Guid> CreateTinyType(Guid value) => Id.Create(value);
         protected override Guid CreateValue() => Guid.NewGuid();
 
         #endregion

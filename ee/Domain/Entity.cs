@@ -8,7 +8,7 @@ namespace Effort.Domain
 
         protected Entity(Guid id)
         {
-            Id = Id.CreateId(id);
+            Id = Id.Create(id);
         }
 
         #endregion

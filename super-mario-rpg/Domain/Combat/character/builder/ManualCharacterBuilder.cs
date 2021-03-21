@@ -119,7 +119,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public CharacterTypes GetCharacterType() => CharacterType;
 
-        public Id GetId() => CreateId(Id);
+        public Id GetId() => Create(Id);
 
         public Name GetName() => Name;
 
