@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Domain", "1. Domain", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Application", "2. Application", "{9837A2BE-8CB8-4ABC-8699-B539B39CD6CB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.WebApi.Test.Integration", "super-mario-rpg-web-api-test-integration\SuperMarioRpg.WebApi.Test.Integration.csproj", "{B571360C-FE70-4F0F-B4DD-93A65110E356}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,18 @@ Global
 		{C17355CB-6533-41E3-A7B1-420F8DF5A6CC}.Release|x64.Build.0 = Release|Any CPU
 		{C17355CB-6533-41E3-A7B1-420F8DF5A6CC}.Release|x86.ActiveCfg = Release|Any CPU
 		{C17355CB-6533-41E3-A7B1-420F8DF5A6CC}.Release|x86.Build.0 = Release|Any CPU
+		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Debug|x64.Build.0 = Debug|Any CPU
+		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Debug|x86.Build.0 = Debug|Any CPU
+		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Release|x64.ActiveCfg = Release|Any CPU
+		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Release|x64.Build.0 = Release|Any CPU
+		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Release|x86.ActiveCfg = Release|Any CPU
+		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,6 +143,7 @@ Global
 		{FB0E956C-4B70-419C-8780-5BA679675DAF} = {D22C2133-2C95-475F-B044-742030FF5505}
 		{61A0EFD0-38CC-4408-9C40-A708A1AE1705} = {9837A2BE-8CB8-4ABC-8699-B539B39CD6CB}
 		{C17355CB-6533-41E3-A7B1-420F8DF5A6CC} = {D22C2133-2C95-475F-B044-742030FF5505}
+		{B571360C-FE70-4F0F-B4DD-93A65110E356} = {D22C2133-2C95-475F-B044-742030FF5505}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DB219336-6540-4720-BC3B-6A42D018B888}
