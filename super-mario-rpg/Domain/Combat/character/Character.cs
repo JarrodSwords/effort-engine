@@ -12,14 +12,14 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Creation
 
-        public Character(ICharacterBuilder builder) : base(builder.Id)
+        public Character(ICharacterBuilder builder) : base(builder.GetId().Value)
         {
-            Name = builder.Name;
-            CharacterType = builder.CharacterType;
-            Progression = new Standard(builder.Xp);
-            NaturalStats = builder.NaturalStats;
+            Name = builder.GetName();
+            CharacterType = builder.GetCharacterType();
+            Progression = new Standard(builder.GetXp());
+            NaturalStats = builder.GetNaturalStats();
             Status = new Status();
-            Loadout = new Loadout(builder.Accessory, builder.Armor, builder.Weapon);
+            Loadout = builder.GetLoadout();
         }
 
         #endregion

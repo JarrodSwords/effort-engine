@@ -1,5 +1,6 @@
 using System;
 using Effort.Domain;
+using static Effort.Domain.Id;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
@@ -8,22 +9,6 @@ namespace SuperMarioRpg.Domain.Combat
     public class ExistingCharacterBuilder : ICharacterBuilder
     {
         #region Public Interface
-
-        public ExistingCharacterBuilder For(CharacterDto dto)
-        {
-            Dto = dto;
-            return this;
-        }
-
-        #endregion
-
-        #region Private Interface
-
-        private CharacterDto Dto { get; set; }
-
-        #endregion
-
-        #region ICharacterBuilder Implementation
 
         public Equipment Accessory { get; }
         public Equipment Armor { get; }
@@ -50,6 +35,34 @@ namespace SuperMarioRpg.Domain.Combat
                 Dto.Speed
             );
         }
+
+        public ExistingCharacterBuilder For(CharacterDto dto)
+        {
+            Dto = dto;
+            return this;
+        }
+
+        #endregion
+
+        #region Private Interface
+
+        private CharacterDto Dto { get; set; }
+
+        #endregion
+
+        #region ICharacterBuilder Implementation
+
+        public CharacterTypes GetCharacterType() => CharacterType;
+
+        public Id GetId() => CreateId(Id);
+
+        public Loadout GetLoadout() => new(Accessory, Armor, Weapon);
+
+        public Name GetName() => Name;
+
+        public Stats GetNaturalStats() => NaturalStats;
+
+        public Xp GetXp() => Xp;
 
         #endregion
     }
