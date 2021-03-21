@@ -1,12 +1,12 @@
-﻿namespace SuperMarioRpg.Application
+﻿namespace SuperMarioRpg.Domain
 {
     public class CreateCharacterCommand : ICommand
     {
         #region Creation
 
-        public CreateCharacterCommand(CharacterInfoDto characterInfoDto)
+        public CreateCharacterCommand(string name)
         {
-            Name = characterInfoDto.Name;
+            Name = name;
         }
 
         #endregion

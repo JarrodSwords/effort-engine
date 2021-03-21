@@ -1,4 +1,4 @@
-﻿namespace SuperMarioRpg.Application
+﻿namespace SuperMarioRpg.Domain
 {
     public interface ICommandHandler<in T> where T : ICommand
     {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.Application
 {

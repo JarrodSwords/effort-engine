@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Application;
+using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
@@ -23,7 +24,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         [HttpPost]
         public IActionResult CreateCharacter([FromBody] CharacterInfoDto dto)
         {
-            var cmd = new CreateCharacterCommand(dto);
+            var cmd = new CreateCharacterCommand(dto.Name);
 
             _characterService.Handle(cmd);
 
