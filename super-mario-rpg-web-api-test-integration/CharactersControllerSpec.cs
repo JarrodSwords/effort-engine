@@ -22,7 +22,15 @@ namespace SuperMarioRpg.WebApi.Test.Integration
         #region Test Methods
 
         [Fact]
-        public async Task Get_ReturnsCharacters()
+        public async Task GetCharacter_ReturnsCharacters()
+        {
+            var character = await HttpClient.GetFromJsonAsync<CharacterDto>("/mario");
+
+            character.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task GetCharacters_ReturnsCharacters()
         {
             var characters = await HttpClient.GetFromJsonAsync<IEnumerable<CharacterDto>>("");
 

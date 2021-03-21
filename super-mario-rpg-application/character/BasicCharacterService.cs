@@ -8,6 +8,8 @@ namespace SuperMarioRpg.Application
 
         public IEnumerable<CharacterDto> Fetch() => new List<CharacterDto> { new() };
 
+        public CharacterDto Fetch(string recordName) => new();
+
         #endregion
     }
 }

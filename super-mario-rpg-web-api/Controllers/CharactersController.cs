@@ -9,9 +9,24 @@ namespace SuperMarioRpg.WebApi.Controllers
     {
         private readonly ICharacterService _characterService;
 
+        #region Creation
+
         public CharactersController(ICharacterService characterService)
         {
             _characterService = characterService;
+        }
+
+        #endregion
+
+        #region Public Interface
+
+        [HttpGet]
+        [Route("/{recordName}")]
+        public ActionResult<CharacterDto> GetCharacter(string recordName)
+        {
+            var character = _characterService.Fetch(recordName);
+
+            return Ok(character);
         }
 
         [HttpGet]
@@ -21,5 +36,7 @@ namespace SuperMarioRpg.WebApi.Controllers
 
             return Ok(characters);
         }
+
+        #endregion
     }
 }

@@ -7,6 +7,7 @@ namespace SuperMarioRpg.Application
         #region Public Interface
 
         IEnumerable<CharacterDto> Fetch();
+        CharacterDto Fetch(string recordName);
 
         #endregion
     }
