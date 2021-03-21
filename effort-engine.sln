@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Effort", "ee\Effort.csproj"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMarioRpg.Wpf", "SuperMarioRpg.Wpf\SuperMarioRpg.Wpf.csproj", "{FB0E956C-4B70-419C-8780-5BA679675DAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMarioRpg.Application", "super-mario-rpg-application\SuperMarioRpg.Application.csproj", "{61A0EFD0-38CC-4408-9C40-A708A1AE1705}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{FB0E956C-4B70-419C-8780-5BA679675DAF}.Release|x64.Build.0 = Release|Any CPU
 		{FB0E956C-4B70-419C-8780-5BA679675DAF}.Release|x86.ActiveCfg = Release|Any CPU
 		{FB0E956C-4B70-419C-8780-5BA679675DAF}.Release|x86.Build.0 = Release|Any CPU
+		{61A0EFD0-38CC-4408-9C40-A708A1AE1705}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61A0EFD0-38CC-4408-9C40-A708A1AE1705}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61A0EFD0-38CC-4408-9C40-A708A1AE1705}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{61A0EFD0-38CC-4408-9C40-A708A1AE1705}.Debug|x64.Build.0 = Debug|Any CPU
+		{61A0EFD0-38CC-4408-9C40-A708A1AE1705}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{61A0EFD0-38CC-4408-9C40-A708A1AE1705}.Debug|x86.Build.0 = Debug|Any CPU
+		{61A0EFD0-38CC-4408-9C40-A708A1AE1705}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61A0EFD0-38CC-4408-9C40-A708A1AE1705}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61A0EFD0-38CC-4408-9C40-A708A1AE1705}.Release|x64.ActiveCfg = Release|Any CPU
+		{61A0EFD0-38CC-4408-9C40-A708A1AE1705}.Release|x64.Build.0 = Release|Any CPU
+		{61A0EFD0-38CC-4408-9C40-A708A1AE1705}.Release|x86.ActiveCfg = Release|Any CPU
+		{61A0EFD0-38CC-4408-9C40-A708A1AE1705}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
