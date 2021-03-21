@@ -6,11 +6,11 @@ using Xunit;
 
 namespace SuperMarioRpg.WebApi.Test.Integration
 {
-    public class CharacterControllerSpec : WebApiFixture
+    public class CharactersControllerSpec : WebApiFixture
     {
         #region Core
 
-        public CharacterControllerSpec(WebApplicationFactory<Startup> factory) : base(factory)
+        public CharactersControllerSpec(WebApplicationFactory<Startup> factory) : base(factory)
         {
         }
 
