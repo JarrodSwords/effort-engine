@@ -10,7 +10,8 @@ namespace SuperMarioRpg.WebApi.Test.Integration
     {
         #region Core
 
-        public HealthCheckSpec(WebApplicationFactory<Startup> factory) : base(factory)
+        public HealthCheckSpec(WebApplicationFactory<Startup> factory) 
+            : base(factory, "/healthcheck")
         {
         }
 
@@ -21,7 +22,7 @@ namespace SuperMarioRpg.WebApi.Test.Integration
         [Fact]
         public async Task HealthCheck_ReturnsOk()
         {
-            var response = await HttpClient.GetAsync("/healthcheck");
+            var response = await HttpClient.GetAsync("");
 
             response.StatusCode.Should().Be(StatusCodes.Status200OK);
         }

@@ -1,7 +1,9 @@
+using System.Collections.Generic;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
+using SuperMarioRpg.Domain.Combat;
 using Xunit;
 
 namespace SuperMarioRpg.WebApi.Test.Integration
@@ -10,7 +12,8 @@ namespace SuperMarioRpg.WebApi.Test.Integration
     {
         #region Core
 
-        public CharactersControllerSpec(WebApplicationFactory<Startup> factory) : base(factory)
+        public CharactersControllerSpec(WebApplicationFactory<Startup> factory) : 
+            base(factory, "/api/characters")
         {
         }
 
@@ -19,11 +22,11 @@ namespace SuperMarioRpg.WebApi.Test.Integration
         #region Test Methods
 
         [Fact]
-        public async Task GetCharacters_Exists()
+        public async Task Get_ReturnsCharacters()
         {
-            var response = await HttpClient.GetAsync("/api/characters");
+            var characters = await HttpClient.GetFromJsonAsync<IEnumerable<Character>>("");
 
-            response.StatusCode.Should().Be(StatusCodes.Status200OK);
+            characters.Should().NotBeNull();
         }
 
         #endregion

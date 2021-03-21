@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
@@ -9,7 +11,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         [HttpGet]
         public ActionResult GetCharacters()
         {
-            return Ok();
+            return Ok(new List<Character>());
         }
     }
 }

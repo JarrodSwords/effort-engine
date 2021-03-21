@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
@@ -8,9 +9,15 @@ namespace SuperMarioRpg.WebApi.Test.Integration
     {
         #region Creation
 
-        protected WebApiFixture(WebApplicationFactory<Startup> factory)
+        protected WebApiFixture(
+            WebApplicationFactory<Startup> factory,
+            string uri = default
+        )
         {
-            HttpClient = factory.CreateDefaultClient();
+            if (uri != default)
+                factory.ClientOptions.BaseAddress = new Uri($"http://localhost{uri}");
+
+            HttpClient = factory.CreateClient();
         }
 
         #endregion
