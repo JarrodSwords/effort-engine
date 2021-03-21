@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\super-mario-rpg-application\SuperMarioRpg.Application.csproj" />
     <ProjectReference Include="..\super-mario-rpg-web-api\SuperMarioRpg.WebApi.csproj" />
     <ProjectReference Include="..\super-mario-rpg\SuperMarioRpg.csproj" />
   </ItemGroup>

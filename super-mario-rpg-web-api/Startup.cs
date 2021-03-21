@@ -4,29 +4,24 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SuperMarioRpg.Application;
 
 namespace SuperMarioRpg.WebApi
 {
     public class Startup
     {
+        #region Creation
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        #endregion
+
+        #region Public Interface
+
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllers();
-            services.AddHealthChecks();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuperMarioRpg.WebApi", Version = "v1" });
-            });
-        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -44,11 +39,37 @@ namespace SuperMarioRpg.WebApi
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHealthChecks("/healthcheck");
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapHealthChecks("/healthcheck");
+                    endpoints.MapControllers();
+                }
+            );
         }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddControllers();
+            services.AddHealthChecks();
+
+            services.AddSwaggerGen(
+                c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuperMarioRpg.WebApi", Version = "v1" }); }
+            );
+
+            RegisterApplicationServices(services);
+        }
+
+        #endregion
+
+        #region Private Interface
+
+        private static void RegisterApplicationServices(IServiceCollection services)
+        {
+            services.AddScoped<ICharacterService, BasicCharacterService>();
+        }
+
+        #endregion
     }
 }
