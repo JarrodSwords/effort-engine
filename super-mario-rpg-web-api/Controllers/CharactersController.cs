@@ -9,7 +9,7 @@ namespace SuperMarioRpg.WebApi.Controllers
     public class CharactersController : ControllerBase
     {
         [HttpGet]
-        public ActionResult GetCharacters()
+        public IActionResult GetCharacters()
         {
             return Ok(new List<Character>());
         }
