@@ -1,4 +1,4 @@
-﻿namespace SuperMarioRpg.Application
+﻿namespace SuperMarioRpg.Domain
 {
     public class CharacterDto
     {
