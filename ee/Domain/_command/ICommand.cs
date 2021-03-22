@@ -1,4 +1,4 @@
-﻿namespace SuperMarioRpg.Domain
+﻿namespace Effort.Domain
 {
     public interface ICommand
     {
