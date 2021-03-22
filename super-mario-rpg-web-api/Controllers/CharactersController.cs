@@ -1,4 +1,5 @@
-﻿using Effort.Domain;
+﻿using System.Collections.Generic;
+using Effort.Domain;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Application;
 using SuperMarioRpg.Domain;
@@ -42,7 +43,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCharacters()
+        public ActionResult<IEnumerable<CharacterDto>> GetCharacters()
         {
             var cmd = new FetchCharacters();
             var characters = _dispatcher.Dispatch(cmd);
