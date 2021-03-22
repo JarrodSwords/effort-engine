@@ -2,24 +2,15 @@ using System;
 using System.Linq;
 using Effort.Domain;
 using Microsoft.Extensions.DependencyInjection;
-using SuperMarioRpg.Application;
 
-namespace SuperMarioRpg.WebApi
+namespace SuperMarioRpg.Application
 {
-    public static class ServiceCollectionExtensions
+    public static class DependencyInjection
     {
         #region Public Interface
 
-        public static void RegisterHandlers(this IServiceCollection services)
-        {
-            var handlerTypes = typeof(CreateCharacter).Assembly.GetTypes()
-                .Where(x => x.GetInterfaces().Any(IsHandlerInterface))
-                .Where(x => x.Name.EndsWith("Handler"))
-                .ToList();
-
-            foreach (var type in handlerTypes)
-                services.Add(type);
-        }
+        public static IServiceCollection RegisterApplicationServices(this IServiceCollection services) =>
+            services.RegisterHandlers();
 
         #endregion
 
@@ -39,6 +30,19 @@ namespace SuperMarioRpg.WebApi
             var typeDefinition = type.GetGenericTypeDefinition();
 
             return typeDefinition == typeof(ICommandHandler<>) || typeDefinition == typeof(IQueryHandler<,>);
+        }
+
+        private static IServiceCollection RegisterHandlers(this IServiceCollection services)
+        {
+            var handlerTypes = typeof(CreateCharacter).Assembly.GetTypes()
+                .Where(x => x.GetInterfaces().Any(IsHandlerInterface))
+                .Where(x => x.Name.EndsWith("Handler"))
+                .ToList();
+
+            foreach (var type in handlerTypes)
+                services.Add(type);
+
+            return services;
         }
 
         #endregion

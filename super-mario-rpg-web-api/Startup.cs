@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SuperMarioRpg.Application;
 
 namespace SuperMarioRpg.WebApi
 {
@@ -58,17 +59,9 @@ namespace SuperMarioRpg.WebApi
                 c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuperMarioRpg.WebApi", Version = "v1" }); }
             );
 
-            RegisterApplicationServices(services);
-            services.RegisterHandlers();
-        }
-
-        #endregion
-
-        #region Private Interface
-
-        private static void RegisterApplicationServices(IServiceCollection services)
-        {
-            services.AddScoped<IDispatcher, ServiceProviderDispatcher>();
+            services
+                .RegisterEffortServices()
+                .RegisterApplicationServices();
         }
 
         #endregion

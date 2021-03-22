@@ -2,7 +2,6 @@
 using Effort.Domain;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Application;
-using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
