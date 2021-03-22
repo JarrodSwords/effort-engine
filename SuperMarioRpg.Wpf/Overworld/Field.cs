@@ -1,9 +1,6 @@
-﻿using SuperMarioRpg.Domain.Combat;
-using SuperMarioRpg.Wpf.Controls;
+﻿using SuperMarioRpg.Wpf.Controls;
 using SuperMarioRpg.Wpf.Main;
-using SuperMarioRpg.Wpf.Menus.Equip;
 using SuperMarioRpg.Wpf.Menus.Root;
-using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 
 namespace SuperMarioRpg.Wpf.Overworld
 {

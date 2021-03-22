@@ -1,5 +1,4 @@
 ﻿using Effort.Domain;
-using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.Application
 {

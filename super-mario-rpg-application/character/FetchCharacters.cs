@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Effort.Domain;
-using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.Application
 {
