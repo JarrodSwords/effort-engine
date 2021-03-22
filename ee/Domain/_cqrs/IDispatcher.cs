@@ -4,7 +4,7 @@
     {
         #region Public Interface
 
-        T Dispatch<T>(ICommand command);
+        void Dispatch(ICommand command);
         T Dispatch<T>(IQuery<T> query);
 
         #endregion

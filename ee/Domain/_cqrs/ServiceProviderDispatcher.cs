@@ -17,7 +17,7 @@ namespace Effort.Domain
 
         #region IDispatcher Implementation
 
-        public T Dispatch<T>(ICommand command)
+        public void Dispatch(ICommand command)
         {
             var type = typeof(ICommandHandler<>);
             Type[] typeArgs = { command.GetType() };
@@ -25,8 +25,7 @@ namespace Effort.Domain
             var handlerType = type.MakeGenericType(typeArgs);
             dynamic handler = _serviceProvider.GetService(handlerType);
 
-            var result = handler.Handle((dynamic) command);
-            return result;
+            handler.Handle((dynamic) command);
         }
 
         public T Dispatch<T>(IQuery<T> query)

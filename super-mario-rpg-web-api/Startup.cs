@@ -1,10 +1,10 @@
+using Effort.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using SuperMarioRpg.Application;
 
 namespace SuperMarioRpg.WebApi
 {
@@ -59,6 +59,7 @@ namespace SuperMarioRpg.WebApi
             );
 
             RegisterApplicationServices(services);
+            services.RegisterHandlers();
         }
 
         #endregion
@@ -67,7 +68,7 @@ namespace SuperMarioRpg.WebApi
 
         private static void RegisterApplicationServices(IServiceCollection services)
         {
-            services.AddScoped<ICharacterService, BasicCharacterService>();
+            services.AddScoped<IDispatcher, ServiceProviderDispatcher>();
         }
 
         #endregion
