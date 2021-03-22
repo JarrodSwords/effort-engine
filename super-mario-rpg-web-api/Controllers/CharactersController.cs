@@ -33,22 +33,22 @@ namespace SuperMarioRpg.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("/{recordName}")]
-        public ActionResult<CharacterDto> GetCharacter(string recordName)
-        {
-            var cmd = new FetchCharacter(recordName);
-            var character = _dispatcher.Dispatch(cmd);
-
-            return Ok(character);
-        }
-
-        [HttpGet]
-        public ActionResult<IEnumerable<CharacterDto>> GetCharacters()
+        public ActionResult<IEnumerable<CharacterDto>> FetchCharacters()
         {
             var cmd = new FetchCharacters();
             var characters = _dispatcher.Dispatch(cmd);
 
             return Ok(characters);
+        }
+
+        [HttpGet]
+        [Route("/{recordName}")]
+        public ActionResult<CharacterDto> FindCharacter(string recordName)
+        {
+            var cmd = new FindCharacter(recordName);
+            var character = _dispatcher.Dispatch(cmd);
+
+            return Ok(character);
         }
 
         #endregion
