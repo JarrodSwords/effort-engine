@@ -5,15 +5,15 @@ using SuperMarioRpg.Application;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/characters")]
     [ApiController]
-    public class CharactersController : ControllerBase
+    public class CharacterController : ControllerBase
     {
         private readonly IDispatcher _dispatcher;
 
         #region Creation
 
-        public CharactersController(IDispatcher dispatcher)
+        public CharacterController(IDispatcher dispatcher)
         {
             _dispatcher = dispatcher;
         }
