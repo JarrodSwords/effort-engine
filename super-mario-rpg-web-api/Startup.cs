@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Reflection;
 using Autofac;
 using Effort.Domain;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +14,12 @@ namespace SuperMarioRpg.WebApi
 {
     public class Startup
     {
+        private readonly List<Assembly> _assemblies = new()
+        {
+            typeof(Entity).Assembly,
+            typeof(FetchCharacters).Assembly
+        };
+
         #region Creation
 
         public Startup(IWebHostEnvironment environment)
@@ -53,8 +61,7 @@ namespace SuperMarioRpg.WebApi
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyModules(typeof(Entity).Assembly);
-            builder.RegisterAssemblyModules(typeof(FetchCharacters).Assembly);
+            builder.RegisterModules(_assemblies);
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -65,6 +72,19 @@ namespace SuperMarioRpg.WebApi
             services.AddSwaggerGen(
                 c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuperMarioRpg.WebApi", Version = "v1" }); }
             );
+        }
+
+        #endregion
+    }
+
+    public static class AutofacExtensions
+    {
+        #region Public Interface
+
+        public static void RegisterModules(this ContainerBuilder builder, IEnumerable<Assembly> assemblies)
+        {
+            foreach (var assembly in assemblies)
+                builder.RegisterAssemblyModules(assembly);
         }
 
         #endregion

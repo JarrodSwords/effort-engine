@@ -30,13 +30,13 @@ namespace SuperMarioRpg.Application
 
         private static void RegisterHandlers(ContainerBuilder builder)
         {
-            var types = typeof(FetchCharacters).Assembly
+            var handlers = typeof(FetchCharacters).Assembly
                 .GetTypes()
                 .Where(x => x.GetInterfaces().Any(IsHandler))
                 .Where(x => x.Name.EndsWith("Handler"));
 
-            foreach (var type in types)
-                builder.RegisterType(type).As(type.GetInterfaces().Single(IsHandler));
+            foreach (var handler in handlers)
+                builder.RegisterType(handler).As(handler.GetInterfaces().Single(IsHandler));
         }
 
         #endregion
