@@ -2,12 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyName>Effort</AssemblyName>
-    <RootNamespace>Effort</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Effort.csproj.DotSettings" />
+    <ProjectReference Include="..\super-mario-rpg\SuperMarioRpg.csproj" />
   </ItemGroup>
 
   <ItemGroup>
