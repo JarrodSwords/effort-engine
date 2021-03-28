@@ -1,6 +1,6 @@
 using Autofac;
 
-namespace SuperMarioRpg.WebApi
+namespace SuperMarioRpg.Application
 {
     public class AutofacModule : Module
     {
@@ -8,6 +8,9 @@ namespace SuperMarioRpg.WebApi
 
         protected override void Load(ContainerBuilder builder)
         {
+            builder
+                .RegisterHandlers()
+                .RegisterCommandDecorators();
         }
 
         #endregion

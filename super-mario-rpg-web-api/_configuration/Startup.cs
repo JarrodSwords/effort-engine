@@ -1,26 +1,15 @@
-using System.Collections.Generic;
-using System.Reflection;
 using Autofac;
-using Effort.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using SuperMarioRpg.Application;
 
 namespace SuperMarioRpg.WebApi
 {
     public class Startup
     {
-        private readonly List<Assembly> _assemblies = new()
-        {
-            typeof(Entity).Assembly,
-            typeof(FetchCharacters).Assembly,
-            typeof(Startup).Assembly
-        };
-
         #region Creation
 
         public Startup(IWebHostEnvironment environment)
@@ -62,7 +51,7 @@ namespace SuperMarioRpg.WebApi
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterModules(_assemblies);
+            builder.RegisterModules();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
