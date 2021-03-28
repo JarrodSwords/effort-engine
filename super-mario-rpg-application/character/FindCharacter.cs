@@ -6,7 +6,7 @@ namespace SuperMarioRpg.Application
     {
         #region Nested Types
 
-        public class FindCharacterHandler : IQueryHandler<FindCharacter, CharacterDto>
+        internal class Handler : IQueryHandler<FindCharacter, CharacterDto>
         {
             #region IQueryHandler<FindCharacter,CharacterDto> Implementation
 
