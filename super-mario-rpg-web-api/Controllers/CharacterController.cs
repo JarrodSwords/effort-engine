@@ -5,8 +5,7 @@ using SuperMarioRpg.Application;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
-    [Route("api/characters")]
-    [ApiController]
+    [Route("api/characters"), ApiController]
     public class CharacterController : ControllerBase
     {
         private readonly IDispatcher _dispatcher;
@@ -23,9 +22,9 @@ namespace SuperMarioRpg.WebApi.Controllers
         #region Public Interface
 
         [HttpPost]
-        public IActionResult CreateCharacter([FromBody] CreateCharacterDto dto)
+        public IActionResult CreateCharacter([FromBody] CreateCharacter.Args args)
         {
-            var cmd = new CreateCharacter(dto.Name);
+            var cmd = new CreateCharacter(args.Name);
             _dispatcher.Dispatch(cmd);
 
             return Ok();
@@ -40,8 +39,7 @@ namespace SuperMarioRpg.WebApi.Controllers
             return Ok(characters);
         }
 
-        [HttpGet]
-        [Route("/{recordName}")]
+        [HttpGet, Route("/{recordName}")]
         public ActionResult<CharacterDto> FindCharacter(string recordName)
         {
             var cmd = new FindCharacter(recordName);

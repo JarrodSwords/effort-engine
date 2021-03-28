@@ -24,7 +24,7 @@ namespace SuperMarioRpg.WebApi.Test.Integration
         [Fact]
         public async Task CreateCharacter_CreatesCharacter()
         {
-            var character = new CreateCharacterDto("Mario");
+            var character = new CreateCharacter.Args("Mario");
 
             await HttpClient.PostAsJsonAsync("", character);
 

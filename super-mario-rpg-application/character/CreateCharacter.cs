@@ -6,7 +6,14 @@ namespace SuperMarioRpg.Application
     {
         #region Nested Types
 
-        [Logged]
+        /// <remarks>
+        ///     May belong in its own assembly.
+        /// </remarks>
+        public record Args(string Name)
+        {
+        }
+
+        [Log]
         public class CreateCharacterHandler : ICommandHandler<CreateCharacter>
         {
             #region ICommandHandler<CreateCharacter> Implementation

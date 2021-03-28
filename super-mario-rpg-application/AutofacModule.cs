@@ -26,9 +26,9 @@ namespace SuperMarioRpg.Application
                 builder.RegisterType(handler).As(handler.GetHandlerInterface());
 
             builder.RegisterGenericDecorator(
-                typeof(LoggerDecorator<>),
+                typeof(CommandLogger<>),
                 typeof(ICommandHandler<>),
-                x => x.ImplementationType.IsDefined(typeof(Logged))
+                x => x.ImplementationType.IsDefined(typeof(LogAttribute))
             );
         }
 
