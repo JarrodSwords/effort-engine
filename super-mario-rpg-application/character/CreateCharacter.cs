@@ -14,7 +14,7 @@ namespace SuperMarioRpg.Application
         }
 
         [Log]
-        public class CreateCharacterHandler : ICommandHandler<CreateCharacter>
+        internal class Handler : ICommandHandler<CreateCharacter>
         {
             #region ICommandHandler<CreateCharacter> Implementation
 

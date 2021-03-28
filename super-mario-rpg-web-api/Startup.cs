@@ -17,7 +17,8 @@ namespace SuperMarioRpg.WebApi
         private readonly List<Assembly> _assemblies = new()
         {
             typeof(Entity).Assembly,
-            typeof(FetchCharacters).Assembly
+            typeof(FetchCharacters).Assembly,
+            typeof(Startup).Assembly
         };
 
         #region Creation

@@ -25,6 +25,8 @@ namespace SuperMarioRpg.Application
             foreach (var handler in Assembly.GetHandlers())
                 builder.RegisterType(handler).As(handler.GetHandlerInterface());
 
+            //builder.RegisterAssemblyTypes(Assembly).AsImplementedInterfaces();
+
             builder.RegisterGenericDecorator(
                 typeof(CommandLogger<>),
                 typeof(ICommandHandler<>),
