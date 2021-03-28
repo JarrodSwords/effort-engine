@@ -1,6 +1,6 @@
 using Autofac;
 
-namespace Effort.Domain
+namespace SuperMarioRpg.WebApi
 {
     public class AutofacModule : Module
     {
@@ -8,7 +8,6 @@ namespace Effort.Domain
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ServiceProviderDispatcher>().As<IDispatcher>();
         }
 
         #endregion
