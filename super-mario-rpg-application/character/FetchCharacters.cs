@@ -7,7 +7,7 @@ namespace SuperMarioRpg.Application
     {
         #region Nested Types
 
-        internal class FetchCharactersHandler : IQueryHandler<FetchCharacters, IEnumerable<CharacterDto>>
+        public class FetchCharactersHandler : IQueryHandler<FetchCharacters, IEnumerable<CharacterDto>>
         {
             #region IQueryHandler<FetchCharacters,IEnumerable<CharacterDto>> Implementation
 
