@@ -1,12 +1,14 @@
-using System;
-using System.Linq;
+using System.Reflection;
 using Autofac;
 using Effort.Domain;
+using Module = Autofac.Module;
 
 namespace SuperMarioRpg.Application
 {
     public class AutofacModule : Module
     {
+        private static readonly Assembly Assembly = typeof(AutofacModule).Assembly;
+
         #region Protected Interface
 
         protected override void Load(ContainerBuilder builder)
@@ -18,25 +20,16 @@ namespace SuperMarioRpg.Application
 
         #region Private Interface
 
-        private static bool IsHandler(Type type)
-        {
-            if (!type.IsGenericType)
-                return false;
-
-            var typeDefinition = type.GetGenericTypeDefinition();
-
-            return typeDefinition == typeof(ICommandHandler<>) || typeDefinition == typeof(IQueryHandler<,>);
-        }
-
         private static void RegisterHandlers(ContainerBuilder builder)
         {
-            var handlers = typeof(FetchCharacters).Assembly
-                .GetTypes()
-                .Where(x => x.GetInterfaces().Any(IsHandler))
-                .Where(x => x.Name.EndsWith("Handler"));
+            foreach (var handler in Assembly.GetHandlers())
+                builder.RegisterType(handler).As(handler.GetHandlerInterface());
 
-            foreach (var handler in handlers)
-                builder.RegisterType(handler).As(handler.GetInterfaces().Single(IsHandler));
+            builder.RegisterGenericDecorator(
+                typeof(LoggerDecorator<>),
+                typeof(ICommandHandler<>),
+                x => x.ImplementationType.IsDefined(typeof(Logged))
+            );
         }
 
         #endregion

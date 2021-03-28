@@ -11,7 +11,10 @@ namespace SuperMarioRpg.Application
         {
             #region IQueryHandler<FetchCharacters,IEnumerable<CharacterDto>> Implementation
 
-            public IEnumerable<CharacterDto> Handle(FetchCharacters query) => new List<CharacterDto> { new() };
+            public IEnumerable<CharacterDto> Handle(FetchCharacters query)
+            {
+                return new List<CharacterDto> { new() };
+            }
 
             #endregion
         }

@@ -6,6 +6,7 @@ namespace SuperMarioRpg.Application
     {
         #region Nested Types
 
+        [Logged]
         public class CreateCharacterHandler : ICommandHandler<CreateCharacter>
         {
             #region ICommandHandler<CreateCharacter> Implementation
