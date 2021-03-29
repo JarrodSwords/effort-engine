@@ -1,4 +1,6 @@
 ﻿using Effort.Domain;
+using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Application
 {
@@ -14,12 +16,29 @@ namespace SuperMarioRpg.Application
         }
 
         [Log]
-        internal class Handler : ICommandHandler<CreateCharacter>
+        internal class Handler : Handler<CreateCharacter>
         {
-            #region ICommandHandler<CreateCharacter> Implementation
+            #region Creation
 
-            public void Handle(CreateCharacter command)
+            public Handler(IUnitOfWork unitOfWork) : base(unitOfWork)
             {
+            }
+
+            #endregion
+
+            #region Public Interface
+
+            public override void Handle(CreateCharacter command)
+            {
+                var director = new Director();
+                var builder = new NewCharacterBuilder().For(CharacterTypes.Mario);
+                director.Configure(builder);
+
+                var character = builder.Build();
+
+                UnitOfWork.CharacterRepository.Create(character);
+
+                UnitOfWork.Commit();
             }
 
             #endregion

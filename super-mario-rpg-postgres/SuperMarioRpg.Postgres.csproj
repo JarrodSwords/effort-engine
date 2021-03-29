@@ -5,12 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ee\Effort.csproj" />
+    <PackageReference Include="npgsql.entityframeworkcore.postgresql" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="6.1.0" />
-    <PackageReference Include="fluentvalidation" Version="9.5.3" />
+    <ProjectReference Include="..\super-mario-rpg\SuperMarioRpg.csproj" />
   </ItemGroup>
 
 </Project>
