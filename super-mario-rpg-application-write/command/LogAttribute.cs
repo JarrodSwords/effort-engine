@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SuperMarioRpg.Application
+namespace SuperMarioRpg.Application.Write
 {
     /// <summary>
     ///     <para>Checked for during <see cref="AutofacModule" /> registration.</para>

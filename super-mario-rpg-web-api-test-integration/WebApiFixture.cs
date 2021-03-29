@@ -3,7 +3,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
-namespace SuperMarioRpg.WebApi.Test.Integration
+namespace SuperMarioRpg.WebApi.Test
 {
     public abstract class WebApiFixture : IClassFixture<WebApplicationFactory<Startup>>
     {

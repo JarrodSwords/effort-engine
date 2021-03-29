@@ -4,7 +4,7 @@ using System.Reflection;
 using Autofac;
 using Effort.Domain;
 
-namespace SuperMarioRpg.Application
+namespace SuperMarioRpg.Application.Write
 {
     public static class ContainerBuilderExtensions
     {

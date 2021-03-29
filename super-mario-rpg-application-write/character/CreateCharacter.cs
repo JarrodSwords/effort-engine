@@ -2,7 +2,7 @@
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Application
+namespace SuperMarioRpg.Application.Write
 {
     public record CreateCharacter(string Name) : ICommand
     {

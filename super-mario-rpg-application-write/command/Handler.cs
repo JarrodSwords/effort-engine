@@ -1,7 +1,7 @@
 ﻿using Effort.Domain;
 using SuperMarioRpg.Domain;
 
-namespace SuperMarioRpg.Application
+namespace SuperMarioRpg.Application.Write
 {
     internal abstract class Handler<T> : ICommandHandler<T> where T : ICommand
     {

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Effort.Domain;
 
-namespace SuperMarioRpg.Application
+namespace SuperMarioRpg.Application.Write
 {
     public class CommandLogger<T> : ICommandHandler<T> where T : ICommand
     {

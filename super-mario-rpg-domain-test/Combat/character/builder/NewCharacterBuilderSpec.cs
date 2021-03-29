@@ -5,7 +5,7 @@ using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 using static SuperMarioRpg.Domain.Combat.StatFactory;
 using static SuperMarioRpg.Domain.Combat.Stats;
 
-namespace SuperMarioRpg.Test.Domain.Combat
+namespace SuperMarioRpg.Domain.Test.Combat
 {
     public class NewCharacterBuilderSpec : CharacterBuilderSpec
     {

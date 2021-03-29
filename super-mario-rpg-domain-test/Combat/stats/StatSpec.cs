@@ -6,14 +6,21 @@ using FluentValidation;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.Stat;
 
-namespace SuperMarioRpg.Test.Domain.Combat
+namespace SuperMarioRpg.Domain.Test.Combat
 {
     public class StatSpec : TinyTypeSpec<short>
     {
         #region Test Methods
 
-        protected override TinyType<short> CreateTinyType(short value) => CreateStat(value);
-        protected override short CreateValue() => 10;
+        protected override TinyType<short> CreateTinyType(short value)
+        {
+            return CreateStat(value);
+        }
+
+        protected override short CreateValue()
+        {
+            return 10;
+        }
 
         [Theory]
         [InlineData(10, 2, 12)]

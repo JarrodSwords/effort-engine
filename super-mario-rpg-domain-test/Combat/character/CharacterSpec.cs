@@ -10,7 +10,7 @@ using static SuperMarioRpg.Domain.Combat.Progression;
 using static SuperMarioRpg.Domain.Combat.Stats;
 using static SuperMarioRpg.Domain.Combat.Xp;
 
-namespace SuperMarioRpg.Test.Domain.Combat
+namespace SuperMarioRpg.Domain.Test.Combat
 {
     public class CharacterSpec : EntitySpec
     {
@@ -38,8 +38,15 @@ namespace SuperMarioRpg.Test.Domain.Combat
 
         #region Test Methods
 
-        protected override Entity CreateEntity() => _mario;
-        protected override Entity CreateEntity(Guid id) => _manualBuilder.WithId(id).Build();
+        protected override Entity CreateEntity()
+        {
+            return _mario;
+        }
+
+        protected override Entity CreateEntity(Guid id)
+        {
+            return _manualBuilder.WithId(id).Build();
+        }
 
         [Theory]
         [InlineData(15, 1)]

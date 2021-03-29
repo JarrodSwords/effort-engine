@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Effort.Domain;
 using Microsoft.AspNetCore.Mvc;
-using SuperMarioRpg.Application;
+using SuperMarioRpg.Application.Write;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {

@@ -1,7 +1,7 @@
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
 
-namespace SuperMarioRpg.Test.Domain.Combat
+namespace SuperMarioRpg.Domain.Test.Combat
 {
     public abstract class CharacterBuilderSpec
     {

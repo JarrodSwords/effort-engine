@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Autofac;
-using SuperMarioRpg.Application;
+using SuperMarioRpg.Application.Write;
 using SuperMarioRpg.Postgresql;
 using Entity = Effort.Domain.Entity;
 

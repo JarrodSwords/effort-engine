@@ -2,7 +2,7 @@
 using SuperMarioRpg.Domain.Overworld;
 using Xunit;
 
-namespace SuperMarioRpg.Test.Domain.Overworld
+namespace SuperMarioRpg.Domain.Test.Overworld
 {
     public class CharacterSpec
     {

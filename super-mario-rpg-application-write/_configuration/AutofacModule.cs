@@ -1,6 +1,6 @@
 using Autofac;
 
-namespace SuperMarioRpg.Application
+namespace SuperMarioRpg.Application.Write
 {
     public class AutofacModule : Module
     {

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Effort", "ee\Effort.csproj"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "wpf", "super-mario-rpg-wpf\wpf.csproj", "{FB0E956C-4B70-419C-8780-5BA679675DAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.Application", "super-mario-rpg-application\SuperMarioRpg.Application.csproj", "{61A0EFD0-38CC-4408-9C40-A708A1AE1705}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "application-write", "super-mario-rpg-application-write\application-write.csproj", "{61A0EFD0-38CC-4408-9C40-A708A1AE1705}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-api", "super-mario-rpg-web-api\web-api.csproj", "{C17355CB-6533-41E3-A7B1-420F8DF5A6CC}"
 EndProject

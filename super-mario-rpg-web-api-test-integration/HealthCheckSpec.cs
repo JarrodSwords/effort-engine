@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
-namespace SuperMarioRpg.WebApi.Test.Integration
+namespace SuperMarioRpg.WebApi.Test
 {
     public class HealthCheckSpec : WebApiFixture
     {
         #region Core
 
-        public HealthCheckSpec(WebApplicationFactory<Startup> factory) 
+        public HealthCheckSpec(WebApplicationFactory<Startup> factory)
             : base(factory, "/healthcheck")
         {
         }

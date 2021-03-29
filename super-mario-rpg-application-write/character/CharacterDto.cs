@@ -1,4 +1,4 @@
-﻿namespace SuperMarioRpg.Application
+﻿namespace SuperMarioRpg.Application.Write
 {
     public class CharacterDto
     {

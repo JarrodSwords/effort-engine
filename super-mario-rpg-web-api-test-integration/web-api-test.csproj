@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\super-mario-rpg-application\SuperMarioRpg.Application.csproj" />
+    <ProjectReference Include="..\super-mario-rpg-application-write\application-write.csproj" />
     <ProjectReference Include="..\super-mario-rpg-web-api\web-api.csproj" />
     <ProjectReference Include="..\super-mario-rpg-domain\domain.csproj" />
   </ItemGroup>
