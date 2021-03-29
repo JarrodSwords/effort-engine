@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.WebApi", "sup
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.WebApi.Test.Integration", "super-mario-rpg-web-api-test-integration\SuperMarioRpg.WebApi.Test.Integration.csproj", "{B571360C-FE70-4F0F-B4DD-93A65110E356}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMarioRpg.Postgres", "super-mario-rpg-postgres\SuperMarioRpg.Postgres.csproj", "{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Release|x64.Build.0 = Release|Any CPU
 		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Release|x86.ActiveCfg = Release|Any CPU
 		{B571360C-FE70-4F0F-B4DD-93A65110E356}.Release|x86.Build.0 = Release|Any CPU
+		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Debug|x64.Build.0 = Debug|Any CPU
+		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Debug|x86.Build.0 = Debug|Any CPU
+		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Release|x64.ActiveCfg = Release|Any CPU
+		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Release|x64.Build.0 = Release|Any CPU
+		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Release|x86.ActiveCfg = Release|Any CPU
+		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

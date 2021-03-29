@@ -1,5 +1,3 @@
-using System;
-using System.Linq.Expressions;
 using Effort.Domain;
 
 namespace SuperMarioRpg.Domain
@@ -11,7 +9,6 @@ namespace SuperMarioRpg.Domain
         void Commit();
         string Create(T aggregateRoot);
         T Find(Id id);
-        T Find(Expression<Func<T, bool>> predicate);
         void Update(T aggregateRoot);
 
         #endregion
