@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace SuperMarioRpg.Postgres
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : Entity
     {
         #region Public Interface
 

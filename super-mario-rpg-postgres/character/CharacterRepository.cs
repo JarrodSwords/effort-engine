@@ -5,13 +5,13 @@ namespace SuperMarioRpg.Postgres
 {
     public class CharacterRepository : Domain.IRepository<DomainCharacter>
     {
-        private readonly RepositoryAdapter<DomainCharacter, Character> _adapter;
+        private readonly Repository<Character> _repository;
 
         #region Creation
 
-        public CharacterRepository(RepositoryAdapter<DomainCharacter, Character> adapter)
+        public CharacterRepository(Repository<Character> repository)
         {
-            _adapter = adapter;
+            _repository = repository;
         }
 
         #endregion
@@ -20,26 +20,26 @@ namespace SuperMarioRpg.Postgres
 
         public void Commit()
         {
-            _adapter.Commit();
+            _repository.Commit();
         }
 
         public string Create(DomainCharacter aggregateRoot)
         {
-            return _adapter.Create(Character.From(aggregateRoot)).Name;
+            return _repository.Create(Character.From(aggregateRoot)).Name;
         }
 
         public DomainCharacter Find(Id id)
         {
-            return _adapter.Find(id.Value).To();
+            return Character.To(_repository.Find(id.Value));
         }
 
         public void Update(DomainCharacter aggregateRoot)
         {
-            var character = _adapter.Find(aggregateRoot.Id.Value);
+            var character = _repository.Find(aggregateRoot.Id.Value);
 
             character.Name = aggregateRoot.Name.Value;
 
-            _adapter.Update(character);
+            _repository.Update(character);
         }
 
         #endregion

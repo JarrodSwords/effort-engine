@@ -2,13 +2,11 @@
 
 namespace SuperMarioRpg.Postgres
 {
-    public abstract class Entity<T>
+    public abstract class Entity
     {
         #region Public Interface
 
         public Guid Id { get; set; }
-
-        public abstract T To();
 
         #endregion
     }

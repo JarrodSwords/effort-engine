@@ -2,22 +2,22 @@
 
 namespace SuperMarioRpg.Postgres
 {
-    public class Character : Entity<DomainCharacter>
+    public class Character : Entity
     {
         #region Public Interface
 
         public string Name { get; set; }
 
-        public static Character From(DomainCharacter entity)
+        public static Character From(DomainCharacter character)
         {
             return new()
             {
-                Id = entity.Id.Value,
-                Name = entity.Name.Value
+                Id = character.Id.Value,
+                Name = character.Name.Value
             };
         }
 
-        public override DomainCharacter To()
+        public static DomainCharacter To(Character character)
         {
             return null;
         }
