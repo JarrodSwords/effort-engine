@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <AssemblyName>SuperMarioRpg.Domain.Test</AssemblyName>
+    <RootNamespace>SuperMarioRpg.Domain.Test</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
