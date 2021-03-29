@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Effort.Test", "ee-test\Effo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.Test", "super-mario-rpg-test\SuperMarioRpg.Test.csproj", "{59C7AE3C-DCEB-43C3-BEE7-2753969AC840}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg", "super-mario-rpg\SuperMarioRpg.csproj", "{1F260A51-2E66-4DC8-8300-91A0B96552D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "domain", "super-mario-rpg-domain\domain.csproj", "{1F260A51-2E66-4DC8-8300-91A0B96552D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Effort", "ee\Effort.csproj", "{36AA6703-4FD5-479F-8228-D5704930AA9D}"
 EndProject

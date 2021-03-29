@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\super-mario-rpg\SuperMarioRpg.csproj" />
+    <ProjectReference Include="..\super-mario-rpg-domain\domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
