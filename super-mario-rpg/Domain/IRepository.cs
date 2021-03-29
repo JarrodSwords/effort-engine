@@ -7,9 +7,9 @@ namespace SuperMarioRpg.Domain
         #region Public Interface
 
         void Commit();
-        string Create(T aggregateRoot);
+        string Create(T character);
         T Find(Id id);
-        void Update(T aggregateRoot);
+        void Update(T character);
 
         #endregion
     }
