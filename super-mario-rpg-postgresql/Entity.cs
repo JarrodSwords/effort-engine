@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SuperMarioRpg.Postgres
+namespace SuperMarioRpg.Postgresql
 {
     public abstract class Entity
     {

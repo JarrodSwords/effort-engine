@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace SuperMarioRpg.Postgres
+namespace SuperMarioRpg.Postgresql
 {
     public interface IRepository<T> where T : Entity
     {

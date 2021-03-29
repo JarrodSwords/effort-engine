@@ -2,7 +2,7 @@
 using SuperMarioRpg.Domain.Combat;
 using DomainCharacter = SuperMarioRpg.Domain.Combat.Character;
 
-namespace SuperMarioRpg.Postgres
+namespace SuperMarioRpg.Postgresql
 {
     public class CharacterRepository : Repository<Character>, ICharacterRepository
     {

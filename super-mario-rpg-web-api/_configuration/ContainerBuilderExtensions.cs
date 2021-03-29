@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Autofac;
 using SuperMarioRpg.Application;
-using SuperMarioRpg.Postgres;
+using SuperMarioRpg.Postgresql;
 using Entity = Effort.Domain.Entity;
 
 namespace SuperMarioRpg.WebApi

@@ -1,6 +1,6 @@
 ﻿using DomainCharacter = SuperMarioRpg.Domain.Combat.Character;
 
-namespace SuperMarioRpg.Postgres
+namespace SuperMarioRpg.Postgresql
 {
     public class Character : Entity
     {

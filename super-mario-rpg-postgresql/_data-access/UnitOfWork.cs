@@ -1,7 +1,7 @@
 ﻿using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Postgres
+namespace SuperMarioRpg.Postgresql
 {
     public class UnitOfWork : IUnitOfWork
     {

@@ -12,6 +12,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <AssemblyName>SuperMarioRpg.Wpf</AssemblyName>
+    <RootNamespace>SuperMarioRpg.Wpf</RootNamespace>
   </PropertyGroup>
 
 </Project>
