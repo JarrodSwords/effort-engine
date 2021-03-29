@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\super-mario-rpg-application\SuperMarioRpg.Application.csproj" />
-    <ProjectReference Include="..\super-mario-rpg-postgres\SuperMarioRpg.Postgres.csproj" />
+    <ProjectReference Include="..\super-mario-rpg-postgres\postgresql.csproj" />
     <ProjectReference Include="..\super-mario-rpg-domain\domain.csproj" />
   </ItemGroup>
 
