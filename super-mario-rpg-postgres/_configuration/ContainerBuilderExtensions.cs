@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Autofac;
+using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.Postgres
 {
@@ -21,6 +22,12 @@ namespace SuperMarioRpg.Postgres
                 .Where(x => x.Name.EndsWith("Repository"))
                 .AsImplementedInterfaces();
 
+            return builder;
+        }
+
+        public static ContainerBuilder RegisterUnitOfWork(this ContainerBuilder builder)
+        {
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
             return builder;
         }
 

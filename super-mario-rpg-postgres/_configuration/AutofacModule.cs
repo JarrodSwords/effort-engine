@@ -10,7 +10,7 @@ namespace SuperMarioRpg.Postgres
         {
             builder
                 .RegisterContext()
-                .RegisterRepositories();
+                .RegisterUnitOfWork();
         }
 
         #endregion
