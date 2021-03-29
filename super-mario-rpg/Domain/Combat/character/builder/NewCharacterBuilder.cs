@@ -48,20 +48,6 @@ namespace SuperMarioRpg.Domain.Combat
             return character;
         }
 
-        public void CreateLoadout()
-        {
-            if (CharacterType != CharacterTypes.Toadstool)
-                return;
-
-            Weapon = EquipmentFactory.SlapGlove;
-            Armor = EquipmentFactory.PolkaDress;
-        }
-
-        public void CreateNaturalStats()
-        {
-            NaturalStats = StatFactory.CreateStats(CharacterType);
-        }
-
         public NewCharacterBuilder For(CharacterTypes characterType)
         {
             CharacterType = characterType;
@@ -81,17 +67,49 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region ICharacterBuilder Implementation
 
-        public CharacterTypes GetCharacterType() => CharacterType;
+        public void CreateLoadout()
+        {
+            if (CharacterType != CharacterTypes.Toadstool)
+                return;
 
-        public Id GetId() => Create(Id);
+            Weapon = EquipmentFactory.SlapGlove;
+            Armor = EquipmentFactory.PolkaDress;
+        }
 
-        public Loadout GetLoadout() => new (Accessory, Armor, Weapon);
+        public void CreateNaturalStats()
+        {
+            NaturalStats = StatFactory.CreateStats(CharacterType);
+        }
 
-        public Name GetName() => Name;
+        public CharacterTypes GetCharacterType()
+        {
+            return CharacterType;
+        }
 
-        public Stats GetNaturalStats() => NaturalStats;
+        public Id GetId()
+        {
+            return Create(Id);
+        }
 
-        public Xp GetXp() => Xp;
+        public Loadout GetLoadout()
+        {
+            return new(Accessory, Armor, Weapon);
+        }
+
+        public Name GetName()
+        {
+            return Name;
+        }
+
+        public Stats GetNaturalStats()
+        {
+            return NaturalStats;
+        }
+
+        public Xp GetXp()
+        {
+            return Xp;
+        }
 
         #endregion
     }

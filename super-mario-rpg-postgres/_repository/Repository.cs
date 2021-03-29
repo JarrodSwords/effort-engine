@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace SuperMarioRpg.Postgres
 {
-    public class Repository<T> : IRepository<T> where T : Entity
+    public abstract class Repository<T> : IRepository<T> where T : Entity
     {
         private readonly Context _context;
 
@@ -34,17 +34,17 @@ namespace SuperMarioRpg.Postgres
             return _context.Find<T>(id);
         }
 
-        public void Update(T entity)
-        {
-            _context.Update(entity);
-        }
-
-        T IRepository<T>.Find(Expression<Func<T, bool>> predicate)
+        public T Find(Expression<Func<T, bool>> predicate)
         {
             return _context
                 .Set<T>()
                 .AsQueryable()
                 .Single(predicate);
+        }
+
+        public void Update(T entity)
+        {
+            _context.Update(entity);
         }
 
         #endregion

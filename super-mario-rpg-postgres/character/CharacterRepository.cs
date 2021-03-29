@@ -4,15 +4,12 @@ using DomainCharacter = SuperMarioRpg.Domain.Combat.Character;
 
 namespace SuperMarioRpg.Postgres
 {
-    public class CharacterRepository : ICharacterRepository
+    public class CharacterRepository : Repository<Character>, ICharacterRepository
     {
-        private readonly IRepository<Character> _repository;
-
         #region Creation
 
-        public CharacterRepository(IRepository<Character> repository)
+        public CharacterRepository(Context context) : base(context)
         {
-            _repository = repository;
         }
 
         #endregion
@@ -21,35 +18,30 @@ namespace SuperMarioRpg.Postgres
 
         public DomainCharacter Find(Name name)
         {
-            return Character.To(_repository.Find(x => x.Name == name.Value));
+            return Character.To(Find(x => x.Name == name.Value));
         }
 
         #endregion
 
         #region IRepository<Character> Implementation
 
-        public void Commit()
-        {
-            _repository.Commit();
-        }
-
         public string Create(DomainCharacter character)
         {
-            return _repository.Create(Character.From(character)).Name;
+            return Create(Character.From(character)).Name;
         }
 
         public DomainCharacter Find(Id id)
         {
-            return Character.To(_repository.Find(id.Value));
+            return Character.To(Find(id.Value));
         }
 
         public void Update(DomainCharacter character)
         {
-            var storedCharacter = _repository.Find(character.Id.Value);
+            var storedCharacter = Find(character.Id.Value);
 
             storedCharacter.Name = character.Name.Value;
 
-            _repository.Update(storedCharacter);
+            Update(storedCharacter);
         }
 
         #endregion
