@@ -4,6 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>SuperMarioRpg.WebApi.Test</AssemblyName>
+
+    <RootNamespace>SuperMarioRpg.WebApi.Test</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\super-mario-rpg-application\SuperMarioRpg.Application.csproj" />
-    <ProjectReference Include="..\super-mario-rpg-web-api\SuperMarioRpg.WebApi.csproj" />
+    <ProjectReference Include="..\super-mario-rpg-web-api\web-api.csproj" />
     <ProjectReference Include="..\super-mario-rpg-domain\domain.csproj" />
   </ItemGroup>
 

@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.Wpf", "super-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.Application", "super-mario-rpg-application\SuperMarioRpg.Application.csproj", "{61A0EFD0-38CC-4408-9C40-A708A1AE1705}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.WebApi", "super-mario-rpg-web-api\SuperMarioRpg.WebApi.csproj", "{C17355CB-6533-41E3-A7B1-420F8DF5A6CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-api", "super-mario-rpg-web-api\web-api.csproj", "{C17355CB-6533-41E3-A7B1-420F8DF5A6CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.WebApi.Test.Integration", "super-mario-rpg-web-api-test-integration\SuperMarioRpg.WebApi.Test.Integration.csproj", "{B571360C-FE70-4F0F-B4DD-93A65110E356}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-api-test", "super-mario-rpg-web-api-test-integration\web-api-test.csproj", "{B571360C-FE70-4F0F-B4DD-93A65110E356}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "postgresql", "super-mario-rpg-postgresql\postgresql.csproj", "{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}"
 EndProject
