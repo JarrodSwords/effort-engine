@@ -1,9 +1,10 @@
 ﻿using Effort.Domain;
+using SuperMarioRpg.Domain.Combat;
 using DomainCharacter = SuperMarioRpg.Domain.Combat.Character;
 
 namespace SuperMarioRpg.Postgres
 {
-    public class CharacterRepository : Domain.IRepository<DomainCharacter>
+    public class CharacterRepository : ICharacterRepository
     {
         private readonly IRepository<Character> _repository;
 
@@ -12,6 +13,15 @@ namespace SuperMarioRpg.Postgres
         public CharacterRepository(IRepository<Character> repository)
         {
             _repository = repository;
+        }
+
+        #endregion
+
+        #region ICharacterRepository Implementation
+
+        public DomainCharacter Find(Name name)
+        {
+            return Character.To(_repository.Find(x => x.Name == name.Value));
         }
 
         #endregion
