@@ -29,7 +29,6 @@ namespace SuperMarioRpg.WebApi.Test.Integration
             await HttpClient.PostAsJsonAsync("", character);
 
             var created = await HttpClient.GetFromJsonAsync<CharacterDto>("/mario");
-
             created.Should().NotBeNull();
         }
 

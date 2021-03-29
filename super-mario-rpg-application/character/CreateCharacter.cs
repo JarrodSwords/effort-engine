@@ -37,6 +37,8 @@ namespace SuperMarioRpg.Application
                 var character = builder.Build();
 
                 UnitOfWork.CharacterRepository.Create(character);
+
+                UnitOfWork.Commit();
             }
 
             #endregion
