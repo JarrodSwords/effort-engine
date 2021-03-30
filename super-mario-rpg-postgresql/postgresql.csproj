@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>SuperMarioRpg.Postgresql</AssemblyName>
+    <RootNamespace>SuperMarioRpg.Postgresql</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="npgsql.entityframeworkcore.postgresql" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\super-mario-rpg-domain\domain.csproj" />
+  </ItemGroup>
+
+</Project>

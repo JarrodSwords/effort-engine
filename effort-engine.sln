@@ -3,23 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Effort.Test", "ee-test\Effort.Test.csproj", "{AB497631-7C6F-4E46-9090-378F644CE9A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "domain-test", "effort-engine-domain-test\domain-test.csproj", "{AB497631-7C6F-4E46-9090-378F644CE9A9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.Test", "super-mario-rpg-test\SuperMarioRpg.Test.csproj", "{59C7AE3C-DCEB-43C3-BEE7-2753969AC840}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "domain-test", "super-mario-rpg-domain-test\domain-test.csproj", "{59C7AE3C-DCEB-43C3-BEE7-2753969AC840}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg", "super-mario-rpg\SuperMarioRpg.csproj", "{1F260A51-2E66-4DC8-8300-91A0B96552D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "domain", "super-mario-rpg-domain\domain.csproj", "{1F260A51-2E66-4DC8-8300-91A0B96552D0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Effort", "ee\Effort.csproj", "{36AA6703-4FD5-479F-8228-D5704930AA9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "domain", "effort-engine-domain\domain.csproj", "{36AA6703-4FD5-479F-8228-D5704930AA9D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.Wpf", "super-mario-rpg-wpf\SuperMarioRpg.Wpf.csproj", "{FB0E956C-4B70-419C-8780-5BA679675DAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "wpf", "super-mario-rpg-wpf\wpf.csproj", "{FB0E956C-4B70-419C-8780-5BA679675DAF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.Application", "super-mario-rpg-application\SuperMarioRpg.Application.csproj", "{61A0EFD0-38CC-4408-9C40-A708A1AE1705}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "application-write", "super-mario-rpg-application-write\application-write.csproj", "{61A0EFD0-38CC-4408-9C40-A708A1AE1705}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.WebApi", "super-mario-rpg-web-api\SuperMarioRpg.WebApi.csproj", "{C17355CB-6533-41E3-A7B1-420F8DF5A6CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-api", "super-mario-rpg-web-api\web-api.csproj", "{C17355CB-6533-41E3-A7B1-420F8DF5A6CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperMarioRpg.WebApi.Test.Integration", "super-mario-rpg-web-api-test-integration\SuperMarioRpg.WebApi.Test.Integration.csproj", "{B571360C-FE70-4F0F-B4DD-93A65110E356}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-api-test", "super-mario-rpg-web-api-test\web-api-test.csproj", "{B571360C-FE70-4F0F-B4DD-93A65110E356}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperMarioRpg.Postgres", "super-mario-rpg-postgres\SuperMarioRpg.Postgres.csproj", "{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "postgresql", "super-mario-rpg-postgresql\postgresql.csproj", "{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "super-mario-rpg", "super-mario-rpg", "{2C2B936F-37FD-48B1-AC5C-F78516012AE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "effort", "effort", "{0F4E8EBD-8304-4AB1-BB23-D7A9CDD4DA84}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "application-read", "super-mario-rpg-application-read\application-read.csproj", "{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -139,9 +145,33 @@ Global
 		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Release|x64.Build.0 = Release|Any CPU
 		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Release|x86.ActiveCfg = Release|Any CPU
 		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Release|x86.Build.0 = Release|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Debug|x64.Build.0 = Debug|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Debug|x86.Build.0 = Debug|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|x64.ActiveCfg = Release|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|x64.Build.0 = Release|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|x86.ActiveCfg = Release|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AB497631-7C6F-4E46-9090-378F644CE9A9} = {0F4E8EBD-8304-4AB1-BB23-D7A9CDD4DA84}
+		{59C7AE3C-DCEB-43C3-BEE7-2753969AC840} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
+		{1F260A51-2E66-4DC8-8300-91A0B96552D0} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
+		{36AA6703-4FD5-479F-8228-D5704930AA9D} = {0F4E8EBD-8304-4AB1-BB23-D7A9CDD4DA84}
+		{FB0E956C-4B70-419C-8780-5BA679675DAF} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
+		{61A0EFD0-38CC-4408-9C40-A708A1AE1705} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
+		{C17355CB-6533-41E3-A7B1-420F8DF5A6CC} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
+		{B571360C-FE70-4F0F-B4DD-93A65110E356} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
+		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DB219336-6540-4720-BC3B-6A42D018B888}
