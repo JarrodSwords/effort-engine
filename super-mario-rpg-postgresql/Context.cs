@@ -4,17 +4,6 @@ namespace SuperMarioRpg.Postgresql
 {
     public class Context : DbContext
     {
-        private readonly string _connectionString;
-
-        #region Creation
-
-        public Context(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
-
-        #endregion
-
         #region Public Interface
 
         public DbSet<Character> Characters { get; set; }
@@ -25,7 +14,9 @@ namespace SuperMarioRpg.Postgresql
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseNpgsql(_connectionString);
+            builder.UseNpgsql(
+                "User ID=postgres;Password=admin;Host=localhost;Port=5432;Database=SuperMarioRpg;Pooling=true;"
+            );
         }
 
         #endregion
