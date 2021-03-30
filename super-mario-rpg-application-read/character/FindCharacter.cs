@@ -1,6 +1,6 @@
 ﻿using Effort.Domain.Messages;
 
-namespace SuperMarioRpg.Application.Write
+namespace SuperMarioRpg.Application.Read
 {
     public record FindCharacter(string Name) : IQuery<CharacterDto>
     {

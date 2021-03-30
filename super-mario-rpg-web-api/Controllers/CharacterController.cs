@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
+using SuperMarioRpg.Application.Read;
 using SuperMarioRpg.Application.Write;
 
 namespace SuperMarioRpg.WebApi.Controllers

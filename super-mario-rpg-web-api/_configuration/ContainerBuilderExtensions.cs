@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Autofac;
+using SuperMarioRpg.Application.Read;
 using SuperMarioRpg.Application.Write;
 using SuperMarioRpg.Postgresql;
 using Entity = Effort.Domain.Entity;
@@ -13,6 +14,7 @@ namespace SuperMarioRpg.WebApi
         {
             typeof(Entity).Assembly,
             typeof(FetchCharacters).Assembly,
+            typeof(CreateCharacter).Assembly,
             typeof(Context).Assembly,
             typeof(ContainerBuilderExtensions).Assembly
         };

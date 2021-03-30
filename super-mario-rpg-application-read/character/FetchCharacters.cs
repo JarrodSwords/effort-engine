@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Effort.Domain.Messages;
 
-namespace SuperMarioRpg.Application.Write
+namespace SuperMarioRpg.Application.Read
 {
     public record FetchCharacters : IQuery<IEnumerable<CharacterDto>>
     {

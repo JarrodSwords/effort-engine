@@ -3,6 +3,7 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using SuperMarioRpg.Application.Read;
 using SuperMarioRpg.Application.Write;
 using Xunit;
 

@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>SuperMarioRpg.Application.Read</AssemblyName>
+    <RootNamespace>SuperMarioRpg.Application.Read</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\effort-engine-domain\domain.csproj" />
+  </ItemGroup>
 
 </Project>
