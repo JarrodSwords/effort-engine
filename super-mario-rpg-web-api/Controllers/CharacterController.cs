@@ -43,8 +43,8 @@ namespace SuperMarioRpg.WebApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CharacterDto>> FetchCharacters()
         {
-            var cmd = new FetchCharacters();
-            var characters = _fetchCharactersHandler.Handle(cmd);
+            var query = new FetchCharacters();
+            var characters = _fetchCharactersHandler.Handle(query);
 
             return Ok(characters);
         }
@@ -53,8 +53,8 @@ namespace SuperMarioRpg.WebApi.Controllers
         [Route("/{recordName}")]
         public ActionResult<CharacterDto> FindCharacter(string recordName)
         {
-            var cmd = new FindCharacter(recordName);
-            var character = _findCharacterHandler.Handle(cmd);
+            var query = new FindCharacter(recordName);
+            var character = _findCharacterHandler.Handle(query);
 
             return Ok(character);
         }
