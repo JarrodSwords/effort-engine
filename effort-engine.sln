@@ -17,13 +17,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "application-write", "super-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-api", "super-mario-rpg-web-api\web-api.csproj", "{C17355CB-6533-41E3-A7B1-420F8DF5A6CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-api-test", "super-mario-rpg-web-api-test-integration\web-api-test.csproj", "{B571360C-FE70-4F0F-B4DD-93A65110E356}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-api-test", "super-mario-rpg-web-api-test\web-api-test.csproj", "{B571360C-FE70-4F0F-B4DD-93A65110E356}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "postgresql", "super-mario-rpg-postgresql\postgresql.csproj", "{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "super-mario-rpg", "super-mario-rpg", "{2C2B936F-37FD-48B1-AC5C-F78516012AE6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "effort", "effort", "{0F4E8EBD-8304-4AB1-BB23-D7A9CDD4DA84}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "application-read", "super-mario-rpg-application-read\application-read.csproj", "{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -143,6 +145,18 @@ Global
 		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Release|x64.Build.0 = Release|Any CPU
 		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Release|x86.ActiveCfg = Release|Any CPU
 		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}.Release|x86.Build.0 = Release|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Debug|x64.Build.0 = Debug|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Debug|x86.Build.0 = Debug|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|x64.ActiveCfg = Release|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|x64.Build.0 = Release|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|x86.ActiveCfg = Release|Any CPU
+		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
