@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace SuperMarioRpg.Postgresql
+namespace SuperMarioRpg.Infrastructure.Write
 {
     public class AutofacModule : Module
     {

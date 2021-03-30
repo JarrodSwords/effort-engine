@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace SuperMarioRpg.Postgresql
+namespace SuperMarioRpg.Infrastructure.Write
 {
     public abstract class Repository<T> : IRepository<T> where T : Entity
     {

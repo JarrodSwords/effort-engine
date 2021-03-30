@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SuperMarioRpg.Postgresql
+namespace SuperMarioRpg.Infrastructure.Write
 {
     public abstract class Entity
     {

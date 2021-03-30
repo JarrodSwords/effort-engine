@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using SuperMarioRpg.Postgresql;
+using SuperMarioRpg.Infrastructure.Write;
 
-namespace SuperMarioRpg.Postgresql.Migrations
+namespace SuperMarioRpg.Infrastructure.Write.Migrations
 {
     [DbContext(typeof(Context))]
     partial class ContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace SuperMarioRpg.Postgresql.Migrations
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("SuperMarioRpg.Postgresql.Character", b =>
+            modelBuilder.Entity("SuperMarioRpg.Infrastructure.Write.Character", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,7 +30,7 @@ namespace SuperMarioRpg.Postgresql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Characters");
+                    b.ToTable("Character");
                 });
 #pragma warning restore 612, 618
         }

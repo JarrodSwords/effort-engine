@@ -19,13 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-api", "super-mario-rpg-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-api-test", "super-mario-rpg-web-api-test\web-api-test.csproj", "{B571360C-FE70-4F0F-B4DD-93A65110E356}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "postgresql", "super-mario-rpg-postgresql\postgresql.csproj", "{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "infrastructure-write", "super-mario-rpg-infrastructure-write\infrastructure-write.csproj", "{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "super-mario-rpg", "super-mario-rpg", "{2C2B936F-37FD-48B1-AC5C-F78516012AE6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "effort", "effort", "{0F4E8EBD-8304-4AB1-BB23-D7A9CDD4DA84}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "application-read", "super-mario-rpg-application-read\application-read.csproj", "{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "infrastructure-read", "super-mario-rpg-infrastructure-read\infrastructure-read.csproj", "{2660CA8B-24FA-4A74-A7D7-30970E276EC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -157,6 +159,18 @@ Global
 		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|x64.Build.0 = Release|Any CPU
 		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|x86.ActiveCfg = Release|Any CPU
 		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41}.Release|x86.Build.0 = Release|Any CPU
+		{2660CA8B-24FA-4A74-A7D7-30970E276EC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2660CA8B-24FA-4A74-A7D7-30970E276EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2660CA8B-24FA-4A74-A7D7-30970E276EC2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2660CA8B-24FA-4A74-A7D7-30970E276EC2}.Debug|x64.Build.0 = Debug|Any CPU
+		{2660CA8B-24FA-4A74-A7D7-30970E276EC2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2660CA8B-24FA-4A74-A7D7-30970E276EC2}.Debug|x86.Build.0 = Debug|Any CPU
+		{2660CA8B-24FA-4A74-A7D7-30970E276EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2660CA8B-24FA-4A74-A7D7-30970E276EC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2660CA8B-24FA-4A74-A7D7-30970E276EC2}.Release|x64.ActiveCfg = Release|Any CPU
+		{2660CA8B-24FA-4A74-A7D7-30970E276EC2}.Release|x64.Build.0 = Release|Any CPU
+		{2660CA8B-24FA-4A74-A7D7-30970E276EC2}.Release|x86.ActiveCfg = Release|Any CPU
+		{2660CA8B-24FA-4A74-A7D7-30970E276EC2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -172,6 +186,7 @@ Global
 		{B571360C-FE70-4F0F-B4DD-93A65110E356} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
 		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
 		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
+		{2660CA8B-24FA-4A74-A7D7-30970E276EC2} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DB219336-6540-4720-BC3B-6A42D018B888}

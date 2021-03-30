@@ -1,14 +1,14 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SuperMarioRpg.Postgresql.Migrations
+namespace SuperMarioRpg.Infrastructure.Write.Migrations
 {
-    public partial class AddCharacter : Migration
+    public partial class CreateCharacter : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Characters",
+                name: "Character",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -16,14 +16,14 @@ namespace SuperMarioRpg.Postgresql.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Characters", x => x.Id);
+                    table.PrimaryKey("PK_Character", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Characters");
+                name: "Character");
         }
     }
 }

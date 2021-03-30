@@ -2,7 +2,7 @@
 using Autofac;
 using SuperMarioRpg.Domain;
 
-namespace SuperMarioRpg.Postgresql
+namespace SuperMarioRpg.Infrastructure.Write
 {
     public static class ContainerBuilderExtensions
     {

@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyName>SuperMarioRpg.Postgresql</AssemblyName>
-    <RootNamespace>SuperMarioRpg.Postgresql</RootNamespace>
+    <AssemblyName>SuperMarioRpg.Infrastructure.Write</AssemblyName>
+    <RootNamespace>SuperMarioRpg.Infrastructure.Write</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
