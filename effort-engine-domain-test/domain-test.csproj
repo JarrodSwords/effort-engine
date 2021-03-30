@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <AssemblyName>Effort.Domain.Test</AssemblyName>
+    <RootNamespace>Effort.Domain.Test</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ee\Effort.csproj" />
+    <ProjectReference Include="..\effort-engine-domain\domain.csproj" />
   </ItemGroup>
 
 </Project>

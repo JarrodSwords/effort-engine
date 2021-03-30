@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Effort.Domain;
+using Effort.Domain.Messages;
 
 namespace SuperMarioRpg.Application.Write
 {

@@ -1,4 +1,4 @@
-﻿using Effort.Domain;
+﻿using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.Application.Write

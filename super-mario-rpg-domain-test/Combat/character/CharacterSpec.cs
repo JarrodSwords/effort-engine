@@ -1,6 +1,6 @@
 using System;
 using Effort.Domain;
-using Effort.Test.Domain;
+using Effort.Domain.Test;
 using FluentAssertions;
 using FluentValidation;
 using SuperMarioRpg.Domain.Combat;

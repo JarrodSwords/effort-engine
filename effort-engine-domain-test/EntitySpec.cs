@@ -1,9 +1,8 @@
 using System;
-using Effort.Domain;
 using FluentAssertions;
 using Xunit;
 
-namespace Effort.Test.Domain
+namespace Effort.Domain.Test
 {
     public abstract class EntitySpec
     {

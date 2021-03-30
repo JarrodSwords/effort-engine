@@ -1,4 +1,4 @@
-﻿namespace Effort.Domain
+﻿namespace Effort.Domain.Messages
 {
     /// <summary>
     ///     A serializable method call.

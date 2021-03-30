@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Effort.Domain;
+using Effort.Domain.Messages;
 
 namespace SuperMarioRpg.Application.Write
 {

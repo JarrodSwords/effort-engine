@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ee\Effort.csproj" />
+    <ProjectReference Include="..\effort-engine-domain\domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 using System;
 using Effort.Domain;
-using Effort.Test.Domain;
+using Effort.Domain.Test;
 using SuperMarioRpg.Domain.Combat;
 using static SuperMarioRpg.Domain.Combat.Equipment;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;

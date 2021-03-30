@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Autofac;
-using Effort.Domain;
+using Effort.Domain.Messages;
 
 namespace SuperMarioRpg.Application.Write
 {
