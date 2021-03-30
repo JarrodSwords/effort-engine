@@ -52,11 +52,7 @@ namespace SuperMarioRpg.WebApi
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterType<Context>()
-                .WithParameter(
-                    "connectionString",
-                    Configuration["ConnectionString"]
-                );
+            builder.RegisterType<Context>();
             builder.RegisterModules();
         }
 
