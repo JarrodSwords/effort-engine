@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using SuperMarioRpg.Postgresql;
+using SuperMarioRpg.Infrastructure.Write;
 
 namespace SuperMarioRpg.WebApi
 {

@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-api", "super-mario-rpg-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web-api-test", "super-mario-rpg-web-api-test\web-api-test.csproj", "{B571360C-FE70-4F0F-B4DD-93A65110E356}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "postgresql", "super-mario-rpg-postgresql\postgresql.csproj", "{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "infrastructure-write", "super-mario-rpg-infrastructure-write\infrastructure-write.csproj", "{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "super-mario-rpg", "super-mario-rpg", "{2C2B936F-37FD-48B1-AC5C-F78516012AE6}"
 EndProject

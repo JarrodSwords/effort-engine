@@ -3,7 +3,7 @@ using System.Reflection;
 using Autofac;
 using SuperMarioRpg.Application.Read;
 using SuperMarioRpg.Application.Write;
-using SuperMarioRpg.Postgresql;
+using SuperMarioRpg.Infrastructure.Write;
 using Entity = Effort.Domain.Entity;
 
 namespace SuperMarioRpg.WebApi

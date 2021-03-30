@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace SuperMarioRpg.Postgresql
+namespace SuperMarioRpg.Infrastructure.Write
 {
     public class Context : DbContext
     {
