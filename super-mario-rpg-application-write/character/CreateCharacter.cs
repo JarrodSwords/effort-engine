@@ -8,13 +8,6 @@ namespace SuperMarioRpg.Application.Write
     {
         #region Nested Types
 
-        /// <remarks>
-        ///     May belong in its own assembly.
-        /// </remarks>
-        public record Args(string Name)
-        {
-        }
-
         [Log]
         internal class Handler : Handler<CreateCharacter>
         {
@@ -45,4 +38,18 @@ namespace SuperMarioRpg.Application.Write
 
         #endregion
     }
+
+    public record CreateCharacterDto(
+        string Name,
+        CombatStatsDto CombatStats
+    );
+
+    public record CombatStatsDto(
+        byte Attack,
+        byte Defense,
+        ushort HitPoints,
+        byte MagicAttack,
+        byte MagicDefense,
+        byte Speed
+    );
 }

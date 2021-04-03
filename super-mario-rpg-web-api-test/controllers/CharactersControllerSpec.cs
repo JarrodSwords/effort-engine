@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using SuperMarioRpg.Application.Read;
 using SuperMarioRpg.Application.Write;
 using Xunit;
+using CombatStatsDto = SuperMarioRpg.Application.Write.CombatStatsDto;
 
 namespace SuperMarioRpg.WebApi.Test
 {
@@ -25,7 +26,8 @@ namespace SuperMarioRpg.WebApi.Test
         [Fact]
         public async Task CreateCharacter_CreatesCharacter()
         {
-            var character = new CreateCharacter.Args("Mario");
+            var stats = new CombatStatsDto(20, 0, 20, 10, 2, 20);
+            var character = new CreateCharacterDto("Mario", stats);
 
             await HttpClient.PostAsJsonAsync("", character);
 

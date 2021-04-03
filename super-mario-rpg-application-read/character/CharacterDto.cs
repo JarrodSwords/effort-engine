@@ -1,6 +1,19 @@
-﻿namespace SuperMarioRpg.Application.Read
+﻿using System;
+
+namespace SuperMarioRpg.Application.Read
 {
-    public class CharacterDto
-    {
-    }
+    public record CharacterDto(
+        Guid Id,
+        string Name,
+        CombatStatsDto CombatStats
+    );
+
+    public record CombatStatsDto(
+        byte Attack,
+        byte Defense,
+        ushort HitPoints,
+        byte MagicAttack,
+        byte MagicDefense,
+        byte Speed
+    );
 }
