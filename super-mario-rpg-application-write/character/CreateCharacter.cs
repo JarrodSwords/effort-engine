@@ -1,4 +1,5 @@
 ﻿using Effort.Domain.Messages;
+using SuperMarioRpg.Api;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 
@@ -42,14 +43,5 @@ namespace SuperMarioRpg.Application.Write
     public record CreateCharacterDto(
         string Name,
         CombatStatsDto CombatStats
-    );
-
-    public record CombatStatsDto(
-        byte Attack,
-        byte Defense,
-        ushort HitPoints,
-        byte MagicAttack,
-        byte MagicDefense,
-        byte Speed
     );
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Effort.Domain.Messages;
+using SuperMarioRpg.Api;
 
 namespace SuperMarioRpg.Application.Read
 {
@@ -13,7 +14,7 @@ namespace SuperMarioRpg.Application.Read
 
             public IEnumerable<CharacterDto> Handle(FetchCharacters query)
             {
-                return new List<CharacterDto> { new() };
+                return new List<CharacterDto>();
             }
 
             #endregion

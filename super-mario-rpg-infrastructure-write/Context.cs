@@ -6,7 +6,7 @@ namespace SuperMarioRpg.Infrastructure.Write
     {
         #region Public Interface
 
-        public DbSet<Character> Characters { get; set; }
+        public DbSet<Character> Character { get; set; }
 
         #endregion
 
@@ -14,14 +14,16 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseNpgsql(
-                "User ID=postgres;Password=admin;Host=localhost;Port=5432;Database=SuperMarioRpg;Pooling=true;"
-            );
+            builder
+                .UseNpgsql(
+                    "User ID=postgres;Password=admin;Host=localhost;Port=5432;Database=SuperMarioRpg;Pooling=true;"
+                )
+                .UseSnakeCaseNamingConvention();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.RemovePluralizingTableNameConvention();
+            //builder.RemovePluralizingTableNameConvention();
             base.OnModelCreating(builder);
         }
 

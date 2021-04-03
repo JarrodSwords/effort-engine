@@ -3,10 +3,9 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
-using SuperMarioRpg.Application.Read;
+using SuperMarioRpg.Api;
 using SuperMarioRpg.Application.Write;
 using Xunit;
-using CombatStatsDto = SuperMarioRpg.Application.Write.CombatStatsDto;
 
 namespace SuperMarioRpg.WebApi.Test
 {
@@ -31,7 +30,7 @@ namespace SuperMarioRpg.WebApi.Test
 
             await HttpClient.PostAsJsonAsync("", character);
 
-            var created = await HttpClient.GetFromJsonAsync<CharacterDto>("/mario");
+            var created = await HttpClient.GetFromJsonAsync<CharacterDto>("/Mario");
             created.Should().NotBeNull();
         }
 

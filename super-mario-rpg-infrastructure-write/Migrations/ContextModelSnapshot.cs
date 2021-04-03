@@ -23,14 +23,17 @@ namespace SuperMarioRpg.Infrastructure.Write.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_character");
 
-                    b.ToTable("Character");
+                    b.ToTable("character");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,8 +10,8 @@ using SuperMarioRpg.Infrastructure.Write;
 namespace SuperMarioRpg.Infrastructure.Write.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210330151303_CreateCharacter")]
-    partial class CreateCharacter
+    [Migration("20210403204528_AddCharacter")]
+    partial class AddCharacter
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,14 +25,17 @@ namespace SuperMarioRpg.Infrastructure.Write.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_character");
 
-                    b.ToTable("Character");
+                    b.ToTable("character");
                 });
 #pragma warning restore 612, 618
         }
