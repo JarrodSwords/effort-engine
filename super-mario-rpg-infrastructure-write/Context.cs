@@ -23,7 +23,6 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //builder.RemovePluralizingTableNameConvention();
             base.OnModelCreating(builder);
         }
 

@@ -1,6 +1,6 @@
-﻿using Dapper;
+﻿using System.Data;
+using Dapper;
 using Effort.Domain.Messages;
-using Npgsql;
 using SuperMarioRpg.Api;
 
 namespace SuperMarioRpg.Application.Read
@@ -9,26 +9,20 @@ namespace SuperMarioRpg.Application.Read
     {
         #region Nested Types
 
-        internal class Handler : IQueryHandler<FindCharacter, CharacterDto>
+        internal class Handler : Handler<FindCharacter, CharacterDto>
         {
-            private const string Query = @"
+            private const string FindCharacter = @"
 SELECT id
      , name
   FROM character C
  WHERE Name = @Name
 ";
 
-            #region IQueryHandler<FindCharacter,CharacterDto> Implementation
+            #region Public Interface
 
-            public CharacterDto Handle(FindCharacter args)
+            public override CharacterDto MakeRequest(IDbConnection connection, FindCharacter args)
             {
-                using var connection = new NpgsqlConnection(
-                    "User ID=postgres;Password=admin;Host=localhost;Port=5432;Database=SuperMarioRpg;Pooling=true;"
-                );
-
-                var character = connection.QueryFirst<CharacterDto>(Query, args);
-
-                return character;
+                return connection.QueryFirst<CharacterDto>(FindCharacter, args);
             }
 
             #endregion

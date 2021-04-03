@@ -37,7 +37,7 @@ namespace SuperMarioRpg.WebApi.Test
         [Fact]
         public async Task GetCharacter_ReturnsCharacter()
         {
-            var character = await HttpClient.GetFromJsonAsync<CharacterDto>("/mario");
+            var character = await HttpClient.GetFromJsonAsync<CharacterDto>("/Mario");
 
             character.Should().NotBeNull();
         }
