@@ -15,7 +15,7 @@ namespace SuperMarioRpg.WebApi.Test
         )
         {
             if (uri != default)
-                factory.ClientOptions.BaseAddress = new Uri($"http://localhost{uri}");
+                factory.ClientOptions.BaseAddress = new Uri($"http://localhost/{uri}/");
 
             HttpClient = factory.CreateClient();
         }

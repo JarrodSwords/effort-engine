@@ -11,7 +11,7 @@ namespace SuperMarioRpg.WebApi.Test
         #region Core
 
         public HealthCheckSpec(WebApplicationFactory<Startup> factory)
-            : base(factory, "/healthcheck")
+            : base(factory, "healthcheck")
         {
         }
 

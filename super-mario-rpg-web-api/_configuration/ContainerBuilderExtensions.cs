@@ -14,7 +14,7 @@ namespace SuperMarioRpg.WebApi
         {
             typeof(Entity).Assembly,
             typeof(FetchCharacters).Assembly,
-            typeof(CreateCharacter).Assembly,
+            typeof(CreateNonPlayerCharacter).Assembly,
             typeof(Context).Assembly,
             typeof(ContainerBuilderExtensions).Assembly
         };

@@ -5,12 +5,12 @@ using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.Application.Write
 {
-    public record CreateCharacter(string Name) : ICommand
+    public record CreateNonPlayerCharacter(string Name) : ICommand
     {
         #region Nested Types
 
         [Log]
-        internal class Handler : Handler<CreateCharacter>
+        internal class Handler : Handler<CreateNonPlayerCharacter>
         {
             #region Creation
 
@@ -22,7 +22,7 @@ namespace SuperMarioRpg.Application.Write
 
             #region Public Interface
 
-            public override void Handle(CreateCharacter command)
+            public override void Handle(CreateNonPlayerCharacter command)
             {
                 var builder = new Builder().From(command);
                 var character = new NonPlayerCharacter(builder);
@@ -45,13 +45,13 @@ namespace SuperMarioRpg.Application.Write
 
     internal class Builder : ICharacterBuilder
     {
-        private CreateCharacter _createCharacter;
+        private CreateNonPlayerCharacter _createNonPlayerCharacter;
 
         #region Public Interface
 
-        public Builder From(CreateCharacter command)
+        public Builder From(CreateNonPlayerCharacter command)
         {
-            _createCharacter = command;
+            _createNonPlayerCharacter = command;
             return this;
         }
 
@@ -66,7 +66,7 @@ namespace SuperMarioRpg.Application.Write
 
         public string GetName()
         {
-            return _createCharacter.Name;
+            return _createNonPlayerCharacter.Name;
         }
 
         #endregion
