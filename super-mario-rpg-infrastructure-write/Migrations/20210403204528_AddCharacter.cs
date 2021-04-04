@@ -3,27 +3,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SuperMarioRpg.Infrastructure.Write.Migrations
 {
-    public partial class CreateCharacter : Migration
+    public partial class AddCharacter : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Character",
+                name: "character",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: true)
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Character", x => x.Id);
+                    table.PrimaryKey("pk_character", x => x.id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Character");
+                name: "character");
         }
     }
 }

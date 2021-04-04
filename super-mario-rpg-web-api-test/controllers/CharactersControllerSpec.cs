@@ -3,7 +3,7 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
-using SuperMarioRpg.Application.Read;
+using SuperMarioRpg.Api;
 using SuperMarioRpg.Application.Write;
 using Xunit;
 
@@ -25,18 +25,19 @@ namespace SuperMarioRpg.WebApi.Test
         [Fact]
         public async Task CreateCharacter_CreatesCharacter()
         {
-            var character = new CreateCharacter.Args("Mario");
+            var stats = new CombatStatsDto(20, 0, 20, 10, 2, 20);
+            var character = new CreateCharacterDto("Mario", stats);
 
             await HttpClient.PostAsJsonAsync("", character);
 
-            var created = await HttpClient.GetFromJsonAsync<CharacterDto>("/mario");
+            var created = await HttpClient.GetFromJsonAsync<CharacterDto>("/Mario");
             created.Should().NotBeNull();
         }
 
         [Fact]
         public async Task GetCharacter_ReturnsCharacter()
         {
-            var character = await HttpClient.GetFromJsonAsync<CharacterDto>("/mario");
+            var character = await HttpClient.GetFromJsonAsync<CharacterDto>("/Mario");
 
             character.Should().NotBeNull();
         }

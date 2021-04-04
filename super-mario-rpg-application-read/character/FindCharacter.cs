@@ -1,4 +1,7 @@
-﻿using Effort.Domain.Messages;
+﻿using System.Data;
+using Dapper;
+using Effort.Domain.Messages;
+using SuperMarioRpg.Api;
 
 namespace SuperMarioRpg.Application.Read
 {
@@ -6,13 +9,20 @@ namespace SuperMarioRpg.Application.Read
     {
         #region Nested Types
 
-        internal class Handler : IQueryHandler<FindCharacter, CharacterDto>
+        internal class Handler : Handler<FindCharacter, CharacterDto>
         {
-            #region IQueryHandler<FindCharacter,CharacterDto> Implementation
+            private const string FindCharacter = @"
+SELECT id
+     , name
+  FROM character C
+ WHERE Name = @Name
+";
 
-            public CharacterDto Handle(FindCharacter query)
+            #region Public Interface
+
+            public override CharacterDto MakeRequest(IDbConnection connection, FindCharacter args)
             {
-                return new();
+                return connection.QueryFirst<CharacterDto>(FindCharacter, args);
             }
 
             #endregion

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\super-mario-rpg-api\api.csproj" />
     <ProjectReference Include="..\super-mario-rpg-domain\domain.csproj" />
   </ItemGroup>
 

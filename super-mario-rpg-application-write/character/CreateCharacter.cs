@@ -1,4 +1,5 @@
 ﻿using Effort.Domain.Messages;
+using SuperMarioRpg.Api;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 
@@ -7,13 +8,6 @@ namespace SuperMarioRpg.Application.Write
     public record CreateCharacter(string Name) : ICommand
     {
         #region Nested Types
-
-        /// <remarks>
-        ///     May belong in its own assembly.
-        /// </remarks>
-        public record Args(string Name)
-        {
-        }
 
         [Log]
         internal class Handler : Handler<CreateCharacter>
@@ -45,4 +39,9 @@ namespace SuperMarioRpg.Application.Write
 
         #endregion
     }
+
+    public record CreateCharacterDto(
+        string Name,
+        CombatStatsDto CombatStats
+    );
 }

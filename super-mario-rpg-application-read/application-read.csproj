@@ -8,6 +8,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\effort-engine-domain\domain.csproj" />
+    <ProjectReference Include="..\super-mario-rpg-api\api.csproj" />
+    <ProjectReference Include="..\super-mario-rpg-domain\domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dapper" Version="2.0.78" />
+    <PackageReference Include="npgsql" Version="5.0.4" />
   </ItemGroup>
 
 </Project>
