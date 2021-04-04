@@ -51,7 +51,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("/{name}")]
+        [Route("{name}")]
         public ActionResult<CharacterDto> FindCharacter(string name)
         {
             var query = new FindCharacter(name);
