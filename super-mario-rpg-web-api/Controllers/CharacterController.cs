@@ -35,8 +35,8 @@ namespace SuperMarioRpg.WebApi.Controllers
         [HttpPost]
         public IActionResult CreateCharacter([FromBody] CreateCharacterDto args)
         {
-            var cmd = new CreateCharacter(args.Name);
-            _createCharacterHandler.Handle(cmd);
+            var command = new CreateCharacter(args.Name);
+            _createCharacterHandler.Handle(command);
 
             return Ok();
         }
@@ -51,10 +51,10 @@ namespace SuperMarioRpg.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("/{recordName}")]
-        public ActionResult<CharacterDto> FindCharacter(string recordName)
+        [Route("/{name}")]
+        public ActionResult<CharacterDto> FindCharacter(string name)
         {
-            var query = new FindCharacter(recordName);
+            var query = new FindCharacter(name);
             var character = _findCharacterHandler.Handle(query);
 
             return Ok(character);
