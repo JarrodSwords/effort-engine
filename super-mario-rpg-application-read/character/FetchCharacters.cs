@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data;
+using Dapper;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
 
@@ -8,13 +10,19 @@ namespace SuperMarioRpg.Application.Read
     {
         #region Nested Types
 
-        internal class Handler : IQueryHandler<FetchCharacters, IEnumerable<CharacterDto>>
+        internal class Handler : Handler<FetchCharacters, IEnumerable<CharacterDto>>
         {
-            #region IQueryHandler<FetchCharacters,IEnumerable<CharacterDto>> Implementation
+            private const string FetchCharacters = @"
+SELECT id
+     , name
+  FROM character
+";
 
-            public IEnumerable<CharacterDto> Handle(FetchCharacters query)
+            #region Public Interface
+
+            public override IEnumerable<CharacterDto> MakeRequest(IDbConnection connection, FetchCharacters args)
             {
-                return new List<CharacterDto>();
+                return connection.Query<CharacterDto>(FetchCharacters, args);
             }
 
             #endregion
