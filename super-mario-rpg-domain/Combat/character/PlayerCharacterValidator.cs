@@ -3,11 +3,11 @@ using static SuperMarioRpg.Domain.Combat.Stats;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class CharacterValidator : AbstractValidator<Character>
+    public class PlayerCharacterValidator : AbstractValidator<PlayerCharacter>
     {
         #region Creation
 
-        public CharacterValidator()
+        public PlayerCharacterValidator()
         {
             RuleFor(x => x.Loadout.Accessory).NotNull().MustBeCompatibleWithCharacter();
             RuleFor(x => x.Loadout.Armor).NotNull().MustBeCompatibleWithCharacter();

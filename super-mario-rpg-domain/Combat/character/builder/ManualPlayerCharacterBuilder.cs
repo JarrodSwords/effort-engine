@@ -8,11 +8,11 @@ using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class ManualCharacterBuilder : ICharacterBuilder
+    public class ManualPlayerCharacterBuilder : IPlayerCharacterBuilder
     {
         #region Creation
 
-        public ManualCharacterBuilder()
+        public ManualPlayerCharacterBuilder()
         {
             Reset();
         }
@@ -21,34 +21,44 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public ManualCharacterBuilder Add(params Equipment[] equipment)
+        public Equipment Accessory { get; private set; }
+        public Equipment Armor { get; private set; }
+        public CharacterTypes CharacterType { get; private set; }
+        public Guid Id { get; private set; }
+        public Name Name { get; }
+        public Stats NaturalStats { get; private set; }
+        public Equipment Weapon { get; private set; }
+
+        public Xp Xp => CreateXp();
+
+        public ManualPlayerCharacterBuilder Add(params Equipment[] equipment)
         {
             Equipment.AddRange(equipment);
             return this;
         }
 
-        public Character Build()
+        public PlayerCharacter Build()
         {
-            var character = new Character(this);
+            var character = new PlayerCharacter(this);
 
             Reset();
 
             return character;
         }
 
-        public ManualCharacterBuilder For(CharacterTypes characterType)
+        public ManualPlayerCharacterBuilder For(CharacterTypes characterType)
         {
             CharacterType = characterType;
             return this;
         }
 
-        public ManualCharacterBuilder WithId(Guid id)
+        public ManualPlayerCharacterBuilder WithId(Guid id)
         {
             Id = id;
             return this;
         }
 
-        public ManualCharacterBuilder WithNaturalStats(
+        public ManualPlayerCharacterBuilder WithNaturalStats(
             short attack = default,
             short defense = default,
             short hp = default,
@@ -89,17 +99,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #endregion
 
-        #region ICharacterBuilder Implementation
-
-        public Equipment Accessory { get; private set; }
-        public Equipment Armor { get; private set; }
-        public CharacterTypes CharacterType { get; private set; }
-        public Guid Id { get; private set; }
-        public Name Name { get; }
-        public Stats NaturalStats { get; private set; }
-        public Equipment Weapon { get; private set; }
-
-        public Xp Xp => CreateXp();
+        #region IPlayerCharacterBuilder Implementation
 
         public void CreateLoadout()
         {
@@ -113,21 +113,35 @@ namespace SuperMarioRpg.Domain.Combat
             NaturalStats = CreateStats(Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed);
         }
 
-        #endregion
+        public CharacterTypes GetCharacterType()
+        {
+            return CharacterType;
+        }
 
-        #region Implementation of ICharacterBuilder
+        public Id GetId()
+        {
+            return Create(Id);
+        }
 
-        public CharacterTypes GetCharacterType() => CharacterType;
+        public Loadout GetLoadout()
+        {
+            return new(Accessory, Armor, Weapon);
+        }
 
-        public Id GetId() => Create(Id);
+        public Name GetName()
+        {
+            return Name;
+        }
 
-        public Name GetName() => Name;
+        public Stats GetNaturalStats()
+        {
+            return NaturalStats;
+        }
 
-        public Loadout GetLoadout() => new (Accessory, Armor, Weapon);
-
-        public Stats GetNaturalStats() => NaturalStats;
-
-        public Xp GetXp() => Xp;
+        public Xp GetXp()
+        {
+            return Xp;
+        }
 
         #endregion
     }

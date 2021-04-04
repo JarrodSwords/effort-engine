@@ -1,5 +1,3 @@
-using SuperMarioRpg.Domain.Combat;
-
 namespace SuperMarioRpg.Domain
 {
     public interface IUnitOfWork

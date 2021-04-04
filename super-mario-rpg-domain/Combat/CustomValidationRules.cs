@@ -8,7 +8,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public static IRuleBuilderOptions<T, Equipment> MustBeCompatibleWithCharacter<T>(
             this IRuleBuilder<T, Equipment> ruleBuilder
-        ) where T : Character
+        ) where T : PlayerCharacter
         {
             return ruleBuilder
                 .Must((x, y) => y.IsCompatible(x.CharacterType))

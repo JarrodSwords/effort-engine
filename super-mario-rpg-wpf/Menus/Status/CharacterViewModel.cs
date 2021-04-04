@@ -4,22 +4,22 @@ namespace SuperMarioRpg.Wpf.Menus.Status
 {
     public class CharacterViewModel : ViewModel
     {
-        private readonly Character _character;
+        private readonly PlayerCharacter _playerCharacter;
 
         #region Creation
 
-        public CharacterViewModel(Character character)
+        public CharacterViewModel(PlayerCharacter playerCharacter)
         {
-            _character = character;
+            _playerCharacter = playerCharacter;
         }
 
         #endregion
 
         #region Public Interface
 
-        public short Hp => _character.EffectiveStats.Hp.Value;
-        public byte Level => _character.Progression.CurrentLevel.Value;
-        public string Name => _character.Name.Value;
+        public short Hp => _playerCharacter.EffectiveStats.Hp.Value;
+        public byte Level => _playerCharacter.Progression.CurrentLevel.Value;
+        public string Name => _playerCharacter.Name.Value;
 
         #endregion
     }

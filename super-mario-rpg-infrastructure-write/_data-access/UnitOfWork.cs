@@ -1,5 +1,4 @@
 ﻿using SuperMarioRpg.Domain;
-using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {

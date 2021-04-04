@@ -1,6 +1,5 @@
 ﻿using Effort.Domain;
-using SuperMarioRpg.Domain.Combat;
-using DomainCharacter = SuperMarioRpg.Domain.Combat.Character;
+using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
@@ -14,28 +13,19 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #endregion
 
-        #region ICharacterRepository Implementation
-
-        public DomainCharacter Find(Name name)
-        {
-            return Character.To(Find(x => x.Name == name.Value));
-        }
-
-        #endregion
-
         #region IRepository<Character> Implementation
 
-        public string Create(DomainCharacter character)
+        public string Create(Domain.Character playerCharacter)
         {
-            return Create(Character.From(character)).Name;
+            return Create(Character.From(playerCharacter)).Name;
         }
 
-        public DomainCharacter Find(Id id)
+        public Domain.Character Find(Id id)
         {
             return Character.To(Find(id.Value));
         }
 
-        public void Update(DomainCharacter character)
+        public void Update(Domain.Character character)
         {
             var storedCharacter = Find(character.Id.Value);
 

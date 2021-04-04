@@ -11,7 +11,7 @@ namespace SuperMarioRpg.Domain.Test.Overworld
         [Fact]
         public void CanMoveToLocation()
         {
-            var character = new Character();
+            var character = new Domain.Overworld.Character();
             var location = new Location("Mario's Pad");
 
             character.Move(location);

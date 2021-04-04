@@ -2,19 +2,19 @@ using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public interface ICharacterBuilder
+    public interface IPlayerCharacterBuilder
     {
         #region Public Interface
 
-        CharacterTypes GetCharacterType();
-        Id GetId();
-        Name GetName();
-        Loadout GetLoadout();
-        Stats GetNaturalStats();
-        Xp GetXp();
-
         void CreateLoadout();
         void CreateNaturalStats();
+
+        CharacterTypes GetCharacterType();
+        Id GetId();
+        Loadout GetLoadout();
+        Name GetName();
+        Stats GetNaturalStats();
+        Xp GetXp();
 
         #endregion
     }

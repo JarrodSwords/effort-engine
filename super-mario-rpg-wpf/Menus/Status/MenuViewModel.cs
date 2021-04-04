@@ -6,13 +6,13 @@ namespace SuperMarioRpg.Wpf.Menus.Status
 {
     public class MenuViewModel : GameState
     {
-        private readonly Character _character;
+        private readonly PlayerCharacter _playerCharacter;
 
         #region Creation
 
-        public MenuViewModel(MainWindowViewModel game, Character character) : base(game)
+        public MenuViewModel(MainWindowViewModel game, PlayerCharacter playerCharacter) : base(game)
         {
-            _character = character;
+            _playerCharacter = playerCharacter;
             ControlState = new MenuControlState();
         }
 
@@ -20,8 +20,8 @@ namespace SuperMarioRpg.Wpf.Menus.Status
 
         #region Public Interface
 
-        public CharacterViewModel CharacterViewModel => new(_character);
-        public StatsViewModel StatsViewModel => new(_character);
+        public CharacterViewModel CharacterViewModel => new(_playerCharacter);
+        public StatsViewModel StatsViewModel => new(_playerCharacter);
 
         #endregion
     }

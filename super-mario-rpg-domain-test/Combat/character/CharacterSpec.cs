@@ -16,16 +16,16 @@ namespace SuperMarioRpg.Domain.Test.Combat
     {
         #region Core
 
-        private readonly Character _mallow;
-        private readonly ManualCharacterBuilder _manualBuilder;
-        private readonly Character _mario;
+        private readonly PlayerCharacter _mallow;
+        private readonly ManualPlayerCharacterBuilder _manualPlayerBuilder;
+        private readonly PlayerCharacter _mario;
 
         public CharacterSpec()
         {
             var director = new Director();
-            _manualBuilder = new ManualCharacterBuilder();
+            _manualPlayerBuilder = new ManualPlayerCharacterBuilder();
 
-            var builder = new NewCharacterBuilder();
+            var builder = new NewPlayerCharacterBuilder();
             director.Configure(builder);
             _mario = builder.Build();
 
@@ -45,7 +45,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
 
         protected override Entity CreateEntity(Guid id)
         {
-            return _manualBuilder.WithId(id).Build();
+            return _manualPlayerBuilder.WithId(id).Build();
         }
 
         [Theory]
