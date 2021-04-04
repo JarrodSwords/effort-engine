@@ -1,7 +1,6 @@
 ﻿using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
 using SuperMarioRpg.Domain;
-using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Application.Write
 {
@@ -24,12 +23,9 @@ namespace SuperMarioRpg.Application.Write
 
             public override void Handle(CreateCharacter command)
             {
-                var builder = new NewPlayerCharacterBuilder().For(CharacterTypes.Mario);
-                new Director().Configure(builder);
+                var character = new NonPlayerCharacter(command.Name);
 
-                var character = builder.Build();
-
-                UnitOfWork.PlayerCharacterRepository.Create(character);
+                UnitOfWork.CharacterRepository.Create(character);
 
                 UnitOfWork.Commit();
             }

@@ -1,12 +1,11 @@
 ﻿using SuperMarioRpg.Domain;
-using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly Context _context;
-        private IPlayerCharacterRepository _playerCharacterRepository;
+        private ICharacterRepository _characterRepository;
 
         #region Creation
 
@@ -19,8 +18,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region IUnitOfWork Implementation
 
-        public IPlayerCharacterRepository PlayerCharacterRepository =>
-            _playerCharacterRepository ??= new PlayerCharacterRepository(_context);
+        public ICharacterRepository CharacterRepository => _characterRepository ??= new CharacterRepository(_context);
 
         public void Commit()
         {
