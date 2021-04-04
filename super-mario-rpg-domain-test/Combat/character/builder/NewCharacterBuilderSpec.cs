@@ -11,11 +11,11 @@ namespace SuperMarioRpg.Domain.Test.Combat
     {
         #region Core
 
-        private readonly NewCharacterBuilder _builder;
+        private readonly NewPlayerCharacterBuilder _builder;
 
         public NewCharacterBuilderSpec()
         {
-            _builder = new NewCharacterBuilder();
+            _builder = new NewPlayerCharacterBuilder();
         }
 
         #endregion

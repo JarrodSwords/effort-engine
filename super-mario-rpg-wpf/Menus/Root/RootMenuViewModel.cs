@@ -65,7 +65,7 @@ namespace SuperMarioRpg.Wpf.Menus.Root
         {
             var director = new Director();
 
-            var builder = new NewCharacterBuilder();
+            var builder = new NewPlayerCharacterBuilder();
             director.Configure(builder);
             yield return builder.Build();
 

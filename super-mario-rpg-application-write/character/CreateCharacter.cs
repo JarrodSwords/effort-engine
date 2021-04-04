@@ -24,7 +24,7 @@ namespace SuperMarioRpg.Application.Write
 
             public override void Handle(CreateCharacter command)
             {
-                var builder = new NewCharacterBuilder().For(CharacterTypes.Mario);
+                var builder = new NewPlayerCharacterBuilder().For(CharacterTypes.Mario);
                 new Director().Configure(builder);
 
                 var character = builder.Build();

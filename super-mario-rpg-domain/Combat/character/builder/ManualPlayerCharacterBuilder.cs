@@ -8,11 +8,11 @@ using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class ManualCharacterBuilder : ICharacterBuilder
+    public class ManualPlayerCharacterBuilder : IPlayerCharacterBuilder
     {
         #region Creation
 
-        public ManualCharacterBuilder()
+        public ManualPlayerCharacterBuilder()
         {
             Reset();
         }
@@ -31,7 +31,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Xp Xp => CreateXp();
 
-        public ManualCharacterBuilder Add(params Equipment[] equipment)
+        public ManualPlayerCharacterBuilder Add(params Equipment[] equipment)
         {
             Equipment.AddRange(equipment);
             return this;
@@ -46,19 +46,19 @@ namespace SuperMarioRpg.Domain.Combat
             return character;
         }
 
-        public ManualCharacterBuilder For(CharacterTypes characterType)
+        public ManualPlayerCharacterBuilder For(CharacterTypes characterType)
         {
             CharacterType = characterType;
             return this;
         }
 
-        public ManualCharacterBuilder WithId(Guid id)
+        public ManualPlayerCharacterBuilder WithId(Guid id)
         {
             Id = id;
             return this;
         }
 
-        public ManualCharacterBuilder WithNaturalStats(
+        public ManualPlayerCharacterBuilder WithNaturalStats(
             short attack = default,
             short defense = default,
             short hp = default,
@@ -99,7 +99,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #endregion
 
-        #region ICharacterBuilder Implementation
+        #region IPlayerCharacterBuilder Implementation
 
         public void CreateLoadout()
         {

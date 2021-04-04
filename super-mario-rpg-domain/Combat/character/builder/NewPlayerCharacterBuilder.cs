@@ -7,7 +7,7 @@ using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class NewCharacterBuilder : ICharacterBuilder
+    public class NewPlayerCharacterBuilder : IPlayerCharacterBuilder
     {
         private static readonly IReadOnlyDictionary<CharacterTypes, ushort> BaseExp =
             new Dictionary<CharacterTypes, ushort>
@@ -21,7 +21,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Creation
 
-        public NewCharacterBuilder()
+        public NewPlayerCharacterBuilder()
         {
             Reset();
         }
@@ -48,7 +48,7 @@ namespace SuperMarioRpg.Domain.Combat
             return character;
         }
 
-        public NewCharacterBuilder For(CharacterTypes characterType)
+        public NewPlayerCharacterBuilder For(CharacterTypes characterType)
         {
             CharacterType = characterType;
             return this;
@@ -65,7 +65,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #endregion
 
-        #region ICharacterBuilder Implementation
+        #region IPlayerCharacterBuilder Implementation
 
         public void CreateLoadout()
         {

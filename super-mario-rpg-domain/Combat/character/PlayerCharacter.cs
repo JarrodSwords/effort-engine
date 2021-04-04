@@ -12,7 +12,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Creation
 
-        public PlayerCharacter(ICharacterBuilder builder) : base(builder.GetId().Value)
+        public PlayerCharacter(IPlayerCharacterBuilder builder) : base(builder.GetId().Value)
         {
             Name = builder.GetName();
             CharacterType = builder.GetCharacterType();
