@@ -1,4 +1,5 @@
-﻿using Effort.Domain.Messages;
+﻿using System;
+using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
 using SuperMarioRpg.Domain;
 
@@ -23,7 +24,8 @@ namespace SuperMarioRpg.Application.Write
 
             public override void Handle(CreateCharacter command)
             {
-                var character = new NonPlayerCharacter(command.Name);
+                var builder = new Builder().From(command);
+                var character = new NonPlayerCharacter(builder);
 
                 UnitOfWork.CharacterRepository.Create(character);
 
@@ -40,4 +42,33 @@ namespace SuperMarioRpg.Application.Write
         string Name,
         CombatStatsDto CombatStats
     );
+
+    internal class Builder : ICharacterBuilder
+    {
+        private CreateCharacter _createCharacter;
+
+        #region Public Interface
+
+        public Builder From(CreateCharacter command)
+        {
+            _createCharacter = command;
+            return this;
+        }
+
+        #endregion
+
+        #region ICharacterBuilder Implementation
+
+        public Guid GetId()
+        {
+            return Guid.Empty;
+        }
+
+        public string GetName()
+        {
+            return _createCharacter.Name;
+        }
+
+        #endregion
+    }
 }

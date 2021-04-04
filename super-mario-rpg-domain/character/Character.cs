@@ -12,6 +12,13 @@ namespace SuperMarioRpg.Domain
             Name = Name.CreateName(name);
         }
 
+        protected Character(ICharacterBuilder builder) : this(
+            builder.GetId(),
+            builder.GetName()
+        )
+        {
+        }
+
         #endregion
 
         #region Public Interface

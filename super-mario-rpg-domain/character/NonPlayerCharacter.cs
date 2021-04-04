@@ -10,6 +10,10 @@ namespace SuperMarioRpg.Domain
         {
         }
 
+        public NonPlayerCharacter(ICharacterBuilder builder) : base(builder)
+        {
+        }
+
         #endregion
     }
 }
