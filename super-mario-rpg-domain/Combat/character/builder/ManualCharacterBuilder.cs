@@ -21,15 +21,25 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
+        public Equipment Accessory { get; private set; }
+        public Equipment Armor { get; private set; }
+        public CharacterTypes CharacterType { get; private set; }
+        public Guid Id { get; private set; }
+        public Name Name { get; }
+        public Stats NaturalStats { get; private set; }
+        public Equipment Weapon { get; private set; }
+
+        public Xp Xp => CreateXp();
+
         public ManualCharacterBuilder Add(params Equipment[] equipment)
         {
             Equipment.AddRange(equipment);
             return this;
         }
 
-        public Character Build()
+        public PlayerCharacter Build()
         {
-            var character = new Character(this);
+            var character = new PlayerCharacter(this);
 
             Reset();
 
@@ -91,16 +101,6 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region ICharacterBuilder Implementation
 
-        public Equipment Accessory { get; private set; }
-        public Equipment Armor { get; private set; }
-        public CharacterTypes CharacterType { get; private set; }
-        public Guid Id { get; private set; }
-        public Name Name { get; }
-        public Stats NaturalStats { get; private set; }
-        public Equipment Weapon { get; private set; }
-
-        public Xp Xp => CreateXp();
-
         public void CreateLoadout()
         {
             Accessory = Equipment.SingleOrDefault(x => x.EquipmentSlot == EquipmentSlot.Accessory);
@@ -113,21 +113,35 @@ namespace SuperMarioRpg.Domain.Combat
             NaturalStats = CreateStats(Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed);
         }
 
-        #endregion
+        public CharacterTypes GetCharacterType()
+        {
+            return CharacterType;
+        }
 
-        #region Implementation of ICharacterBuilder
+        public Id GetId()
+        {
+            return Create(Id);
+        }
 
-        public CharacterTypes GetCharacterType() => CharacterType;
+        public Loadout GetLoadout()
+        {
+            return new(Accessory, Armor, Weapon);
+        }
 
-        public Id GetId() => Create(Id);
+        public Name GetName()
+        {
+            return Name;
+        }
 
-        public Name GetName() => Name;
+        public Stats GetNaturalStats()
+        {
+            return NaturalStats;
+        }
 
-        public Loadout GetLoadout() => new (Accessory, Armor, Weapon);
-
-        public Stats GetNaturalStats() => NaturalStats;
-
-        public Xp GetXp() => Xp;
+        public Xp GetXp()
+        {
+            return Xp;
+        }
 
         #endregion
     }

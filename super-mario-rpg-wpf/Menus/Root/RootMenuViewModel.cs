@@ -31,22 +31,11 @@ namespace SuperMarioRpg.Wpf.Menus.Root
                 _submenus.Add(submenu);
 
             Submenus = new ReadOnlyObservableCollection<string>(_submenus);
-            
+
             ControlState = new ControlState
             {
                 XCommand = new Command(ExitMenu)
             };
-        }
-
-        private void ExitMenu()
-        {
-            Game.SetGameState(new Field(Game));
-        }
-
-        public string SelectedSubmenu
-        {
-            get => _selectedSubmenu;
-            set => SetProperty(ref _selectedSubmenu, value);
         }
 
         #endregion
@@ -54,13 +43,25 @@ namespace SuperMarioRpg.Wpf.Menus.Root
         #region Public Interface
 
         public ReadOnlyObservableCollection<CharacterViewModel> PartyMembers { get; }
+
+        public string SelectedSubmenu
+        {
+            get => _selectedSubmenu;
+            set => SetProperty(ref _selectedSubmenu, value);
+        }
+
         public ReadOnlyObservableCollection<string> Submenus { get; }
 
         #endregion
 
         #region Private Interface
 
-        private static IEnumerable<Character> GetCharacters()
+        private void ExitMenu()
+        {
+            Game.SetGameState(new Field(Game));
+        }
+
+        private static IEnumerable<PlayerCharacter> GetCharacters()
         {
             var director = new Director();
 
@@ -81,8 +82,10 @@ namespace SuperMarioRpg.Wpf.Menus.Root
         {
             yield return "Item";
             yield return "Status";
+
             //yield return "Special";
             yield return "Equip";
+
             //yield return "Special Item";
             //yield return "Map";
         }

@@ -22,7 +22,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
 
         #region Private Interface
 
-        private Character CreateCharacter()
+        private PlayerCharacter CreateCharacter()
         {
             Director.Configure(_builder);
             return _builder.Build();

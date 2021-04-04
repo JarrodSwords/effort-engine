@@ -3,16 +3,16 @@ using FluentValidation;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public class Character : AggregateRoot
+    public class PlayerCharacter : AggregateRoot
     {
-        private static readonly CharacterValidator Validator = new();
+        private static readonly PlayerCharacterValidator Validator = new();
         private Loadout _loadout;
         private Progression _progression;
         private Status _status;
 
         #region Creation
 
-        public Character(ICharacterBuilder builder) : base(builder.GetId().Value)
+        public PlayerCharacter(ICharacterBuilder builder) : base(builder.GetId().Value)
         {
             Name = builder.GetName();
             CharacterType = builder.GetCharacterType();
@@ -70,13 +70,13 @@ namespace SuperMarioRpg.Domain.Combat
             }
         }
 
-        public Character Add(Xp xp)
+        public PlayerCharacter Add(Xp xp)
         {
             Progression = Progression.Add(xp);
             return this;
         }
 
-        public Character Equip(Equipment equipment)
+        public PlayerCharacter Equip(Equipment equipment)
         {
             Loadout = Loadout.Equip(equipment);
             return this;
@@ -88,7 +88,7 @@ namespace SuperMarioRpg.Domain.Combat
             return Loadout.IsEquipped(equipment);
         }
 
-        public Character Unequip(Equipment equipment)
+        public PlayerCharacter Unequip(Equipment equipment)
         {
             Loadout = Loadout.Unequip(equipment);
             return this;

@@ -29,7 +29,7 @@ namespace SuperMarioRpg.Application.Write
 
                 var character = builder.Build();
 
-                UnitOfWork.CharacterRepository.Create(character);
+                UnitOfWork.PlayerCharacterRepository.Create(character);
 
                 UnitOfWork.Commit();
             }

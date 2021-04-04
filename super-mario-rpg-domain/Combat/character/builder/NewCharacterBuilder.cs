@@ -39,9 +39,9 @@ namespace SuperMarioRpg.Domain.Combat
         public Equipment Weapon { get; private set; }
         public Xp Xp => CreateXp(BaseExp[CharacterType]);
 
-        public Character Build()
+        public PlayerCharacter Build()
         {
-            var character = new Character(this);
+            var character = new PlayerCharacter(this);
 
             Reset();
 

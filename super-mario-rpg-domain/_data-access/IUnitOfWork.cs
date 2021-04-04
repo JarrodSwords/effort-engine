@@ -6,7 +6,7 @@ namespace SuperMarioRpg.Domain
     {
         #region Public Interface
 
-        ICharacterRepository CharacterRepository { get; }
+        IPlayerCharacterRepository PlayerCharacterRepository { get; }
         void Commit();
 
         #endregion

@@ -16,9 +16,9 @@ namespace SuperMarioRpg.Domain.Test.Combat
     {
         #region Core
 
-        private readonly Character _mallow;
+        private readonly PlayerCharacter _mallow;
         private readonly ManualCharacterBuilder _manualBuilder;
-        private readonly Character _mario;
+        private readonly PlayerCharacter _mario;
 
         public CharacterSpec()
         {

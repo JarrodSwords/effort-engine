@@ -1,4 +1,4 @@
-﻿using DomainCharacter = SuperMarioRpg.Domain.Combat.Character;
+﻿using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
@@ -8,16 +8,16 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public string Name { get; set; }
 
-        public static Character From(DomainCharacter character)
+        public static Character From(PlayerCharacter playerCharacter)
         {
             return new()
             {
-                Id = character.Id.Value,
-                Name = character.Name.Value
+                Id = playerCharacter.Id.Value,
+                Name = playerCharacter.Name.Value
             };
         }
 
-        public static DomainCharacter To(Character character)
+        public static PlayerCharacter To(Character character)
         {
             return null;
         }

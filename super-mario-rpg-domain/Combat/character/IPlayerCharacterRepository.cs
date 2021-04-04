@@ -2,11 +2,11 @@ using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public interface ICharacterRepository : IRepository<Character>
+    public interface IPlayerCharacterRepository : IRepository<PlayerCharacter>
     {
         #region Public Interface
 
-        Character Find(Name name);
+        PlayerCharacter Find(Name name);
 
         #endregion
     }
