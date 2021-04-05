@@ -1,6 +1,8 @@
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using SuperMarioRpg.Infrastructure.Write;
 
 namespace SuperMarioRpg.WebApi
 {
@@ -17,7 +19,12 @@ namespace SuperMarioRpg.WebApi
 
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var builder = CreateHostBuilder(args);
+            var host = builder.Build();
+
+            host.Services.GetAutofacRoot().Resolve<Context>().Update();
+
+            host.Run();
         }
 
         #endregion

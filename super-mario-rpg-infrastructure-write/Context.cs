@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
@@ -7,6 +8,20 @@ namespace SuperMarioRpg.Infrastructure.Write
         #region Public Interface
 
         public DbSet<Character> Character { get; set; }
+
+        public Context Update()
+        {
+            var currentMigration = Database.GetAppliedMigrations().Last();
+            var latestMigration = Database.GetMigrations().Last();
+
+            if (currentMigration == latestMigration)
+                return this;
+
+            Database.EnsureDeleted();
+            Database.Migrate();
+
+            return this;
+        }
 
         #endregion
 
