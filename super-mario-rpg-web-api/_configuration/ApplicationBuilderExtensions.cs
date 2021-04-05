@@ -13,8 +13,8 @@ namespace SuperMarioRpg.WebApi
         {
             var context = app.GetService<Context>();
 
-            if (context.Database.CanConnect() && context.IsLatest)
-                return app;
+            //if (context.Database.CanConnect() && context.IsLatest)
+            //    return app;
 
             context.ApplyMigrations();
             app.GetService<ICommandHandler<SeedNonPlayerCharacters>>().Handle(new SeedNonPlayerCharacters());
