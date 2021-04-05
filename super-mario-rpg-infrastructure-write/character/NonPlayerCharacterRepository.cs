@@ -15,7 +15,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #endregion
 
-        #region INonPlayerCharacterRepository Implementation
+        #region IRepository<NonPlayerCharacter> Implementation
 
         public void Create(params NonPlayerCharacter[] nonPlayerCharacters)
         {
@@ -23,10 +23,6 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             Create(characters);
         }
-
-        #endregion
-
-        #region IRepository<NonPlayerCharacter> Implementation
 
         public string Create(NonPlayerCharacter character)
         {

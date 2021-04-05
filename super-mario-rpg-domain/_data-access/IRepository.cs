@@ -7,9 +7,10 @@ namespace SuperMarioRpg.Domain
         #region Public Interface
 
         void Commit();
-        string Create(T character);
+        string Create(T root);
+        void Create(params T[] root);
         T Find(Id id);
-        void Update(T character);
+        void Update(T root);
 
         #endregion
     }
