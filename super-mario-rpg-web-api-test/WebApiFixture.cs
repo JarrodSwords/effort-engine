@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
+using SuperMarioRpg.Infrastructure.Write;
 using Xunit;
 
 namespace SuperMarioRpg.WebApi.Test
@@ -18,6 +19,10 @@ namespace SuperMarioRpg.WebApi.Test
                 factory.ClientOptions.BaseAddress = new Uri($"http://localhost/{uri}/");
 
             HttpClient = factory.CreateClient();
+
+            var context = factory.Services.GetService(typeof(Context)) as Context;
+
+            context?.Update();
         }
 
         #endregion

@@ -48,6 +48,11 @@ namespace SuperMarioRpg.WebApi
                     endpoints.MapControllers();
                 }
             );
+
+            UpdateContext(app);
+
+            if (env.IsDevelopment())
+                SeedData(app);
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -64,6 +69,18 @@ namespace SuperMarioRpg.WebApi
             services.AddSwaggerGen(
                 c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuperMarioRpg.WebApi", Version = "v1" }); }
             );
+        }
+
+        public static void SeedData(IApplicationBuilder app)
+        {
+            //var context = app.ApplicationServices.GetService(typeof(Context)) as Context;
+            //context?.Update();
+        }
+
+        public static void UpdateContext(IApplicationBuilder app)
+        {
+            var context = app.ApplicationServices.GetService(typeof(Context)) as Context;
+            context?.Update();
         }
 
         #endregion
