@@ -29,6 +29,11 @@ namespace SuperMarioRpg.Infrastructure.Write
             return _context.Add(entity).Entity;
         }
 
+        public void Create(params T[] entities)
+        {
+            _context.AddRange(entities.ToList());
+        }
+
         public T Find(Guid id)
         {
             return _context.Find<T>(id);

@@ -9,14 +9,10 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public DbSet<Character> Character { get; set; }
 
+        public bool IsLatest => Database.GetAppliedMigrations().Last() == Database.GetMigrations().Last();
+
         public Context ApplyMigrations()
         {
-            var currentMigration = Database.GetAppliedMigrations().Last();
-            var latestMigration = Database.GetMigrations().Last();
-
-            if (currentMigration == latestMigration)
-                return this;
-
             Database.EnsureDeleted();
             Database.Migrate();
 

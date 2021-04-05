@@ -9,6 +9,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         void Commit();
         T Create(T entity);
+        void Create(params T[] entities);
         T Find(Guid id);
         T Find(Expression<Func<T, bool>> predicate);
         void Update(T entity);

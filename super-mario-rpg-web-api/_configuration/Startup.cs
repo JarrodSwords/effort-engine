@@ -1,10 +1,12 @@
 using Autofac;
+using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SuperMarioRpg.Application.Write;
 using SuperMarioRpg.Infrastructure.Write;
 
 namespace SuperMarioRpg.WebApi
@@ -35,6 +37,7 @@ namespace SuperMarioRpg.WebApi
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SuperMarioRpg.WebApi v1"));
+                SetUpDevEnvironment(app);
             }
 
             app.UseHttpsRedirection();
@@ -48,11 +51,6 @@ namespace SuperMarioRpg.WebApi
                     endpoints.MapControllers();
                 }
             );
-
-            UpdateContext(app);
-
-            if (env.IsDevelopment())
-                SeedData(app);
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -71,16 +69,15 @@ namespace SuperMarioRpg.WebApi
             );
         }
 
-        public static void SeedData(IApplicationBuilder app)
+        public static T GetService<T>(IApplicationBuilder app) where T : class
         {
-            //var context = app.ApplicationServices.GetService(typeof(Context)) as Context;
-            //context?.ApplyMigrations();
+            return app.ApplicationServices.GetService(typeof(T)) as T;
         }
 
-        public static void UpdateContext(IApplicationBuilder app)
+        public static void SetUpDevEnvironment(IApplicationBuilder app)
         {
-            var context = app.ApplicationServices.GetService(typeof(Context)) as Context;
-            context?.ApplyMigrations();
+            GetService<Context>(app)?.ApplyMigrations();
+            GetService<ICommandHandler<SeedNonPlayerCharacters>>(app).Handle(new SeedNonPlayerCharacters());
         }
 
         #endregion
