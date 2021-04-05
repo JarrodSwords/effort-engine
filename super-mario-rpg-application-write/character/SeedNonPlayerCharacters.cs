@@ -11,8 +11,11 @@ namespace SuperMarioRpg.Application.Write
         {
             private static readonly NonPlayerCharacter[] Characters =
             {
+                new("Boshi"),
+                new("Frogfucious"),
                 new("Chancellor"),
-                new("Toad")
+                new("Toad"),
+                new("Toadofsky")
             };
 
             #region Creation
