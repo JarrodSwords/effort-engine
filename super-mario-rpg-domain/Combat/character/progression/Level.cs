@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using static SuperMarioRpg.Domain.Combat.Stats;
-using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -48,7 +47,7 @@ namespace SuperMarioRpg.Domain.Combat
         public Level(byte value, ushort required, Stats combatStatReward)
         {
             Value = value;
-            Required = CreateXp(required);
+            Required = new(required);
             CombatStatReward = combatStatReward;
         }
 

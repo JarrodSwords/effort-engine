@@ -1,6 +1,5 @@
 using System;
 using Effort.Domain;
-using static Effort.Domain.Name;
 using static SuperMarioRpg.Domain.Combat.StatFactory;
 
 namespace SuperMarioRpg.Domain.Combat
@@ -22,7 +21,7 @@ namespace SuperMarioRpg.Domain.Combat
             Buffs buffs
         ) : base(id)
         {
-            Name = CreateName(name);
+            Name = new(name);
             EquipmentType = equipmentType;
             EquipmentSlot = equipmentSlot;
             Stats = CreateStats(EquipmentType);
@@ -41,8 +40,10 @@ namespace SuperMarioRpg.Domain.Combat
         public Name Name { get; }
         public Stats Stats { get; }
 
-        public static Equipment CreateEquipment(EquipmentSlot equipmentSlot) =>
-            new(Guid.Empty, EquipmentType.None, equipmentSlot, CharacterTypes.All, null, Buffs.None);
+        public static Equipment CreateEquipment(EquipmentSlot equipmentSlot)
+        {
+            return new(Guid.Empty, EquipmentType.None, equipmentSlot, CharacterTypes.All, null, Buffs.None);
+        }
 
         public static Equipment CreateEquipment(
             EquipmentType equipmentType,
@@ -51,18 +52,29 @@ namespace SuperMarioRpg.Domain.Combat
             string name,
             Buffs buffs = default,
             Guid id = default
-        ) =>
-            new(id, equipmentType, equipmentSlot, characterTypes, name, buffs);
+        )
+        {
+            return new(id, equipmentType, equipmentSlot, characterTypes, name, buffs);
+        }
 
-        public bool IsCompatible(CharacterTypes characterType) => CharacterTypes.Contains(characterType);
+        public bool IsCompatible(CharacterTypes characterType)
+        {
+            return CharacterTypes.Contains(characterType);
+        }
 
-        public override string ToString() => Name.ToString();
+        public override string ToString()
+        {
+            return Name.ToString();
+        }
 
         #endregion
 
         #region IStatusProvider Implementation
 
-        public Status GetStatus() => new(buffs: Buffs);
+        public Status GetStatus()
+        {
+            return new(buffs: Buffs);
+        }
 
         #endregion
     }

@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Effort.Domain;
-using static Effort.Domain.Id;
-using static Effort.Domain.Name;
-using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -34,10 +31,10 @@ namespace SuperMarioRpg.Domain.Combat
         public Equipment Armor { get; private set; }
         public CharacterTypes CharacterType { get; private set; }
         public Guid Id { get; }
-        public Name Name => CreateName(CharacterType.ToString());
+        public Name Name => new(CharacterType.ToString());
         public Stats NaturalStats { get; private set; }
         public Equipment Weapon { get; private set; }
-        public Xp Xp => CreateXp(BaseExp[CharacterType]);
+        public Xp Xp => new(BaseExp[CharacterType]);
 
         public PlayerCharacter Build()
         {
@@ -88,7 +85,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Id GetId()
         {
-            return Create(Id);
+            return new(Id);
         }
 
         public Loadout GetLoadout()

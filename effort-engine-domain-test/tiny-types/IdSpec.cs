@@ -8,7 +8,7 @@ namespace Effort.Domain.Test
 
         protected override TinyType<Guid> CreateTinyType(Guid value)
         {
-            return Id.Create(value);
+            return new Id(value);
         }
 
         protected override Guid CreateValue()

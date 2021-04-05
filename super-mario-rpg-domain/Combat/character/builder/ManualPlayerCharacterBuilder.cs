@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Effort.Domain;
-using static Effort.Domain.Id;
 using static SuperMarioRpg.Domain.Combat.Stats;
-using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -29,7 +27,7 @@ namespace SuperMarioRpg.Domain.Combat
         public Stats NaturalStats { get; private set; }
         public Equipment Weapon { get; private set; }
 
-        public Xp Xp => CreateXp();
+        public Xp Xp => new();
 
         public ManualPlayerCharacterBuilder Add(params Equipment[] equipment)
         {
@@ -120,7 +118,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Id GetId()
         {
-            return Create(Id);
+            return new(Id);
         }
 
         public Loadout GetLoadout()

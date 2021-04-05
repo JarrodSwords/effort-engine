@@ -8,7 +8,6 @@ using Xunit;
 using static SuperMarioRpg.Domain.Combat.EquipmentFactory;
 using static SuperMarioRpg.Domain.Combat.Progression;
 using static SuperMarioRpg.Domain.Combat.Stats;
-using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Test.Combat
 {
@@ -54,7 +53,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
         [InlineData(50, 3)]
         public void WhenAddingXp_LevelIsUpdated(ushort xpValue, byte expectedLevel)
         {
-            _mario.Add(CreateXp(xpValue));
+            _mario.Add(new(xpValue));
 
             _mario.Progression.CurrentLevel.Value.Should().Be(expectedLevel);
         }
@@ -62,7 +61,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
         [Fact]
         public void WhenAddingXp_OverMaximum_XpIsCapped()
         {
-            var xp = CreateXp(10000);
+            var xp = new Xp(10000);
 
             _mario.Add(xp);
             _mallow.Equip(ExpBooster).Add(xp);
@@ -76,7 +75,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
         [Fact]
         public void WhenAddingXp_WhileBoosted_GainDoubleXp()
         {
-            _mario.Equip(ExpBooster).Add(CreateXp(500));
+            _mario.Equip(ExpBooster).Add(new(500));
 
             _mario.Progression.Xp.Value.Should().Be(1000);
         }
@@ -86,7 +85,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
         {
             var marioProgression = _mario.Add(Max).Progression;
             var mallowProgression = _mallow.Add(Max).Equip(ExpBooster).Progression;
-            var xp = CreateXp(1);
+            var xp = new Xp(1);
 
             _mario.Add(xp);
             _mallow.Add(xp);
@@ -98,7 +97,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
         [Fact]
         public void WhenAddingXp_WhileStandard_GainXp()
         {
-            var xp = CreateXp(500);
+            var xp = new Xp(500);
 
             _mario.Add(xp);
 
@@ -147,7 +146,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
             var rewardStats = CreateStats(3, 2, 5, 2, 2);
             var expectedNaturalStats = _mario.NaturalStats + rewardStats;
 
-            _mario.Add(CreateXp(16));
+            _mario.Add(new(16));
 
             _mario.NaturalStats.Should().Be(expectedNaturalStats);
         }

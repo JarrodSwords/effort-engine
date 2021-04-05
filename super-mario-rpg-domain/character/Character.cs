@@ -9,7 +9,7 @@ namespace SuperMarioRpg.Domain
 
         protected Character(Guid id, string name) : base(id)
         {
-            Name = Name.CreateName(name);
+            Name = new(name);
         }
 
         protected Character(ICharacterBuilder builder) : this(
