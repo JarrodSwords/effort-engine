@@ -1,12 +1,10 @@
 using Autofac;
-using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using SuperMarioRpg.Application.Write;
 using SuperMarioRpg.Infrastructure.Write;
 
 namespace SuperMarioRpg.WebApi
@@ -67,26 +65,6 @@ namespace SuperMarioRpg.WebApi
             services.AddSwaggerGen(
                 c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "SuperMarioRpg.WebApi", Version = "v1" }); }
             );
-        }
-
-        #endregion
-    }
-
-    public static class ApplicationBuilderExtensions
-    {
-        #region Public Interface
-
-        public static IApplicationBuilder ConfigureDevDatabase(this IApplicationBuilder app)
-        {
-            app.GetService<Context>()?.ApplyMigrations();
-            app.GetService<ICommandHandler<SeedNonPlayerCharacters>>().Handle(new SeedNonPlayerCharacters());
-
-            return app;
-        }
-
-        public static T GetService<T>(this IApplicationBuilder app) where T : class
-        {
-            return app.ApplicationServices.GetService(typeof(T)) as T;
         }
 
         #endregion
