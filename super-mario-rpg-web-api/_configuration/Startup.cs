@@ -74,13 +74,13 @@ namespace SuperMarioRpg.WebApi
         public static void SeedData(IApplicationBuilder app)
         {
             //var context = app.ApplicationServices.GetService(typeof(Context)) as Context;
-            //context?.Update();
+            //context?.ApplyMigrations();
         }
 
         public static void UpdateContext(IApplicationBuilder app)
         {
             var context = app.ApplicationServices.GetService(typeof(Context)) as Context;
-            context?.Update();
+            context?.ApplyMigrations();
         }
 
         #endregion

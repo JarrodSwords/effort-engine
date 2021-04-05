@@ -9,7 +9,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public DbSet<Character> Character { get; set; }
 
-        public Context Update()
+        public Context ApplyMigrations()
         {
             var currentMigration = Database.GetAppliedMigrations().Last();
             var latestMigration = Database.GetMigrations().Last();

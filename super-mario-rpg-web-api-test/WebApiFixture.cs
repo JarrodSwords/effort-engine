@@ -21,8 +21,7 @@ namespace SuperMarioRpg.WebApi.Test
             HttpClient = factory.CreateClient();
 
             var context = factory.Services.GetService(typeof(Context)) as Context;
-
-            context?.Update();
+            context?.ApplyMigrations();
         }
 
         #endregion
