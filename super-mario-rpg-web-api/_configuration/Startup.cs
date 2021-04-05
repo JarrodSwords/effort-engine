@@ -37,7 +37,7 @@ namespace SuperMarioRpg.WebApi
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SuperMarioRpg.WebApi v1"));
-                SetUpDevEnvironment(app);
+                app.ConfigureDevDatabase();
             }
 
             app.UseHttpsRedirection();
@@ -69,15 +69,24 @@ namespace SuperMarioRpg.WebApi
             );
         }
 
-        public static T GetService<T>(IApplicationBuilder app) where T : class
+        #endregion
+    }
+
+    public static class ApplicationBuilderExtensions
+    {
+        #region Public Interface
+
+        public static IApplicationBuilder ConfigureDevDatabase(this IApplicationBuilder app)
         {
-            return app.ApplicationServices.GetService(typeof(T)) as T;
+            app.GetService<Context>()?.ApplyMigrations();
+            app.GetService<ICommandHandler<SeedNonPlayerCharacters>>().Handle(new SeedNonPlayerCharacters());
+
+            return app;
         }
 
-        public static void SetUpDevEnvironment(IApplicationBuilder app)
+        public static T GetService<T>(this IApplicationBuilder app) where T : class
         {
-            GetService<Context>(app)?.ApplyMigrations();
-            GetService<ICommandHandler<SeedNonPlayerCharacters>>(app).Handle(new SeedNonPlayerCharacters());
+            return app.ApplicationServices.GetService(typeof(T)) as T;
         }
 
         #endregion
