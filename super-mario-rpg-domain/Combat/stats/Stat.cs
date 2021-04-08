@@ -10,16 +10,10 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Creation
 
-        private Stat(short value) : base(value)
+        public Stat(short value = default) : base(value)
         {
             new StatValidator().ValidateAndThrow(this);
         }
-
-        #endregion
-
-        #region Public Interface
-
-        public static Stat CreateStat(short value = default) => new(value);
 
         #endregion
 
@@ -32,7 +26,7 @@ namespace SuperMarioRpg.Domain.Combat
             // clamp
             sum = sum < Min ? Min : sum > Max ? Max : sum;
 
-            return CreateStat(sum);
+            return new(sum);
         }
 
         #endregion

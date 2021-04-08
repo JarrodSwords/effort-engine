@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using static SuperMarioRpg.Domain.Combat.Xp;
 
 namespace SuperMarioRpg.Domain.Combat
 {
     public abstract record Progression
     {
-        public static readonly Xp Max = CreateXp(9999);
+        public static readonly Xp Max = new(9999);
 
         #region Creation
 
@@ -21,7 +20,7 @@ namespace SuperMarioRpg.Domain.Combat
         #region Public Interface
 
         public Level CurrentLevel => CurrentNode.Value;
-        public Xp ToNext => CurrentNode.Next is null ? CreateXp() : CurrentNode.Next.Value.Required - Xp;
+        public Xp ToNext => CurrentNode.Next is null ? new() : CurrentNode.Next.Value.Required - Xp;
         public Xp Xp { get; }
 
         public event EventHandler<Stats> LeveledUp;

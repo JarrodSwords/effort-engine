@@ -8,7 +8,7 @@ namespace Effort.Domain
 
         protected Entity(Guid id)
         {
-            Id = Id.Create(id);
+            Id = new Id(id);
         }
 
         #endregion
@@ -34,7 +34,10 @@ namespace Effort.Domain
             return Id == otherEntity.Id;
         }
 
-        public override int GetHashCode() => Id.GetHashCode();
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
 
         public static bool operator ==(Entity left, Entity right)
         {
@@ -47,7 +50,10 @@ namespace Effort.Domain
             return Equals(left, right);
         }
 
-        public static bool operator !=(Entity left, Entity right) => !Equals(left, right);
+        public static bool operator !=(Entity left, Entity right)
+        {
+            return !Equals(left, right);
+        }
 
         #endregion
     }

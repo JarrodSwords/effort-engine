@@ -1,21 +1,13 @@
 namespace Effort.Domain
 {
-    public abstract record TinyType<T>
+    public abstract record TinyType<T>(T Value)
     {
-        #region Creation
-
-        protected TinyType(T value)
-        {
-            Value = value;
-        }
-
-        #endregion
-
         #region Public Interface
 
-        public T Value { get; }
-
-        public override string ToString() => Value.ToString();
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
 
         #endregion
     }

@@ -3,6 +3,7 @@ using Effort.Domain;
 using Effort.Domain.Test;
 using FluentAssertions;
 using FluentValidation;
+using SuperMarioRpg.Domain.Combat;
 using Xunit;
 using static SuperMarioRpg.Domain.Combat.Stat;
 
@@ -14,7 +15,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
 
         protected override TinyType<short> CreateTinyType(short value)
         {
-            return CreateStat(value);
+            return new Stat(value);
         }
 
         protected override short CreateValue()
@@ -27,8 +28,8 @@ namespace SuperMarioRpg.Domain.Test.Combat
         [InlineData(10, -2, 8)]
         public void WhenAdding_InBounds_SumIsExpectedValue(short value1, short value2, short expectedValue)
         {
-            var addend1 = CreateStat(value1);
-            var addend2 = CreateStat(value2);
+            var addend1 = new Stat(value1);
+            var addend2 = new Stat(value2);
 
             var sum = addend1 + addend2;
 
@@ -40,8 +41,8 @@ namespace SuperMarioRpg.Domain.Test.Combat
         [InlineData(Min, -1)]
         public void WhenAdding_OutOfBounds_SumIsClamped(short limit, short addend)
         {
-            var addend1 = CreateStat(limit);
-            var addend2 = CreateStat(addend);
+            var addend1 = new Stat(limit);
+            var addend2 = new Stat(addend);
 
             var sum = addend1 + addend2;
 
@@ -53,7 +54,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
         [InlineData(Min, -1)]
         public void WhenInstantiating_WithValueOutOfRange_ExceptionIsThrown(short limit, short addend)
         {
-            Action createInvalidStat = () => { CreateStat((short) (limit + addend)); };
+            Action createInvalidStat = () => { new Stat((short) (limit + addend)); };
 
             createInvalidStat.Should().Throw<ValidationException>();
         }

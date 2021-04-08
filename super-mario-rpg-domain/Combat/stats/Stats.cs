@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using static SuperMarioRpg.Domain.Combat.Stat;
 
 namespace SuperMarioRpg.Domain.Combat
 {
@@ -34,12 +33,12 @@ namespace SuperMarioRpg.Domain.Combat
             short specialDefense,
             short speed
         ) : this(
-            CreateStat(attack),
-            CreateStat(defense),
-            CreateStat(hp),
-            CreateStat(specialAttack),
-            CreateStat(specialDefense),
-            CreateStat(speed)
+            new Stat(attack),
+            new Stat(defense),
+            new Stat(hp),
+            new Stat(specialAttack),
+            new Stat(specialDefense),
+            new Stat(speed)
         )
         {
         }
@@ -67,8 +66,10 @@ namespace SuperMarioRpg.Domain.Combat
             short specialAttack = default,
             short specialDefense = default,
             short speed = default
-        ) =>
-            new(attack, defense, hp, specialAttack, specialDefense, speed);
+        )
+        {
+            return new(attack, defense, hp, specialAttack, specialDefense, speed);
+        }
 
         public static Stats CreateStats(
             Stat attack,
@@ -77,15 +78,18 @@ namespace SuperMarioRpg.Domain.Combat
             Stat specialAttack,
             Stat specialDefense,
             Stat speed
-        ) =>
-            new(attack, defense, hp, specialAttack, specialDefense, speed);
+        )
+        {
+            return new(attack, defense, hp, specialAttack, specialDefense, speed);
+        }
 
         #endregion
 
         #region Equality, Operators
 
-        public static Stats operator +(Stats left, Stats right) =>
-            CreateStats(
+        public static Stats operator +(Stats left, Stats right)
+        {
+            return CreateStats(
                 left.Attack + right.Attack,
                 left.Defense + right.Defense,
                 left.Hp + right.Hp,
@@ -93,6 +97,7 @@ namespace SuperMarioRpg.Domain.Combat
                 left.SpecialDefense + right.SpecialDefense,
                 left.Speed + right.Speed
             );
+        }
 
         #endregion
     }

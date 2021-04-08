@@ -11,7 +11,12 @@ namespace SuperMarioRpg.WebApi
 
         public static IApplicationBuilder ConfigureDevDatabase(this IApplicationBuilder app)
         {
-            app.GetService<Context>()?.ApplyMigrations();
+            var context = app.GetService<Context>();
+
+            //if (context.Database.CanConnect() && context.IsLatest)
+            //    return app;
+
+            context.ApplyMigrations();
             app.GetService<ICommandHandler<SeedNonPlayerCharacters>>().Handle(new SeedNonPlayerCharacters());
 
             return app;
