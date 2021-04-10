@@ -6,23 +6,22 @@ using SuperMarioRpg.Api;
 
 namespace SuperMarioRpg.Application.Read
 {
-    public record FetchCharacters : IQuery<IEnumerable<CharacterDto>>
+    public record FetchCharacters : IQuery<IEnumerable<Character>>
     {
         #region Nested Types
 
-        internal class Handler : Handler<FetchCharacters, IEnumerable<CharacterDto>>
+        internal class Handler : Handler<FetchCharacters, IEnumerable<Character>>
         {
             private const string FetchCharacters = @"
-SELECT id
-     , name
-  FROM character
+select name
+  from character
 ";
 
             #region Public Interface
 
-            public override IEnumerable<CharacterDto> MakeRequest(IDbConnection connection, FetchCharacters args)
+            public override IEnumerable<Character> MakeRequest(IDbConnection connection, FetchCharacters args)
             {
-                return connection.Query<CharacterDto>(FetchCharacters, args);
+                return connection.Query<Character>(FetchCharacters, args);
             }
 
             #endregion

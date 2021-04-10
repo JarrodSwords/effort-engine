@@ -5,24 +5,23 @@ using SuperMarioRpg.Api;
 
 namespace SuperMarioRpg.Application.Read
 {
-    public record FindCharacter(string Name) : IQuery<CharacterDto>
+    public record FindCharacter(string Name) : IQuery<Character>
     {
         #region Nested Types
 
-        internal class Handler : Handler<FindCharacter, CharacterDto>
+        internal class Handler : Handler<FindCharacter, Character>
         {
             private const string FindCharacter = @"
-SELECT id
-     , name
-  FROM character C
- WHERE Name = @Name
+select name
+  from character
+ where name = @Name
 ";
 
             #region Public Interface
 
-            public override CharacterDto MakeRequest(IDbConnection connection, FindCharacter args)
+            public override Character MakeRequest(IDbConnection connection, FindCharacter args)
             {
-                return connection.QueryFirst<CharacterDto>(FindCharacter, args);
+                return connection.QueryFirst<Character>(FindCharacter, args);
             }
 
             #endregion
