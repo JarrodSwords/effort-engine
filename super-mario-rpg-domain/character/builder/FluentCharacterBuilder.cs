@@ -1,4 +1,5 @@
 ﻿using System;
+using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Domain
 {
@@ -29,6 +30,11 @@ namespace SuperMarioRpg.Domain
         #endregion
 
         #region ICharacterBuilder Implementation
+
+        public CharacterTypes GetCharacterTypes()
+        {
+            throw new NotImplementedException();
+        }
 
         public CombatStats GetCombatStats()
         {

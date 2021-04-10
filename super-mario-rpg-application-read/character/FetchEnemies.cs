@@ -26,6 +26,7 @@ select c.""name""
   from character c
   left join combat_stats cs
     on cs.id = c.combat_stats_id
+ where c.is_enemy = true
 ";
 
             #region Public Interface

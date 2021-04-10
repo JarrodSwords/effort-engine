@@ -1,6 +1,8 @@
 ﻿using System;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Combat;
+using CombatStats = SuperMarioRpg.Domain.CombatStats;
 
 namespace SuperMarioRpg.Application.Write
 {
@@ -38,6 +40,11 @@ namespace SuperMarioRpg.Application.Write
             #endregion
 
             #region ICharacterBuilder Implementation
+
+            public CharacterTypes GetCharacterTypes()
+            {
+                return CharacterTypes.Enemy;
+            }
 
             public CombatStats GetCombatStats()
             {
