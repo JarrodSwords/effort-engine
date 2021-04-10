@@ -2,14 +2,9 @@
 
 namespace SuperMarioRpg.Api
 {
-    public record CharacterDto
-    {
-        #region Public Interface
-
-        public CombatStatsDto CombatStats { get; set; }
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-
-        #endregion
-    }
+    public record CharacterDto(
+        Guid Id = default,
+        string Name = default,
+        CombatStatsDto CombatStats = default
+    );
 }

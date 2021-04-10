@@ -2,6 +2,7 @@
 using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
 using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Application.Write
 {
@@ -58,6 +59,11 @@ namespace SuperMarioRpg.Application.Write
         #endregion
 
         #region ICharacterBuilder Implementation
+
+        public Stats GetCombatStats()
+        {
+            throw new NotImplementedException();
+        }
 
         public Guid GetId()
         {

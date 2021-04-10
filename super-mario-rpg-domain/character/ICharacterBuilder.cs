@@ -1,4 +1,5 @@
 ﻿using System;
+using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Domain
 {
@@ -6,6 +7,7 @@ namespace SuperMarioRpg.Domain
     {
         #region Public Interface
 
+        Stats GetCombatStats();
         Guid GetId();
         string GetName();
 

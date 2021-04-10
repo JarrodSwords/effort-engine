@@ -1,4 +1,6 @@
-﻿using Effort.Domain.Messages;
+﻿using System.Linq;
+using Effort.Domain.Messages;
+using SuperMarioRpg.Api;
 using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.Application.Write
@@ -9,13 +11,15 @@ namespace SuperMarioRpg.Application.Write
 
         internal class Handler : Handler<SeedNonPlayerCharacters>
         {
-            private static readonly NonPlayerCharacter[] Characters =
+            private readonly NonPlayerCharacterBuilder _builder = new();
+
+            private static readonly CharacterDto[] Characters =
             {
-                new("Boshi"),
-                new("Frogfucious"),
-                new("Chancellor"),
-                new("Toad"),
-                new("Toadofsky")
+                new(Name: "Boshi"),
+                new(Name: "Frogfucious"),
+                new(Name: "Chancellor"),
+                new(Name: "Toad"),
+                new(Name: "Toadofsky")
             };
 
             #region Creation
@@ -30,7 +34,9 @@ namespace SuperMarioRpg.Application.Write
 
             public override void Handle(SeedNonPlayerCharacters command)
             {
-                UnitOfWork.NonPlayerCharacterRepository.Create(Characters);
+                var characters = Characters.Select(x => _builder.From(x).Build()).ToArray();
+
+                UnitOfWork.NonPlayerCharacterRepository.Create(characters);
 
                 UnitOfWork.Commit();
             }
