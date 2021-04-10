@@ -21,7 +21,7 @@ select name
 
             public override Character MakeRequest(IDbConnection connection, FindCharacter args)
             {
-                return connection.QueryFirst<Character>(FindCharacter, args);
+                return connection.QuerySingle<Character>(FindCharacter, args);
             }
 
             #endregion
