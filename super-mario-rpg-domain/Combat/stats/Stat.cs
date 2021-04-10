@@ -1,4 +1,5 @@
-﻿using Effort.Domain;
+﻿using System;
+using Effort.Domain;
 using FluentValidation;
 
 namespace SuperMarioRpg.Domain.Combat
@@ -21,10 +22,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public static Stat operator +(Stat left, Stat right)
         {
-            var sum = (short) (left.Value + right.Value);
-
-            // clamp
-            sum = sum < Min ? Min : sum > Max ? Max : sum;
+            var sum = (short) Math.Clamp(left.Value + right.Value, Min, Max);
 
             return new(sum);
         }

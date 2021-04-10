@@ -4,8 +4,9 @@ namespace SuperMarioRpg.Domain
     {
         #region Public Interface
 
-        ICharacterRepository CharacterRepository { get; }
-        INonPlayerCharacterRepository NonPlayerCharacterRepository { get; }
+        Enemy.IRepository EnemyRepository { get; }
+        NonPlayerCharacter.IRepository NonPlayerCharacterRepository { get; }
+
         void Commit();
 
         #endregion

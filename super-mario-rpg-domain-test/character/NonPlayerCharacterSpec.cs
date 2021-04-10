@@ -9,6 +9,7 @@ namespace SuperMarioRpg.Domain.Test
         #region Core
 
         private const string Toad = "Toad";
+        private readonly FluentCharacterBuilder _builder = new();
 
         #endregion
 
@@ -16,12 +17,12 @@ namespace SuperMarioRpg.Domain.Test
 
         protected override NonPlayerCharacter CreateEntity()
         {
-            return new(Toad);
+            return _builder.WithName(Toad).BuildNonPlayerCharacter();
         }
 
         protected override NonPlayerCharacter CreateEntity(Guid id)
         {
-            return new(Toad, id);
+            return _builder.WithId(id).BuildNonPlayerCharacter();
         }
 
         [Fact]

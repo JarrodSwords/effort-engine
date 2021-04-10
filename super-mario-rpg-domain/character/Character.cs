@@ -1,5 +1,4 @@
-﻿using System;
-using Effort.Domain;
+﻿using Effort.Domain;
 
 namespace SuperMarioRpg.Domain
 {
@@ -7,16 +6,9 @@ namespace SuperMarioRpg.Domain
     {
         #region Creation
 
-        protected Character(Guid id, string name) : base(id)
+        protected Character(ICharacterBuilder builder) : base(builder.GetId())
         {
-            Name = new(name);
-        }
-
-        protected Character(ICharacterBuilder builder) : this(
-            builder.GetId(),
-            builder.GetName()
-        )
-        {
+            Name = new Name(builder.GetName());
         }
 
         #endregion

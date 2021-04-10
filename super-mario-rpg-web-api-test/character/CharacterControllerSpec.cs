@@ -31,7 +31,7 @@ namespace SuperMarioRpg.WebApi.Test
         [Fact]
         public async Task GetCharacter_ReturnsCharacter()
         {
-            var character = await HttpClient.GetFromJsonAsync<CharacterDto>("Toad");
+            var character = await HttpClient.GetFromJsonAsync<Character>("Toad");
 
             character.Should().NotBeNull();
         }
@@ -39,7 +39,7 @@ namespace SuperMarioRpg.WebApi.Test
         [Fact]
         public async Task GetCharacters_ReturnsCharacters()
         {
-            var characters = await HttpClient.GetFromJsonAsync<IEnumerable<CharacterDto>>("");
+            var characters = await HttpClient.GetFromJsonAsync<IEnumerable<Character>>("");
 
             characters.Should().NotBeNull();
         }

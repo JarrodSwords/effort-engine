@@ -4,22 +4,32 @@ using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.Application.Write
 {
-    public record CreateNonPlayerCharacter(string Name) : ICommand
+    public record CreateEnemy(
+        string Name,
+        ushort HitPoints,
+        short Attack,
+        short MagicAttack,
+        short Defense,
+        short MagicDefense,
+        decimal Evade,
+        decimal MagicEvade,
+        short Speed
+    ) : ICommand
     {
         #region Nested Types
 
         internal class Builder : ICharacterBuilder
         {
-            private CreateNonPlayerCharacter _command;
+            private CreateEnemy _command;
 
             #region Public Interface
 
-            public NonPlayerCharacter Build()
+            public Enemy Build()
             {
                 return new(this);
             }
 
-            public Builder From(CreateNonPlayerCharacter command)
+            public Builder From(CreateEnemy command)
             {
                 _command = command;
                 return this;
@@ -31,7 +41,18 @@ namespace SuperMarioRpg.Application.Write
 
             public CombatStats GetCombatStats()
             {
-                throw new NotSupportedException();
+                var (_, hitPoints, attack, magicAttack, defense, magicDefense, evade, magicEvade, speed) = _command;
+
+                return new CombatStats(
+                    hitPoints,
+                    attack,
+                    magicAttack,
+                    defense,
+                    magicDefense,
+                    evade,
+                    magicEvade,
+                    speed
+                );
             }
 
             public Guid GetId()
@@ -47,8 +68,7 @@ namespace SuperMarioRpg.Application.Write
             #endregion
         }
 
-        [Log]
-        internal class Handler : Handler<CreateNonPlayerCharacter>
+        internal class Handler : Handler<CreateEnemy>
         {
             #region Creation
 
@@ -60,12 +80,11 @@ namespace SuperMarioRpg.Application.Write
 
             #region Public Interface
 
-            public override void Handle(CreateNonPlayerCharacter command)
+            public override void Handle(CreateEnemy command)
             {
-                var builder = new Builder().From(command);
-                var character = new NonPlayerCharacter(builder);
+                var character = new Builder().From(command).Build();
 
-                UnitOfWork.NonPlayerCharacterRepository.Create(character);
+                UnitOfWork.EnemyRepository.Create(character);
 
                 UnitOfWork.Commit();
             }
