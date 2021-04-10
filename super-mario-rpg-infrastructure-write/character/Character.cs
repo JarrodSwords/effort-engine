@@ -1,5 +1,6 @@
 ﻿using System;
 using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
@@ -9,6 +10,8 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public CombatStats CombatStats { get; set; }
         public Guid? CombatStatsId { get; set; }
+        public bool IsEnemy { get; set; }
+        public bool IsNonPlayerCharacter { get; set; }
         public string Name { get; set; }
 
         public static Character From(Enemy enemy)
@@ -18,6 +21,8 @@ namespace SuperMarioRpg.Infrastructure.Write
             return new()
             {
                 Name = enemy.Name.Value,
+                IsEnemy = enemy.CharacterTypes.Contains(CharacterTypes.Enemy),
+                IsNonPlayerCharacter = enemy.CharacterTypes.Contains(CharacterTypes.NonPlayerCharacter),
                 CombatStats = new CombatStats(
                     hitPoints,
                     attack,
@@ -35,8 +40,10 @@ namespace SuperMarioRpg.Infrastructure.Write
         {
             return new()
             {
-                Id = nonPlayerCharacter.Id.Value,
-                Name = nonPlayerCharacter.Name.Value
+                //Id = nonPlayerCharacter.Id.Value,
+                Name = nonPlayerCharacter.Name.Value,
+                IsEnemy = nonPlayerCharacter.CharacterTypes.Contains(CharacterTypes.Enemy),
+                IsNonPlayerCharacter = nonPlayerCharacter.CharacterTypes.Contains(CharacterTypes.NonPlayerCharacter)
             };
         }
 
