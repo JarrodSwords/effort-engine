@@ -11,7 +11,8 @@ namespace SuperMarioRpg.Domain.Test
 
         private const string Toad = "Toad";
         private readonly NonPlayerCharacterBuilder _builder = new();
-        private readonly CharacterDto _toad = new(Name: Toad);
+        private readonly FluentCharacterBuilder _fluentBuilder = new();
+        private readonly CreateNonPlayerCharacterArgs _toad = new(Toad);
 
         #endregion
 
@@ -24,8 +25,7 @@ namespace SuperMarioRpg.Domain.Test
 
         protected override NonPlayerCharacter CreateEntity(Guid id)
         {
-            var toad = new CharacterDto(id, Toad);
-            return _builder.From(toad).Build();
+            return _fluentBuilder.WithId(id).BuildNonPlayerCharacter();
         }
 
         [Fact]

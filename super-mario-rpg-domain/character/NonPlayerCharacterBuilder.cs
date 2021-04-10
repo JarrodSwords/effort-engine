@@ -6,7 +6,7 @@ namespace SuperMarioRpg.Domain
 {
     public class NonPlayerCharacterBuilder : ICharacterBuilder
     {
-        private CharacterDto _character;
+        private CreateNonPlayerCharacterArgs _args;
 
         #region Public Interface
 
@@ -15,9 +15,9 @@ namespace SuperMarioRpg.Domain
             return new(this);
         }
 
-        public NonPlayerCharacterBuilder From(CharacterDto character)
+        public NonPlayerCharacterBuilder From(CreateNonPlayerCharacterArgs args)
         {
-            _character = character;
+            _args = args;
             return this;
         }
 
@@ -27,19 +27,63 @@ namespace SuperMarioRpg.Domain
 
         public Stats GetCombatStats()
         {
-            var (attack, defense, hitPoints, magicAttack, magicDefense, speed) = _character.CombatStats;
-
-            return Stats.CreateStats(attack, defense, (short) hitPoints, magicAttack, magicDefense, speed);
+            throw new NotSupportedException();
         }
 
         public Guid GetId()
         {
-            return _character.Id;
+            return Guid.Empty;
         }
 
         public string GetName()
         {
-            return _character.Name;
+            return _args.Name;
+        }
+
+        #endregion
+    }
+
+    public class FluentCharacterBuilder : ICharacterBuilder
+    {
+        #region Public Interface
+
+        public Guid Id { get; private set; }
+        public string Name { get; private set; }
+
+        public NonPlayerCharacter BuildNonPlayerCharacter()
+        {
+            return new(this);
+        }
+
+        public FluentCharacterBuilder WithId(Guid id)
+        {
+            Id = id;
+            return this;
+        }
+
+        public FluentCharacterBuilder WithName(string name)
+        {
+            Name = name;
+            return this;
+        }
+
+        #endregion
+
+        #region ICharacterBuilder Implementation
+
+        public Stats GetCombatStats()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Guid GetId()
+        {
+            return Id;
+        }
+
+        public string GetName()
+        {
+            return Name;
         }
 
         #endregion
