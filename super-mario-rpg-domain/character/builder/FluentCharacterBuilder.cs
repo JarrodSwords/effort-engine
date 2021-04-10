@@ -1,5 +1,4 @@
 ﻿using System;
-using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Domain
 {

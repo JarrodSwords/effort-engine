@@ -9,22 +9,22 @@
         }
 
         public CombatStats(
-            short attack,
-            short defense,
-            decimal evade,
             ushort hitPoints,
+            short attack,
             short magicAttack,
+            short defense,
             short magicDefense,
+            decimal evade,
             decimal magicEvade,
             short speed
         )
         {
-            Attack = attack;
-            Defense = defense;
-            Evade = evade;
             HitPoints = hitPoints;
+            Attack = attack;
             MagicAttack = magicAttack;
+            Defense = defense;
             MagicDefense = magicDefense;
+            Evade = evade;
             MagicEvade = magicEvade;
             Speed = speed;
         }

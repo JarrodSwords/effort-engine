@@ -9,41 +9,35 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public CombatStats CombatStats { get; set; }
         public Guid? CombatStatsId { get; set; }
-
         public string Name { get; set; }
-
-        public static Character From(Domain.Character character)
-        {
-            return new()
-            {
-                Id = character.Id.Value,
-                Name = character.Name.Value
-            };
-        }
 
         public static Character From(Enemy enemy)
         {
-            var stats = enemy.CombatStats.Stats;
+            var (hitPoints, attack, magicAttack, defense, magicDefense, evade, magicEvade, speed) = enemy.CombatStats;
 
             return new()
             {
                 Name = enemy.Name.Value,
                 CombatStats = new CombatStats(
-                    stats.Attack.Value,
-                    stats.Defense.Value,
-                    stats.Evade.Value,
-                    (ushort) stats.Hp.Value,
-                    stats.SpecialAttack.Value,
-                    stats.SpecialDefense.Value,
-                    stats.MagicEvade.Value,
-                    stats.Speed.Value
+                    hitPoints,
+                    attack,
+                    magicAttack,
+                    defense,
+                    magicDefense,
+                    evade,
+                    magicEvade,
+                    speed
                 )
             };
         }
 
-        public static Domain.Character To(Character character)
+        public static Character From(NonPlayerCharacter nonPlayerCharacter)
         {
-            return null;
+            return new()
+            {
+                Id = nonPlayerCharacter.Id.Value,
+                Name = nonPlayerCharacter.Name.Value
+            };
         }
 
         #endregion

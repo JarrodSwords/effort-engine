@@ -1,7 +1,6 @@
 ﻿using System;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
-using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Application.Write
 {

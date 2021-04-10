@@ -1,6 +1,4 @@
-﻿using SuperMarioRpg.Domain.Combat;
-
-namespace SuperMarioRpg.Domain
+﻿namespace SuperMarioRpg.Domain
 {
     public class Enemy : Character
     {
@@ -27,4 +25,15 @@ namespace SuperMarioRpg.Domain
 
         #endregion
     }
+
+    public record CombatStats(
+        ushort HitPoints,
+        short Attack,
+        short MagicAttack,
+        short Defense,
+        short MagicDefense,
+        decimal Evade,
+        decimal MagicEvade,
+        short Speed
+    );
 }

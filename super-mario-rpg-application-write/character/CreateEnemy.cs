@@ -1,7 +1,6 @@
 ﻿using System;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
-using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Application.Write
 {
@@ -9,12 +8,12 @@ namespace SuperMarioRpg.Application.Write
         string Name,
         ushort HitPoints,
         short Attack,
-        short Defense,
         short MagicAttack,
+        short Defense,
         short MagicDefense,
-        short Speed,
         decimal Evade,
-        decimal MagicEvade
+        decimal MagicEvade,
+        short Speed
     ) : ICommand
     {
         #region Nested Types
@@ -42,20 +41,18 @@ namespace SuperMarioRpg.Application.Write
 
             public CombatStats GetCombatStats()
             {
-                var (_, hitPoints, attack, defense, magicAttack, magicDefense, speed, evade, magicEvade) = _command;
+                var (_, hitPoints, attack, magicAttack, defense, magicDefense, evade, magicEvade, speed) = _command;
 
-                var value = Stats.CreateStats(
+                return new CombatStats(
+                    hitPoints,
                     attack,
-                    defense,
-                    (short) hitPoints,
                     magicAttack,
+                    defense,
                     magicDefense,
-                    speed,
                     evade,
-                    magicEvade
+                    magicEvade,
+                    speed
                 );
-
-                return new CombatStats(stats: value);
             }
 
             public Guid GetId()

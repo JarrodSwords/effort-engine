@@ -4,11 +4,11 @@
         string Name,
         ushort HitPoints,
         short Attack,
-        short Defense,
         short MagicAttack,
+        short Defense,
         short MagicDefense,
-        short Speed,
         short Evade,
-        short MagicEvade
+        short MagicEvade,
+        short Speed
     );
 }
