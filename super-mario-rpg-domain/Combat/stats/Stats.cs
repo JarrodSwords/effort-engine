@@ -1,7 +1,27 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
+    public class CombatStats : Entity
+    {
+        #region Creation
+
+        public CombatStats(Guid id = default, Stats stats = default) : base(id)
+        {
+            Stats = stats;
+        }
+
+        #endregion
+
+        #region Public Interface
+
+        public Stats Stats { get; }
+
+        #endregion
+    }
+
     public record Stats
     {
         public static Stats Default = CreateStats();
@@ -14,7 +34,9 @@ namespace SuperMarioRpg.Domain.Combat
             Stat hp,
             Stat specialAttack,
             Stat specialDefense,
-            Stat speed
+            Stat speed,
+            Stat evade,
+            Stat magicEvade
         )
         {
             Attack = attack;
@@ -23,6 +45,8 @@ namespace SuperMarioRpg.Domain.Combat
             SpecialAttack = specialAttack;
             SpecialDefense = specialDefense;
             Speed = speed;
+            Evade = evade;
+            MagicEvade = magicEvade;
         }
 
         private Stats(
@@ -31,14 +55,18 @@ namespace SuperMarioRpg.Domain.Combat
             short hp,
             short specialAttack,
             short specialDefense,
-            short speed
+            short speed,
+            decimal evade,
+            decimal magicEvade
         ) : this(
             new Stat(attack),
             new Stat(defense),
             new Stat(hp),
             new Stat(specialAttack),
             new Stat(specialDefense),
-            new Stat(speed)
+            new Stat(speed),
+            new Stat((short) evade),
+            new Stat((short) magicEvade)
         )
         {
         }
@@ -49,7 +77,9 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Stat Attack { get; }
         public Stat Defense { get; }
+        public Stat Evade { get; }
         public Stat Hp { get; }
+        public Stat MagicEvade { get; }
         public Stat SpecialAttack { get; }
         public Stat SpecialDefense { get; }
         public Stat Speed { get; }
@@ -65,10 +95,21 @@ namespace SuperMarioRpg.Domain.Combat
             short hp = default,
             short specialAttack = default,
             short specialDefense = default,
-            short speed = default
+            short speed = default,
+            decimal evade = default,
+            decimal magicEvade = default
         )
         {
-            return new(attack, defense, hp, specialAttack, specialDefense, speed);
+            return new(
+                attack,
+                defense,
+                hp,
+                specialAttack,
+                specialDefense,
+                speed,
+                evade,
+                magicEvade
+            );
         }
 
         public static Stats CreateStats(
@@ -77,10 +118,21 @@ namespace SuperMarioRpg.Domain.Combat
             Stat hp,
             Stat specialAttack,
             Stat specialDefense,
-            Stat speed
+            Stat speed,
+            Stat evade,
+            Stat magicEvade
         )
         {
-            return new(attack, defense, hp, specialAttack, specialDefense, speed);
+            return new(
+                attack,
+                defense,
+                hp,
+                specialAttack,
+                specialDefense,
+                speed,
+                evade,
+                magicEvade
+            );
         }
 
         #endregion
@@ -95,7 +147,9 @@ namespace SuperMarioRpg.Domain.Combat
                 left.Hp + right.Hp,
                 left.SpecialAttack + right.SpecialAttack,
                 left.SpecialDefense + right.SpecialDefense,
-                left.Speed + right.Speed
+                left.Speed + right.Speed,
+                left.Evade + right.Evade,
+                left.MagicEvade + right.MagicEvade
             );
         }
 

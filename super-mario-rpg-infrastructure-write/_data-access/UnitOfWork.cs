@@ -6,6 +6,7 @@ namespace SuperMarioRpg.Infrastructure.Write
     {
         private readonly Context _context;
         private ICharacterRepository _characterRepository;
+        private Domain.Enemy.IRepository _enemyRepository;
         private INonPlayerCharacterRepository _nonPlayerCharacterRepository;
 
         #region Creation
@@ -20,6 +21,7 @@ namespace SuperMarioRpg.Infrastructure.Write
         #region IUnitOfWork Implementation
 
         public ICharacterRepository CharacterRepository => _characterRepository ??= new CharacterRepository(_context);
+        public Domain.Enemy.IRepository EnemyRepository => _enemyRepository ??= new EnemyRepository(_context);
 
         public INonPlayerCharacterRepository NonPlayerCharacterRepository =>
             _nonPlayerCharacterRepository ??= new NonPlayerCharacterRepository(_context);

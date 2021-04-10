@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Effort.Domain.Messages;
-using SuperMarioRpg.Api;
 using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.Application.Write
@@ -11,9 +10,9 @@ namespace SuperMarioRpg.Application.Write
 
         internal class Handler : Handler<SeedNonPlayerCharacters>
         {
-            private readonly NonPlayerCharacterBuilder _builder = new();
+            private readonly CreateNonPlayerCharacter.Builder _builder = new();
 
-            private static readonly CreateNonPlayerCharacterArgs[] Characters =
+            private static readonly CreateNonPlayerCharacter[] Characters =
             {
                 new("Boshi"),
                 new("Frogfucious"),
@@ -34,9 +33,9 @@ namespace SuperMarioRpg.Application.Write
 
             public override void Handle(SeedNonPlayerCharacters command)
             {
-                var characters = Characters.Select(x => _builder.From(x).Build()).ToArray();
+                var characters = Characters.Select(x => _builder.From(x).Build());
 
-                UnitOfWork.NonPlayerCharacterRepository.Create(characters);
+                UnitOfWork.NonPlayerCharacterRepository.Create(characters.ToArray());
 
                 UnitOfWork.Commit();
             }

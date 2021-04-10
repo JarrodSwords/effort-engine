@@ -31,7 +31,7 @@ namespace SuperMarioRpg.Domain
 
         #region ICharacterBuilder Implementation
 
-        public Stats GetCombatStats()
+        public CombatStats GetCombatStats()
         {
             throw new NotImplementedException();
         }

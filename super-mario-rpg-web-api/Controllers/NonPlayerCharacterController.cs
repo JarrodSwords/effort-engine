@@ -1,5 +1,6 @@
 ﻿using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
+using SuperMarioRpg.Api;
 using SuperMarioRpg.Application.Write;
 
 namespace SuperMarioRpg.WebApi.Controllers
@@ -22,7 +23,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         #region Public Interface
 
         [HttpPost]
-        public IActionResult CreateCharacter([FromBody] CreateCharacterDto args)
+        public IActionResult CreateCharacter([FromBody] CreateNonPlayerCharacterArgs args)
         {
             var command = new CreateNonPlayerCharacter(args.Name);
             _createCharacterHandler.Handle(command);

@@ -7,7 +7,7 @@ namespace SuperMarioRpg.Domain
     {
         #region Public Interface
 
-        Stats GetCombatStats();
+        CombatStats GetCombatStats();
         Guid GetId();
         string GetName();
 

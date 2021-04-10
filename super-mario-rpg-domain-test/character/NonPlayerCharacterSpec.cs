@@ -1,6 +1,5 @@
 ﻿using System;
 using FluentAssertions;
-using SuperMarioRpg.Api;
 using Xunit;
 
 namespace SuperMarioRpg.Domain.Test
@@ -10,9 +9,7 @@ namespace SuperMarioRpg.Domain.Test
         #region Core
 
         private const string Toad = "Toad";
-        private readonly NonPlayerCharacterBuilder _builder = new();
-        private readonly FluentCharacterBuilder _fluentBuilder = new();
-        private readonly CreateNonPlayerCharacterArgs _toad = new(Toad);
+        private readonly FluentCharacterBuilder _builder = new();
 
         #endregion
 
@@ -20,12 +17,12 @@ namespace SuperMarioRpg.Domain.Test
 
         protected override NonPlayerCharacter CreateEntity()
         {
-            return _builder.From(_toad).Build();
+            return _builder.WithName(Toad).BuildNonPlayerCharacter();
         }
 
         protected override NonPlayerCharacter CreateEntity(Guid id)
         {
-            return _fluentBuilder.WithId(id).BuildNonPlayerCharacter();
+            return _builder.WithId(id).BuildNonPlayerCharacter();
         }
 
         [Fact]
@@ -33,7 +30,7 @@ namespace SuperMarioRpg.Domain.Test
         {
             var character = CreateEntity();
 
-            character.Name.Value.Should().Be(_toad.Name);
+            character.Name.Value.Should().Be(Toad);
         }
 
         #endregion
