@@ -5,7 +5,7 @@ using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
-    public class NonPlayerCharacterRepository : Repository<Character>, INonPlayerCharacterRepository
+    public class NonPlayerCharacterRepository : Repository<Character>, NonPlayerCharacter.IRepository
     {
         #region Creation
 

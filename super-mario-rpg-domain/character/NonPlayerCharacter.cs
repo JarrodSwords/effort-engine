@@ -9,5 +9,13 @@
         }
 
         #endregion
+
+        #region Nested Types
+
+        public interface IRepository : IRepository<NonPlayerCharacter>
+        {
+        }
+
+        #endregion
     }
 }
