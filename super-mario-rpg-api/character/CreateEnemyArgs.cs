@@ -11,9 +11,4 @@
         short MagicEvade,
         short Speed
     );
-
-    public record Enemy(
-        string Name,
-        CombatStats CombatStats
-    );
 }
