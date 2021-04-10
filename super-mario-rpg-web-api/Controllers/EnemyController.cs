@@ -1,6 +1,8 @@
-﻿using Effort.Domain.Messages;
+﻿using System.Collections.Generic;
+using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Api;
+using SuperMarioRpg.Application.Read;
 using SuperMarioRpg.Application.Write;
 
 namespace SuperMarioRpg.WebApi.Controllers
@@ -10,12 +12,17 @@ namespace SuperMarioRpg.WebApi.Controllers
     public class EnemyController : ControllerBase
     {
         private readonly ICommandHandler<CreateEnemy> _createEnemyHandler;
+        private readonly IQueryHandler<FetchEnemies, IEnumerable<Enemy>> _fetchEnemiesHandler;
 
         #region Creation
 
-        public EnemyController(ICommandHandler<CreateEnemy> createEnemyHandler)
+        public EnemyController(
+            ICommandHandler<CreateEnemy> createEnemyHandler,
+            IQueryHandler<FetchEnemies, IEnumerable<Enemy>> fetchEnemiesHandler
+        )
         {
             _createEnemyHandler = createEnemyHandler;
+            _fetchEnemiesHandler = fetchEnemiesHandler;
         }
 
         #endregion
@@ -42,6 +49,13 @@ namespace SuperMarioRpg.WebApi.Controllers
             _createEnemyHandler.Handle(command);
 
             return Ok();
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Enemy>> FetchEnemies()
+        {
+            var enemies = _fetchEnemiesHandler.Handle(new FetchEnemies());
+            return Ok(enemies);
         }
 
         #endregion

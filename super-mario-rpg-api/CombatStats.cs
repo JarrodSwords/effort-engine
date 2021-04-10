@@ -1,14 +1,13 @@
 ﻿namespace SuperMarioRpg.Api
 {
-    public record CreateEnemyArgs(
-        string Name,
+    public record CombatStats(
         ushort HitPoints,
         short Attack,
         short MagicAttack,
         short Defense,
         short MagicDefense,
-        short Evade,
-        short MagicEvade,
+        decimal Evade,
+        decimal MagicEvade,
         short Speed
     );
 }
