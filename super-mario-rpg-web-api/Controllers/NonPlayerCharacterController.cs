@@ -16,15 +16,19 @@ namespace SuperMarioRpg.WebApi.Controllers
         private readonly IQueryHandler<FetchNonPlayerCharacters, IEnumerable<NonPlayerCharacter>>
             _fetchNonPlayerCharactersHandler;
 
+        private readonly IQueryHandler<FindNonPlayerCharacter, NonPlayerCharacter> _findNonPlayerCharacterHandler;
+
         #region Creation
 
         public NonPlayerCharacterController(
             ICommandHandler<CreateNonPlayerCharacter> createCharacterHandler,
-            IQueryHandler<FetchNonPlayerCharacters, IEnumerable<NonPlayerCharacter>> fetchNonPlayerCharactersHandler
+            IQueryHandler<FetchNonPlayerCharacters, IEnumerable<NonPlayerCharacter>> fetchNonPlayerCharactersHandler,
+            IQueryHandler<FindNonPlayerCharacter, NonPlayerCharacter> findNonPlayerCharacterHandler
         )
         {
             _createCharacterHandler = createCharacterHandler;
             _fetchNonPlayerCharactersHandler = fetchNonPlayerCharactersHandler;
+            _findNonPlayerCharacterHandler = findNonPlayerCharacterHandler;
         }
 
         #endregion
@@ -43,6 +47,15 @@ namespace SuperMarioRpg.WebApi.Controllers
         public ActionResult<IEnumerable<NonPlayerCharacter>> FetchNonPlayerCharacters()
         {
             var nonPlayerCharacters = _fetchNonPlayerCharactersHandler.Handle(new FetchNonPlayerCharacters());
+
+            return Ok(nonPlayerCharacters);
+        }
+
+        [HttpGet]
+        [Route("{name}")]
+        public ActionResult<NonPlayerCharacter> FindNonPlayerCharacter(string name)
+        {
+            var nonPlayerCharacters = _findNonPlayerCharacterHandler.Handle(new FindNonPlayerCharacter(name));
 
             return Ok(nonPlayerCharacters);
         }
