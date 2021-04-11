@@ -10,8 +10,6 @@ namespace SuperMarioRpg.Application.Write
 
         internal class Handler : Handler<SeedEnemies>
         {
-            private readonly CreateEnemy.Builder _builder = new();
-
             private static readonly CreateEnemy[] Enemies =
             {
                 new("Terrapin", 10, 100, 10, 1, 0, 8, 1, 0, 0),
@@ -33,7 +31,7 @@ namespace SuperMarioRpg.Application.Write
 
             public override void Handle(SeedEnemies command)
             {
-                var enemies = Enemies.Select(x => _builder.From(x).Build());
+                var enemies = Enemies.Select(CreateEnemy.Build);
 
                 UnitOfWork.EnemyRepository.Create(enemies.ToArray());
 

@@ -16,66 +16,57 @@ namespace SuperMarioRpg.Application.Write
         short MagicDefense,
         decimal Evade,
         decimal MagicEvade
-    ) : ICommand
+    ) : ICommand, ICharacterBuilder
     {
-        #region Nested Types
+        #region Public Interface
 
-        internal class Builder : ICharacterBuilder
+        public Enemy Build()
         {
-            private CreateEnemy _command;
-
-            #region Public Interface
-
-            public Enemy Build()
-            {
-                return new(this);
-            }
-
-            public Builder From(CreateEnemy command)
-            {
-                _command = command;
-                return this;
-            }
-
-            #endregion
-
-            #region ICharacterBuilder Implementation
-
-            public CharacterTypes GetCharacterTypes()
-            {
-                return CharacterTypes.Enemy;
-            }
-
-            public Enemy.CombatStats GetCombatStats()
-            {
-                var (_, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade, magicEvade) =
-                    _command;
-
-                return new Enemy.CombatStats(
-                    hitPoints,
-                    flowerPoints,
-                    speed,
-                    attack,
-                    magicAttack,
-                    defense,
-                    magicDefense,
-                    evade,
-                    magicEvade
-                );
-            }
-
-            public Guid GetId()
-            {
-                return default;
-            }
-
-            public string GetName()
-            {
-                return _command.Name;
-            }
-
-            #endregion
+            return new(this);
         }
+
+        public static Enemy Build(CreateEnemy builder)
+        {
+            return builder.Build();
+        }
+
+        #endregion
+
+        #region ICharacterBuilder Implementation
+
+        public CharacterTypes GetCharacterTypes()
+        {
+            return CharacterTypes.Enemy;
+        }
+
+        public Enemy.CombatStats GetCombatStats()
+        {
+            return new(
+                HitPoints,
+                FlowerPoints,
+                Speed,
+                Attack,
+                MagicAttack,
+                Defense,
+                MagicDefense,
+                Evade,
+                MagicEvade
+            );
+        }
+
+        public Guid GetId()
+        {
+            return default;
+        }
+
+        public string GetName()
+        {
+            return Name;
+        }
+
+        #endregion
+
+        #region Nested Types
 
         internal class Handler : Handler<CreateEnemy>
         {
@@ -91,7 +82,7 @@ namespace SuperMarioRpg.Application.Write
 
             public override void Handle(CreateEnemy command)
             {
-                var character = new Builder().From(command).Build();
+                var character = command.Build();
 
                 UnitOfWork.EnemyRepository.Create(character);
 
