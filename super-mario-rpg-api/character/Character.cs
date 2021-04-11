@@ -1,4 +1,4 @@
 ﻿namespace SuperMarioRpg.Api
 {
-    public record Character(string Name = default);
+    public record Character(string Name);
 }

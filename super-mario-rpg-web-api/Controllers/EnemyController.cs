@@ -57,6 +57,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         public ActionResult<IEnumerable<Enemy>> FetchEnemies()
         {
             var enemies = _fetchEnemiesHandler.Handle(new FetchEnemies());
+
             return Ok(enemies);
         }
 

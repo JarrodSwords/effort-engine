@@ -25,8 +25,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         [HttpPost]
         public IActionResult CreateCharacter([FromBody] CreateNonPlayerCharacterArgs args)
         {
-            var command = new CreateNonPlayerCharacter(args.Name);
-            _createCharacterHandler.Handle(command);
+            _createCharacterHandler.Handle(new CreateNonPlayerCharacter(args.Name));
 
             return Ok();
         }

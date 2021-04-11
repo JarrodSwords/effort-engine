@@ -10,13 +10,13 @@ namespace SuperMarioRpg.WebApi.Controllers
     [ApiController]
     public class CharacterController : ControllerBase
     {
-        private readonly IQueryHandler<FetchCharacters, IEnumerable<object>> _fetchCharactersHandler;
+        private readonly IQueryHandler<FetchCharacters, IEnumerable<Character>> _fetchCharactersHandler;
         private readonly IQueryHandler<FindCharacter, Character> _findCharacterHandler;
 
         #region Creation
 
         public CharacterController(
-            IQueryHandler<FetchCharacters, IEnumerable<object>> fetchCharactersHandler,
+            IQueryHandler<FetchCharacters, IEnumerable<Character>> fetchCharactersHandler,
             IQueryHandler<FindCharacter, Character> findCharacterHandler
         )
         {
@@ -29,10 +29,9 @@ namespace SuperMarioRpg.WebApi.Controllers
         #region Public Interface
 
         [HttpGet]
-        public ActionResult<IEnumerable<object>> FetchCharacters()
+        public ActionResult<IEnumerable<Character>> FetchCharacters()
         {
-            var query = new FetchCharacters();
-            var characters = _fetchCharactersHandler.Handle(query);
+            var characters = _fetchCharactersHandler.Handle(new FetchCharacters());
 
             return Ok(characters);
         }
@@ -41,8 +40,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         [Route("{name}")]
         public ActionResult<Character> FindCharacter(string name)
         {
-            var query = new FindCharacter(name);
-            var character = _findCharacterHandler.Handle(query);
+            var character = _findCharacterHandler.Handle(new FindCharacter(name));
 
             return Ok(character);
         }
