@@ -31,16 +31,16 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region IRepository Implementation
 
+        public string Create(NonPlayerCharacter nonPlayerCharacter)
+        {
+            return Create(Character.From(nonPlayerCharacter)).Name;
+        }
+
         public void Create(params NonPlayerCharacter[] nonPlayerCharacters)
         {
             var characters = nonPlayerCharacters.Select(Character.From).ToArray();
 
             Create(characters);
-        }
-
-        public string Create(NonPlayerCharacter character)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
