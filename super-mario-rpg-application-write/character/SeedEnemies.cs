@@ -14,11 +14,11 @@ namespace SuperMarioRpg.Application.Write
 
             private static readonly CreateEnemy[] Enemies =
             {
-                new("Terrapin", 10, 1, 0, 8, 1, 0, 0, 10),
-                new("Bowser", 320, 1, 0, 12, 0, 0, 0, 10),
-                new("Kinklink", 60, 0, 0, 10, 0, 0, 0, 99),
-                new("Goomba", 16, 3, 1, 3, 1, 0, 0, 13),
-                new("Sky Troopa", 10, 4, 6, 16, 4, 0.08m, 0, 18)
+                new("Terrapin", 10, 100, 10, 1, 0, 8, 1, 0, 0),
+                new("Bowser", 320, 100, 10, 1, 0, 12, 0, 0, 0),
+                new("Kinklink", 60, 100, 99, 0, 0, 10, 0, 0, 0),
+                new("Goomba", 16, 100, 13, 3, 1, 3, 1, 0, 0),
+                new("Sky Troopa", 10, 100, 18, 4, 6, 16, 4, 0.08m, 0)
             };
 
             #region Creation

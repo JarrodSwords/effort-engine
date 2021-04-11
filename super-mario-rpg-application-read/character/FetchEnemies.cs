@@ -16,13 +16,14 @@ namespace SuperMarioRpg.Application.Read
             private const string FetchEnemies = @"
 select c.name
      , cs.hit_points
+     , cs.flower_points
+     , cs.speed
      , cs.attack
      , cs.magic_attack 
      , cs.defense 
      , cs.magic_defense 
      , cs.evade 
      , cs.magic_evade 
-     , cs.speed
   from character c
   left join combat_stats cs
     on cs.id = c.combat_stats_id
@@ -45,33 +46,36 @@ select c.name
             private record FetchEnemiesRecord(
                 string name,
                 int hit_points,
+                short flower_points,
+                short speed,
                 short attack,
                 short magic_attack,
                 short defense,
                 short magic_defense,
-                decimal evade,
-                decimal magic_evade,
-                short speed
+                decimal? evade,
+                decimal? magic_evade
             )
             {
                 #region Public Interface
 
                 public static Enemy AsEnemy(FetchEnemiesRecord record)
                 {
-                    var (name, hitPoints, attack, magicAttack, defense, magicDefense, evade, magicEvade, speed) =
+                    var (name, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade,
+                            magicEvade) =
                         record;
 
                     return new Enemy(
                         name,
                         new CombatStats(
                             (ushort) hitPoints,
+                            (byte?) flowerPoints,
+                            speed,
                             attack,
                             magicAttack,
                             defense,
                             magicDefense,
                             evade,
-                            magicEvade,
-                            speed
+                            magicEvade
                         )
                     );
                 }

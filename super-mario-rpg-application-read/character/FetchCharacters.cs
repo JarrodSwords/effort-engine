@@ -16,13 +16,14 @@ namespace SuperMarioRpg.Application.Read
             private const string FetchCharacters = @"
 select c.name
      , cs.hit_points
+     , cs.flower_points
+     , cs.speed
      , cs.attack
      , cs.magic_attack 
      , cs.defense 
      , cs.magic_defense 
      , cs.evade 
      , cs.magic_evade 
-     , cs.speed
      , c.is_enemy
      , c.is_non_player_character
   from character c
@@ -46,13 +47,14 @@ select c.name
             private record CharacterRecord(
                 string name,
                 int hit_points,
+                short flowerPoints,
+                short speed,
                 short attack,
                 short magic_attack,
                 short defense,
                 short magic_defense,
                 decimal evade,
                 decimal magic_evade,
-                short speed,
                 bool is_enemy,
                 bool is_non_player_character
             )
@@ -61,7 +63,9 @@ select c.name
 
                 public static object AsMostSpecificType(CharacterRecord record)
                 {
-                    var (name, hitPoints, attack, magicAttack, defense, magicDefense, evade, magicEvade, speed, isEnemy,
+                    var (name, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade,
+                            magicEvade,
+                            isEnemy,
                             isNonPlayerCharacter) =
                         record;
 
@@ -70,13 +74,14 @@ select c.name
                             name,
                             new CombatStats(
                                 (ushort) hitPoints,
+                                (byte?) flowerPoints,
+                                speed,
                                 attack,
                                 magicAttack,
                                 defense,
                                 magicDefense,
                                 evade,
-                                magicEvade,
-                                speed
+                                magicEvade
                             )
                         );
 

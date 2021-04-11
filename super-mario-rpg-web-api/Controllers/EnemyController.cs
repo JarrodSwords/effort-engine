@@ -32,11 +32,13 @@ namespace SuperMarioRpg.WebApi.Controllers
         [HttpPost]
         public IActionResult CreateEnemy([FromBody] CreateEnemyArgs args)
         {
-            var (name, hitPoints, attack, defense, magicAttack, magicDefense, speed, evade, magicEvade) = args;
+            var (name, hitPoints, flowerPoints, speed, attack, defense, magicAttack, magicDefense, evade, magicEvade) =
+                args;
 
             var command = new CreateEnemy(
                 name,
                 hitPoints,
+                flowerPoints,
                 attack,
                 defense,
                 magicAttack,

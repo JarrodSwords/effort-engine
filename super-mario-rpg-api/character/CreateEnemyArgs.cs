@@ -3,12 +3,13 @@
     public record CreateEnemyArgs(
         string Name,
         ushort HitPoints,
+        byte? FlowerPoints,
+        short Speed,
         short Attack,
         short MagicAttack,
         short Defense,
         short MagicDefense,
-        short Evade,
-        short MagicEvade,
-        short Speed
+        decimal? Evade,
+        decimal? MagicEvade
     );
 }
