@@ -10,8 +10,6 @@ namespace SuperMarioRpg.Application.Write
 
         internal class Handler : Handler<SeedNonPlayerCharacters>
         {
-            private readonly CreateNonPlayerCharacter.Builder _builder = new();
-
             private static readonly CreateNonPlayerCharacter[] Characters =
             {
                 new("Boshi"),
@@ -33,7 +31,7 @@ namespace SuperMarioRpg.Application.Write
 
             public override void Handle(SeedNonPlayerCharacters command)
             {
-                var characters = Characters.Select(x => _builder.From(x).Build());
+                var characters = Characters.Select(CreateNonPlayerCharacter.Build);
 
                 UnitOfWork.NonPlayerCharacterRepository.Create(characters.ToArray());
 

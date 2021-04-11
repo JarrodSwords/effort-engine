@@ -14,6 +14,11 @@ namespace SuperMarioRpg.Application.Write
             return new(this);
         }
 
+        public static NonPlayerCharacter Build(CreateNonPlayerCharacter builder)
+        {
+            return builder.Build();
+        }
+
         #endregion
 
         #region ICharacterBuilder Implementation
@@ -57,9 +62,7 @@ namespace SuperMarioRpg.Application.Write
 
             public override void Handle(CreateNonPlayerCharacter command)
             {
-                var nonPlayerCharacter = command.Build();
-
-                UnitOfWork.NonPlayerCharacterRepository.Create(nonPlayerCharacter);
+                UnitOfWork.NonPlayerCharacterRepository.Create(command.Build());
 
                 UnitOfWork.Commit();
             }
