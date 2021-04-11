@@ -40,7 +40,6 @@ namespace SuperMarioRpg.Infrastructure.Write
         {
             return new()
             {
-                //Id = nonPlayerCharacter.Id.Value,
                 Name = nonPlayerCharacter.Name.Value,
                 IsEnemy = nonPlayerCharacter.CharacterTypes.Contains(CharacterTypes.Enemy),
                 IsNonPlayerCharacter = nonPlayerCharacter.CharacterTypes.Contains(CharacterTypes.NonPlayerCharacter)
