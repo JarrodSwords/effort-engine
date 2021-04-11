@@ -36,52 +36,8 @@ select c.name
             public override IEnumerable<Enemy> MakeRequest(IDbConnection connection, FetchEnemies query)
             {
                 return connection
-                    .Query<FetchEnemiesRecord>(FetchEnemies)
-                    .Select(FetchEnemiesRecord.AsEnemy);
-            }
-
-            #endregion
-
-            #region Nested Types
-
-            private record FetchEnemiesRecord(
-                string name,
-                int hit_points,
-                short flower_points,
-                short speed,
-                short attack,
-                short magic_attack,
-                short defense,
-                short magic_defense,
-                decimal? evade,
-                decimal? magic_evade
-            )
-            {
-                #region Public Interface
-
-                public static Enemy AsEnemy(FetchEnemiesRecord record)
-                {
-                    var (name, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade,
-                            magicEvade) =
-                        record;
-
-                    return new Enemy(
-                        name,
-                        new CombatStats(
-                            (ushort) hitPoints,
-                            (byte?) flowerPoints,
-                            speed,
-                            attack,
-                            magicAttack,
-                            defense,
-                            magicDefense,
-                            evade,
-                            magicEvade
-                        )
-                    );
-                }
-
-                #endregion
+                    .Query<EnemyRecord>(FetchEnemies)
+                    .Select(EnemyRecord.AsEnemy);
             }
 
             #endregion
