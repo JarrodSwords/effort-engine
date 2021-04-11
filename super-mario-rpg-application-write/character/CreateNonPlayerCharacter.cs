@@ -62,7 +62,7 @@ namespace SuperMarioRpg.Application.Write
 
             public override void Handle(CreateNonPlayerCharacter command)
             {
-                UnitOfWork.NonPlayerCharacterRepository.Create(command.Build());
+                UnitOfWork.NonPlayerCharacters.Create(command.Build());
 
                 UnitOfWork.Commit();
             }

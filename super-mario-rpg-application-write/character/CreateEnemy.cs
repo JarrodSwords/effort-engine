@@ -84,7 +84,7 @@ namespace SuperMarioRpg.Application.Write
             {
                 var character = command.Build();
 
-                UnitOfWork.EnemyRepository.Create(character);
+                UnitOfWork.Enemies.Create(character);
 
                 UnitOfWork.Commit();
             }

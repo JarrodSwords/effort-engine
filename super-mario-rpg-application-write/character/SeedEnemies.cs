@@ -33,7 +33,7 @@ namespace SuperMarioRpg.Application.Write
             {
                 var enemies = Enemies.Select(CreateEnemy.Build);
 
-                UnitOfWork.EnemyRepository.Create(enemies.ToArray());
+                UnitOfWork.Enemies.Create(enemies.ToArray());
 
                 UnitOfWork.Commit();
             }

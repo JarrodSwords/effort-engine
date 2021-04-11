@@ -33,7 +33,7 @@ namespace SuperMarioRpg.Application.Write
             {
                 var characters = Characters.Select(CreateNonPlayerCharacter.Build);
 
-                UnitOfWork.NonPlayerCharacterRepository.Create(characters.ToArray());
+                UnitOfWork.NonPlayerCharacters.Create(characters.ToArray());
 
                 UnitOfWork.Commit();
             }

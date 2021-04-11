@@ -37,7 +37,7 @@ namespace SuperMarioRpg.Application.Write
 
             public override void Handle(DeleteCharacter command)
             {
-                UnitOfWork.CharacterRepository.Delete(command.Name);
+                UnitOfWork.Characters.Delete(command.Name);
 
                 UnitOfWork.Commit();
             }
