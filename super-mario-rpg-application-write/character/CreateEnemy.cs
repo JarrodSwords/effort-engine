@@ -7,15 +7,16 @@ using CombatStats = SuperMarioRpg.Domain.CombatStats;
 namespace SuperMarioRpg.Application.Write
 {
     public record CreateEnemy(
-        string Name,
-        ushort HitPoints,
-        short Attack,
-        short MagicAttack,
-        short Defense,
-        short MagicDefense,
-        decimal Evade,
-        decimal MagicEvade,
-        short Speed
+        string Name = default,
+        ushort HitPoints = default,
+        byte? FlowerPoints = default,
+        short Speed = default,
+        short Attack = default,
+        short MagicAttack = default,
+        short Defense = default,
+        short MagicDefense = default,
+        decimal? Evade = default,
+        decimal? MagicEvade = default
     ) : ICommand
     {
         #region Nested Types
@@ -48,17 +49,19 @@ namespace SuperMarioRpg.Application.Write
 
             public CombatStats GetCombatStats()
             {
-                var (_, hitPoints, attack, magicAttack, defense, magicDefense, evade, magicEvade, speed) = _command;
+                var (_, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade, magicEvade) =
+                    _command;
 
                 return new CombatStats(
                     hitPoints,
+                    flowerPoints,
+                    speed,
                     attack,
                     magicAttack,
                     defense,
                     magicDefense,
                     evade,
-                    magicEvade,
-                    speed
+                    magicEvade
                 );
             }
 

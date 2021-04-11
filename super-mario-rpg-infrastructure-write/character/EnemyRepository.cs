@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Effort.Domain;
 using SuperMarioRpg.Domain;
 
@@ -16,14 +17,14 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region IRepository<Enemy> Implementation
 
-        public string Create(Enemy root)
+        public string Create(Enemy enemy)
         {
-            return Create(Character.From(root)).Name;
+            return Create(Character.From(enemy)).Name;
         }
 
-        public void Create(params Enemy[] root)
+        public void Create(params Enemy[] enemies)
         {
-            throw new NotImplementedException();
+            Create(enemies.Select(Character.From).ToArray());
         }
 
         public Enemy Find(Id id)

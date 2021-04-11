@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System.Data;
 using Dapper;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
 
 namespace SuperMarioRpg.Application.Read
 {
-    public record FetchEnemies : IQuery<IEnumerable<Enemy>>
+    public record FindEnemy(string Name) : IQuery<Enemy>
     {
         #region Nested Types
 
-        internal class Handler : Handler<FetchEnemies, IEnumerable<Enemy>>
+        internal class Handler : Handler<FindEnemy, Enemy>
         {
             private const string FetchEnemies = @"
 select c.name
@@ -27,17 +25,17 @@ select c.name
   from character c
   left join combat_stats cs
     on cs.id = c.combat_stats_id
- where c.is_enemy = true
- order by c.name
+ where name = @Name
+   and c.is_enemy = true
 ";
 
             #region Public Interface
 
-            public override IEnumerable<Enemy> MakeRequest(IDbConnection connection, FetchEnemies query)
+            public override Enemy MakeRequest(IDbConnection connection, FindEnemy query)
             {
-                return connection
-                    .Query<FetchEnemiesRecord>(FetchEnemies)
-                    .Select(FetchEnemiesRecord.AsEnemy);
+                return FetchEnemiesRecord.AsEnemy(
+                    connection.QuerySingle<FetchEnemiesRecord>(FetchEnemies, query)
+                );
             }
 
             #endregion
