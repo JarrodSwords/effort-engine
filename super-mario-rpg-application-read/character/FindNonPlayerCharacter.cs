@@ -20,9 +20,9 @@ select name
 
             #region Public Interface
 
-            public override NonPlayerCharacter MakeRequest(IDbConnection connection, FindNonPlayerCharacter args)
+            public override NonPlayerCharacter MakeRequest(IDbConnection connection, FindNonPlayerCharacter query)
             {
-                return connection.QuerySingle<NonPlayerCharacter>(FindNonPlayerCharacter, args);
+                return connection.QuerySingle<NonPlayerCharacter>(FindNonPlayerCharacter, query);
             }
 
             #endregion

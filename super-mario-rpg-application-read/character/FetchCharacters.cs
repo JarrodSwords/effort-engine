@@ -20,9 +20,9 @@ select name
 
             #region Public Interface
 
-            public override IEnumerable<Character> MakeRequest(IDbConnection connection, FetchCharacters args)
+            public override IEnumerable<Character> MakeRequest(IDbConnection connection, FetchCharacters query)
             {
-                return connection.Query<Character>(FetchCharacters, args);
+                return connection.Query<Character>(FetchCharacters, query);
             }
 
             #endregion
