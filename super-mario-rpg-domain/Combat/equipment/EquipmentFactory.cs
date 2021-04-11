@@ -22,7 +22,7 @@ namespace SuperMarioRpg.Domain.Combat
                 EquipmentType.ExpBooster => Equipment.CreateEquipment(
                     equipmentType,
                     EquipmentSlot.Accessory,
-                    CharacterTypes.All,
+                    CharacterTypes.PlayerCharacter,
                     "Exp. Booster",
                     Buffs.DoubleXp
                 ),
@@ -62,8 +62,10 @@ namespace SuperMarioRpg.Domain.Combat
             return equipment;
         }
 
-        public static IEnumerable<Equipment> CreateEquipment(params EquipmentType[] equipmentTypes) =>
-            equipmentTypes.Select(CreateEquipment);
+        public static IEnumerable<Equipment> CreateEquipment(params EquipmentType[] equipmentTypes)
+        {
+            return equipmentTypes.Select(CreateEquipment);
+        }
 
         #endregion
     }

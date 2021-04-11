@@ -1,4 +1,5 @@
 ﻿using Effort.Domain;
+using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Domain
 {
@@ -8,6 +9,7 @@ namespace SuperMarioRpg.Domain
 
         protected Character(ICharacterBuilder builder) : base(builder.GetId())
         {
+            CharacterTypes = builder.GetCharacterTypes();
             Name = new Name(builder.GetName());
         }
 
@@ -15,6 +17,7 @@ namespace SuperMarioRpg.Domain
 
         #region Public Interface
 
+        public CharacterTypes CharacterTypes { get; }
         public Name Name { get; }
 
         #endregion
