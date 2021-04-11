@@ -33,7 +33,7 @@ namespace SuperMarioRpg.Domain
 
         public CharacterTypes GetCharacterTypes()
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         public CombatStats GetCombatStats()
