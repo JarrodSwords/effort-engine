@@ -2,7 +2,6 @@
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
-using CombatStats = SuperMarioRpg.Domain.CombatStats;
 
 namespace SuperMarioRpg.Application.Write
 {
@@ -36,7 +35,7 @@ namespace SuperMarioRpg.Application.Write
                 return CharacterTypes.NonPlayerCharacter;
             }
 
-            public CombatStats GetCombatStats()
+            public Enemy.CombatStats GetCombatStats()
             {
                 throw new NotSupportedException();
             }

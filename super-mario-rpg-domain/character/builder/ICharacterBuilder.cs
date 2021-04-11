@@ -8,7 +8,7 @@ namespace SuperMarioRpg.Domain
         #region Public Interface
 
         CharacterTypes GetCharacterTypes();
-        CombatStats GetCombatStats();
+        Enemy.CombatStats GetCombatStats();
         Guid GetId();
         string GetName();
 

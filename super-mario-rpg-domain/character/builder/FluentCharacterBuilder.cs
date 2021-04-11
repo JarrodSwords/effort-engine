@@ -36,7 +36,7 @@ namespace SuperMarioRpg.Domain
             return 0;
         }
 
-        public CombatStats GetCombatStats()
+        public Enemy.CombatStats GetCombatStats()
         {
             throw new NotImplementedException();
         }

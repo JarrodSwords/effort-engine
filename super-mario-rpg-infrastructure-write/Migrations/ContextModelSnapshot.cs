@@ -56,7 +56,7 @@ namespace SuperMarioRpg.Infrastructure.Write.Migrations
             );
 
             modelBuilder.Entity(
-                "SuperMarioRpg.Infrastructure.Write.CombatStats",
+                "SuperMarioRpg.Infrastructure.Write.BaseStats",
                 b =>
                 {
                     b.Property<Guid>("Id")
@@ -111,12 +111,12 @@ namespace SuperMarioRpg.Infrastructure.Write.Migrations
                 "SuperMarioRpg.Infrastructure.Write.Character",
                 b =>
                 {
-                    b.HasOne("SuperMarioRpg.Infrastructure.Write.CombatStats", "CombatStats")
+                    b.HasOne("SuperMarioRpg.Infrastructure.Write.BaseStats", "BaseStats")
                         .WithMany()
                         .HasForeignKey("CombatStatsId")
                         .HasConstraintName("fk_character_combat_stats_combat_stats_id");
 
-                    b.Navigation("CombatStats");
+                    b.Navigation("BaseStats");
                 }
             );
 #pragma warning restore 612, 618

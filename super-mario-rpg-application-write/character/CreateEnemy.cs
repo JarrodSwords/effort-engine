@@ -2,7 +2,6 @@
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
-using CombatStats = SuperMarioRpg.Domain.CombatStats;
 
 namespace SuperMarioRpg.Application.Write
 {
@@ -47,12 +46,12 @@ namespace SuperMarioRpg.Application.Write
                 return CharacterTypes.Enemy;
             }
 
-            public CombatStats GetCombatStats()
+            public Enemy.CombatStats GetCombatStats()
             {
                 var (_, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade, magicEvade) =
                     _command;
 
-                return new CombatStats(
+                return new Enemy.CombatStats(
                     hitPoints,
                     flowerPoints,
                     speed,

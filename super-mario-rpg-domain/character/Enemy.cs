@@ -6,14 +6,14 @@
 
         public Enemy(ICharacterBuilder builder) : base(builder)
         {
-            CombatStats = builder.GetCombatStats();
+            BaseStats = builder.GetCombatStats();
         }
 
         #endregion
 
         #region Public Interface
 
-        public CombatStats CombatStats { get; }
+        public CombatStats BaseStats { get; }
 
         #endregion
     }
