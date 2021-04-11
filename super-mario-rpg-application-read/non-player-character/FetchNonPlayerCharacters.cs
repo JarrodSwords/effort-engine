@@ -15,9 +15,8 @@ namespace SuperMarioRpg.Application.Read
             private const string FetchNonPlayerCharacters = @"
 select name
   from character
- where is_non_player_character = true
- order by name
-";
+ where is_playable = false
+ order by name";
 
             #region Public Interface
 

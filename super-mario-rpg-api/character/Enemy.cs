@@ -2,6 +2,6 @@
 {
     public record Enemy(
         string Name,
-        CombatStats CombatStats
+        EnemyCombatStats BaseStats
     );
 }

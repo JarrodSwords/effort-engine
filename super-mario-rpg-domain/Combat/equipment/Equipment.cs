@@ -42,7 +42,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public static Equipment CreateEquipment(EquipmentSlot equipmentSlot)
         {
-            return new(Guid.Empty, EquipmentType.None, equipmentSlot, CharacterTypes.PlayerCharacter, null, Buffs.None);
+            return new(Guid.Empty, EquipmentType.None, equipmentSlot, CharacterTypes.Playable, null, Buffs.None);
         }
 
         public static Equipment CreateEquipment(

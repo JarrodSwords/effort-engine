@@ -32,9 +32,7 @@ namespace SuperMarioRpg.Application.Write
             public override void Handle(SeedNonPlayerCharacters command)
             {
                 var characters = Characters.Select(CreateNonPlayerCharacter.Build);
-
                 UnitOfWork.NonPlayerCharacters.Create(characters.ToArray());
-
                 UnitOfWork.Commit();
             }
 
