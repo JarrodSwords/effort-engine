@@ -16,25 +16,12 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public static Character From(Enemy enemy)
         {
-            var (hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade, magicEvade) =
-                enemy.BaseStats;
-
             return new()
             {
                 Name = enemy.Name.Value,
                 IsEnemy = enemy.CharacterTypes.Contains(CharacterTypes.Enemy),
                 IsNonPlayerCharacter = enemy.CharacterTypes.Contains(CharacterTypes.NonPlayerCharacter),
-                CombatStats = new CombatStats(
-                    hitPoints,
-                    flowerPoints,
-                    speed,
-                    attack,
-                    magicAttack,
-                    defense,
-                    magicDefense,
-                    evade,
-                    magicEvade
-                )
+                CombatStats = CombatStats.From(enemy.BaseStats)
             };
         }
 
