@@ -14,7 +14,7 @@ namespace SuperMarioRpg.Application.Read
         internal class Handler : Handler<FetchEnemies, IEnumerable<Enemy>>
         {
             private const string FetchEnemies = @"
-select c.""name""
+select c.name
      , cs.hit_points
      , cs.attack
      , cs.magic_attack 
