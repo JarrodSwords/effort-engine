@@ -3,6 +3,7 @@ using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Api;
 using SuperMarioRpg.Application.Read;
+using SuperMarioRpg.Application.Write;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
@@ -10,16 +11,19 @@ namespace SuperMarioRpg.WebApi.Controllers
     [ApiController]
     public class CharacterController : ControllerBase
     {
+        private readonly ICommandHandler<DeleteCharacter> _deleteCharacterHandler;
         private readonly IQueryHandler<FetchCharacters, IEnumerable<Character>> _fetchCharactersHandler;
         private readonly IQueryHandler<FindCharacter, Character> _findCharacterHandler;
 
         #region Creation
 
         public CharacterController(
+            ICommandHandler<DeleteCharacter> deleteCharacterHandler,
             IQueryHandler<FetchCharacters, IEnumerable<Character>> fetchCharactersHandler,
             IQueryHandler<FindCharacter, Character> findCharacterHandler
         )
         {
+            _deleteCharacterHandler = deleteCharacterHandler;
             _fetchCharactersHandler = fetchCharactersHandler;
             _findCharacterHandler = findCharacterHandler;
         }
@@ -27,6 +31,15 @@ namespace SuperMarioRpg.WebApi.Controllers
         #endregion
 
         #region Public Interface
+
+        [HttpDelete]
+        [Route("{name}")]
+        public IActionResult DeleteCharacter(string name)
+        {
+            _deleteCharacterHandler.Handle(new DeleteCharacter(name));
+
+            return Ok();
+        }
 
         [HttpGet]
         public ActionResult<IEnumerable<Character>> FetchCharacters()

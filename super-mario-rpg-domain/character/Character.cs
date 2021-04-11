@@ -21,5 +21,18 @@ namespace SuperMarioRpg.Domain
         public Name Name { get; }
 
         #endregion
+
+        #region Nested Types
+
+        public interface IRepository : IRepository<Character>
+        {
+            #region Public Interface
+
+            IRepository Delete(Name name);
+
+            #endregion
+        }
+
+        #endregion
     }
 }

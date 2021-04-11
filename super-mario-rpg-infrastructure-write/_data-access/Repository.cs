@@ -34,6 +34,11 @@ namespace SuperMarioRpg.Infrastructure.Write
             _context.AddRange(entities.ToList());
         }
 
+        public void Delete(T entity)
+        {
+            _context.Remove(entity);
+        }
+
         public T Find(Guid id)
         {
             return _context.Find<T>(id);
