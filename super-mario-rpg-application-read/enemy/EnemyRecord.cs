@@ -1,7 +1,9 @@
-﻿using SuperMarioRpg.Api;
+﻿using System.Diagnostics.CodeAnalysis;
+using SuperMarioRpg.Api;
 
 namespace SuperMarioRpg.Application.Read
 {
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal record EnemyRecord(
         string name,
         int hit_points,
@@ -15,7 +17,34 @@ namespace SuperMarioRpg.Application.Read
         decimal magic_evade
     )
     {
+        private const string Select = @"
+select c.name
+     , cs.hit_points
+     , cs.flower_points
+     , cs.speed
+     , cs.attack
+     , cs.magic_attack 
+     , cs.defense 
+     , cs.magic_defense 
+     , cs.evade 
+     , cs.magic_evade 
+  from character c
+  left join combat_stats cs
+    on cs.id = c.combat_stats_id";
+
         #region Public Interface
+
+        public static string Fetch =>
+            $@"{Select}
+ where c.is_enemy = true
+ order by c.name
+";
+
+        public static string Find =>
+            $@"{Select}
+ where name = @Name
+   and c.is_enemy = true 
+";
 
         public static Enemy AsEnemy(EnemyRecord record)
         {
