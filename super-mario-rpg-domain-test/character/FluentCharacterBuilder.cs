@@ -1,9 +1,9 @@
 ﻿using System;
 using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Domain
+namespace SuperMarioRpg.Domain.Test
 {
-    public class FluentCharacterBuilder : ICharacterBuilder
+    public class FluentBuilder : Character.IBuilder
     {
         #region Public Interface
 
@@ -15,13 +15,13 @@ namespace SuperMarioRpg.Domain
             return new(this);
         }
 
-        public FluentCharacterBuilder WithId(Guid id)
+        public FluentBuilder WithId(Guid id)
         {
             Id = id;
             return this;
         }
 
-        public FluentCharacterBuilder WithName(string name)
+        public FluentBuilder WithName(string name)
         {
             Name = name;
             return this;
@@ -29,7 +29,7 @@ namespace SuperMarioRpg.Domain
 
         #endregion
 
-        #region ICharacterBuilder Implementation
+        #region IBuilder Implementation
 
         public CharacterTypes GetCharacterTypes()
         {

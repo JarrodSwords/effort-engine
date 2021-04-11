@@ -4,7 +4,7 @@
     {
         #region Creation
 
-        public Enemy(ICharacterBuilder builder) : base(builder)
+        public Enemy(IBuilder builder) : base(builder)
         {
             BaseStats = builder.GetCombatStats();
         }

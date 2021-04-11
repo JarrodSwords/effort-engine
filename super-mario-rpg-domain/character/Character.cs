@@ -7,7 +7,7 @@ namespace SuperMarioRpg.Domain
     {
         #region Creation
 
-        protected Character(ICharacterBuilder builder) : base(builder.GetId())
+        protected Character(IBuilder builder) : base(builder.GetId())
         {
             CharacterTypes = builder.GetCharacterTypes();
             Name = new Name(builder.GetName());

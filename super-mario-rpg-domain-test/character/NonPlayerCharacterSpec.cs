@@ -9,7 +9,7 @@ namespace SuperMarioRpg.Domain.Test
         #region Core
 
         private const string Toad = "Toad";
-        private readonly FluentCharacterBuilder _builder = new();
+        private readonly FluentBuilder _builder = new();
 
         #endregion
 

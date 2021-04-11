@@ -16,7 +16,7 @@ namespace SuperMarioRpg.Application.Write
         short MagicDefense,
         decimal Evade,
         decimal MagicEvade
-    ) : ICommand, ICharacterBuilder
+    ) : ICommand, Character.IBuilder
     {
         #region Public Interface
 
@@ -32,7 +32,7 @@ namespace SuperMarioRpg.Application.Write
 
         #endregion
 
-        #region ICharacterBuilder Implementation
+        #region IBuilder Implementation
 
         public CharacterTypes GetCharacterTypes()
         {

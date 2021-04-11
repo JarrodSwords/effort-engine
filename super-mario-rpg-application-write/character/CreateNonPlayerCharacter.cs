@@ -5,7 +5,7 @@ using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Application.Write
 {
-    public record CreateNonPlayerCharacter(string Name) : ICommand, ICharacterBuilder
+    public record CreateNonPlayerCharacter(string Name) : ICommand, Character.IBuilder
     {
         #region Public Interface
 
@@ -21,7 +21,7 @@ namespace SuperMarioRpg.Application.Write
 
         #endregion
 
-        #region ICharacterBuilder Implementation
+        #region IBuilder Implementation
 
         public CharacterTypes GetCharacterTypes()
         {
