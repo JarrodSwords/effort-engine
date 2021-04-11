@@ -22,7 +22,7 @@ namespace SuperMarioRpg.Domain.Combat
                 EquipmentType.ExpBooster => Equipment.CreateEquipment(
                     equipmentType,
                     EquipmentSlot.Accessory,
-                    CharacterTypes.PlayerCharacter,
+                    CharacterTypes.Playable,
                     "Exp. Booster",
                     Buffs.DoubleXp
                 ),

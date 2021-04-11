@@ -36,7 +36,7 @@ namespace SuperMarioRpg.Application.Write
 
         public CharacterTypes GetCharacterTypes()
         {
-            return CharacterTypes.Enemy;
+            return CharacterTypes.Combatant;
         }
 
         public Enemy.CombatStats GetEnemyCombatStats()

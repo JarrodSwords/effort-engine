@@ -24,21 +24,18 @@ select c.name
      , cs.magic_defense
   from character c
   join combat_stats cs
-    on cs.id = c.combat_stats_id";
+    on cs.id = c.combat_stats_id
+ where c.is_playable = true";
 
         #region Public Interface
 
         public static string Fetch =>
             $@"{Select}
- where c.is_enemy = false
- order by c.name
-";
+ order by c.name";
 
         public static string Find =>
             $@"{Select}
- where name = @Name
-   and c.is_enemy = false 
-";
+   and name = @Name";
 
         public static PlayableCharacter AsPlayableCharacter(PlayableCharacterRecord record)
         {

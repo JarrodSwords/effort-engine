@@ -14,9 +14,8 @@ namespace SuperMarioRpg.Application.Read
             private const string FindNonPlayerCharacter = @"
 select name
   from character
- where name = @Name
-   and is_non_player_character = true
-";
+ where is_playable = false
+   and name = @Name";
 
             #region Public Interface
 

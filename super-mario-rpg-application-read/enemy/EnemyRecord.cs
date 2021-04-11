@@ -29,22 +29,19 @@ select c.name
      , cs.evade 
      , cs.magic_evade 
   from character c
-  left join combat_stats cs
-    on cs.id = c.combat_stats_id";
+  join combat_stats cs
+    on cs.id = c.combat_stats_id
+ where c.is_playable = false";
 
         #region Public Interface
 
         public static string Fetch =>
             $@"{Select}
- where c.is_enemy = true
- order by c.name
-";
+ order by c.name";
 
         public static string Find =>
             $@"{Select}
- where name = @Name
-   and c.is_enemy = true 
-";
+   and name = @Name";
 
         public static Enemy AsEnemy(EnemyRecord record)
         {
