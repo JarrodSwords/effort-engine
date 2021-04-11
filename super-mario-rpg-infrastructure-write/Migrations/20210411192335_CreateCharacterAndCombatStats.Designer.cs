@@ -10,8 +10,8 @@ using SuperMarioRpg.Infrastructure.Write;
 namespace SuperMarioRpg.Infrastructure.Write.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210411031323_Initial")]
-    partial class Initial
+    [Migration("20210411192335_CreateCharacterAndCombatStats")]
+    partial class CreateCharacterAndCombatStats
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,7 +53,7 @@ namespace SuperMarioRpg.Infrastructure.Write.Migrations
                     b.ToTable("character");
                 });
 
-            modelBuilder.Entity("SuperMarioRpg.Infrastructure.Write.BaseStats", b =>
+            modelBuilder.Entity("SuperMarioRpg.Infrastructure.Write.CombatStats", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,12 +104,12 @@ namespace SuperMarioRpg.Infrastructure.Write.Migrations
 
             modelBuilder.Entity("SuperMarioRpg.Infrastructure.Write.Character", b =>
                 {
-                    b.HasOne("SuperMarioRpg.Infrastructure.Write.BaseStats", "BaseStats")
+                    b.HasOne("SuperMarioRpg.Infrastructure.Write.CombatStats", "CombatStats")
                         .WithMany()
                         .HasForeignKey("CombatStatsId")
                         .HasConstraintName("fk_character_combat_stats_combat_stats_id");
 
-                    b.Navigation("BaseStats");
+                    b.Navigation("CombatStats");
                 });
 #pragma warning restore 612, 618
         }
