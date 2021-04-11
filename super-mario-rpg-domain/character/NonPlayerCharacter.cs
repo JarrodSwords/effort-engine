@@ -12,7 +12,7 @@
 
         #region Nested Types
 
-        public interface IRepository : IRepository<NonPlayerCharacter>
+        public new interface IRepository : IRepository<NonPlayerCharacter>
         {
         }
 

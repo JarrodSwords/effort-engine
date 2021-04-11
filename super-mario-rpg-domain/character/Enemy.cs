@@ -19,7 +19,7 @@
 
         #region Nested Types
 
-        public interface IRepository : IRepository<Enemy>
+        public new interface IRepository : IRepository<Enemy>
         {
         }
 
