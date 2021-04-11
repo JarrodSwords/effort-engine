@@ -1,6 +1,8 @@
-﻿using Effort.Domain.Messages;
+﻿using System.Collections.Generic;
+using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Api;
+using SuperMarioRpg.Application.Read;
 using SuperMarioRpg.Application.Write;
 
 namespace SuperMarioRpg.WebApi.Controllers
@@ -11,11 +13,18 @@ namespace SuperMarioRpg.WebApi.Controllers
     {
         private readonly ICommandHandler<CreateNonPlayerCharacter> _createCharacterHandler;
 
+        private readonly IQueryHandler<FetchNonPlayerCharacters, IEnumerable<NonPlayerCharacter>>
+            _fetchNonPlayerCharactersHandler;
+
         #region Creation
 
-        public NonPlayerCharacterController(ICommandHandler<CreateNonPlayerCharacter> createCharacterHandler)
+        public NonPlayerCharacterController(
+            ICommandHandler<CreateNonPlayerCharacter> createCharacterHandler,
+            IQueryHandler<FetchNonPlayerCharacters, IEnumerable<NonPlayerCharacter>> fetchNonPlayerCharactersHandler
+        )
         {
             _createCharacterHandler = createCharacterHandler;
+            _fetchNonPlayerCharactersHandler = fetchNonPlayerCharactersHandler;
         }
 
         #endregion
@@ -23,11 +32,19 @@ namespace SuperMarioRpg.WebApi.Controllers
         #region Public Interface
 
         [HttpPost]
-        public IActionResult CreateCharacter([FromBody] CreateNonPlayerCharacterArgs args)
+        public IActionResult CreateNonPlayerCharacter([FromBody] CreateNonPlayerCharacterArgs args)
         {
             _createCharacterHandler.Handle(new CreateNonPlayerCharacter(args.Name));
 
             return Ok();
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<NonPlayerCharacter>> FetchNonPlayerCharacters()
+        {
+            var nonPlayerCharacters = _fetchNonPlayerCharactersHandler.Handle(new FetchNonPlayerCharacters());
+
+            return Ok(nonPlayerCharacters);
         }
 
         #endregion

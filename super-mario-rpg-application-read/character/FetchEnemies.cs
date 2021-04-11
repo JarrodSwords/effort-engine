@@ -28,6 +28,7 @@ select c.name
   left join combat_stats cs
     on cs.id = c.combat_stats_id
  where c.is_enemy = true
+ order by c.name
 ";
 
             #region Public Interface
