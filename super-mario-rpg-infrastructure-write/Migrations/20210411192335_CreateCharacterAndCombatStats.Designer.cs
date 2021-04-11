@@ -10,8 +10,8 @@ using SuperMarioRpg.Infrastructure.Write;
 namespace SuperMarioRpg.Infrastructure.Write.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210411031323_Initial")]
-    partial class Initial
+    [Migration("20210411192335_CreateCharacterAndCombatStats")]
+    partial class CreateCharacterAndCombatStats
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

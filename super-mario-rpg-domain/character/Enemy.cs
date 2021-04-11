@@ -1,27 +1,19 @@
 ﻿namespace SuperMarioRpg.Domain
 {
-    public class Enemy : Character
+    public partial class Enemy : Character
     {
         #region Creation
 
-        public Enemy(ICharacterBuilder builder) : base(builder)
+        public Enemy(IBuilder builder) : base(builder)
         {
-            CombatStats = builder.GetCombatStats();
+            BaseStats = builder.GetCombatStats();
         }
 
         #endregion
 
         #region Public Interface
 
-        public CombatStats CombatStats { get; }
-
-        #endregion
-
-        #region Nested Types
-
-        public new interface IRepository : IRepository<Enemy>
-        {
-        }
+        public CombatStats BaseStats { get; }
 
         #endregion
     }

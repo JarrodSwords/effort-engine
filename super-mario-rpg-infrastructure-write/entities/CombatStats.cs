@@ -1,12 +1,13 @@
-﻿namespace SuperMarioRpg.Infrastructure.Write
+﻿using SuperMarioRpg.Domain;
+
+namespace SuperMarioRpg.Infrastructure.Write
 {
     public class CombatStats : Entity
     {
         #region Creation
 
-        public CombatStats(byte flowerPoints)
+        public CombatStats()
         {
-            FlowerPoints = flowerPoints;
         }
 
         public CombatStats(
@@ -45,6 +46,24 @@
         public short MagicDefense { get; set; }
         public decimal? MagicEvade { get; set; }
         public short Speed { get; set; }
+
+        public static CombatStats From(Enemy.CombatStats combatStats)
+        {
+            var (hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade, magicEvade) =
+                combatStats;
+
+            return new CombatStats(
+                hitPoints,
+                flowerPoints,
+                speed,
+                attack,
+                magicAttack,
+                defense,
+                magicDefense,
+                evade,
+                magicEvade
+            );
+        }
 
         #endregion
     }

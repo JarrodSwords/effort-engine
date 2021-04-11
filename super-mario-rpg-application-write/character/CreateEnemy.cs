@@ -2,81 +2,71 @@
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
-using CombatStats = SuperMarioRpg.Domain.CombatStats;
 
 namespace SuperMarioRpg.Application.Write
 {
     public record CreateEnemy(
-        string Name = default,
-        ushort HitPoints = default,
-        byte? FlowerPoints = default,
-        short Speed = default,
-        short Attack = default,
-        short MagicAttack = default,
-        short Defense = default,
-        short MagicDefense = default,
-        decimal? Evade = default,
-        decimal? MagicEvade = default
-    ) : ICommand
+        string Name,
+        ushort HitPoints,
+        byte FlowerPoints,
+        short Speed,
+        short Attack,
+        short MagicAttack,
+        short Defense,
+        short MagicDefense,
+        decimal Evade,
+        decimal MagicEvade
+    ) : ICommand, Character.IBuilder
     {
-        #region Nested Types
+        #region Public Interface
 
-        internal class Builder : ICharacterBuilder
+        public Enemy Build()
         {
-            private CreateEnemy _command;
-
-            #region Public Interface
-
-            public Enemy Build()
-            {
-                return new(this);
-            }
-
-            public Builder From(CreateEnemy command)
-            {
-                _command = command;
-                return this;
-            }
-
-            #endregion
-
-            #region ICharacterBuilder Implementation
-
-            public CharacterTypes GetCharacterTypes()
-            {
-                return CharacterTypes.Enemy;
-            }
-
-            public CombatStats GetCombatStats()
-            {
-                var (_, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade, magicEvade) =
-                    _command;
-
-                return new CombatStats(
-                    hitPoints,
-                    flowerPoints,
-                    speed,
-                    attack,
-                    magicAttack,
-                    defense,
-                    magicDefense,
-                    evade,
-                    magicEvade
-                );
-            }
-
-            public Guid GetId()
-            {
-                return Guid.Empty;
-            }
-
-            public string GetName()
-            {
-                return _command.Name;
-            }
-
-            #endregion
+            return new(this);
         }
+
+        public static Enemy Build(CreateEnemy builder)
+        {
+            return builder.Build();
+        }
+
+        #endregion
+
+        #region IBuilder Implementation
+
+        public CharacterTypes GetCharacterTypes()
+        {
+            return CharacterTypes.Enemy;
+        }
+
+        public Enemy.CombatStats GetCombatStats()
+        {
+            return new(
+                HitPoints,
+                FlowerPoints,
+                Speed,
+                Attack,
+                MagicAttack,
+                Defense,
+                MagicDefense,
+                Evade,
+                MagicEvade
+            );
+        }
+
+        public Guid GetId()
+        {
+            return default;
+        }
+
+        public string GetName()
+        {
+            return Name;
+        }
+
+        #endregion
+
+        #region Nested Types
 
         internal class Handler : Handler<CreateEnemy>
         {
@@ -92,9 +82,9 @@ namespace SuperMarioRpg.Application.Write
 
             public override void Handle(CreateEnemy command)
             {
-                var character = new Builder().From(command).Build();
+                var character = command.Build();
 
-                UnitOfWork.EnemyRepository.Create(character);
+                UnitOfWork.Enemies.Create(character);
 
                 UnitOfWork.Commit();
             }

@@ -3,11 +3,11 @@ using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Domain
 {
-    public abstract class Character : AggregateRoot
+    public abstract partial class Character : AggregateRoot
     {
         #region Creation
 
-        protected Character(ICharacterBuilder builder) : base(builder.GetId())
+        protected Character(IBuilder builder) : base(builder.GetId())
         {
             CharacterTypes = builder.GetCharacterTypes();
             Name = new Name(builder.GetName());
@@ -19,19 +19,6 @@ namespace SuperMarioRpg.Domain
 
         public CharacterTypes CharacterTypes { get; }
         public Name Name { get; }
-
-        #endregion
-
-        #region Nested Types
-
-        public interface IRepository : IRepository<Character>
-        {
-            #region Public Interface
-
-            IRepository Delete(Name name);
-
-            #endregion
-        }
 
         #endregion
     }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SuperMarioRpg.Infrastructure.Write.Migrations
 {
-    public partial class Initial : Migration
+    public partial class CreateCharacterAndCombatStats : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
