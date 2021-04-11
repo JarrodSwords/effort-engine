@@ -18,9 +18,6 @@ namespace SuperMarioRpg.WebApi.Test
                 factory.ClientOptions.BaseAddress = new Uri($"http://localhost/{uri}/");
 
             HttpClient = factory.CreateClient();
-
-            //var context = factory.Services.GetService(typeof(Context)) as Context;
-            //context?.ApplyMigrations();
         }
 
         #endregion
