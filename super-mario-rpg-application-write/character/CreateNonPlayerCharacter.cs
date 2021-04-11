@@ -5,53 +5,42 @@ using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Application.Write
 {
-    public record CreateNonPlayerCharacter(string Name) : ICommand
+    public record CreateNonPlayerCharacter(string Name) : ICommand, ICharacterBuilder
     {
-        #region Nested Types
+        #region Public Interface
 
-        internal class Builder : ICharacterBuilder
+        public NonPlayerCharacter Build()
         {
-            private CreateNonPlayerCharacter _command;
-
-            #region Public Interface
-
-            public NonPlayerCharacter Build()
-            {
-                return new(this);
-            }
-
-            public Builder From(CreateNonPlayerCharacter command)
-            {
-                _command = command;
-                return this;
-            }
-
-            #endregion
-
-            #region ICharacterBuilder Implementation
-
-            public CharacterTypes GetCharacterTypes()
-            {
-                return CharacterTypes.NonPlayerCharacter;
-            }
-
-            public Enemy.CombatStats GetCombatStats()
-            {
-                throw new NotSupportedException();
-            }
-
-            public Guid GetId()
-            {
-                return Guid.Empty;
-            }
-
-            public string GetName()
-            {
-                return _command.Name;
-            }
-
-            #endregion
+            return new(this);
         }
+
+        #endregion
+
+        #region ICharacterBuilder Implementation
+
+        public CharacterTypes GetCharacterTypes()
+        {
+            return CharacterTypes.NonPlayerCharacter;
+        }
+
+        public Enemy.CombatStats GetCombatStats()
+        {
+            throw new NotSupportedException();
+        }
+
+        public Guid GetId()
+        {
+            return default;
+        }
+
+        public string GetName()
+        {
+            return Name;
+        }
+
+        #endregion
+
+        #region Nested Types
 
         [Log]
         internal class Handler : Handler<CreateNonPlayerCharacter>
@@ -68,10 +57,9 @@ namespace SuperMarioRpg.Application.Write
 
             public override void Handle(CreateNonPlayerCharacter command)
             {
-                var builder = new Builder().From(command);
-                var character = new NonPlayerCharacter(builder);
+                var nonPlayerCharacter = command.Build();
 
-                UnitOfWork.NonPlayerCharacterRepository.Create(character);
+                UnitOfWork.NonPlayerCharacterRepository.Create(nonPlayerCharacter);
 
                 UnitOfWork.Commit();
             }
