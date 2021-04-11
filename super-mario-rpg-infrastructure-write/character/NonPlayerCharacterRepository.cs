@@ -15,7 +15,21 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #endregion
 
-        #region IRepository<NonPlayerCharacter> Implementation
+        #region Public Interface
+
+        public NonPlayerCharacter Find(Id id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(NonPlayerCharacter character)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IRepository Implementation
 
         public void Create(params NonPlayerCharacter[] nonPlayerCharacters)
         {
@@ -25,16 +39,6 @@ namespace SuperMarioRpg.Infrastructure.Write
         }
 
         public string Create(NonPlayerCharacter character)
-        {
-            throw new NotImplementedException();
-        }
-
-        public NonPlayerCharacter Find(Id id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(NonPlayerCharacter character)
         {
             throw new NotImplementedException();
         }
