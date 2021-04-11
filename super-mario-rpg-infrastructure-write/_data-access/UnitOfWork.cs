@@ -20,11 +20,11 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region IUnitOfWork Implementation
 
-        public Domain.Character.IRepository Characters => _characters ??= new CharacterRepository(_context);
-        public Enemy.IRepository Enemies => _enemies ??= new EnemyRepository(_context);
+        public Domain.Character.IRepository Characters => _characters ??= new Character.Repository(_context);
+        public Enemy.IRepository Enemies => _enemies ??= new Character.EnemyRepository(_context);
 
         public NonPlayerCharacter.IRepository NonPlayerCharacters =>
-            _nonPlayerCharacters ??= new NonPlayerCharacterRepository(_context);
+            _nonPlayerCharacters ??= new Character.NonPlayerCharacterRepository(_context);
 
         public void Commit()
         {

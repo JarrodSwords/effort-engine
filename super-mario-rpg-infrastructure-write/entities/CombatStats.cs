@@ -6,9 +6,8 @@ namespace SuperMarioRpg.Infrastructure.Write
     {
         #region Creation
 
-        public CombatStats(byte flowerPoints)
+        public CombatStats()
         {
-            FlowerPoints = flowerPoints;
         }
 
         public CombatStats(
