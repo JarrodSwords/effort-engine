@@ -5,27 +5,24 @@ using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Application.Write
 {
-    public record CreateEnemy(
+    public record CreatePlayableCharacter(
         string Name,
         ushort HitPoints,
-        byte FlowerPoints,
         short Speed,
         short Attack,
         short MagicAttack,
         short Defense,
-        short MagicDefense,
-        decimal Evade,
-        decimal MagicEvade
+        short MagicDefense
     ) : ICommand, Character.IBuilder
     {
         #region Public Interface
 
-        public Enemy Build()
+        public PlayableCharacter Build()
         {
             return new(this);
         }
 
-        public static Enemy Build(CreateEnemy builder)
+        public static PlayableCharacter Build(CreatePlayableCharacter builder)
         {
             return builder.Build();
         }
@@ -36,22 +33,12 @@ namespace SuperMarioRpg.Application.Write
 
         public CharacterTypes GetCharacterTypes()
         {
-            return CharacterTypes.Enemy;
+            return CharacterTypes.PlayerCharacter;
         }
 
         public Enemy.CombatStats GetEnemyCombatStats()
         {
-            return new(
-                HitPoints,
-                FlowerPoints,
-                Speed,
-                Attack,
-                MagicAttack,
-                Defense,
-                MagicDefense,
-                Evade,
-                MagicEvade
-            );
+            throw new NotSupportedException();
         }
 
         public Guid GetId()
@@ -66,14 +53,14 @@ namespace SuperMarioRpg.Application.Write
 
         public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
         {
-            throw new NotSupportedException();
+            return new(HitPoints, Speed, Attack, MagicAttack, Defense, MagicDefense);
         }
 
         #endregion
 
         #region Nested Types
 
-        internal class Handler : Handler<CreateEnemy>
+        internal class Handler : Handler<CreatePlayableCharacter>
         {
             #region Creation
 
@@ -85,9 +72,9 @@ namespace SuperMarioRpg.Application.Write
 
             #region Public Interface
 
-            public override void Handle(CreateEnemy command)
+            public override void Handle(CreatePlayableCharacter command)
             {
-                UnitOfWork.Enemies.Create(command.Build());
+                UnitOfWork.PlayableCharacters.Create(command.Build());
                 UnitOfWork.Commit();
             }
 

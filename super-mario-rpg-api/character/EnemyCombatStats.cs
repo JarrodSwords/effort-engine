@@ -1,6 +1,6 @@
 ﻿namespace SuperMarioRpg.Api
 {
-    public record CombatStats(
+    public record EnemyCombatStats(
         ushort HitPoints,
         byte? FlowerPoints,
         short Speed,

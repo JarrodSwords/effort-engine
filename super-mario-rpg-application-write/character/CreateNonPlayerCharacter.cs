@@ -28,7 +28,7 @@ namespace SuperMarioRpg.Application.Write
             return CharacterTypes.NonPlayerCharacter;
         }
 
-        public Enemy.CombatStats GetCombatStats()
+        public Enemy.CombatStats GetEnemyCombatStats()
         {
             throw new NotSupportedException();
         }
@@ -41,6 +41,11 @@ namespace SuperMarioRpg.Application.Write
         public string GetName()
         {
             return Name;
+        }
+
+        public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
+        {
+            throw new NotSupportedException();
         }
 
         #endregion
@@ -63,7 +68,6 @@ namespace SuperMarioRpg.Application.Write
             public override void Handle(CreateNonPlayerCharacter command)
             {
                 UnitOfWork.NonPlayerCharacters.Create(command.Build());
-
                 UnitOfWork.Commit();
             }
 

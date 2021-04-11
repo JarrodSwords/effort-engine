@@ -23,6 +23,11 @@ namespace SuperMarioRpg.Infrastructure.Write
             CombatStats = CombatStats.From(enemy.BaseStats);
         }
 
+        public Character(PlayableCharacter playableCharacter) : this(playableCharacter as Domain.Character)
+        {
+            CombatStats = CombatStats.From(playableCharacter.BaseStats);
+        }
+
         #endregion
 
         #region Public Interface
@@ -41,6 +46,11 @@ namespace SuperMarioRpg.Infrastructure.Write
         public static Character From(NonPlayerCharacter nonPlayerCharacter)
         {
             return new(nonPlayerCharacter);
+        }
+
+        public static Character From(PlayableCharacter playableCharacter)
+        {
+            return new(playableCharacter);
         }
 
         public Character SetCharacterTypes(CharacterTypes characterTypes)

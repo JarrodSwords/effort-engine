@@ -36,7 +36,7 @@ namespace SuperMarioRpg.Domain.Test
             return 0;
         }
 
-        public Enemy.CombatStats GetCombatStats()
+        public Enemy.CombatStats GetEnemyCombatStats()
         {
             throw new NotImplementedException();
         }
@@ -49,6 +49,11 @@ namespace SuperMarioRpg.Domain.Test
         public string GetName()
         {
             return Name;
+        }
+
+        public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

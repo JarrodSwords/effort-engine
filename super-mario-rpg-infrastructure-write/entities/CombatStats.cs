@@ -65,6 +65,20 @@ namespace SuperMarioRpg.Infrastructure.Write
             );
         }
 
+        public static CombatStats From(PlayableCharacter.CombatStats combatStats)
+        {
+            var (hitPoints, speed, attack, magicAttack, defense, magicDefense) = combatStats;
+
+            return new CombatStats(
+                hitPoints,
+                speed: speed,
+                attack: attack,
+                magicAttack: magicAttack,
+                defense: defense,
+                magicDefense: magicDefense
+            );
+        }
+
         #endregion
     }
 }

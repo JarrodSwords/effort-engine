@@ -4,66 +4,56 @@ using SuperMarioRpg.Api;
 namespace SuperMarioRpg.Application.Read
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    internal record EnemyRecord(
+    internal record PlayableCharacterRecord(
         string name,
         int hit_points,
-        short flower_points,
         short speed,
         short attack,
         short magic_attack,
         short defense,
-        short magic_defense,
-        decimal evade,
-        decimal magic_evade
+        short magic_defense
     )
     {
         private const string Select = @"
 select c.name
      , cs.hit_points
-     , cs.flower_points
      , cs.speed
      , cs.attack
      , cs.magic_attack 
      , cs.defense 
-     , cs.magic_defense 
-     , cs.evade 
-     , cs.magic_evade 
+     , cs.magic_defense
   from character c
-  left join combat_stats cs
+  join combat_stats cs
     on cs.id = c.combat_stats_id";
 
         #region Public Interface
 
         public static string Fetch =>
             $@"{Select}
- where c.is_enemy = true
+ where c.is_enemy = false
  order by c.name
 ";
 
         public static string Find =>
             $@"{Select}
  where name = @Name
-   and c.is_enemy = true 
+   and c.is_enemy = false 
 ";
 
-        public static Enemy AsEnemy(EnemyRecord record)
+        public static PlayableCharacter AsPlayableCharacter(PlayableCharacterRecord record)
         {
-            var (name, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade,
-                    magicEvade) =
+            var (name, hitPoints, speed, attack, magicAttack, defense, magicDefense) =
                 record;
 
-            return new Enemy(
+            return new PlayableCharacter(
                 name,
-                new EnemyCombatStats(
+                new PlayableCharacterCombatStats(
                     (ushort) hitPoints,
-                    (byte?) flowerPoints,
                     speed,
                     attack,
                     magicAttack,
                     defense,
-                    magicDefense,
-                    evade,
-                    magicEvade
+                    magicDefense
                 )
             );
         }

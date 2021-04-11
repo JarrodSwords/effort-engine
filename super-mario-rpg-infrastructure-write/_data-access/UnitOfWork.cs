@@ -8,6 +8,7 @@ namespace SuperMarioRpg.Infrastructure.Write
         private Domain.Character.IRepository _characters;
         private Enemy.IRepository _enemies;
         private NonPlayerCharacter.IRepository _nonPlayerCharacters;
+        private PlayableCharacter.IRepository _playableCharacters;
 
         #region Creation
 
@@ -25,6 +26,9 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public NonPlayerCharacter.IRepository NonPlayerCharacters =>
             _nonPlayerCharacters ??= new Character.NonPlayerCharacterRepository(_context);
+
+        public PlayableCharacter.IRepository PlayableCharacters =>
+            _playableCharacters ??= new Character.PlayableCharacterRepository(_context);
 
         public void Commit()
         {
