@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SuperMarioRpg.Infrastructure.Write.Migrations
 {
-    public partial class CreateCharacterAndCombatStats : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,8 +33,8 @@ namespace SuperMarioRpg.Infrastructure.Write.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     combat_stats_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    is_enemy = table.Column<bool>(type: "boolean", nullable: false),
-                    is_non_player_character = table.Column<bool>(type: "boolean", nullable: false),
+                    is_combatant = table.Column<bool>(type: "boolean", nullable: false),
+                    is_playable = table.Column<bool>(type: "boolean", nullable: false),
                     name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>

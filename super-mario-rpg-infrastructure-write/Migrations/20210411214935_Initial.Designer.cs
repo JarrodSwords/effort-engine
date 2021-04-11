@@ -10,15 +10,15 @@ using SuperMarioRpg.Infrastructure.Write;
 namespace SuperMarioRpg.Infrastructure.Write.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210411192335_CreateCharacterAndCombatStats")]
-    partial class CreateCharacterAndCombatStats
+    [Migration("20210411214935_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("SuperMarioRpg.Infrastructure.Write.Character", b =>
@@ -32,13 +32,13 @@ namespace SuperMarioRpg.Infrastructure.Write.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("combat_stats_id");
 
-                    b.Property<bool>("IsEnemy")
+                    b.Property<bool>("IsCombatant")
                         .HasColumnType("boolean")
-                        .HasColumnName("is_enemy");
+                        .HasColumnName("is_combatant");
 
-                    b.Property<bool>("IsNonPlayerCharacter")
+                    b.Property<bool>("IsPlayable")
                         .HasColumnType("boolean")
-                        .HasColumnName("is_non_player_character");
+                        .HasColumnName("is_playable");
 
                     b.Property<string>("Name")
                         .HasColumnType("text")
