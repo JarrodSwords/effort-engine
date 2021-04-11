@@ -66,9 +66,13 @@ namespace SuperMarioRpg.Infrastructure.Write.Migrations
                         .HasColumnType("smallint")
                         .HasColumnName("defense");
 
-                    b.Property<decimal>("Evade")
+                    b.Property<decimal?>("Evade")
                         .HasColumnType("numeric")
                         .HasColumnName("evade");
+
+                    b.Property<byte?>("FlowerPoints")
+                        .HasColumnType("smallint")
+                        .HasColumnName("flower_points");
 
                     b.Property<int>("HitPoints")
                         .HasColumnType("integer")
@@ -82,7 +86,7 @@ namespace SuperMarioRpg.Infrastructure.Write.Migrations
                         .HasColumnType("smallint")
                         .HasColumnName("magic_defense");
 
-                    b.Property<decimal>("MagicEvade")
+                    b.Property<decimal?>("MagicEvade")
                         .HasColumnType("numeric")
                         .HasColumnName("magic_evade");
 

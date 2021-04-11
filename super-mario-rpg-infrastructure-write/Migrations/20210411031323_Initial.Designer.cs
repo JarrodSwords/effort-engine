@@ -10,8 +10,8 @@ using SuperMarioRpg.Infrastructure.Write;
 namespace SuperMarioRpg.Infrastructure.Write.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210410174300_CreateCharacterAndCombatStats")]
-    partial class CreateCharacterAndCombatStats
+    [Migration("20210411031323_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,14 @@ namespace SuperMarioRpg.Infrastructure.Write.Migrations
                     b.Property<Guid?>("CombatStatsId")
                         .HasColumnType("uuid")
                         .HasColumnName("combat_stats_id");
+
+                    b.Property<bool>("IsEnemy")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_enemy");
+
+                    b.Property<bool>("IsNonPlayerCharacter")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_non_player_character");
 
                     b.Property<string>("Name")
                         .HasColumnType("text")
@@ -60,9 +68,13 @@ namespace SuperMarioRpg.Infrastructure.Write.Migrations
                         .HasColumnType("smallint")
                         .HasColumnName("defense");
 
-                    b.Property<decimal>("Evade")
+                    b.Property<decimal?>("Evade")
                         .HasColumnType("numeric")
                         .HasColumnName("evade");
+
+                    b.Property<byte?>("FlowerPoints")
+                        .HasColumnType("smallint")
+                        .HasColumnName("flower_points");
 
                     b.Property<int>("HitPoints")
                         .HasColumnType("integer")
@@ -76,7 +88,7 @@ namespace SuperMarioRpg.Infrastructure.Write.Migrations
                         .HasColumnType("smallint")
                         .HasColumnName("magic_defense");
 
-                    b.Property<decimal>("MagicEvade")
+                    b.Property<decimal?>("MagicEvade")
                         .HasColumnType("numeric")
                         .HasColumnName("magic_evade");
 
