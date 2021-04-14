@@ -4,12 +4,14 @@
     {
         #region Nested Types
 
-        public new interface IRepository : IRepository<PlayableCharacter>
+        public interface IRepository : IRepository<PlayableCharacter>
         {
             #region Public Interface
 
             string Create(PlayableCharacter playableCharacter);
             void Create(params PlayableCharacter[] playableCharacters);
+            PlayableCharacter Find(string name);
+            void Update(PlayableCharacter playableCharacter);
 
             #endregion
         }

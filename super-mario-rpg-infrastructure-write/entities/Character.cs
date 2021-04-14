@@ -4,7 +4,7 @@ using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
-    public partial class Character : Entity
+    public partial class Character : Entity, Domain.Character.IBuilder
     {
         #region Creation
 
@@ -38,6 +38,11 @@ namespace SuperMarioRpg.Infrastructure.Write
         public bool IsPlayable { get; set; }
         public string Name { get; set; }
 
+        public PlayableCharacter BuildPlayableCharacter()
+        {
+            return new(this);
+        }
+
         public static Character From(Enemy enemy)
         {
             return new(enemy);
@@ -59,6 +64,60 @@ namespace SuperMarioRpg.Infrastructure.Write
             IsPlayable = characterTypes.Contains(CharacterTypes.Playable);
 
             return this;
+        }
+
+        #endregion
+
+        #region IBuilder Implementation
+
+        public CharacterTypes GetCharacterTypes()
+        {
+            var characterTypes = CharacterTypes.None;
+
+            if (IsCombatant)
+                characterTypes |= CharacterTypes.Combatant;
+
+            if (IsPlayable)
+                characterTypes |= CharacterTypes.Playable;
+
+            return characterTypes;
+        }
+
+        public Enemy.CombatStats GetEnemyCombatStats()
+        {
+            return new(
+                CombatStats.HitPoints,
+                CombatStats.FlowerPoints.Value,
+                CombatStats.Speed,
+                CombatStats.Attack,
+                CombatStats.MagicAttack,
+                CombatStats.Defense,
+                CombatStats.MagicDefense,
+                CombatStats.Evade.Value,
+                CombatStats.MagicEvade.Value
+            );
+        }
+
+        public Guid GetId()
+        {
+            return Id;
+        }
+
+        public string GetName()
+        {
+            return Name;
+        }
+
+        public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
+        {
+            return new(
+                CombatStats.HitPoints,
+                CombatStats.Speed,
+                CombatStats.Attack,
+                CombatStats.MagicAttack,
+                CombatStats.Defense,
+                CombatStats.MagicDefense
+            );
         }
 
         #endregion
