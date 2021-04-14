@@ -2,8 +2,8 @@
 using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Api;
-using SuperMarioRpg.Application.Read;
-using SuperMarioRpg.Application.Write;
+using SuperMarioRpg.Application.Read.Enemies;
+using SuperMarioRpg.Application.Write.Enemies;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
@@ -11,21 +11,21 @@ namespace SuperMarioRpg.WebApi.Controllers
     [ApiController]
     public class EnemyController : ControllerBase
     {
-        private readonly ICommandHandler<CreateEnemy> _createEnemyHandler;
-        private readonly IQueryHandler<FetchEnemies, IEnumerable<Enemy>> _fetchEnemiesHandler;
-        private readonly IQueryHandler<FindEnemy, Enemy> _findEnemyHandler;
+        private readonly ICommandHandler<Create> _createHandler;
+        private readonly IQueryHandler<Fetch, IEnumerable<Enemy>> _fetchHandler;
+        private readonly IQueryHandler<Find, Enemy> _findHandler;
 
         #region Creation
 
         public EnemyController(
-            ICommandHandler<CreateEnemy> createEnemyHandler,
-            IQueryHandler<FetchEnemies, IEnumerable<Enemy>> fetchEnemiesHandler,
-            IQueryHandler<FindEnemy, Enemy> findEnemyHandler
+            ICommandHandler<Create> createHandler,
+            IQueryHandler<Fetch, IEnumerable<Enemy>> fetchHandler,
+            IQueryHandler<Find, Enemy> findHandler
         )
         {
-            _createEnemyHandler = createEnemyHandler;
-            _fetchEnemiesHandler = fetchEnemiesHandler;
-            _findEnemyHandler = findEnemyHandler;
+            _createHandler = createHandler;
+            _fetchHandler = fetchHandler;
+            _findHandler = findHandler;
         }
 
         #endregion
@@ -33,12 +33,12 @@ namespace SuperMarioRpg.WebApi.Controllers
         #region Public Interface
 
         [HttpPost]
-        public IActionResult CreateEnemy([FromBody] CreateEnemyArgs args)
+        public IActionResult Create([FromBody] CreateEnemyArgs args)
         {
             var (name, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade, magicEvade) =
                 args;
 
-            var command = new CreateEnemy(
+            var command = new Create(
                 name,
                 hitPoints,
                 flowerPoints,
@@ -51,24 +51,24 @@ namespace SuperMarioRpg.WebApi.Controllers
                 magicEvade
             );
 
-            _createEnemyHandler.Handle(command);
+            _createHandler.Handle(command);
 
             return Ok();
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Enemy>> FetchEnemies()
+        public ActionResult<IEnumerable<Enemy>> Fetch()
         {
-            var enemies = _fetchEnemiesHandler.Handle(new FetchEnemies());
+            var enemies = _fetchHandler.Handle(new Fetch());
 
             return Ok(enemies);
         }
 
         [HttpGet]
         [Route("{name}")]
-        public ActionResult<Enemy> FindEnemy(string name)
+        public ActionResult<Enemy> Find(string name)
         {
-            var enemy = _findEnemyHandler.Handle(new FindEnemy(name));
+            var enemy = _findHandler.Handle(new Find(name));
 
             return Ok(enemy);
         }

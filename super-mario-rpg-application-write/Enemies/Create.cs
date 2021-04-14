@@ -3,9 +3,9 @@ using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Application.Write
+namespace SuperMarioRpg.Application.Write.Enemies
 {
-    public record CreateEnemy(
+    public record Create(
         string Name,
         ushort HitPoints,
         byte FlowerPoints,
@@ -25,7 +25,7 @@ namespace SuperMarioRpg.Application.Write
             return new(this);
         }
 
-        public static Enemy Build(CreateEnemy builder)
+        public static Enemy Build(Create builder)
         {
             return builder.Build();
         }
@@ -73,7 +73,7 @@ namespace SuperMarioRpg.Application.Write
 
         #region Nested Types
 
-        internal class Handler : Handler<CreateEnemy>
+        internal class Handler : Handler<Create>
         {
             #region Creation
 
@@ -85,7 +85,7 @@ namespace SuperMarioRpg.Application.Write
 
             #region Public Interface
 
-            public override void Handle(CreateEnemy command)
+            public override void Handle(Create command)
             {
                 UnitOfWork.Enemies.Create(command.Build());
                 UnitOfWork.Commit();

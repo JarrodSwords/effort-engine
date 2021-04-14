@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using SuperMarioRpg.Api;
 
-namespace SuperMarioRpg.Application.Read
+namespace SuperMarioRpg.Application.Read.Enemies
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    internal record EnemyRecord(
+    internal record Record(
         string name,
         int hit_points,
         short flower_points,
@@ -43,7 +43,12 @@ select c.name
             $@"{Select}
    and name = @Name";
 
-        public static Enemy AsEnemy(EnemyRecord record)
+        public Enemy AsEnemy()
+        {
+            return AsEnemy(this);
+        }
+
+        public static Enemy AsEnemy(Record record)
         {
             var (name, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade,
                     magicEvade) =

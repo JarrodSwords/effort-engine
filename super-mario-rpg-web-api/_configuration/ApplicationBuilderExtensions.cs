@@ -1,6 +1,7 @@
 using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Builder;
 using SuperMarioRpg.Application.Write;
+using SuperMarioRpg.Application.Write.Enemies;
 using SuperMarioRpg.Infrastructure.Write;
 
 namespace SuperMarioRpg.WebApi
@@ -18,7 +19,7 @@ namespace SuperMarioRpg.WebApi
 
             context.ApplyMigrations();
 
-            app.GetService<ICommandHandler<SeedEnemies>>().Handle(new SeedEnemies());
+            app.GetService<ICommandHandler<Seed>>().Handle(new Seed());
             app.GetService<ICommandHandler<SeedNonPlayerCharacters>>().Handle(new SeedNonPlayerCharacters());
             app.GetService<ICommandHandler<SeedPlayableCharacters>>().Handle(new SeedPlayableCharacters());
 

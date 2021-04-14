@@ -2,15 +2,15 @@
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 
-namespace SuperMarioRpg.Application.Write
+namespace SuperMarioRpg.Application.Write.Enemies
 {
-    public record SeedEnemies : ICommand
+    public record Seed : ICommand
     {
         #region Nested Types
 
-        internal class Handler : Handler<SeedEnemies>
+        internal class Handler : Handler<Seed>
         {
-            private static readonly CreateEnemy[] Enemies =
+            private static readonly Create[] Enemies =
             {
                 new("Terrapin", 10, 100, 10, 1, 0, 8, 1, 0, 0),
                 new("Bowser", 320, 100, 10, 1, 0, 12, 0, 0, 0),
@@ -29,9 +29,9 @@ namespace SuperMarioRpg.Application.Write
 
             #region Public Interface
 
-            public override void Handle(SeedEnemies command)
+            public override void Handle(Seed command)
             {
-                var enemies = Enemies.Select(CreateEnemy.Build);
+                var enemies = Enemies.Select(Create.Build);
 
                 UnitOfWork.Enemies.Create(enemies.ToArray());
 
