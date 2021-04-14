@@ -13,7 +13,7 @@
 
         #region Public Interface
 
-        public CombatStats BaseStats { get; }
+        public CombatStats BaseStats { get; set; }
 
         #endregion
     }

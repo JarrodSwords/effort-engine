@@ -3,6 +3,7 @@ using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Api;
 using SuperMarioRpg.Application.Read;
+using SuperMarioRpg.Application.Write;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
@@ -14,16 +15,19 @@ namespace SuperMarioRpg.WebApi.Controllers
             _fetchPlayableCharactersHandler;
 
         private readonly IQueryHandler<FindPlayableCharacter, PlayableCharacter> _findPlayableCharacterHandler;
+        private readonly ICommandHandler<UpdatePlayableCharacterBaseStats> _updatePlayableCharacterCombatStats;
 
         #region Creation
 
         public PlayableCharacterController(
             IQueryHandler<FetchPlayableCharacters, IEnumerable<PlayableCharacter>> fetchPlayableCharactersHandler,
-            IQueryHandler<FindPlayableCharacter, PlayableCharacter> findPlayableCharacterHandler
+            IQueryHandler<FindPlayableCharacter, PlayableCharacter> findPlayableCharacterHandler,
+            ICommandHandler<UpdatePlayableCharacterBaseStats> updatePlayableCharacterCombatStats
         )
         {
             _fetchPlayableCharactersHandler = fetchPlayableCharactersHandler;
             _findPlayableCharacterHandler = findPlayableCharacterHandler;
+            _updatePlayableCharacterCombatStats = updatePlayableCharacterCombatStats;
         }
 
         #endregion
@@ -45,6 +49,30 @@ namespace SuperMarioRpg.WebApi.Controllers
             var playableCharacter = _findPlayableCharacterHandler.Handle(new FindPlayableCharacter(name));
 
             return Ok(playableCharacter);
+        }
+
+        [HttpPut]
+        [Route("{name}/base-stats")]
+        public IActionResult UpdatePlayableCharacterBaseStats(
+            string name,
+            [FromBody] PlayableCharacterCombatStats baseStats
+        )
+        {
+            var (hitPoints, speed, attack, magicAttack, defense, magicDefense) = baseStats;
+
+            _updatePlayableCharacterCombatStats.Handle(
+                new UpdatePlayableCharacterBaseStats(
+                    name,
+                    hitPoints,
+                    speed,
+                    attack,
+                    magicAttack,
+                    defense,
+                    magicDefense
+                )
+            );
+
+            return Ok();
         }
 
         #endregion

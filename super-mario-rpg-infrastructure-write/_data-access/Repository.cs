@@ -6,13 +6,13 @@ namespace SuperMarioRpg.Infrastructure.Write
 {
     public abstract class Repository<T> : IRepository<T> where T : Entity
     {
-        private readonly Context _context;
+        protected readonly Context Context;
 
         #region Creation
 
         protected Repository(Context context)
         {
-            _context = context;
+            Context = context;
         }
 
         #endregion
@@ -21,32 +21,32 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public void Commit()
         {
-            _context.SaveChanges();
+            Context.SaveChanges();
         }
 
         public T Create(T entity)
         {
-            return _context.Add(entity).Entity;
+            return Context.Add(entity).Entity;
         }
 
         public void Create(params T[] entities)
         {
-            _context.AddRange(entities.ToList());
+            Context.AddRange(entities.ToList());
         }
 
         public void Delete(T entity)
         {
-            _context.Remove(entity);
+            Context.Remove(entity);
         }
 
         public T Find(Guid id)
         {
-            return _context.Find<T>(id);
+            return Context.Find<T>(id);
         }
 
         public T Find(Expression<Func<T, bool>> predicate)
         {
-            return _context
+            return Context
                 .Set<T>()
                 .AsQueryable()
                 .Single(predicate);
@@ -54,7 +54,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public void Update(T entity)
         {
-            _context.Update(entity);
+            Context.Update(entity);
         }
 
         #endregion
