@@ -17,7 +17,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region Public Interface
 
-        public PlayableCharacter BuildPlayableCharacter()
+        public PlayableCharacter AsPlayableCharacter()
         {
             return new(this);
         }
@@ -25,6 +25,12 @@ namespace SuperMarioRpg.Infrastructure.Write
         public static Character From(PlayableCharacter playableCharacter)
         {
             return new(playableCharacter);
+        }
+
+        public Character Update(PlayableCharacter playableCharacter)
+        {
+            CombatStats.Update(playableCharacter.BaseStats);
+            return this;
         }
 
         #endregion
@@ -58,23 +64,15 @@ namespace SuperMarioRpg.Infrastructure.Write
                 return Context.Character
                     .Include(x => x.CombatStats)
                     .Single(x => x.IsPlayable && x.Name == name)
-                    .BuildPlayableCharacter();
+                    .AsPlayableCharacter();
             }
 
             public void Update(PlayableCharacter playableCharacter)
             {
                 var character = Context.Character
                     .Include(x => x.CombatStats)
-                    .Single(x => x.IsPlayable && x.Name == playableCharacter.Name.Value);
-
-                var (hitPoints, speed, attack, magicAttack, defense, magicDefense) = playableCharacter.BaseStats;
-
-                character.CombatStats.HitPoints = hitPoints;
-                character.CombatStats.Speed = speed;
-                character.CombatStats.Attack = attack;
-                character.CombatStats.MagicAttack = magicAttack;
-                character.CombatStats.Defense = defense;
-                character.CombatStats.MagicDefense = magicDefense;
+                    .Single(x => x.IsPlayable && x.Name == playableCharacter.Name.Value)
+                    .Update(playableCharacter);
 
                 Update(character);
             }
