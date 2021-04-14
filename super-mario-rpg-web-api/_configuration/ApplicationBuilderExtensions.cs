@@ -20,7 +20,8 @@ namespace SuperMarioRpg.WebApi
             context.ApplyMigrations();
 
             app.GetService<ICommandHandler<Seed>>().Handle(new Seed());
-            app.GetService<ICommandHandler<SeedNonPlayerCharacters>>().Handle(new SeedNonPlayerCharacters());
+            app.GetService<ICommandHandler<Application.Write.NonPlayerCharacters.Seed>>()
+                .Handle(new Application.Write.NonPlayerCharacters.Seed());
             app.GetService<ICommandHandler<SeedPlayableCharacters>>().Handle(new SeedPlayableCharacters());
 
             return app;

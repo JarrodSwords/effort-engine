@@ -4,13 +4,13 @@ using Dapper;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
 
-namespace SuperMarioRpg.Application.Read
+namespace SuperMarioRpg.Application.Read.NonPlayerCharacters
 {
-    public record FetchNonPlayerCharacters : IQuery<IEnumerable<NonPlayerCharacter>>
+    public record Fetch : IQuery<IEnumerable<NonPlayerCharacter>>
     {
         #region Nested Types
 
-        internal class Handler : Handler<FetchNonPlayerCharacters, IEnumerable<NonPlayerCharacter>>
+        internal class Handler : Handler<Fetch, IEnumerable<NonPlayerCharacter>>
         {
             private const string FetchNonPlayerCharacters = @"
 select name
@@ -20,10 +20,7 @@ select name
 
             #region Public Interface
 
-            public override IEnumerable<NonPlayerCharacter> MakeRequest(
-                IDbConnection connection,
-                FetchNonPlayerCharacters query
-            )
+            public override IEnumerable<NonPlayerCharacter> MakeRequest(IDbConnection connection, Fetch query)
             {
                 return connection.Query<NonPlayerCharacter>(FetchNonPlayerCharacters);
             }

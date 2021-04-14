@@ -3,9 +3,9 @@ using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Application.Write
+namespace SuperMarioRpg.Application.Write.NonPlayerCharacters
 {
-    public record CreateNonPlayerCharacter(string Name) : ICommand, Character.IBuilder
+    public record Create(string Name) : ICommand, Character.IBuilder
     {
         #region Public Interface
 
@@ -14,7 +14,7 @@ namespace SuperMarioRpg.Application.Write
             return new(this);
         }
 
-        public static NonPlayerCharacter Build(CreateNonPlayerCharacter builder)
+        public static NonPlayerCharacter Build(Create builder)
         {
             return builder.Build();
         }
@@ -53,7 +53,7 @@ namespace SuperMarioRpg.Application.Write
         #region Nested Types
 
         [Log]
-        internal class Handler : Handler<CreateNonPlayerCharacter>
+        internal class Handler : Handler<Create>
         {
             #region Creation
 
@@ -65,7 +65,7 @@ namespace SuperMarioRpg.Application.Write
 
             #region Public Interface
 
-            public override void Handle(CreateNonPlayerCharacter command)
+            public override void Handle(Create command)
             {
                 UnitOfWork.NonPlayerCharacters.Create(command.Build());
                 UnitOfWork.Commit();

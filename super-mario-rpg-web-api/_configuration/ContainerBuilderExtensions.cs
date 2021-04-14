@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Autofac;
 using SuperMarioRpg.Application.Read;
-using SuperMarioRpg.Application.Write;
+using SuperMarioRpg.Application.Write.NonPlayerCharacters;
 using SuperMarioRpg.Infrastructure.Write;
 using Entity = Effort.Domain.Entity;
 
@@ -14,7 +14,7 @@ namespace SuperMarioRpg.WebApi
         {
             typeof(Entity).Assembly,
             typeof(FetchCharacters).Assembly,
-            typeof(CreateNonPlayerCharacter).Assembly,
+            typeof(Create).Assembly,
             typeof(Context).Assembly,
             typeof(ContainerBuilderExtensions).Assembly
         };

@@ -2,15 +2,15 @@
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 
-namespace SuperMarioRpg.Application.Write
+namespace SuperMarioRpg.Application.Write.NonPlayerCharacters
 {
-    public record SeedNonPlayerCharacters : ICommand
+    public record Seed : ICommand
     {
         #region Nested Types
 
-        internal class Handler : Handler<SeedNonPlayerCharacters>
+        internal class Handler : Handler<Seed>
         {
-            private static readonly CreateNonPlayerCharacter[] Characters =
+            private static readonly Create[] Characters =
             {
                 new("Boshi"),
                 new("Frogfucious"),
@@ -29,9 +29,9 @@ namespace SuperMarioRpg.Application.Write
 
             #region Public Interface
 
-            public override void Handle(SeedNonPlayerCharacters command)
+            public override void Handle(Seed command)
             {
-                var characters = Characters.Select(CreateNonPlayerCharacter.Build);
+                var characters = Characters.Select(Create.Build);
                 UnitOfWork.NonPlayerCharacters.Create(characters.ToArray());
                 UnitOfWork.Commit();
             }
