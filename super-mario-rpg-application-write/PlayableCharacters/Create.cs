@@ -3,9 +3,9 @@ using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Application.Write
+namespace SuperMarioRpg.Application.Write.PlayableCharacters
 {
-    public record CreatePlayableCharacter(
+    public record Create(
         string Name,
         ushort HitPoints,
         short Speed,
@@ -22,7 +22,7 @@ namespace SuperMarioRpg.Application.Write
             return new(this);
         }
 
-        public static PlayableCharacter Build(CreatePlayableCharacter builder)
+        public static PlayableCharacter Build(Create builder)
         {
             return builder.Build();
         }
@@ -60,7 +60,7 @@ namespace SuperMarioRpg.Application.Write
 
         #region Nested Types
 
-        internal class Handler : Handler<CreatePlayableCharacter>
+        internal class Handler : Handler<Create>
         {
             #region Creation
 
@@ -72,7 +72,7 @@ namespace SuperMarioRpg.Application.Write
 
             #region Public Interface
 
-            public override void Handle(CreatePlayableCharacter command)
+            public override void Handle(Create command)
             {
                 UnitOfWork.PlayableCharacters.Create(command.Build());
                 UnitOfWork.Commit();

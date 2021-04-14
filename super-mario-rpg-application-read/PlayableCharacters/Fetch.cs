@@ -5,24 +5,24 @@ using Dapper;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
 
-namespace SuperMarioRpg.Application.Read
+namespace SuperMarioRpg.Application.Read.PlayableCharacters
 {
-    public record FetchPlayableCharacters : IQuery<IEnumerable<PlayableCharacter>>
+    public record Fetch : IQuery<IEnumerable<PlayableCharacter>>
     {
         #region Nested Types
 
-        internal class Handler : Handler<FetchPlayableCharacters, IEnumerable<PlayableCharacter>>
+        internal class Handler : Handler<Fetch, IEnumerable<PlayableCharacter>>
         {
             #region Public Interface
 
             public override IEnumerable<PlayableCharacter> MakeRequest(
                 IDbConnection connection,
-                FetchPlayableCharacters query
+                Fetch query
             )
             {
                 return connection
-                    .Query<PlayableCharacterRecord>(PlayableCharacterRecord.Fetch)
-                    .Select(PlayableCharacterRecord.AsPlayableCharacter);
+                    .Query<Record>(Record.Fetch)
+                    .Select(Record.AsPlayableCharacter);
             }
 
             #endregion

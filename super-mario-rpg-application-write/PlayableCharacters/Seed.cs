@@ -2,15 +2,15 @@
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 
-namespace SuperMarioRpg.Application.Write
+namespace SuperMarioRpg.Application.Write.PlayableCharacters
 {
-    public record SeedPlayableCharacters : ICommand
+    public record Seed : ICommand
     {
         #region Nested Types
 
-        internal class Handler : Handler<SeedPlayableCharacters>
+        internal class Handler : Handler<Seed>
         {
-            private static readonly CreatePlayableCharacter[] PlayableCharacters =
+            private static readonly Create[] PlayableCharacters =
             {
                 new("Bowser", 80, 15, 85, 52, 20, 30),
                 new("Geno", 45, 30, 60, 23, 20, 30),
@@ -29,9 +29,9 @@ namespace SuperMarioRpg.Application.Write
 
             #region Public Interface
 
-            public override void Handle(SeedPlayableCharacters command)
+            public override void Handle(Seed command)
             {
-                var characters = PlayableCharacters.Select(CreatePlayableCharacter.Build);
+                var characters = PlayableCharacters.Select(Create.Build);
                 UnitOfWork.PlayableCharacters.Create(characters.ToArray());
                 UnitOfWork.Commit();
             }
