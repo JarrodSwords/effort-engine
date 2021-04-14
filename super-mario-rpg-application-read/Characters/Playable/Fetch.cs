@@ -15,10 +15,7 @@ namespace SuperMarioRpg.Application.Read.Characters.Playable
         {
             #region Public Interface
 
-            public override IEnumerable<PlayableCharacter> MakeRequest(
-                IDbConnection connection,
-                Fetch query
-            )
+            public override IEnumerable<PlayableCharacter> MakeRequest(IDbConnection connection, Fetch query)
             {
                 return connection
                     .Query<Record>(Record.Fetch)

@@ -11,7 +11,7 @@ namespace SuperMarioRpg.Application.Read.Characters
 
         internal class Handler : Handler<Find, Character>
         {
-            private const string FindCharacter = @"
+            private const string Find = @"
 select name
   from character
  where name = @Name
@@ -21,7 +21,7 @@ select name
 
             public override Character MakeRequest(IDbConnection connection, Find query)
             {
-                return connection.QuerySingle<Character>(FindCharacter, query);
+                return connection.QuerySingle<Character>(Find, query);
             }
 
             #endregion

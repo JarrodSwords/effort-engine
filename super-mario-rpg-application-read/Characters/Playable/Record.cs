@@ -44,8 +44,7 @@ select c.name
 
         public static PlayableCharacter AsPlayableCharacter(Record record)
         {
-            var (name, hitPoints, speed, attack, magicAttack, defense, magicDefense) =
-                record;
+            var (name, hitPoints, speed, attack, magicAttack, defense, magicDefense) = record;
 
             return new PlayableCharacter(
                 name,

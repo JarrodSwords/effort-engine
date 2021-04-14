@@ -50,8 +50,7 @@ select c.name
 
         public static Enemy AsEnemy(Record record)
         {
-            var (name, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade,
-                    magicEvade) =
+            var (name, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade, magicEvade) =
                 record;
 
             return new Enemy(

@@ -12,7 +12,7 @@ namespace SuperMarioRpg.Application.Read.Characters
 
         internal class Handler : Handler<Fetch, IEnumerable<Character>>
         {
-            private const string FetchCharacters = @"
+            private const string Fetch = @"
 select name
   from character
  order by name
@@ -22,7 +22,7 @@ select name
 
             public override IEnumerable<Character> MakeRequest(IDbConnection connection, Fetch query)
             {
-                return connection.Query<Character>(FetchCharacters, query);
+                return connection.Query<Character>(Fetch, query);
             }
 
             #endregion

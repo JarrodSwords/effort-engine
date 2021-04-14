@@ -12,7 +12,7 @@ namespace SuperMarioRpg.Application.Read.Characters.NonPlayable
 
         internal class Handler : Handler<Fetch, IEnumerable<NonPlayableCharacter>>
         {
-            private const string FetchNonPlayerCharacters = @"
+            private const string Fetch = @"
 select name
   from character
  where is_playable = false
@@ -22,7 +22,7 @@ select name
 
             public override IEnumerable<NonPlayableCharacter> MakeRequest(IDbConnection connection, Fetch query)
             {
-                return connection.Query<NonPlayableCharacter>(FetchNonPlayerCharacters);
+                return connection.Query<NonPlayableCharacter>(Fetch);
             }
 
             #endregion

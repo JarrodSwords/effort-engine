@@ -10,7 +10,7 @@ namespace SuperMarioRpg.Domain.Test
         public Guid Id { get; private set; }
         public string Name { get; private set; }
 
-        public NonPlayerCharacter BuildNonPlayerCharacter()
+        public NonPlayableCharacter BuildNonPlayerCharacter()
         {
             return new(this);
         }

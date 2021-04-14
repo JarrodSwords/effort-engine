@@ -5,6 +5,24 @@ namespace SuperMarioRpg.Infrastructure.Write
 {
     public partial class Character
     {
+        #region Creation
+
+        public Character(Enemy enemy) : this(enemy as Domain.Character)
+        {
+            CombatStats = CombatStats.From(enemy.BaseStats);
+        }
+
+        #endregion
+
+        #region Public Interface
+
+        public static Character From(Enemy enemy)
+        {
+            return new(enemy);
+        }
+
+        #endregion
+
         #region Nested Types
 
         public class EnemyRepository : Repository<Character>, Enemy.IRepository

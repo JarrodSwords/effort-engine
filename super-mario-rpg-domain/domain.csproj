@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="character\NonPlayerCharacter.IRepository.cs" />
+    <None Include="character\NonPlayableCharacter.IRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

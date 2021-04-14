@@ -9,12 +9,12 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
     {
         #region Public Interface
 
-        public NonPlayerCharacter Build()
+        public NonPlayableCharacter Build()
         {
             return new(this);
         }
 
-        public static NonPlayerCharacter Build(Create builder)
+        public static NonPlayableCharacter Build(Create builder)
         {
             return builder.Build();
         }

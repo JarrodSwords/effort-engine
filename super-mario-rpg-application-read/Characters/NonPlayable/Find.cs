@@ -11,7 +11,7 @@ namespace SuperMarioRpg.Application.Read.Characters.NonPlayable
 
         internal class Handler : Handler<Find, NonPlayableCharacter>
         {
-            private const string FindNonPlayerCharacter = @"
+            private const string Find = @"
 select name
   from character
  where is_playable = false
@@ -21,7 +21,7 @@ select name
 
             public override NonPlayableCharacter MakeRequest(IDbConnection connection, Find query)
             {
-                return connection.QuerySingle<NonPlayableCharacter>(FindNonPlayerCharacter, query);
+                return connection.QuerySingle<NonPlayableCharacter>(Find, query);
             }
 
             #endregion
