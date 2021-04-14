@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Autofac;
-using SuperMarioRpg.Application.Read;
-using SuperMarioRpg.Application.Write;
+using SuperMarioRpg.Application.Read.Characters;
+using SuperMarioRpg.Application.Write.Characters.NonPlayable;
 using SuperMarioRpg.Infrastructure.Write;
 using Entity = Effort.Domain.Entity;
 
@@ -13,8 +13,8 @@ namespace SuperMarioRpg.WebApi
         private static readonly List<Assembly> Assemblies = new()
         {
             typeof(Entity).Assembly,
-            typeof(FetchCharacters).Assembly,
-            typeof(CreateNonPlayerCharacter).Assembly,
+            typeof(Fetch).Assembly,
+            typeof(Create).Assembly,
             typeof(Context).Assembly,
             typeof(ContainerBuilderExtensions).Assembly
         };

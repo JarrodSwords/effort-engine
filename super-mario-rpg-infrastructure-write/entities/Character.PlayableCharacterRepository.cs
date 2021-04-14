@@ -6,6 +6,29 @@ namespace SuperMarioRpg.Infrastructure.Write
 {
     public partial class Character
     {
+        #region Creation
+
+        public Character(PlayableCharacter playableCharacter) : this(playableCharacter as Domain.Character)
+        {
+            CombatStats = CombatStats.From(playableCharacter.BaseStats);
+        }
+
+        #endregion
+
+        #region Public Interface
+
+        public PlayableCharacter BuildPlayableCharacter()
+        {
+            return new(this);
+        }
+
+        public static Character From(PlayableCharacter playableCharacter)
+        {
+            return new(playableCharacter);
+        }
+
+        #endregion
+
         #region Nested Types
 
         public class PlayableCharacterRepository : Repository<Character>, PlayableCharacter.IRepository

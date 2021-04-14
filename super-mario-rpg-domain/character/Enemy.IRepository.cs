@@ -4,7 +4,7 @@
     {
         #region Nested Types
 
-        public new interface IRepository : IRepository<Enemy>
+        public interface IRepository : IRepository<Enemy>
         {
             #region Public Interface
 

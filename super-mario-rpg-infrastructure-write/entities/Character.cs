@@ -18,16 +18,6 @@ namespace SuperMarioRpg.Infrastructure.Write
             SetCharacterTypes(character.CharacterTypes);
         }
 
-        public Character(Enemy enemy) : this(enemy as Domain.Character)
-        {
-            CombatStats = CombatStats.From(enemy.BaseStats);
-        }
-
-        public Character(PlayableCharacter playableCharacter) : this(playableCharacter as Domain.Character)
-        {
-            CombatStats = CombatStats.From(playableCharacter.BaseStats);
-        }
-
         #endregion
 
         #region Public Interface
@@ -37,26 +27,6 @@ namespace SuperMarioRpg.Infrastructure.Write
         public bool IsCombatant { get; set; }
         public bool IsPlayable { get; set; }
         public string Name { get; set; }
-
-        public PlayableCharacter BuildPlayableCharacter()
-        {
-            return new(this);
-        }
-
-        public static Character From(Enemy enemy)
-        {
-            return new(enemy);
-        }
-
-        public static Character From(NonPlayerCharacter nonPlayerCharacter)
-        {
-            return new(nonPlayerCharacter);
-        }
-
-        public static Character From(PlayableCharacter playableCharacter)
-        {
-            return new(playableCharacter);
-        }
 
         public Character SetCharacterTypes(CharacterTypes characterTypes)
         {

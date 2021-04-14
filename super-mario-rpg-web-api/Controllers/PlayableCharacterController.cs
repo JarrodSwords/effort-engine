@@ -2,8 +2,8 @@
 using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Api;
-using SuperMarioRpg.Application.Read;
-using SuperMarioRpg.Application.Write;
+using SuperMarioRpg.Application.Read.Characters.Playable;
+using SuperMarioRpg.Application.Write.Characters.Playable;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
@@ -11,23 +11,21 @@ namespace SuperMarioRpg.WebApi.Controllers
     [ApiController]
     public class PlayableCharacterController : ControllerBase
     {
-        private readonly IQueryHandler<FetchPlayableCharacters, IEnumerable<PlayableCharacter>>
-            _fetchPlayableCharactersHandler;
-
-        private readonly IQueryHandler<FindPlayableCharacter, PlayableCharacter> _findPlayableCharacterHandler;
-        private readonly ICommandHandler<UpdatePlayableCharacterBaseStats> _updatePlayableCharacterCombatStats;
+        private readonly IQueryHandler<Fetch, IEnumerable<PlayableCharacter>> _fetchHandler;
+        private readonly IQueryHandler<Find, PlayableCharacter> _findHandler;
+        private readonly ICommandHandler<UpdateBaseStats> _updateBaseStatsHandler;
 
         #region Creation
 
         public PlayableCharacterController(
-            IQueryHandler<FetchPlayableCharacters, IEnumerable<PlayableCharacter>> fetchPlayableCharactersHandler,
-            IQueryHandler<FindPlayableCharacter, PlayableCharacter> findPlayableCharacterHandler,
-            ICommandHandler<UpdatePlayableCharacterBaseStats> updatePlayableCharacterCombatStats
+            IQueryHandler<Fetch, IEnumerable<PlayableCharacter>> fetchHandler,
+            IQueryHandler<Find, PlayableCharacter> findHandler,
+            ICommandHandler<UpdateBaseStats> updateBaseStatsHandler
         )
         {
-            _fetchPlayableCharactersHandler = fetchPlayableCharactersHandler;
-            _findPlayableCharacterHandler = findPlayableCharacterHandler;
-            _updatePlayableCharacterCombatStats = updatePlayableCharacterCombatStats;
+            _fetchHandler = fetchHandler;
+            _findHandler = findHandler;
+            _updateBaseStatsHandler = updateBaseStatsHandler;
         }
 
         #endregion
@@ -35,33 +33,33 @@ namespace SuperMarioRpg.WebApi.Controllers
         #region Public Interface
 
         [HttpGet]
-        public ActionResult<IEnumerable<PlayableCharacter>> FetchPlayableCharacters()
+        public ActionResult<IEnumerable<PlayableCharacter>> Fetch()
         {
-            var playableCharacters = _fetchPlayableCharactersHandler.Handle(new FetchPlayableCharacters());
+            var playableCharacters = _fetchHandler.Handle(new Fetch());
 
             return Ok(playableCharacters);
         }
 
         [HttpGet]
         [Route("{name}")]
-        public ActionResult<PlayableCharacter> FetchPlayableCharacters(string name)
+        public ActionResult<PlayableCharacter> Find(string name)
         {
-            var playableCharacter = _findPlayableCharacterHandler.Handle(new FindPlayableCharacter(name));
+            var playableCharacter = _findHandler.Handle(new Find(name));
 
             return Ok(playableCharacter);
         }
 
         [HttpPut]
         [Route("{name}/base-stats")]
-        public IActionResult UpdatePlayableCharacterBaseStats(
+        public IActionResult UpdateBaseStats(
             string name,
             [FromBody] PlayableCharacterCombatStats baseStats
         )
         {
             var (hitPoints, speed, attack, magicAttack, defense, magicDefense) = baseStats;
 
-            _updatePlayableCharacterCombatStats.Handle(
-                new UpdatePlayableCharacterBaseStats(
+            _updateBaseStatsHandler.Handle(
+                new UpdateBaseStats(
                     name,
                     hitPoints,
                     speed,

@@ -2,7 +2,7 @@
 using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Api;
-using SuperMarioRpg.Application.Read;
+using SuperMarioRpg.Application.Read.Characters;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
@@ -10,18 +10,18 @@ namespace SuperMarioRpg.WebApi.Controllers
     [ApiController]
     public class CharacterController : ControllerBase
     {
-        private readonly IQueryHandler<FetchCharacters, IEnumerable<Character>> _fetchCharactersHandler;
-        private readonly IQueryHandler<FindCharacter, Character> _findCharacterHandler;
+        private readonly IQueryHandler<Fetch, IEnumerable<Character>> _fetchHandler;
+        private readonly IQueryHandler<Find, Character> _findHandler;
 
         #region Creation
 
         public CharacterController(
-            IQueryHandler<FetchCharacters, IEnumerable<Character>> fetchCharactersHandler,
-            IQueryHandler<FindCharacter, Character> findCharacterHandler
+            IQueryHandler<Fetch, IEnumerable<Character>> fetchHandler,
+            IQueryHandler<Find, Character> findHandler
         )
         {
-            _fetchCharactersHandler = fetchCharactersHandler;
-            _findCharacterHandler = findCharacterHandler;
+            _fetchHandler = fetchHandler;
+            _findHandler = findHandler;
         }
 
         #endregion
@@ -29,18 +29,18 @@ namespace SuperMarioRpg.WebApi.Controllers
         #region Public Interface
 
         [HttpGet]
-        public ActionResult<IEnumerable<Character>> FetchCharacters()
+        public ActionResult<IEnumerable<Character>> Fetch()
         {
-            var characters = _fetchCharactersHandler.Handle(new FetchCharacters());
+            var characters = _fetchHandler.Handle(new Fetch());
 
             return Ok(characters);
         }
 
         [HttpGet]
         [Route("{name}")]
-        public ActionResult<Character> FindCharacter(string name)
+        public ActionResult<Character> Find(string name)
         {
-            var character = _findCharacterHandler.Handle(new FindCharacter(name));
+            var character = _findHandler.Handle(new Find(name));
 
             return Ok(character);
         }

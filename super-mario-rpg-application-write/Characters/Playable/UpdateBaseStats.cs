@@ -1,9 +1,9 @@
 ﻿using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 
-namespace SuperMarioRpg.Application.Write
+namespace SuperMarioRpg.Application.Write.Characters.Playable
 {
-    public record UpdatePlayableCharacterBaseStats(
+    public record UpdateBaseStats(
         string Name,
         ushort HitPoints,
         short Speed,
@@ -15,7 +15,7 @@ namespace SuperMarioRpg.Application.Write
     {
         #region Nested Types
 
-        internal class Handler : Handler<UpdatePlayableCharacterBaseStats>
+        internal class Handler : Handler<UpdateBaseStats>
         {
             #region Creation
 
@@ -27,7 +27,7 @@ namespace SuperMarioRpg.Application.Write
 
             #region Public Interface
 
-            public override void Handle(UpdatePlayableCharacterBaseStats command)
+            public override void Handle(UpdateBaseStats command)
             {
                 var (name, hitPoints, speed, attack, magicAttack, defense, magicDefense) = command;
                 var baseStats = new PlayableCharacter.CombatStats(

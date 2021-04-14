@@ -3,29 +3,18 @@ using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Application.Write
+namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 {
-    public record CreateEnemy(
-        string Name,
-        ushort HitPoints,
-        byte FlowerPoints,
-        short Speed,
-        short Attack,
-        short MagicAttack,
-        short Defense,
-        short MagicDefense,
-        decimal Evade,
-        decimal MagicEvade
-    ) : ICommand, Character.IBuilder
+    public record Create(string Name) : ICommand, Character.IBuilder
     {
         #region Public Interface
 
-        public Enemy Build()
+        public NonPlayableCharacter Build()
         {
             return new(this);
         }
 
-        public static Enemy Build(CreateEnemy builder)
+        public static NonPlayableCharacter Build(Create builder)
         {
             return builder.Build();
         }
@@ -36,22 +25,12 @@ namespace SuperMarioRpg.Application.Write
 
         public CharacterTypes GetCharacterTypes()
         {
-            return CharacterTypes.Combatant;
+            return CharacterTypes.None;
         }
 
         public Enemy.CombatStats GetEnemyCombatStats()
         {
-            return new(
-                HitPoints,
-                FlowerPoints,
-                Speed,
-                Attack,
-                MagicAttack,
-                Defense,
-                MagicDefense,
-                Evade,
-                MagicEvade
-            );
+            throw new NotSupportedException();
         }
 
         public Guid GetId()
@@ -73,7 +52,8 @@ namespace SuperMarioRpg.Application.Write
 
         #region Nested Types
 
-        internal class Handler : Handler<CreateEnemy>
+        [Log]
+        internal class Handler : Handler<Create>
         {
             #region Creation
 
@@ -85,9 +65,9 @@ namespace SuperMarioRpg.Application.Write
 
             #region Public Interface
 
-            public override void Handle(CreateEnemy command)
+            public override void Handle(Create command)
             {
-                UnitOfWork.Enemies.Create(command.Build());
+                UnitOfWork.NonPlayerCharacters.Create(command.Build());
                 UnitOfWork.Commit();
             }
 

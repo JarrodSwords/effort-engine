@@ -3,18 +3,26 @@ using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Application.Write
+namespace SuperMarioRpg.Application.Write.Characters.Playable
 {
-    public record CreateNonPlayerCharacter(string Name) : ICommand, Character.IBuilder
+    public record Create(
+        string Name,
+        ushort HitPoints,
+        short Speed,
+        short Attack,
+        short MagicAttack,
+        short Defense,
+        short MagicDefense
+    ) : ICommand, Character.IBuilder
     {
         #region Public Interface
 
-        public NonPlayerCharacter Build()
+        public PlayableCharacter Build()
         {
             return new(this);
         }
 
-        public static NonPlayerCharacter Build(CreateNonPlayerCharacter builder)
+        public static PlayableCharacter Build(Create builder)
         {
             return builder.Build();
         }
@@ -25,7 +33,7 @@ namespace SuperMarioRpg.Application.Write
 
         public CharacterTypes GetCharacterTypes()
         {
-            return CharacterTypes.None;
+            return CharacterTypes.Combatant | CharacterTypes.Playable;
         }
 
         public Enemy.CombatStats GetEnemyCombatStats()
@@ -45,15 +53,14 @@ namespace SuperMarioRpg.Application.Write
 
         public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
         {
-            throw new NotSupportedException();
+            return new(HitPoints, Speed, Attack, MagicAttack, Defense, MagicDefense);
         }
 
         #endregion
 
         #region Nested Types
 
-        [Log]
-        internal class Handler : Handler<CreateNonPlayerCharacter>
+        internal class Handler : Handler<Create>
         {
             #region Creation
 
@@ -65,9 +72,9 @@ namespace SuperMarioRpg.Application.Write
 
             #region Public Interface
 
-            public override void Handle(CreateNonPlayerCharacter command)
+            public override void Handle(Create command)
             {
-                UnitOfWork.NonPlayerCharacters.Create(command.Build());
+                UnitOfWork.PlayableCharacters.Create(command.Build());
                 UnitOfWork.Commit();
             }
 
