@@ -33,7 +33,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         #region Public Interface
 
         [HttpGet]
-        public ActionResult<IEnumerable<PlayableCharacter>> FetchPlayableCharacters()
+        public ActionResult<IEnumerable<PlayableCharacter>> Fetch()
         {
             var playableCharacters = _fetchHandler.Handle(new Fetch());
 
@@ -42,7 +42,7 @@ namespace SuperMarioRpg.WebApi.Controllers
 
         [HttpGet]
         [Route("{name}")]
-        public ActionResult<PlayableCharacter> FetchPlayableCharacters(string name)
+        public ActionResult<PlayableCharacter> Find(string name)
         {
             var playableCharacter = _findHandler.Handle(new Find(name));
 
@@ -51,7 +51,7 @@ namespace SuperMarioRpg.WebApi.Controllers
 
         [HttpPut]
         [Route("{name}/base-stats")]
-        public IActionResult UpdatePlayableCharacterBaseStats(
+        public IActionResult UpdateBaseStats(
             string name,
             [FromBody] PlayableCharacterCombatStats baseStats
         )

@@ -29,7 +29,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         #region Public Interface
 
         [HttpGet]
-        public ActionResult<IEnumerable<Character>> FetchCharacters()
+        public ActionResult<IEnumerable<Character>> Fetch()
         {
             var characters = _fetchHandler.Handle(new Fetch());
 
@@ -38,7 +38,7 @@ namespace SuperMarioRpg.WebApi.Controllers
 
         [HttpGet]
         [Route("{name}")]
-        public ActionResult<Character> FindCharacter(string name)
+        public ActionResult<Character> Find(string name)
         {
             var character = _findHandler.Handle(new Find(name));
 
