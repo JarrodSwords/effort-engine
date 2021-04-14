@@ -40,7 +40,9 @@ namespace SuperMarioRpg.Application.Write
                 );
 
                 var playableCharacter = UnitOfWork.PlayableCharacters.Find(name);
+
                 playableCharacter.BaseStats = baseStats;
+
                 UnitOfWork.PlayableCharacters.Update(playableCharacter);
                 UnitOfWork.Commit();
             }
