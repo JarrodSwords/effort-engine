@@ -3,7 +3,7 @@ using Dapper;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
 
-namespace SuperMarioRpg.Application.Read.Enemies
+namespace SuperMarioRpg.Application.Read.Characters.Enemies
 {
     public record Find(string Name) : IQuery<Enemy>
     {

@@ -2,8 +2,8 @@
 using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Api;
-using SuperMarioRpg.Application.Read.PlayableCharacters;
-using SuperMarioRpg.Application.Write.PlayableCharacters;
+using SuperMarioRpg.Application.Read.Characters.Playable;
+using SuperMarioRpg.Application.Write.Characters.Playable;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {

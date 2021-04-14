@@ -3,26 +3,18 @@ using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Application.Write.PlayableCharacters
+namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 {
-    public record Create(
-        string Name,
-        ushort HitPoints,
-        short Speed,
-        short Attack,
-        short MagicAttack,
-        short Defense,
-        short MagicDefense
-    ) : ICommand, Character.IBuilder
+    public record Create(string Name) : ICommand, Character.IBuilder
     {
         #region Public Interface
 
-        public PlayableCharacter Build()
+        public NonPlayerCharacter Build()
         {
             return new(this);
         }
 
-        public static PlayableCharacter Build(Create builder)
+        public static NonPlayerCharacter Build(Create builder)
         {
             return builder.Build();
         }
@@ -33,7 +25,7 @@ namespace SuperMarioRpg.Application.Write.PlayableCharacters
 
         public CharacterTypes GetCharacterTypes()
         {
-            return CharacterTypes.Combatant | CharacterTypes.Playable;
+            return CharacterTypes.None;
         }
 
         public Enemy.CombatStats GetEnemyCombatStats()
@@ -53,13 +45,14 @@ namespace SuperMarioRpg.Application.Write.PlayableCharacters
 
         public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
         {
-            return new(HitPoints, Speed, Attack, MagicAttack, Defense, MagicDefense);
+            throw new NotSupportedException();
         }
 
         #endregion
 
         #region Nested Types
 
+        [Log]
         internal class Handler : Handler<Create>
         {
             #region Creation
@@ -74,7 +67,7 @@ namespace SuperMarioRpg.Application.Write.PlayableCharacters
 
             public override void Handle(Create command)
             {
-                UnitOfWork.PlayableCharacters.Create(command.Build());
+                UnitOfWork.NonPlayerCharacters.Create(command.Build());
                 UnitOfWork.Commit();
             }
 

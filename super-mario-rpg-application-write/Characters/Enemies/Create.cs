@@ -3,7 +3,7 @@ using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Application.Write.Enemies
+namespace SuperMarioRpg.Application.Write.Characters.Enemies
 {
     public record Create(
         string Name,

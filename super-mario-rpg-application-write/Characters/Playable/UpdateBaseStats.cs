@@ -1,7 +1,7 @@
 ﻿using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 
-namespace SuperMarioRpg.Application.Write.PlayableCharacters
+namespace SuperMarioRpg.Application.Write.Characters.Playable
 {
     public record UpdateBaseStats(
         string Name,

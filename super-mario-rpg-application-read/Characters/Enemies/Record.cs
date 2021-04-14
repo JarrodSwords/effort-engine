@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using SuperMarioRpg.Api;
 
-namespace SuperMarioRpg.Application.Read.Enemies
+namespace SuperMarioRpg.Application.Read.Characters.Enemies
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal record Record(

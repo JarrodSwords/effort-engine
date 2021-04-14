@@ -2,7 +2,7 @@
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 
-namespace SuperMarioRpg.Application.Write.NonPlayerCharacters
+namespace SuperMarioRpg.Application.Write.Characters.Enemies
 {
     public record Seed : ICommand
     {
@@ -10,13 +10,13 @@ namespace SuperMarioRpg.Application.Write.NonPlayerCharacters
 
         internal class Handler : Handler<Seed>
         {
-            private static readonly Create[] Characters =
+            private static readonly Create[] Enemies =
             {
-                new("Boshi"),
-                new("Frogfucious"),
-                new("Chancellor"),
-                new("Toad"),
-                new("Toadofsky")
+                new("Terrapin", 10, 100, 10, 1, 0, 8, 1, 0, 0),
+                new("Bowser", 320, 100, 10, 1, 0, 12, 0, 0, 0),
+                new("Kinklink", 60, 100, 99, 0, 0, 10, 0, 0, 0),
+                new("Goomba", 16, 100, 13, 3, 1, 3, 1, 0, 0),
+                new("Sky Troopa", 10, 100, 18, 4, 6, 16, 4, 0.08m, 0)
             };
 
             #region Creation
@@ -31,8 +31,10 @@ namespace SuperMarioRpg.Application.Write.NonPlayerCharacters
 
             public override void Handle(Seed command)
             {
-                var characters = Characters.Select(Create.Build);
-                UnitOfWork.NonPlayerCharacters.Create(characters.ToArray());
+                var enemies = Enemies.Select(Create.Build);
+
+                UnitOfWork.Enemies.Create(enemies.ToArray());
+
                 UnitOfWork.Commit();
             }
 

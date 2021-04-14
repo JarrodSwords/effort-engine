@@ -2,8 +2,8 @@
 using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Api;
-using SuperMarioRpg.Application.Read.NonPlayerCharacters;
-using SuperMarioRpg.Application.Write.NonPlayerCharacters;
+using SuperMarioRpg.Application.Read.Characters.NonPlayable;
+using SuperMarioRpg.Application.Write.Characters.NonPlayable;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
@@ -12,15 +12,15 @@ namespace SuperMarioRpg.WebApi.Controllers
     public class NonPlayerCharacterController : ControllerBase
     {
         private readonly ICommandHandler<Create> _createHandler;
-        private readonly IQueryHandler<Fetch, IEnumerable<NonPlayerCharacter>> _fetchHandler;
-        private readonly IQueryHandler<Find, NonPlayerCharacter> _findHandler;
+        private readonly IQueryHandler<Fetch, IEnumerable<NonPlayableCharacter>> _fetchHandler;
+        private readonly IQueryHandler<Find, NonPlayableCharacter> _findHandler;
 
         #region Creation
 
         public NonPlayerCharacterController(
             ICommandHandler<Create> createHandler,
-            IQueryHandler<Fetch, IEnumerable<NonPlayerCharacter>> fetchHandler,
-            IQueryHandler<Find, NonPlayerCharacter> findHandler
+            IQueryHandler<Fetch, IEnumerable<NonPlayableCharacter>> fetchHandler,
+            IQueryHandler<Find, NonPlayableCharacter> findHandler
         )
         {
             _createHandler = createHandler;
@@ -41,7 +41,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<NonPlayerCharacter>> Fetch()
+        public ActionResult<IEnumerable<NonPlayableCharacter>> Fetch()
         {
             var nonPlayerCharacters = _fetchHandler.Handle(new Fetch());
 
@@ -50,7 +50,7 @@ namespace SuperMarioRpg.WebApi.Controllers
 
         [HttpGet]
         [Route("{name}")]
-        public ActionResult<NonPlayerCharacter> Find(string name)
+        public ActionResult<NonPlayableCharacter> Find(string name)
         {
             var nonPlayerCharacters = _findHandler.Handle(new Find(name));
 

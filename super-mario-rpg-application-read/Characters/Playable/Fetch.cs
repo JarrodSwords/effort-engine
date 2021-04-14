@@ -5,7 +5,7 @@ using Dapper;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
 
-namespace SuperMarioRpg.Application.Read.PlayableCharacters
+namespace SuperMarioRpg.Application.Read.Characters.Playable
 {
     public record Fetch : IQuery<IEnumerable<PlayableCharacter>>
     {
