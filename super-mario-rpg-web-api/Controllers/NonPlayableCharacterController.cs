@@ -7,9 +7,9 @@ using SuperMarioRpg.Application.Write.Characters.NonPlayable;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
-    [Route("api/non-player-characters")]
+    [Route("api/non-playable-characters")]
     [ApiController]
-    public class NonPlayerCharacterController : ControllerBase
+    public class NonPlayableCharacterController : ControllerBase
     {
         private readonly ICommandHandler<Create> _createHandler;
         private readonly IQueryHandler<Fetch, IEnumerable<NonPlayableCharacter>> _fetchHandler;
@@ -17,7 +17,7 @@ namespace SuperMarioRpg.WebApi.Controllers
 
         #region Creation
 
-        public NonPlayerCharacterController(
+        public NonPlayableCharacterController(
             ICommandHandler<Create> createHandler,
             IQueryHandler<Fetch, IEnumerable<NonPlayableCharacter>> fetchHandler,
             IQueryHandler<Find, NonPlayableCharacter> findHandler
