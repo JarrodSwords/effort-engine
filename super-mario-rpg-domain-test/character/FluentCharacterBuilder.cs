@@ -1,4 +1,5 @@
 ﻿using System;
+using Effort.Domain;
 using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Domain.Test
@@ -46,9 +47,9 @@ namespace SuperMarioRpg.Domain.Test
             return Id;
         }
 
-        public string GetName()
+        public Name GetName()
         {
-            return Name;
+            return (Name) Name;
         }
 
         public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()

@@ -1,4 +1,5 @@
 ﻿using System;
+using Effort.Domain;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 
@@ -14,7 +15,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public Character(Domain.Character character)
         {
-            Name = character.Name.Value;
+            Name = character.Name;
             SetCharacterTypes(character.CharacterTypes);
         }
 
@@ -73,9 +74,9 @@ namespace SuperMarioRpg.Infrastructure.Write
             return Id;
         }
 
-        public string GetName()
+        public Name GetName()
         {
-            return Name;
+            return (Name) Name;
         }
 
         public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
