@@ -17,14 +17,14 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region Public Interface
 
+        public static Character AsCharacter(PlayableCharacter playableCharacter)
+        {
+            return new(playableCharacter);
+        }
+
         public PlayableCharacter AsPlayableCharacter()
         {
             return new(this);
-        }
-
-        public static Character From(PlayableCharacter playableCharacter)
-        {
-            return new(playableCharacter);
         }
 
         public Character Update(PlayableCharacter playableCharacter)
@@ -51,12 +51,12 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             public string Create(PlayableCharacter playableCharacter)
             {
-                return Create(From(playableCharacter)).Name;
+                return Create(AsCharacter(playableCharacter)).Name;
             }
 
             public void Create(params PlayableCharacter[] playableCharacters)
             {
-                Create(playableCharacters.Select(From).ToArray());
+                Create(playableCharacters.Select(AsCharacter).ToArray());
             }
 
             public PlayableCharacter Find(string name)

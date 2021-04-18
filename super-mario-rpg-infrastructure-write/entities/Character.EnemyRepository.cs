@@ -16,7 +16,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region Public Interface
 
-        public static Character From(Enemy enemy)
+        public static Character AsCharacter(Enemy enemy)
         {
             return new(enemy);
         }
@@ -39,12 +39,12 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             public string Create(Enemy enemy)
             {
-                return Create(From(enemy)).Name;
+                return Create(AsCharacter(enemy)).Name;
             }
 
             public void Create(params Enemy[] enemies)
             {
-                Create(enemies.Select(From).ToArray());
+                Create(enemies.Select(AsCharacter).ToArray());
             }
 
             #endregion

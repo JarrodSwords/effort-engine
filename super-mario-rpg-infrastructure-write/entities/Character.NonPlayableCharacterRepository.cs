@@ -7,7 +7,7 @@ namespace SuperMarioRpg.Infrastructure.Write
     {
         #region Public Interface
 
-        public static Character From(NonPlayableCharacter nonPlayableCharacter)
+        public static Character AsCharacter(NonPlayableCharacter nonPlayableCharacter)
         {
             return new(nonPlayableCharacter);
         }
@@ -30,12 +30,12 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             public string Create(NonPlayableCharacter nonPlayableCharacter)
             {
-                return Create(From(nonPlayableCharacter)).Name;
+                return Create(AsCharacter(nonPlayableCharacter)).Name;
             }
 
             public void Create(params NonPlayableCharacter[] nonPlayerCharacters)
             {
-                var characters = nonPlayerCharacters.Select(From).ToArray();
+                var characters = nonPlayerCharacters.Select(AsCharacter).ToArray();
 
                 Create(characters);
             }
