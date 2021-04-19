@@ -16,7 +16,7 @@ namespace SuperMarioRpg.Infrastructure.Write
         public Character(Domain.Character character)
         {
             Name = character.Name;
-            SetCharacterTypes(character.CharacterTypes);
+            Update(character.CharacterTypes);
         }
 
         #endregion
@@ -29,7 +29,7 @@ namespace SuperMarioRpg.Infrastructure.Write
         public bool IsPlayable { get; set; }
         public string Name { get; set; }
 
-        public Character SetCharacterTypes(CharacterTypes characterTypes)
+        public Character Update(CharacterTypes characterTypes)
         {
             IsCombatant = characterTypes.Contains(CharacterTypes.Combatant);
             IsPlayable = characterTypes.Contains(CharacterTypes.Playable);

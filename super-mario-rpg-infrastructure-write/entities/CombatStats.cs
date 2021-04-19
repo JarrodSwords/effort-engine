@@ -47,7 +47,25 @@ namespace SuperMarioRpg.Infrastructure.Write
         public decimal? MagicEvade { get; set; }
         public short Speed { get; set; }
 
-        public static CombatStats From(Enemy.CombatStats combatStats)
+        public CombatStats Update(PlayableCharacter.CombatStats combatStats)
+        {
+            var (hitPoints, speed, attack, magicAttack, defense, magicDefense) = combatStats;
+
+            HitPoints = hitPoints;
+            Speed = speed;
+            Attack = attack;
+            MagicAttack = magicAttack;
+            Defense = defense;
+            MagicDefense = magicDefense;
+
+            return this;
+        }
+
+        #endregion
+
+        #region Equality, Operators
+
+        public static implicit operator CombatStats(Enemy.CombatStats combatStats)
         {
             var (hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade, magicEvade) =
                 combatStats;
@@ -65,7 +83,7 @@ namespace SuperMarioRpg.Infrastructure.Write
             );
         }
 
-        public static CombatStats From(PlayableCharacter.CombatStats combatStats)
+        public static implicit operator CombatStats(PlayableCharacter.CombatStats combatStats)
         {
             var (hitPoints, speed, attack, magicAttack, defense, magicDefense) = combatStats;
 
@@ -77,20 +95,6 @@ namespace SuperMarioRpg.Infrastructure.Write
                 defense: defense,
                 magicDefense: magicDefense
             );
-        }
-
-        public CombatStats Update(PlayableCharacter.CombatStats combatStats)
-        {
-            var (hitPoints, speed, attack, magicAttack, defense, magicDefense) = combatStats;
-
-            HitPoints = hitPoints;
-            Speed = speed;
-            Attack = attack;
-            MagicAttack = magicAttack;
-            Defense = defense;
-            MagicDefense = magicDefense;
-
-            return this;
         }
 
         #endregion

@@ -9,7 +9,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public Character(Enemy enemy) : this(enemy as Domain.Character)
         {
-            CombatStats = CombatStats.From(enemy.BaseStats);
+            CombatStats = enemy.BaseStats;
         }
 
         #endregion
@@ -17,6 +17,15 @@ namespace SuperMarioRpg.Infrastructure.Write
         #region Public Interface
 
         public static Character AsCharacter(Enemy enemy)
+        {
+            return enemy;
+        }
+
+        #endregion
+
+        #region Equality, Operators
+
+        public static implicit operator Character(Enemy enemy)
         {
             return new(enemy);
         }
@@ -39,7 +48,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             public string Create(Enemy enemy)
             {
-                return Create(AsCharacter(enemy)).Name;
+                return base.Create(enemy).Name;
             }
 
             public void Create(params Enemy[] enemies)
