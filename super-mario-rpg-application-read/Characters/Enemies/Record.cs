@@ -43,12 +43,16 @@ select c.name
             $@"{Select}
    and name = @Name";
 
-        public Enemy AsEnemy()
+        public static Enemy AsEnemy(Record record)
         {
-            return AsEnemy(this);
+            return record;
         }
 
-        public static Enemy AsEnemy(Record record)
+        #endregion
+
+        #region Equality, Operators
+
+        public static implicit operator Enemy(Record record)
         {
             var (name, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade, magicEvade) =
                 record;
