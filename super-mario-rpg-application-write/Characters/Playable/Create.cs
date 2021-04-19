@@ -49,7 +49,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
 
         public Name GetName()
         {
-            return (Name) Name;
+            return Name;
         }
 
         public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()

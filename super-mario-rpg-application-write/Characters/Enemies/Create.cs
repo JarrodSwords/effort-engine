@@ -62,7 +62,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
 
         public Name GetName()
         {
-            return (Name) Name;
+            return Name;
         }
 
         public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()

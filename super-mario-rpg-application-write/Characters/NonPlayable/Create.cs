@@ -41,7 +41,7 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 
         public Name GetName()
         {
-            return (Name) Name;
+            return Name;
         }
 
         public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()

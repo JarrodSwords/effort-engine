@@ -49,7 +49,7 @@ namespace SuperMarioRpg.Domain.Test
 
         public Name GetName()
         {
-            return (Name) Name;
+            return Name;
         }
 
         public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
