@@ -1,4 +1,6 @@
-﻿namespace SuperMarioRpg.Domain
+﻿using Effort.Domain;
+
+namespace SuperMarioRpg.Domain
 {
     public partial class PlayableCharacter
     {
@@ -10,7 +12,7 @@
 
             string Create(PlayableCharacter playableCharacter);
             void Create(params PlayableCharacter[] playableCharacters);
-            PlayableCharacter Find(string name);
+            PlayableCharacter Find(Name name);
             void Update(PlayableCharacter playableCharacter);
 
             #endregion

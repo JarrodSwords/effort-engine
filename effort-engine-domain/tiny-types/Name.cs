@@ -4,7 +4,7 @@ namespace Effort.Domain
     {
         #region Equality, Operators
 
-        public static explicit operator Name(string name)
+        public static implicit operator Name(string name)
         {
             return new(name);
         }

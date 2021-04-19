@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Effort.Domain;
 using Microsoft.EntityFrameworkCore;
 using SuperMarioRpg.Domain;
 
@@ -68,7 +69,7 @@ namespace SuperMarioRpg.Infrastructure.Write
                 Create(playableCharacters.Select(AsCharacter).ToArray());
             }
 
-            public PlayableCharacter Find(string name)
+            public PlayableCharacter Find(Name name)
             {
                 return Context.Character
                     .Include(x => x.CombatStats)
@@ -79,7 +80,7 @@ namespace SuperMarioRpg.Infrastructure.Write
             {
                 var character = Context.Character
                     .Include(x => x.CombatStats)
-                    .Single(x => x.IsPlayable && x.Name == playableCharacter.Name.Value)
+                    .Single(x => x.IsPlayable && x.Name == playableCharacter.Name)
                     .Update(playableCharacter);
 
                 base.Update(character);
