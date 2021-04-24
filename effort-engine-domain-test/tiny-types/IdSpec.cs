@@ -13,6 +13,11 @@ namespace Effort.Domain.Test
             return new Id(Id);
         }
 
+        protected override ValueObject CreateOther()
+        {
+            return new Id();
+        }
+
         #endregion
     }
 }

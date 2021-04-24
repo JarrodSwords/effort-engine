@@ -18,6 +18,11 @@ namespace SuperMarioRpg.Domain.Test.Combat
             return new Stat(10);
         }
 
+        protected override ValueObject CreateOther()
+        {
+            return new Stat(20);
+        }
+
         [Theory]
         [InlineData(10, 2, 12)]
         [InlineData(10, -2, 8)]
