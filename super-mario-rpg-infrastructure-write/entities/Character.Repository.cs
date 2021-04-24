@@ -11,7 +11,7 @@ namespace SuperMarioRpg.Infrastructure.Write
             Repository<Character>,
             IEnemyRepository,
             INonPlayableCharacterRepository,
-            PlayableCharacter.IRepository
+            IPlayableCharacterRepository
         {
             #region Creation
 
@@ -51,7 +51,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             #endregion
 
-            #region IRepository Implementation
+            #region IPlayableCharacterRepository Implementation
 
             public string Create(PlayableCharacter playableCharacter)
             {
