@@ -1,7 +1,15 @@
 namespace Effort.Domain
 {
-    public record Name(string Value) : TinyType<string>(Value)
+    public class Name : TinyType<string>
     {
+        #region Creation
+
+        public Name(string value) : base(value)
+        {
+        }
+
+        #endregion
+
         #region Equality, Operators
 
         public static implicit operator Name(string name)

@@ -37,7 +37,7 @@ namespace SuperMarioRpg.Domain.Combat
         {
             var node = CurrentNode.Next;
 
-            while (node.Value.Required.Value <= xp.Value)
+            while (node.Value.Required <= xp)
             {
                 node = node.Next;
 
@@ -56,7 +56,7 @@ namespace SuperMarioRpg.Domain.Combat
         {
             var node = Level.Levels.First;
 
-            while (node.Next?.Value.Required.Value <= xp.Value)
+            while (node is not null && node.Next?.Value.Required <= xp)
                 node = node.Next;
 
             return node;

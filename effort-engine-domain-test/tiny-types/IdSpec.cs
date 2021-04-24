@@ -2,18 +2,15 @@ using System;
 
 namespace Effort.Domain.Test
 {
-    public class IdSpec : TinyTypeSpec<Guid>
+    public class IdSpec : ValueObjectSpec
     {
+        private static readonly Guid Id = Guid.NewGuid();
+
         #region Protected Interface
 
-        protected override TinyType<Guid> CreateTinyType(Guid value)
+        protected override ValueObject Create()
         {
-            return new Id(value);
-        }
-
-        protected override Guid CreateValue()
-        {
-            return Guid.NewGuid();
+            return new Id(Id);
         }
 
         #endregion

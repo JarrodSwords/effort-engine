@@ -16,12 +16,12 @@ namespace SuperMarioRpg.Domain.Test.Combat
 
             var sum = addend1 + addend2;
 
-            sum.Attack.Value.Should().Be(21);
-            sum.Defense.Value.Should().Be(2);
-            sum.Hp.Value.Should().Be(23);
-            sum.SpecialAttack.Value.Should().Be(14);
-            sum.SpecialDefense.Value.Should().Be(7);
-            sum.Speed.Value.Should().Be(26);
+            sum.Attack.Should().Be((short) 21);
+            sum.Defense.Should().Be((short) 2);
+            sum.Hp.Should().Be((short) 23);
+            sum.SpecialAttack.Should().Be((short) 14);
+            sum.SpecialDefense.Should().Be((short) 7);
+            sum.Speed.Should().Be((short) 26);
         }
 
         #endregion

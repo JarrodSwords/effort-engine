@@ -8,7 +8,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public StatValidator()
         {
-            RuleFor(x => x.Value).InclusiveBetween(Stat.Min, Stat.Max);
+            RuleFor(x => (short) x).InclusiveBetween(Stat.Min, Stat.Max);
         }
 
         #endregion

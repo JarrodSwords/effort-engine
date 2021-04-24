@@ -30,7 +30,7 @@ namespace SuperMarioRpg.Domain.Test
         {
             var character = CreateEntity();
 
-            character.Name.Value.Should().Be(Toad);
+            character.Name.Should().Be(Toad);
         }
 
         #endregion

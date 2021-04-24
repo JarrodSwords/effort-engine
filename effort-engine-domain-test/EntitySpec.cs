@@ -21,7 +21,7 @@ namespace Effort.Domain.Test
             var id = Guid.NewGuid();
             var entity = CreateEntity(id);
 
-            entity.Id.Value.Should().Be(id);
+            ((Guid) entity.Id).Should().Be(id);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace Effort.Domain.Test
         {
             var entity = CreateEntity();
 
-            entity.Id.Value.Should().NotBeEmpty();
+            entity.Id.Should().NotBeNull();
         }
 
         [Fact]

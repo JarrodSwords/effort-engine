@@ -73,14 +73,14 @@ namespace SuperMarioRpg.Infrastructure.Write
             {
                 return Context.Character
                     .Include(x => x.CombatStats)
-                    .Single(x => x.IsPlayable && x.Name == name.Value);
+                    .Single(x => x.IsPlayable && x.Name == name);
             }
 
             public void Update(PlayableCharacter playableCharacter)
             {
                 var character = Context.Character
                     .Include(x => x.CombatStats)
-                    .Single(x => x.IsPlayable && x.Name == playableCharacter.Name.Value)
+                    .Single(x => x.IsPlayable && x.Name == playableCharacter.Name)
                     .Update(playableCharacter);
 
                 base.Update(character);
