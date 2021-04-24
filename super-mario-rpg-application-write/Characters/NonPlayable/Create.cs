@@ -34,7 +34,7 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
             throw new NotSupportedException();
         }
 
-        public Guid GetId()
+        public Id GetId()
         {
             return default;
         }

@@ -1,12 +1,10 @@
-using System;
-
 namespace Effort.Domain
 {
     public abstract class Entity
     {
         #region Creation
 
-        protected Entity(Guid id)
+        protected Entity(Id id)
         {
             Id = new Id(id);
         }

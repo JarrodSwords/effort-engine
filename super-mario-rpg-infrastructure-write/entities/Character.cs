@@ -69,9 +69,9 @@ namespace SuperMarioRpg.Infrastructure.Write
             );
         }
 
-        public Guid GetId()
+        public Id GetId()
         {
-            return Id;
+            return new(Id);
         }
 
         public Name GetName()

@@ -1,5 +1,4 @@
-﻿using System;
-using Effort.Domain;
+﻿using Effort.Domain;
 using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Domain
@@ -14,7 +13,7 @@ namespace SuperMarioRpg.Domain
 
             CharacterTypes GetCharacterTypes();
             Enemy.CombatStats GetEnemyCombatStats();
-            Guid GetId();
+            Id GetId();
             Name GetName();
             PlayableCharacter.CombatStats GetPlayableCharacterCombatStats();
 

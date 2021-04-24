@@ -55,7 +55,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
             );
         }
 
-        public Guid GetId()
+        public Id GetId()
         {
             return default;
         }

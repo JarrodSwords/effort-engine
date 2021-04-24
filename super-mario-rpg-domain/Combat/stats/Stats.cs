@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Effort.Domain;
 
@@ -9,7 +8,7 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Creation
 
-        public CombatStats(Guid id = default, Stats stats = default) : base(id)
+        public CombatStats(Id id = default, Stats stats = default) : base(id)
         {
             Stats = stats;
         }

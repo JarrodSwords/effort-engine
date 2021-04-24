@@ -42,7 +42,7 @@ namespace SuperMarioRpg.Domain.Test
             throw new NotImplementedException();
         }
 
-        public Guid GetId()
+        public Id GetId()
         {
             return Id;
         }
