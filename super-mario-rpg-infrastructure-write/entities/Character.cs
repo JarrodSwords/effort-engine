@@ -1,4 +1,5 @@
 ﻿using System;
+using Effort.Domain;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 
@@ -14,8 +15,8 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public Character(Domain.Character character)
         {
-            Name = character.Name.Value;
-            SetCharacterTypes(character.CharacterTypes);
+            Name = character.Name;
+            Update(character.CharacterTypes);
         }
 
         #endregion
@@ -28,7 +29,7 @@ namespace SuperMarioRpg.Infrastructure.Write
         public bool IsPlayable { get; set; }
         public string Name { get; set; }
 
-        public Character SetCharacterTypes(CharacterTypes characterTypes)
+        public Character Update(CharacterTypes characterTypes)
         {
             IsCombatant = characterTypes.Contains(CharacterTypes.Combatant);
             IsPlayable = characterTypes.Contains(CharacterTypes.Playable);
@@ -73,7 +74,7 @@ namespace SuperMarioRpg.Infrastructure.Write
             return Id;
         }
 
-        public string GetName()
+        public Name GetName()
         {
             return Name;
         }

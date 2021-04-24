@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Effort.Domain;
 using Microsoft.EntityFrameworkCore;
 using SuperMarioRpg.Domain;
 
@@ -10,7 +11,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public Character(PlayableCharacter playableCharacter) : this(playableCharacter as Domain.Character)
         {
-            CombatStats = CombatStats.From(playableCharacter.BaseStats);
+            CombatStats = playableCharacter.BaseStats;
         }
 
         #endregion
@@ -19,18 +20,27 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public static Character AsCharacter(PlayableCharacter playableCharacter)
         {
-            return new(playableCharacter);
-        }
-
-        public PlayableCharacter AsPlayableCharacter()
-        {
-            return new(this);
+            return playableCharacter;
         }
 
         public Character Update(PlayableCharacter playableCharacter)
         {
             CombatStats.Update(playableCharacter.BaseStats);
             return this;
+        }
+
+        #endregion
+
+        #region Equality, Operators
+
+        public static implicit operator PlayableCharacter(Character character)
+        {
+            return new(character);
+        }
+
+        public static implicit operator Character(PlayableCharacter playableCharacter)
+        {
+            return new(playableCharacter);
         }
 
         #endregion
@@ -51,7 +61,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             public string Create(PlayableCharacter playableCharacter)
             {
-                return Create(AsCharacter(playableCharacter)).Name;
+                return base.Create(playableCharacter).Name;
             }
 
             public void Create(params PlayableCharacter[] playableCharacters)
@@ -59,12 +69,11 @@ namespace SuperMarioRpg.Infrastructure.Write
                 Create(playableCharacters.Select(AsCharacter).ToArray());
             }
 
-            public PlayableCharacter Find(string name)
+            public PlayableCharacter Find(Name name)
             {
                 return Context.Character
                     .Include(x => x.CombatStats)
-                    .Single(x => x.IsPlayable && x.Name == name)
-                    .AsPlayableCharacter();
+                    .Single(x => x.IsPlayable && x.Name == name.Value);
             }
 
             public void Update(PlayableCharacter playableCharacter)
@@ -74,7 +83,7 @@ namespace SuperMarioRpg.Infrastructure.Write
                     .Single(x => x.IsPlayable && x.Name == playableCharacter.Name.Value)
                     .Update(playableCharacter);
 
-                Update(character);
+                base.Update(character);
             }
 
             #endregion

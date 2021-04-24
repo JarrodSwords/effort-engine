@@ -37,12 +37,16 @@ select c.name
             $@"{Select}
    and name = @Name";
 
-        public PlayableCharacter AsPlayableCharacter()
+        public static PlayableCharacter AsPlayableCharacter(Record record)
         {
-            return AsPlayableCharacter(this);
+            return record;
         }
 
-        public static PlayableCharacter AsPlayableCharacter(Record record)
+        #endregion
+
+        #region Equality, Operators
+
+        public static implicit operator PlayableCharacter(Record record)
         {
             var (name, hitPoints, speed, attack, magicAttack, defense, magicDefense) = record;
 

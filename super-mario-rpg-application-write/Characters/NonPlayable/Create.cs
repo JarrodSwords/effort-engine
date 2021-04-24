@@ -1,4 +1,5 @@
 ﻿using System;
+using Effort.Domain;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
@@ -38,7 +39,7 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
             return default;
         }
 
-        public string GetName()
+        public Name GetName()
         {
             return Name;
         }

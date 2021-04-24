@@ -9,6 +9,15 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         public static Character AsCharacter(NonPlayableCharacter nonPlayableCharacter)
         {
+            return nonPlayableCharacter;
+        }
+
+        #endregion
+
+        #region Equality, Operators
+
+        public static implicit operator Character(NonPlayableCharacter nonPlayableCharacter)
+        {
             return new(nonPlayableCharacter);
         }
 
@@ -30,7 +39,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             public string Create(NonPlayableCharacter nonPlayableCharacter)
             {
-                return Create(AsCharacter(nonPlayableCharacter)).Name;
+                return base.Create(nonPlayableCharacter).Name;
             }
 
             public void Create(params NonPlayableCharacter[] nonPlayerCharacters)
