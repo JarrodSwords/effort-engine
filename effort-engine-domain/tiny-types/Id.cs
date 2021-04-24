@@ -2,5 +2,14 @@ using System;
 
 namespace Effort.Domain
 {
-    public record Id(Guid Value) : TinyType<Guid>(Value == default ? Guid.NewGuid() : Value);
+    public class Id : TinyType<Guid>
+    {
+        #region Creation
+
+        public Id(Guid value = default) : base(value == default ? Guid.NewGuid() : value)
+        {
+        }
+
+        #endregion
+    }
 }

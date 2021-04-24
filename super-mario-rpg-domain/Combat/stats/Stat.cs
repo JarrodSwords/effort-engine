@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public record Stat : TinyType<short>
+    public class Stat : TinyType<short>
     {
         public const short Max = 255;
         public const short Min = -255;

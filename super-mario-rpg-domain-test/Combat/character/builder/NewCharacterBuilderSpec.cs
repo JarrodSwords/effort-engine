@@ -47,7 +47,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
             var character = CreateCharacter();
 
             character.Progression.CurrentLevel.Value.Should().Be(expectedLevel);
-            character.Progression.Xp.Value.Should().Be(expectedXp);
+            character.Progression.Xp.Should().Be(expectedXp);
             character.NaturalStats.Should().Be(expectedStats);
         }
 

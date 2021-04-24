@@ -2,13 +2,26 @@ using Effort.Domain;
 
 namespace SuperMarioRpg.Domain.Combat
 {
-    public record Xp(ushort Value = default) : TinyType<ushort>(Value)
+    public class Xp : TinyType<ushort>
     {
+        #region Creation
+
+        public Xp(ushort value = default) : base(value)
+        {
+        }
+
+        #endregion
+
         #region Equality, Operators
 
         public static Xp operator +(Xp left, Xp right)
         {
             return new((ushort) (left.Value + right.Value));
+        }
+
+        public static implicit operator Xp(ushort value)
+        {
+            return new(value);
         }
 
         public static Xp operator -(Xp left, Xp right)

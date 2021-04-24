@@ -9,18 +9,18 @@ using static SuperMarioRpg.Domain.Combat.Stat;
 
 namespace SuperMarioRpg.Domain.Test.Combat
 {
-    public class StatSpec : TinyTypeSpec<short>
+    public class StatSpec : ValueObjectSpec
     {
         #region Test Methods
 
-        protected override TinyType<short> CreateTinyType(short value)
+        protected override ValueObject Create()
         {
-            return new Stat(value);
+            return new Stat(10);
         }
 
-        protected override short CreateValue()
+        protected override ValueObject CreateOther()
         {
-            return 10;
+            return new Stat(20);
         }
 
         [Theory]
@@ -33,7 +33,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
 
             var sum = addend1 + addend2;
 
-            sum.Value.Should().Be(expectedValue);
+            sum.Should().Be(expectedValue);
         }
 
         [Theory]
@@ -46,7 +46,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
 
             var sum = addend1 + addend2;
 
-            sum.Value.Should().Be(limit);
+            sum.Should().Be(limit);
         }
 
         [Theory]

@@ -77,7 +77,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
         {
             _mario.Equip(ExpBooster).Add(new(500));
 
-            _mario.Progression.Xp.Value.Should().Be(1000);
+            _mario.Progression.Xp.Should().Be((ushort) 1000);
         }
 
         [Fact]

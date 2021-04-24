@@ -17,7 +17,7 @@ namespace SuperMarioRpg.Domain.Combat
             var newXp = Xp + xp;
             LevelUp(newXp);
 
-            if (newXp.Value >= Max.Value)
+            if (newXp >= Max)
                 return new Maxed();
 
             return new Standard(newXp);

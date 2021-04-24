@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Effort.Domain;
 
@@ -22,7 +23,7 @@ namespace SuperMarioRpg.Domain.Combat
         #endregion
     }
 
-    public record Stats
+    public class Stats : ValueObject
     {
         public static Stats Default = CreateStats();
 
@@ -138,6 +139,18 @@ namespace SuperMarioRpg.Domain.Combat
         #endregion
 
         #region Equality, Operators
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Attack;
+            yield return Defense;
+            yield return Evade;
+            yield return Hp;
+            yield return MagicEvade;
+            yield return SpecialAttack;
+            yield return SpecialDefense;
+            yield return Speed;
+        }
 
         public static Stats operator +(Stats left, Stats right)
         {

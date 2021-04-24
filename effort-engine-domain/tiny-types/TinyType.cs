@@ -1,12 +1,66 @@
+using System.Collections.Generic;
+using System.Diagnostics;
+
 namespace Effort.Domain
 {
-    public abstract record TinyType<T>(T Value)
+    [DebuggerDisplay("{Value}")]
+    public abstract class TinyType<T> : ValueObject
     {
-        #region Public Interface
+        #region Creation
 
-        public override string ToString()
+        protected TinyType(T value)
         {
-            return Value.ToString();
+            Value = value;
+        }
+
+        #endregion
+
+        #region Protected Interface
+
+        protected T Value { get; }
+
+        #endregion
+
+        #region Equality, Operators
+
+        public override bool Equals(object other)
+        {
+            if (other is null)
+                return false;
+
+            return other.GetType() == typeof(T)
+                ? Equals((T) other)
+                : base.Equals(other);
+        }
+
+        public bool Equals(T other)
+        {
+            return ((T) this).Equals(other);
+        }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Value;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public static bool operator ==(TinyType<T> left, TinyType<T> right)
+        {
+            return Equals(left, right);
+        }
+
+        public static implicit operator T(TinyType<T> instance)
+        {
+            return instance is null ? default : instance.Value;
+        }
+
+        public static bool operator !=(TinyType<T> left, TinyType<T> right)
+        {
+            return !Equals(left, right);
         }
 
         #endregion
