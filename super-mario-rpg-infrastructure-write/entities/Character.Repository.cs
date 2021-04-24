@@ -7,55 +7,43 @@ namespace SuperMarioRpg.Infrastructure.Write
 {
     public partial class Character
     {
-        #region Creation
-
-        public Character(PlayableCharacter playableCharacter) : this(playableCharacter as Domain.Character)
-        {
-            CombatStats = playableCharacter.BaseStats;
-        }
-
-        #endregion
-
-        #region Public Interface
-
-        public Character Update(PlayableCharacter playableCharacter)
-        {
-            CombatStats.Update(playableCharacter.BaseStats);
-            return this;
-        }
-
-        #endregion
-
-        #region Static Interface
-
-        public static Character AsCharacter(PlayableCharacter playableCharacter)
-        {
-            return playableCharacter;
-        }
-
-        public static implicit operator Character(PlayableCharacter playableCharacter)
-        {
-            return new(playableCharacter);
-        }
-
-        public static implicit operator PlayableCharacter(Character character)
-        {
-            return new(character);
-        }
-
-        #endregion
-
-        public class PlayableCharacterRepository : Repository<Character>, PlayableCharacter.IRepository
+        public class Repository :
+            Repository<Character>,
+            Enemy.IRepository,
+            NonPlayableCharacter.IRepository,
+            PlayableCharacter.IRepository
         {
             #region Creation
 
-            public PlayableCharacterRepository(Context context) : base(context)
+            public Repository(Context context) : base(context)
             {
             }
 
             #endregion
 
             #region IRepository Implementation
+
+            public string Create(Enemy enemy)
+            {
+                return base.Create(enemy).Name;
+            }
+
+            public void Create(params Enemy[] enemies)
+            {
+                Create(enemies.Select(AsCharacter).ToArray());
+            }
+
+            public string Create(NonPlayableCharacter nonPlayableCharacter)
+            {
+                return base.Create(nonPlayableCharacter).Name;
+            }
+
+            public void Create(params NonPlayableCharacter[] nonPlayerCharacters)
+            {
+                var characters = nonPlayerCharacters.Select(AsCharacter).ToArray();
+
+                Create(characters);
+            }
 
             public string Create(PlayableCharacter playableCharacter)
             {
