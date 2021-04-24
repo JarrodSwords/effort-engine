@@ -8,8 +8,6 @@ namespace SuperMarioRpg.Application.Read.Characters
 {
     public record Fetch : IQuery<IEnumerable<Character>>
     {
-        #region Nested Types
-
         internal class Handler : Handler<Fetch, IEnumerable<Character>>
         {
             private const string Fetch = @"
@@ -27,7 +25,5 @@ select name
 
             #endregion
         }
-
-        #endregion
     }
 }

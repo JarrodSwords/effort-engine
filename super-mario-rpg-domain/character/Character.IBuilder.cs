@@ -5,8 +5,6 @@ namespace SuperMarioRpg.Domain
 {
     public partial class Character
     {
-        #region Nested Types
-
         public interface IBuilder
         {
             #region Public Interface
@@ -19,7 +17,5 @@ namespace SuperMarioRpg.Domain
 
             #endregion
         }
-
-        #endregion
     }
 }

@@ -5,7 +5,7 @@ namespace Effort.Domain
 {
     public abstract class ValueObject
     {
-        #region Equality, Operators
+        #region Equality
 
         public override bool Equals(object other)
         {
@@ -36,6 +36,10 @@ namespace Effort.Domain
                     }
                 );
         }
+
+        #endregion
+
+        #region Static Interface
 
         public static bool operator ==(ValueObject left, ValueObject right)
         {

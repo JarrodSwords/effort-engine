@@ -10,7 +10,17 @@ namespace SuperMarioRpg.Application.Write
     {
         private static readonly Assembly Assembly = typeof(ContainerBuilderExtensions).Assembly;
 
-        #region Public Interface
+        #region Static Interface
+
+        private static bool IsHandler(Type type)
+        {
+            if (!type.IsGenericType)
+                return false;
+
+            var typeDefinition = type.GetGenericTypeDefinition();
+
+            return typeDefinition == typeof(ICommandHandler<>) || typeDefinition == typeof(IQueryHandler<,>);
+        }
 
         public static ContainerBuilder RegisterCommandDecorators(this ContainerBuilder builder)
         {
@@ -31,20 +41,6 @@ namespace SuperMarioRpg.Application.Write
                 .AsImplementedInterfaces();
 
             return builder;
-        }
-
-        #endregion
-
-        #region Private Interface
-
-        private static bool IsHandler(Type type)
-        {
-            if (!type.IsGenericType)
-                return false;
-
-            var typeDefinition = type.GetGenericTypeDefinition();
-
-            return typeDefinition == typeof(ICommandHandler<>) || typeDefinition == typeof(IQueryHandler<,>);
         }
 
         #endregion

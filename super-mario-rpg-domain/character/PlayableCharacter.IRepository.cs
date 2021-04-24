@@ -4,8 +4,6 @@ namespace SuperMarioRpg.Domain
 {
     public partial class PlayableCharacter
     {
-        #region Nested Types
-
         public interface IRepository : IRepository<PlayableCharacter>
         {
             #region Public Interface
@@ -17,7 +15,5 @@ namespace SuperMarioRpg.Domain
 
             #endregion
         }
-
-        #endregion
     }
 }

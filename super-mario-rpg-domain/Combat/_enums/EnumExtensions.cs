@@ -2,7 +2,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public static class EnumExtensions
     {
-        #region Public Interface
+        #region Static Interface
 
         public static bool Contains(this Buffs target, Buffs other)
         {

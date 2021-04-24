@@ -30,6 +30,10 @@ namespace SuperMarioRpg.Domain.Combat
         public Elements ElementalImmunities { get; }
         public Elements ElementalResistances { get; }
 
+        #endregion
+
+        #region Static Interface
+
         public static Status Aggregate(params IStatusProvider[] statusProviders)
         {
             return statusProviders.Aggregate(
@@ -37,10 +41,6 @@ namespace SuperMarioRpg.Domain.Combat
                 (current, statusProvider) => current + statusProvider.GetStatus()
             );
         }
-
-        #endregion
-
-        #region Equality, Operators
 
         public static Status operator +(Status left, Status right)
         {

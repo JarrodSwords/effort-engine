@@ -6,8 +6,6 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
 {
     public record Seed : ICommand
     {
-        #region Nested Types
-
         internal class Handler : Handler<Seed>
         {
             private static readonly Create[] Enemies =
@@ -40,7 +38,5 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
 
             #endregion
         }
-
-        #endregion
     }
 }

@@ -17,7 +17,7 @@ namespace Effort.Domain
 
         #endregion
 
-        #region Equality, Operators
+        #region Equality
 
         public override bool Equals(object other)
         {
@@ -36,6 +36,10 @@ namespace Effort.Domain
         {
             return Id.GetHashCode();
         }
+
+        #endregion
+
+        #region Static Interface
 
         public static bool operator ==(Entity left, Entity right)
         {

@@ -6,8 +6,6 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 {
     public record Seed : ICommand
     {
-        #region Nested Types
-
         internal class Handler : Handler<Seed>
         {
             private static readonly Create[] Characters =
@@ -38,7 +36,5 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 
             #endregion
         }
-
-        #endregion
     }
 }

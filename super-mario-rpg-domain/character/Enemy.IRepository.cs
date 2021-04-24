@@ -2,8 +2,6 @@
 {
     public partial class Enemy
     {
-        #region Nested Types
-
         public interface IRepository : IRepository<Enemy>
         {
             #region Public Interface
@@ -13,7 +11,5 @@
 
             #endregion
         }
-
-        #endregion
     }
 }

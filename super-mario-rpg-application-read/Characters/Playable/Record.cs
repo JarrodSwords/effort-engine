@@ -37,14 +37,14 @@ select c.name
             $@"{Select}
    and name = @Name";
 
+        #endregion
+
+        #region Static Interface
+
         public static PlayableCharacter AsPlayableCharacter(Record record)
         {
             return record;
         }
-
-        #endregion
-
-        #region Equality, Operators
 
         public static implicit operator PlayableCharacter(Record record)
         {

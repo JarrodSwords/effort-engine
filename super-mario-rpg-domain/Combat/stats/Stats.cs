@@ -84,6 +84,26 @@ namespace SuperMarioRpg.Domain.Combat
         public Stat SpecialDefense { get; }
         public Stat Speed { get; }
 
+        #endregion
+
+        #region Equality
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Attack;
+            yield return Defense;
+            yield return Evade;
+            yield return Hp;
+            yield return MagicEvade;
+            yield return SpecialAttack;
+            yield return SpecialDefense;
+            yield return Speed;
+        }
+
+        #endregion
+
+        #region Static Interface
+
         public static Stats Aggregate(params Stats[] stats)
         {
             return stats.Aggregate((x, y) => x + y);
@@ -133,22 +153,6 @@ namespace SuperMarioRpg.Domain.Combat
                 evade,
                 magicEvade
             );
-        }
-
-        #endregion
-
-        #region Equality, Operators
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Attack;
-            yield return Defense;
-            yield return Evade;
-            yield return Hp;
-            yield return MagicEvade;
-            yield return SpecialAttack;
-            yield return SpecialDefense;
-            yield return Speed;
         }
 
         public static Stats operator +(Stats left, Stats right)

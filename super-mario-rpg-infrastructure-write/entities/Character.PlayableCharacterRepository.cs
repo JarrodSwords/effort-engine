@@ -18,11 +18,6 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region Public Interface
 
-        public static Character AsCharacter(PlayableCharacter playableCharacter)
-        {
-            return playableCharacter;
-        }
-
         public Character Update(PlayableCharacter playableCharacter)
         {
             CombatStats.Update(playableCharacter.BaseStats);
@@ -31,11 +26,11 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #endregion
 
-        #region Equality, Operators
+        #region Static Interface
 
-        public static implicit operator PlayableCharacter(Character character)
+        public static Character AsCharacter(PlayableCharacter playableCharacter)
         {
-            return new(character);
+            return playableCharacter;
         }
 
         public static implicit operator Character(PlayableCharacter playableCharacter)
@@ -43,9 +38,12 @@ namespace SuperMarioRpg.Infrastructure.Write
             return new(playableCharacter);
         }
 
-        #endregion
+        public static implicit operator PlayableCharacter(Character character)
+        {
+            return new(character);
+        }
 
-        #region Nested Types
+        #endregion
 
         public class PlayableCharacterRepository : Repository<Character>, PlayableCharacter.IRepository
         {
@@ -88,7 +86,5 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             #endregion
         }
-
-        #endregion
     }
 }

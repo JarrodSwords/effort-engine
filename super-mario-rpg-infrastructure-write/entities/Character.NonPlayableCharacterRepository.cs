@@ -5,16 +5,12 @@ namespace SuperMarioRpg.Infrastructure.Write
 {
     public partial class Character
     {
-        #region Public Interface
+        #region Static Interface
 
         public static Character AsCharacter(NonPlayableCharacter nonPlayableCharacter)
         {
             return nonPlayableCharacter;
         }
-
-        #endregion
-
-        #region Equality, Operators
 
         public static implicit operator Character(NonPlayableCharacter nonPlayableCharacter)
         {
@@ -22,8 +18,6 @@ namespace SuperMarioRpg.Infrastructure.Write
         }
 
         #endregion
-
-        #region Nested Types
 
         public class NonPlayableCharacterRepository : Repository<Character>, NonPlayableCharacter.IRepository
         {
@@ -51,7 +45,5 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             #endregion
         }
-
-        #endregion
     }
 }

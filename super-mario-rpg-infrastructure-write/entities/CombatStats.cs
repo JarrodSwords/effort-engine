@@ -63,7 +63,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #endregion
 
-        #region Equality, Operators
+        #region Static Interface
 
         public static implicit operator CombatStats(Enemy.CombatStats combatStats)
         {

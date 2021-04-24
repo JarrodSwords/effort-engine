@@ -8,7 +8,7 @@ namespace SuperMarioRpg.Infrastructure.Write
     {
         private static readonly Assembly Assembly = typeof(ContainerBuilderExtensions).Assembly;
 
-        #region Public Interface
+        #region Static Interface
 
         public static ContainerBuilder RegisterContext(this ContainerBuilder builder)
         {

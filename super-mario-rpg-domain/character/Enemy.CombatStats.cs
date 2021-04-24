@@ -2,8 +2,6 @@
 {
     public partial class Enemy
     {
-        #region Nested Types
-
         public record CombatStats(
             ushort HitPoints,
             byte FlowerPoints,
@@ -15,7 +13,5 @@
             decimal Evade,
             decimal MagicEvade
         );
-
-        #endregion
     }
 }

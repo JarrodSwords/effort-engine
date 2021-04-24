@@ -13,8 +13,6 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
         short MagicDefense
     ) : ICommand
     {
-        #region Nested Types
-
         internal class Handler : Handler<UpdateBaseStats>
         {
             #region Creation
@@ -49,7 +47,5 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
 
             #endregion
         }
-
-        #endregion
     }
 }

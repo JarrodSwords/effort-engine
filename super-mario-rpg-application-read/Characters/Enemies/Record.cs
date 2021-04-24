@@ -43,14 +43,14 @@ select c.name
             $@"{Select}
    and name = @Name";
 
+        #endregion
+
+        #region Static Interface
+
         public static Enemy AsEnemy(Record record)
         {
             return record;
         }
-
-        #endregion
-
-        #region Equality, Operators
 
         public static implicit operator Enemy(Record record)
         {

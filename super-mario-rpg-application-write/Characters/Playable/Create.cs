@@ -23,11 +23,6 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
             return new(this);
         }
 
-        public static PlayableCharacter Build(Create builder)
-        {
-            return builder.Build();
-        }
-
         #endregion
 
         #region IBuilder Implementation
@@ -59,7 +54,14 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
 
         #endregion
 
-        #region Nested Types
+        #region Static Interface
+
+        public static PlayableCharacter Build(Create builder)
+        {
+            return builder.Build();
+        }
+
+        #endregion
 
         internal class Handler : Handler<Create>
         {
@@ -81,7 +83,5 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
 
             #endregion
         }
-
-        #endregion
     }
 }

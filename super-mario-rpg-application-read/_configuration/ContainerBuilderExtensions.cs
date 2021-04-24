@@ -10,7 +10,15 @@ namespace SuperMarioRpg.Application.Read
     {
         private static readonly Assembly Assembly = typeof(ContainerBuilderExtensions).Assembly;
 
-        #region Public Interface
+        #region Static Interface
+
+        private static bool IsHandler(Type type)
+        {
+            if (!type.IsGenericType)
+                return false;
+
+            return type.GetGenericTypeDefinition() == typeof(IQueryHandler<,>);
+        }
 
         public static ContainerBuilder RegisterHandlers(this ContainerBuilder builder)
         {
@@ -20,18 +28,6 @@ namespace SuperMarioRpg.Application.Read
                 .AsImplementedInterfaces();
 
             return builder;
-        }
-
-        #endregion
-
-        #region Private Interface
-
-        private static bool IsHandler(Type type)
-        {
-            if (!type.IsGenericType)
-                return false;
-
-            return type.GetGenericTypeDefinition() == typeof(IQueryHandler<,>);
         }
 
         #endregion

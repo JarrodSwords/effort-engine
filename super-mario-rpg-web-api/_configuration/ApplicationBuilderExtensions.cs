@@ -7,7 +7,7 @@ namespace SuperMarioRpg.WebApi
 {
     public static class ApplicationBuilderExtensions
     {
-        #region Public Interface
+        #region Static Interface
 
         public static IApplicationBuilder ConfigureDevDatabase(this IApplicationBuilder app)
         {

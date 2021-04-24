@@ -7,8 +7,6 @@ namespace SuperMarioRpg.Application.Read.Characters
 {
     public record Find(string Name) : IQuery<Character>
     {
-        #region Nested Types
-
         internal class Handler : Handler<Find, Character>
         {
             private const string Find = @"
@@ -26,7 +24,5 @@ select name
 
             #endregion
         }
-
-        #endregion
     }
 }

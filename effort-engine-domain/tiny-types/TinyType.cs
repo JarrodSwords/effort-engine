@@ -21,7 +21,7 @@ namespace Effort.Domain
 
         #endregion
 
-        #region Equality, Operators
+        #region Equality
 
         public override bool Equals(object other)
         {
@@ -48,19 +48,23 @@ namespace Effort.Domain
             return base.GetHashCode();
         }
 
+        #endregion
+
+        #region Static Interface
+
         public static bool operator ==(TinyType<T> left, TinyType<T> right)
         {
             return Equals(left, right);
         }
 
-        public static implicit operator T(TinyType<T> instance)
-        {
-            return instance is null ? default : instance.Value;
-        }
-
         public static bool operator !=(TinyType<T> left, TinyType<T> right)
         {
             return !Equals(left, right);
+        }
+
+        public static implicit operator T(TinyType<T> instance)
+        {
+            return instance is null ? default : instance.Value;
         }
 
         #endregion

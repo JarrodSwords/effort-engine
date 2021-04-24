@@ -4,7 +4,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public static class CustomValidationRules
     {
-        #region Public Interface
+        #region Static Interface
 
         public static IRuleBuilderOptions<T, Equipment> MustBeCompatibleWithCharacter<T>(
             this IRuleBuilder<T, Equipment> ruleBuilder

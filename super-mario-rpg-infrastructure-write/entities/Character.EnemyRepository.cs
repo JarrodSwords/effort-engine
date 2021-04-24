@@ -14,16 +14,12 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #endregion
 
-        #region Public Interface
+        #region Static Interface
 
         public static Character AsCharacter(Enemy enemy)
         {
             return enemy;
         }
-
-        #endregion
-
-        #region Equality, Operators
 
         public static implicit operator Character(Enemy enemy)
         {
@@ -31,8 +27,6 @@ namespace SuperMarioRpg.Infrastructure.Write
         }
 
         #endregion
-
-        #region Nested Types
 
         public class EnemyRepository : Repository<Character>, Enemy.IRepository
         {
@@ -58,7 +52,5 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             #endregion
         }
-
-        #endregion
     }
 }
