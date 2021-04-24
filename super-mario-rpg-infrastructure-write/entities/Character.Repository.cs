@@ -9,7 +9,7 @@ namespace SuperMarioRpg.Infrastructure.Write
     {
         public class Repository :
             Repository<Character>,
-            Enemy.IRepository,
+            IEnemyRepository,
             NonPlayableCharacter.IRepository,
             PlayableCharacter.IRepository
         {
@@ -21,7 +21,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             #endregion
 
-            #region IRepository Implementation
+            #region IEnemyRepository Implementation
 
             public string Create(Enemy enemy)
             {
@@ -32,6 +32,10 @@ namespace SuperMarioRpg.Infrastructure.Write
             {
                 Create(enemies.Select(AsCharacter).ToArray());
             }
+
+            #endregion
+
+            #region IRepository Implementation
 
             public string Create(NonPlayableCharacter nonPlayableCharacter)
             {

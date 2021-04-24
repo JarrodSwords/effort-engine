@@ -24,7 +24,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region IUnitOfWork Implementation
 
-        public Enemy.IRepository Enemies => CharacterRepository;
+        public IEnemyRepository Enemies => CharacterRepository;
         public NonPlayableCharacter.IRepository NonPlayerCharacters => CharacterRepository;
         public PlayableCharacter.IRepository PlayableCharacters => CharacterRepository;
 
