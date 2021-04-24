@@ -2,6 +2,8 @@
 {
     public partial class NonPlayableCharacter
     {
+        #region Nested Types
+
         public interface IRepository : IRepository<NonPlayableCharacter>
         {
             #region Public Interface
@@ -11,5 +13,7 @@
 
             #endregion
         }
+
+        #endregion
     }
 }
