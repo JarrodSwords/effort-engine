@@ -1,3 +1,5 @@
+using SuperMarioRpg.Domain.Configuration;
+
 namespace SuperMarioRpg.Domain
 {
     public interface IUnitOfWork

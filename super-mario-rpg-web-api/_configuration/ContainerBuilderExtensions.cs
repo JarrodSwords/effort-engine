@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Autofac;
 using SuperMarioRpg.Application.Read.Characters;
-using SuperMarioRpg.Application.Write.Characters.NonPlayable;
+using SuperMarioRpg.Application.Write.Configuration.Characters.NonPlayable;
 using SuperMarioRpg.Infrastructure.Write;
 using Entity = Effort.Domain.Entity;
 

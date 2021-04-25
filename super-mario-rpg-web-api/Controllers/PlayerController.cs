@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Api;
 using SuperMarioRpg.Application.Read.Players;
-using SuperMarioRpg.Application.Write.Players;
+using SuperMarioRpg.Application.Write.Configuration.Players;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {

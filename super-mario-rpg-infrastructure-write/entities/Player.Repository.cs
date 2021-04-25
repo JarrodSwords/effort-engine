@@ -1,4 +1,4 @@
-﻿using SuperMarioRpg.Domain;
+﻿using SuperMarioRpg.Domain.Configuration;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
@@ -16,7 +16,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             #region IPlayerRepository Implementation
 
-            public void Create(Domain.Player player)
+            public void Create(Domain.Configuration.Player player)
             {
                 base.Create(player);
             }

@@ -3,7 +3,7 @@ using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Api;
 using SuperMarioRpg.Application.Read.Characters.NonPlayable;
-using SuperMarioRpg.Application.Write.Characters.NonPlayable;
+using SuperMarioRpg.Application.Write.Configuration.Characters.NonPlayable;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {

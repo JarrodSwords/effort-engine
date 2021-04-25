@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Effort.Domain;
 using Microsoft.EntityFrameworkCore;
-using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Configuration;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {

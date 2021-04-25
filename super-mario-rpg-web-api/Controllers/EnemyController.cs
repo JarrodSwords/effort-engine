@@ -3,7 +3,7 @@ using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
 using SuperMarioRpg.Api;
 using SuperMarioRpg.Application.Read.Characters.Enemies;
-using SuperMarioRpg.Application.Write.Characters.Enemies;
+using SuperMarioRpg.Application.Write.Configuration.Characters.Enemies;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
