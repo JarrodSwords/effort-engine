@@ -7,6 +7,7 @@ namespace SuperMarioRpg.Domain
         IEnemyRepository Enemies { get; }
         INonPlayableCharacterRepository NonPlayerCharacters { get; }
         IPlayableCharacterRepository PlayableCharacters { get; }
+        IPlayerRepository Players { get; }
 
         void Commit();
 
