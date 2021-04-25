@@ -12,7 +12,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #endregion
 
-        #region Equality, Operators
+        #region Static Interface
 
         public static Xp operator +(Xp left, Xp right)
         {

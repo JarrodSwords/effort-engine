@@ -1,12 +1,10 @@
-using System;
-
 namespace Effort.Domain
 {
     public abstract class Entity
     {
         #region Creation
 
-        protected Entity(Guid id)
+        protected Entity(Id id)
         {
             Id = new Id(id);
         }
@@ -19,7 +17,7 @@ namespace Effort.Domain
 
         #endregion
 
-        #region Equality, Operators
+        #region Equality
 
         public override bool Equals(object other)
         {
@@ -38,6 +36,10 @@ namespace Effort.Domain
         {
             return Id.GetHashCode();
         }
+
+        #endregion
+
+        #region Static Interface
 
         public static bool operator ==(Entity left, Entity right)
         {

@@ -50,7 +50,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #endregion
 
-        #region Private Interface
+        #region Static Interface
 
         private static LinkedListNode<Level> GetCurrentNode(Xp xp)
         {

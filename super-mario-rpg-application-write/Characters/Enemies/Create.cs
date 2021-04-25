@@ -26,11 +26,6 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
             return new(this);
         }
 
-        public static Enemy Build(Create builder)
-        {
-            return builder.Build();
-        }
-
         #endregion
 
         #region IBuilder Implementation
@@ -55,7 +50,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
             );
         }
 
-        public Guid GetId()
+        public Id GetId()
         {
             return default;
         }
@@ -72,7 +67,14 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
 
         #endregion
 
-        #region Nested Types
+        #region Static Interface
+
+        public static Enemy Build(Create builder)
+        {
+            return builder.Build();
+        }
+
+        #endregion
 
         internal class Handler : Handler<Create>
         {
@@ -94,7 +96,5 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
 
             #endregion
         }
-
-        #endregion
     }
 }

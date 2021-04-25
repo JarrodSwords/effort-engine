@@ -15,11 +15,6 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
             return new(this);
         }
 
-        public static NonPlayableCharacter Build(Create builder)
-        {
-            return builder.Build();
-        }
-
         #endregion
 
         #region IBuilder Implementation
@@ -34,7 +29,7 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
             throw new NotSupportedException();
         }
 
-        public Guid GetId()
+        public Id GetId()
         {
             return default;
         }
@@ -51,7 +46,14 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 
         #endregion
 
-        #region Nested Types
+        #region Static Interface
+
+        public static NonPlayableCharacter Build(Create builder)
+        {
+            return builder.Build();
+        }
+
+        #endregion
 
         [Log]
         internal class Handler : Handler<Create>
@@ -74,7 +76,5 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 
             #endregion
         }
-
-        #endregion
     }
 }

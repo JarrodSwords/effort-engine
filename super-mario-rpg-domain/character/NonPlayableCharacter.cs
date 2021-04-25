@@ -1,6 +1,6 @@
 ﻿namespace SuperMarioRpg.Domain
 {
-    public partial class NonPlayableCharacter : Character
+    public class NonPlayableCharacter : Character
     {
         #region Creation
 

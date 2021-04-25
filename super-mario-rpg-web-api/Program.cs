@@ -6,7 +6,7 @@ namespace SuperMarioRpg.WebApi
 {
     public class Program
     {
-        #region Public Interface
+        #region Static Interface
 
         public static IHostBuilder CreateHostBuilder(string[] args)
         {

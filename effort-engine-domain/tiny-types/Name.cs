@@ -10,7 +10,7 @@ namespace Effort.Domain
 
         #endregion
 
-        #region Equality, Operators
+        #region Static Interface
 
         public static implicit operator Name(string name)
         {

@@ -19,7 +19,7 @@ namespace SuperMarioRpg.WebApi
             typeof(ContainerBuilderExtensions).Assembly
         };
 
-        #region Public Interface
+        #region Static Interface
 
         public static void RegisterModules(this ContainerBuilder builder)
         {

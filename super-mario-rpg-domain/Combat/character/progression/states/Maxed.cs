@@ -12,7 +12,10 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Public Interface
 
-        public override Progression Add(Xp xp) => this;
+        public override Progression Add(Xp xp)
+        {
+            return this;
+        }
 
         #endregion
     }

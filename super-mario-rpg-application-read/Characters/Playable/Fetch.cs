@@ -9,8 +9,6 @@ namespace SuperMarioRpg.Application.Read.Characters.Playable
 {
     public record Fetch : IQuery<IEnumerable<PlayableCharacter>>
     {
-        #region Nested Types
-
         internal class Handler : Handler<Fetch, IEnumerable<PlayableCharacter>>
         {
             #region Public Interface
@@ -24,7 +22,5 @@ namespace SuperMarioRpg.Application.Read.Characters.Playable
 
             #endregion
         }
-
-        #endregion
     }
 }

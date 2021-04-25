@@ -9,8 +9,6 @@ namespace SuperMarioRpg.Application.Read.Characters.Enemies
 {
     public record Fetch : IQuery<IEnumerable<Enemy>>
     {
-        #region Nested Types
-
         internal class Handler : Handler<Fetch, IEnumerable<Enemy>>
         {
             #region Public Interface
@@ -24,7 +22,5 @@ namespace SuperMarioRpg.Application.Read.Characters.Enemies
 
             #endregion
         }
-
-        #endregion
     }
 }

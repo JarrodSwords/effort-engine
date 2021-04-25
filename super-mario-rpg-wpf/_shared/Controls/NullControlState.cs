@@ -2,12 +2,8 @@
 {
     public partial class ControlState
     {
-        #region Nested Types
-
         public class NullControlState : ControlState
         {
         }
-
-        #endregion
     }
 }

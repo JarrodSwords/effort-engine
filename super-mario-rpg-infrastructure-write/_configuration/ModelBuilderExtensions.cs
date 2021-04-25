@@ -4,7 +4,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 {
     public static class ModelBuilderExtensions
     {
-        #region Public Interface
+        #region Static Interface
 
         public static void RemovePluralizingTableNameConvention(this ModelBuilder modelBuilder)
         {

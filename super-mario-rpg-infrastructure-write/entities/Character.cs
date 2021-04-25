@@ -13,10 +13,20 @@ namespace SuperMarioRpg.Infrastructure.Write
         {
         }
 
-        public Character(Domain.Character character)
+        private Character(Domain.Character character)
         {
             Name = character.Name;
             Update(character.CharacterTypes);
+        }
+
+        private Character(Enemy enemy) : this(enemy as Domain.Character)
+        {
+            CombatStats = enemy.BaseStats;
+        }
+
+        private Character(PlayableCharacter playableCharacter) : this(playableCharacter as Domain.Character)
+        {
+            CombatStats = playableCharacter.BaseStats;
         }
 
         #endregion
@@ -29,7 +39,17 @@ namespace SuperMarioRpg.Infrastructure.Write
         public bool IsPlayable { get; set; }
         public string Name { get; set; }
 
-        public Character Update(CharacterTypes characterTypes)
+        #endregion
+
+        #region Private Interface
+
+        private Character Update(PlayableCharacter playableCharacter)
+        {
+            CombatStats.Update(playableCharacter.BaseStats);
+            return this;
+        }
+
+        private Character Update(CharacterTypes characterTypes)
         {
             IsCombatant = characterTypes.Contains(CharacterTypes.Combatant);
             IsPlayable = characterTypes.Contains(CharacterTypes.Playable);
@@ -69,9 +89,9 @@ namespace SuperMarioRpg.Infrastructure.Write
             );
         }
 
-        public Guid GetId()
+        public Id GetId()
         {
-            return Id;
+            return new(Id);
         }
 
         public Name GetName()
@@ -89,6 +109,45 @@ namespace SuperMarioRpg.Infrastructure.Write
                 CombatStats.Defense,
                 CombatStats.MagicDefense
             );
+        }
+
+        #endregion
+
+        #region Static Interface
+
+        private static Character AsCharacter(Enemy enemy)
+        {
+            return enemy;
+        }
+
+        private static Character AsCharacter(NonPlayableCharacter nonPlayableCharacter)
+        {
+            return nonPlayableCharacter;
+        }
+
+        private static Character AsCharacter(PlayableCharacter playableCharacter)
+        {
+            return playableCharacter;
+        }
+
+        public static implicit operator Character(Enemy enemy)
+        {
+            return new(enemy);
+        }
+
+        public static implicit operator Character(NonPlayableCharacter nonPlayableCharacter)
+        {
+            return new(nonPlayableCharacter);
+        }
+
+        public static implicit operator Character(PlayableCharacter playableCharacter)
+        {
+            return new(playableCharacter);
+        }
+
+        public static implicit operator PlayableCharacter(Character character)
+        {
+            return new(character);
         }
 
         #endregion

@@ -7,8 +7,6 @@ namespace SuperMarioRpg.Application.Read.Characters.NonPlayable
 {
     public record Find(string Name) : IQuery<NonPlayableCharacter>
     {
-        #region Nested Types
-
         internal class Handler : Handler<Find, NonPlayableCharacter>
         {
             private const string Find = @"
@@ -26,7 +24,5 @@ select name
 
             #endregion
         }
-
-        #endregion
     }
 }

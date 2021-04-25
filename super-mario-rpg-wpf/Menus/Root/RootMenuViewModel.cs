@@ -61,6 +61,10 @@ namespace SuperMarioRpg.Wpf.Menus.Root
             Game.SetGameState(new Field(Game));
         }
 
+        #endregion
+
+        #region Static Interface
+
         private static IEnumerable<PlayerCharacter> GetCharacters()
         {
             var director = new Director();

@@ -11,5 +11,14 @@ namespace Effort.Domain
         }
 
         #endregion
+
+        #region Static Interface
+
+        public static implicit operator Id(Guid id)
+        {
+            return new(id);
+        }
+
+        #endregion
     }
 }

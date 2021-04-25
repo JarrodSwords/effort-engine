@@ -7,8 +7,6 @@ namespace SuperMarioRpg.Application.Read.Characters.Playable
 {
     public record Find(string Name) : IQuery<PlayableCharacter>
     {
-        #region Nested Types
-
         internal class Handler : Handler<Find, PlayableCharacter>
         {
             #region Public Interface
@@ -20,7 +18,5 @@ namespace SuperMarioRpg.Application.Read.Characters.Playable
 
             #endregion
         }
-
-        #endregion
     }
 }

@@ -24,8 +24,6 @@ namespace SuperMarioRpg.Wpf.Overworld
 
         #endregion
 
-        #region Nested Types
-
         public class FieldControlState : ControlState
         {
             #region Creation
@@ -37,7 +35,5 @@ namespace SuperMarioRpg.Wpf.Overworld
 
             #endregion
         }
-
-        #endregion
     }
 }
