@@ -7,10 +7,10 @@ namespace SuperMarioRpg.Domain.Characters
     {
         #region Creation
 
-        protected Character(ICharacterBuilder characterBuilder) : base(characterBuilder.GetId())
+        protected Character(ICharacterBuilder builder) : base(builder.GetId())
         {
-            CharacterTypes = characterBuilder.GetCharacterTypes();
-            Name = characterBuilder.GetName();
+            CharacterTypes = builder.GetCharacterTypes();
+            Name = builder.GetName();
         }
 
         #endregion

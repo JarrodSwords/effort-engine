@@ -4,7 +4,7 @@
     {
         #region Creation
 
-        public NonPlayableCharacter(ICharacterBuilder characterBuilder) : base(characterBuilder)
+        public NonPlayableCharacter(ICharacterBuilder builder) : base(builder)
         {
         }
 
