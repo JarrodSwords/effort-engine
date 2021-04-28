@@ -4,8 +4,6 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public interface IPlayerCharacterBuilder
     {
-        #region Public Interface
-
         void CreateLoadout();
         void CreateNaturalStats();
 
@@ -15,7 +13,5 @@ namespace SuperMarioRpg.Domain.Combat
         Name GetName();
         Stats GetNaturalStats();
         Xp GetXp();
-
-        #endregion
     }
 }

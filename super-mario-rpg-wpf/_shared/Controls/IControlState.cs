@@ -2,8 +2,6 @@
 {
     public interface IControlState
     {
-        #region Public Interface
-
         Command ACommand { get; }
         Command BCommand { get; }
         Command DownCommand { get; }
@@ -16,7 +14,5 @@
         Command UpCommand { get; }
         Command XCommand { get; }
         Command YCommand { get; }
-
-        #endregion
     }
 }

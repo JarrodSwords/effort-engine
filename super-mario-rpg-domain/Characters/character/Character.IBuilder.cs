@@ -7,14 +7,10 @@ namespace SuperMarioRpg.Domain.Characters
 {
     public interface ICharacterBuilder
     {
-        #region Public Interface
-
         CharacterTypes GetCharacterTypes();
         CombatStats GetCombatStats();
         EnemyCombatStats GetEnemyCombatStats();
         Id GetId();
         Name GetName();
-
-        #endregion
     }
 }
