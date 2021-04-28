@@ -1,11 +1,9 @@
-﻿using System;
-using Effort.Domain;
+﻿using Effort.Domain;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Characters;
 using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Domain.Stats;
-using CombatStats = SuperMarioRpg.Domain.Stats.CombatStats;
 
 namespace SuperMarioRpg.Application.Write.Characters.Enemies
 {
@@ -20,13 +18,11 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
         short MagicDefense,
         decimal Evade,
         decimal MagicEvade
-    ) : ICommand, ICharacterBuilder, IEnemyCombatStatsBuilder
+    ) : ICommand, IEnemyBuilder, IEnemyCombatStatsBuilder
     {
         #region ICharacterBuilder Implementation
 
         public CharacterTypes GetCharacterTypes() => CharacterTypes.Combatant;
-        public CombatStats GetCombatStats() => throw new NotSupportedException();
-        public EnemyCombatStats GetEnemyCombatStats() => new(this);
         public Id GetId() => default;
         public Name GetName() => Name;
 
@@ -40,6 +36,12 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
         public short GetMagicAttack() => MagicAttack;
         public short GetMagicDefense() => MagicDefense;
         public short GetSpeed() => Speed;
+
+        #endregion
+
+        #region IEnemyBuilder Implementation
+
+        public EnemyCombatStats GetCombatStats() => new(this);
 
         #endregion
 

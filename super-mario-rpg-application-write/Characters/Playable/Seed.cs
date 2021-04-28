@@ -1,5 +1,7 @@
-﻿using Effort.Domain.Messages;
+﻿using System.Linq;
+using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Characters;
 
 namespace SuperMarioRpg.Application.Write.Characters.Playable
 {
@@ -28,7 +30,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
 
             public override void Handle(Seed command)
             {
-                var characters = PlayableCharacters.Select(Create.Build);
+                var characters = PlayableCharacters.Select(x => new PlayableCharacter(x));
                 UnitOfWork.PlayableCharacters.Create(characters.ToArray());
                 UnitOfWork.Commit();
             }

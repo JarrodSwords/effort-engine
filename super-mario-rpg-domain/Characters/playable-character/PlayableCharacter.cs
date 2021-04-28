@@ -6,7 +6,7 @@ namespace SuperMarioRpg.Domain.Characters
     {
         #region Creation
 
-        public PlayableCharacter(ICharacterBuilder builder) : base(builder)
+        public PlayableCharacter(IPlayableCharacterBuilder builder) : base(builder)
         {
             BaseStats = builder.GetCombatStats();
         }

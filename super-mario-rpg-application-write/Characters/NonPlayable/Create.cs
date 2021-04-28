@@ -1,11 +1,8 @@
-﻿using System;
-using Effort.Domain;
+﻿using Effort.Domain;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Characters;
 using SuperMarioRpg.Domain.Combat;
-using SuperMarioRpg.Domain.Stats;
-using CombatStats = SuperMarioRpg.Domain.Stats.CombatStats;
 
 namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 {
@@ -14,8 +11,6 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
         #region ICharacterBuilder Implementation
 
         public CharacterTypes GetCharacterTypes() => CharacterTypes.None;
-        public CombatStats GetCombatStats() => throw new NotSupportedException();
-        public EnemyCombatStats GetEnemyCombatStats() => throw new NotSupportedException();
         public Id GetId() => default;
         public Name GetName() => Name;
 

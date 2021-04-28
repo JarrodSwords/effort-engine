@@ -1,5 +1,4 @@
-﻿using System;
-using Effort.Domain;
+﻿using Effort.Domain;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Characters;
@@ -17,13 +16,11 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
         short MagicAttack,
         short Defense,
         short MagicDefense
-    ) : ICommand, ICharacterBuilder, ICombatStatsBuilder
+    ) : ICommand, IPlayableCharacterBuilder, ICombatStatsBuilder
     {
         #region ICharacterBuilder Implementation
 
         public CharacterTypes GetCharacterTypes() => CharacterTypes.Combatant | CharacterTypes.Playable;
-        public CombatStats GetCombatStats() => new(this);
-        public EnemyCombatStats GetEnemyCombatStats() => throw new NotSupportedException();
         public Id GetId() => default;
         public Name GetName() => Name;
 
@@ -37,6 +34,12 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
         public short GetMagicAttack() => MagicAttack;
         public short GetMagicDefense() => MagicDefense;
         public short GetSpeed() => Speed;
+
+        #endregion
+
+        #region IPlayableCharacterBuilder Implementation
+
+        public CombatStats GetCombatStats() => new(this);
 
         #endregion
 
