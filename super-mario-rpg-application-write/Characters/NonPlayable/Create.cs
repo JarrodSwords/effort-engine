@@ -31,7 +31,7 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 
             public override void Handle(Create command)
             {
-                UnitOfWork.NonPlayerCharacters.Create(new NonPlayableCharacter(command));
+                UnitOfWork.NonPlayerCharacterRepository.Create(new NonPlayableCharacter(command));
                 UnitOfWork.Commit();
             }
 

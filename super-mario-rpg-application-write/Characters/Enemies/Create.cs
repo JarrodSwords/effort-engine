@@ -67,7 +67,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
 
             public override void Handle(Create command)
             {
-                UnitOfWork.Enemies.Create(new Enemy(command));
+                UnitOfWork.EnemyRepository.Create(new Enemy(command));
                 UnitOfWork.Commit();
             }
 

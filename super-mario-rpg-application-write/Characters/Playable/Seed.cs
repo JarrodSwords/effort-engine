@@ -31,7 +31,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
             public override void Handle(Seed command)
             {
                 var characters = PlayableCharacters.Select(x => new PlayableCharacter(x));
-                UnitOfWork.PlayableCharacters.Create(characters.ToArray());
+                UnitOfWork.PlayableCharacterRepository.Create(characters.ToArray());
                 UnitOfWork.Commit();
             }
 

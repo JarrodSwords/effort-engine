@@ -39,11 +39,11 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
 
             public override void Handle(UpdateBaseStats command)
             {
-                var playableCharacter = UnitOfWork.PlayableCharacters.Find(command.Name);
+                var playableCharacter = UnitOfWork.PlayableCharacterRepository.Find(command.Name);
 
                 playableCharacter.BaseStats = new CombatStats(command);
 
-                UnitOfWork.PlayableCharacters.Update(playableCharacter);
+                UnitOfWork.PlayableCharacterRepository.Update(playableCharacter);
                 UnitOfWork.Commit();
             }
 

@@ -5,10 +5,10 @@ namespace SuperMarioRpg.Domain
 {
     public interface IUnitOfWork
     {
-        IEnemyRepository Enemies { get; }
-        INonPlayableCharacterRepository NonPlayerCharacters { get; }
-        IPlayableCharacterRepository PlayableCharacters { get; }
-        IPlayerRepository Players { get; }
+        IEnemyRepository EnemyRepository { get; }
+        INonPlayableCharacterRepository NonPlayerCharacterRepository { get; }
+        IPlayableCharacterRepository PlayableCharacterRepository { get; }
+        IPlayerRepository PlayerRepository { get; }
 
         void Commit();
     }

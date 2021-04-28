@@ -28,7 +28,7 @@ namespace SuperMarioRpg.Application.Write.Players
 
                 var player = new Player(emailAddress, password, userName);
 
-                UnitOfWork.Players.Create(player);
+                UnitOfWork.PlayerRepository.Create(player);
                 UnitOfWork.Commit();
             }
 

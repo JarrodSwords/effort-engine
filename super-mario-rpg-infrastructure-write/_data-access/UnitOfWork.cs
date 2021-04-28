@@ -21,17 +21,16 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region Private Interface
 
-        private Character.Repository CharacterNonRepository =>
-            _characterRepository ??= new Character.Repository(_context);
+        private Character.Repository CharacterRepository => _characterRepository ??= new Character.Repository(_context);
 
         #endregion
 
         #region IUnitOfWork Implementation
 
-        public IEnemyRepository Enemies => CharacterNonRepository;
-        public INonPlayableCharacterRepository NonPlayerCharacters => CharacterNonRepository;
-        public IPlayableCharacterRepository PlayableCharacters => CharacterNonRepository;
-        public IPlayerRepository Players => _playerRepository ?? new Player.Repository(_context);
+        public IEnemyRepository EnemyRepository => CharacterRepository;
+        public INonPlayableCharacterRepository NonPlayerCharacterRepository => CharacterRepository;
+        public IPlayableCharacterRepository PlayableCharacterRepository => CharacterRepository;
+        public IPlayerRepository PlayerRepository => _playerRepository ?? new Player.Repository(_context);
 
         public void Commit()
         {

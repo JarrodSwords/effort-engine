@@ -57,7 +57,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
 
             public override void Handle(Create command)
             {
-                UnitOfWork.PlayableCharacters.Create(new PlayableCharacter(command));
+                UnitOfWork.PlayableCharacterRepository.Create(new PlayableCharacter(command));
                 UnitOfWork.Commit();
             }
 

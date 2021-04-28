@@ -1,5 +1,7 @@
-﻿using Effort.Domain.Messages;
+﻿using System.Linq;
+using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Characters;
 
 namespace SuperMarioRpg.Application.Write.Characters.Enemies
 {
@@ -28,10 +30,8 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
 
             public override void Handle(Seed command)
             {
-                var enemies = Enemies.Select(Create.Build);
-
-                UnitOfWork.Enemies.Create(enemies.ToArray());
-
+                var enemies = Enemies.Select(x => new Enemy(x));
+                UnitOfWork.EnemyRepository.Create(enemies.ToArray());
                 UnitOfWork.Commit();
             }
 
