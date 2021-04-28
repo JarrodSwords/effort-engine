@@ -11,50 +11,13 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 {
     public record Create(string Name) : ICommand, ICharacterBuilder
     {
-        #region Public Interface
-
-        public NonPlayableCharacter Build()
-        {
-            return new(this);
-        }
-
-        #endregion
-
         #region ICharacterBuilder Implementation
 
-        public CharacterTypes GetCharacterTypes()
-        {
-            return CharacterTypes.None;
-        }
-
-        public CombatStats GetCombatStats()
-        {
-            throw new NotSupportedException();
-        }
-
-        public EnemyCombatStats GetEnemyCombatStats()
-        {
-            throw new NotSupportedException();
-        }
-
-        public Id GetId()
-        {
-            return default;
-        }
-
-        public Name GetName()
-        {
-            return Name;
-        }
-
-        #endregion
-
-        #region Static Interface
-
-        public static NonPlayableCharacter Build(Create builder)
-        {
-            return builder.Build();
-        }
+        public CharacterTypes GetCharacterTypes() => CharacterTypes.None;
+        public CombatStats GetCombatStats() => throw new NotSupportedException();
+        public EnemyCombatStats GetEnemyCombatStats() => throw new NotSupportedException();
+        public Id GetId() => default;
+        public Name GetName() => Name;
 
         #endregion
 
@@ -73,7 +36,7 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 
             public override void Handle(Create command)
             {
-                UnitOfWork.NonPlayerCharacters.Create(command.Build());
+                UnitOfWork.NonPlayerCharacters.Create(new NonPlayableCharacter(command));
                 UnitOfWork.Commit();
             }
 

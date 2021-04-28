@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Effort.Domain.Messages;
+﻿using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 
 namespace SuperMarioRpg.Application.Write.Characters.NonPlayable

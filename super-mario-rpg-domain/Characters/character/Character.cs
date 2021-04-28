@@ -3,7 +3,7 @@ using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Domain.Characters
 {
-    public abstract partial class Character : AggregateRoot
+    public abstract class Character : AggregateRoot
     {
         #region Creation
 

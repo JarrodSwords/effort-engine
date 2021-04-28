@@ -12,15 +12,8 @@ namespace Effort.Domain
 
         #region Static Interface
 
-        public static implicit operator Name(string name)
-        {
-            return new(name);
-        }
-
-        public static implicit operator string(Name name)
-        {
-            return name.Value;
-        }
+        public static implicit operator Name(string name) => new(name);
+        public static implicit operator string(Name name) => name.Value;
 
         #endregion
     }

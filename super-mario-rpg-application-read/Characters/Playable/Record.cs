@@ -41,10 +41,7 @@ select c.name
 
         #region Static Interface
 
-        public static PlayableCharacter AsPlayableCharacter(Record record)
-        {
-            return record;
-        }
+        public static PlayableCharacter AsPlayableCharacter(Record record) => record;
 
         public static implicit operator PlayableCharacter(Record record)
         {

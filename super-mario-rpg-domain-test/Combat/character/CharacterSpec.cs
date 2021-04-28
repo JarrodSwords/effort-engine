@@ -37,15 +37,8 @@ namespace SuperMarioRpg.Domain.Test.Combat
 
         #region Test Methods
 
-        protected override Entity CreateEntity()
-        {
-            return _mario;
-        }
-
-        protected override Entity CreateEntity(Guid id)
-        {
-            return _manualPlayerBuilder.WithId(id).Build();
-        }
+        protected override Entity CreateEntity() => _mario;
+        protected override Entity CreateEntity(Guid id) => _manualPlayerBuilder.WithId(id).Build();
 
         [Theory]
         [InlineData(15, 1)]

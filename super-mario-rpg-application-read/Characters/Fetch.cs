@@ -18,10 +18,8 @@ select name
 
             #region Public Interface
 
-            public override IEnumerable<Character> MakeRequest(IDbConnection connection, Fetch query)
-            {
-                return connection.Query<Character>(Fetch, query);
-            }
+            public override IEnumerable<Character> MakeRequest(IDbConnection connection, Fetch query) =>
+                connection.Query<Character>(Fetch, query);
 
             #endregion
         }

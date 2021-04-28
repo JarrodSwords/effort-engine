@@ -11,14 +11,10 @@ namespace SuperMarioRpg.Domain.Test.Combat
     {
         #region Protected Interface
 
-        protected override Entity CreateEntity()
-        {
-            return Shirt;
-        }
+        protected override Entity CreateEntity() => Shirt;
 
-        protected override Entity CreateEntity(Guid id)
-        {
-            return CreateEquipment(
+        protected override Entity CreateEntity(Guid id) =>
+            CreateEquipment(
                 EquipmentType.Shirt,
                 EquipmentSlot.Armor,
                 CharacterTypes.Mario,
@@ -26,7 +22,6 @@ namespace SuperMarioRpg.Domain.Test.Combat
                 Buffs.None,
                 id
             );
-        }
 
         #endregion
     }

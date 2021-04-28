@@ -24,10 +24,7 @@ namespace SuperMarioRpg.Infrastructure.Write
             Context.SaveChanges();
         }
 
-        public T Create(T entity)
-        {
-            return Context.Add(entity).Entity;
-        }
+        public T Create(T entity) => Context.Add(entity).Entity;
 
         public void Create(params T[] entities)
         {
@@ -39,18 +36,13 @@ namespace SuperMarioRpg.Infrastructure.Write
             Context.Remove(entity);
         }
 
-        public T Find(Guid id)
-        {
-            return Context.Find<T>(id);
-        }
+        public T Find(Guid id) => Context.Find<T>(id);
 
-        public T Find(Expression<Func<T, bool>> predicate)
-        {
-            return Context
+        public T Find(Expression<Func<T, bool>> predicate) =>
+            Context
                 .Set<T>()
                 .AsQueryable()
                 .Single(predicate);
-        }
 
         public void Update(T entity)
         {

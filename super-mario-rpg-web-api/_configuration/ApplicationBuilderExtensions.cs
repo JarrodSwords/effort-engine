@@ -27,10 +27,8 @@ namespace SuperMarioRpg.WebApi
             return app;
         }
 
-        public static T GetService<T>(this IApplicationBuilder app) where T : class
-        {
-            return app.ApplicationServices.GetService(typeof(T)) as T;
-        }
+        public static T GetService<T>(this IApplicationBuilder app) where T : class =>
+            app.ApplicationServices.GetService(typeof(T)) as T;
 
         #endregion
     }

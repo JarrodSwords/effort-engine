@@ -16,15 +16,11 @@ namespace SuperMarioRpg.Domain.Test.Configuration
 
         #region Test Methods
 
-        protected override NonPlayableCharacter CreateEntity()
-        {
-            return _characterBuilder.WithName(Toad).BuildNonPlayerCharacter();
-        }
+        protected override NonPlayableCharacter CreateEntity() =>
+            _characterBuilder.WithName(Toad).BuildNonPlayerCharacter();
 
-        protected override NonPlayableCharacter CreateEntity(Guid id)
-        {
-            return _characterBuilder.WithId(id).BuildNonPlayerCharacter();
-        }
+        protected override NonPlayableCharacter CreateEntity(Guid id) =>
+            _characterBuilder.WithId(id).BuildNonPlayerCharacter();
 
         [Fact]
         public void WhenInstantiating()

@@ -16,35 +16,12 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
     {
         #region ICombatStatsBuilder Implementation
 
-        public short GetAttack()
-        {
-            return Attack;
-        }
-
-        public short GetDefense()
-        {
-            return Defense;
-        }
-
-        public ushort GetHitPoints()
-        {
-            return HitPoints;
-        }
-
-        public short GetMagicAttack()
-        {
-            return MagicAttack;
-        }
-
-        public short GetMagicDefense()
-        {
-            return MagicDefense;
-        }
-
-        public short GetSpeed()
-        {
-            return Speed;
-        }
+        public short GetAttack() => Attack;
+        public short GetDefense() => Defense;
+        public ushort GetHitPoints() => HitPoints;
+        public short GetMagicAttack() => MagicAttack;
+        public short GetMagicDefense() => MagicDefense;
+        public short GetSpeed() => Speed;
 
         #endregion
 

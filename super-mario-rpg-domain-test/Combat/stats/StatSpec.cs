@@ -13,15 +13,8 @@ namespace SuperMarioRpg.Domain.Test.Combat
     {
         #region Test Methods
 
-        protected override ValueObject Create()
-        {
-            return new Stat(10);
-        }
-
-        protected override ValueObject CreateOther()
-        {
-            return new Stat(20);
-        }
+        protected override ValueObject Create() => new Stat(10);
+        protected override ValueObject CreateOther() => new Stat(20);
 
         [Theory]
         [InlineData(10, 2, 12)]

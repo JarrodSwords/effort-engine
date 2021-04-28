@@ -118,9 +118,8 @@ namespace SuperMarioRpg.Domain.Combat
             short speed = default,
             decimal evade = default,
             decimal magicEvade = default
-        )
-        {
-            return new(
+        ) =>
+            new(
                 attack,
                 defense,
                 hp,
@@ -130,7 +129,6 @@ namespace SuperMarioRpg.Domain.Combat
                 evade,
                 magicEvade
             );
-        }
 
         public static Stats CreateStats(
             Stat attack,
@@ -141,9 +139,8 @@ namespace SuperMarioRpg.Domain.Combat
             Stat speed,
             Stat evade,
             Stat magicEvade
-        )
-        {
-            return new(
+        ) =>
+            new(
                 attack,
                 defense,
                 hp,
@@ -153,11 +150,9 @@ namespace SuperMarioRpg.Domain.Combat
                 evade,
                 magicEvade
             );
-        }
 
-        public static Stats operator +(Stats left, Stats right)
-        {
-            return CreateStats(
+        public static Stats operator +(Stats left, Stats right) =>
+            CreateStats(
                 left.Attack + right.Attack,
                 left.Defense + right.Defense,
                 left.Hp + right.Hp,
@@ -167,7 +162,6 @@ namespace SuperMarioRpg.Domain.Combat
                 left.Evade + right.Evade,
                 left.MagicEvade + right.MagicEvade
             );
-        }
 
         #endregion
     }

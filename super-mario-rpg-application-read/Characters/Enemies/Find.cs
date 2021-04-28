@@ -11,10 +11,8 @@ namespace SuperMarioRpg.Application.Read.Characters.Enemies
         {
             #region Public Interface
 
-            public override Enemy MakeRequest(IDbConnection connection, Find query)
-            {
-                return connection.QuerySingle<Record>(Record.Find, query);
-            }
+            public override Enemy MakeRequest(IDbConnection connection, Find query) =>
+                connection.QuerySingle<Record>(Record.Find, query);
 
             #endregion
         }

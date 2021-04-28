@@ -13,11 +13,7 @@ namespace SuperMarioRpg.Domain.Test.Configuration
 
         public Guid Id { get; private set; }
         public string Name { get; private set; }
-
-        public NonPlayableCharacter BuildNonPlayerCharacter()
-        {
-            return new(this);
-        }
+        public NonPlayableCharacter BuildNonPlayerCharacter() => new(this);
 
         public FluentCharacterBuilder WithId(Guid id)
         {
@@ -35,30 +31,11 @@ namespace SuperMarioRpg.Domain.Test.Configuration
 
         #region ICharacterBuilder Implementation
 
-        public CharacterTypes GetCharacterTypes()
-        {
-            return 0;
-        }
-
-        public CombatStats GetCombatStats()
-        {
-            throw new NotImplementedException();
-        }
-
-        public EnemyCombatStats GetEnemyCombatStats()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Id GetId()
-        {
-            return Id;
-        }
-
-        public Name GetName()
-        {
-            return Name;
-        }
+        public CharacterTypes GetCharacterTypes() => 0;
+        public CombatStats GetCombatStats() => throw new NotImplementedException();
+        public EnemyCombatStats GetEnemyCombatStats() => throw new NotImplementedException();
+        public Id GetId() => Id;
+        public Name GetName() => Name;
 
         #endregion
     }

@@ -22,108 +22,32 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
         decimal MagicEvade
     ) : ICommand, ICharacterBuilder, IEnemyCombatStatsBuilder
     {
-        #region Public Interface
-
-        public Enemy Build()
-        {
-            return new(this);
-        }
-
-        public EnemyCombatStats BuildEnemyCombatStats()
-        {
-            return new(this);
-        }
-
-        #endregion
-
         #region ICharacterBuilder Implementation
 
-        public CharacterTypes GetCharacterTypes()
-        {
-            return CharacterTypes.Combatant;
-        }
-
-        public CombatStats GetCombatStats()
-        {
-            throw new NotSupportedException();
-        }
-
-        public EnemyCombatStats GetEnemyCombatStats()
-        {
-            return BuildEnemyCombatStats();
-        }
-
-        public Id GetId()
-        {
-            return default;
-        }
-
-        public Name GetName()
-        {
-            return Name;
-        }
+        public CharacterTypes GetCharacterTypes() => CharacterTypes.Combatant;
+        public CombatStats GetCombatStats() => throw new NotSupportedException();
+        public EnemyCombatStats GetEnemyCombatStats() => new(this);
+        public Id GetId() => default;
+        public Name GetName() => Name;
 
         #endregion
 
         #region ICombatStatsBuilder Implementation
 
-        public short GetAttack()
-        {
-            return Attack;
-        }
-
-        public short GetDefense()
-        {
-            return Defense;
-        }
-
-        public ushort GetHitPoints()
-        {
-            return HitPoints;
-        }
-
-        public short GetMagicAttack()
-        {
-            return MagicAttack;
-        }
-
-        public short GetMagicDefense()
-        {
-            return MagicDefense;
-        }
-
-        public short GetSpeed()
-        {
-            return Speed;
-        }
+        public short GetAttack() => Attack;
+        public short GetDefense() => Defense;
+        public ushort GetHitPoints() => HitPoints;
+        public short GetMagicAttack() => MagicAttack;
+        public short GetMagicDefense() => MagicDefense;
+        public short GetSpeed() => Speed;
 
         #endregion
 
         #region IEnemyCombatStatsBuilder Implementation
 
-        public decimal GetEvade()
-        {
-            return Evade;
-        }
-
-        public byte GetFlowerPoints()
-        {
-            return FlowerPoints;
-        }
-
-        public decimal GetMagicEvade()
-        {
-            return MagicEvade;
-        }
-
-        #endregion
-
-        #region Static Interface
-
-        public static Enemy Build(Create builder)
-        {
-            return builder.Build();
-        }
+        public decimal GetEvade() => Evade;
+        public byte GetFlowerPoints() => FlowerPoints;
+        public decimal GetMagicEvade() => MagicEvade;
 
         #endregion
 
@@ -141,7 +65,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
 
             public override void Handle(Create command)
             {
-                UnitOfWork.Enemies.Create(command.Build());
+                UnitOfWork.Enemies.Create(new Enemy(command));
                 UnitOfWork.Commit();
             }
 

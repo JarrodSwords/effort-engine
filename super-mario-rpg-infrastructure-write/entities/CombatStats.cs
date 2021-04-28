@@ -47,15 +47,8 @@ namespace SuperMarioRpg.Infrastructure.Write
         public decimal? MagicEvade { get; set; }
         public short Speed { get; set; }
 
-        public Domain.Stats.CombatStats Build()
-        {
-            return new(this);
-        }
-
-        public EnemyCombatStats BuildEnemyCombatStats()
-        {
-            return new(this);
-        }
+        public Domain.Stats.CombatStats Build() => new(this);
+        public EnemyCombatStats BuildEnemyCombatStats() => new(this);
 
         public CombatStats Update(CombatStats combatStats)
         {
@@ -73,72 +66,32 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region ICombatStatsBuilder Implementation
 
-        public short GetAttack()
-        {
-            return Attack;
-        }
-
-        public short GetDefense()
-        {
-            return Defense;
-        }
-
-        public ushort GetHitPoints()
-        {
-            return HitPoints;
-        }
-
-        public short GetMagicAttack()
-        {
-            return MagicAttack;
-        }
-
-        public short GetMagicDefense()
-        {
-            return MagicDefense;
-        }
-
-        public short GetSpeed()
-        {
-            return Speed;
-        }
+        public short GetAttack() => Attack;
+        public short GetDefense() => Defense;
+        public ushort GetHitPoints() => HitPoints;
+        public short GetMagicAttack() => MagicAttack;
+        public short GetMagicDefense() => MagicDefense;
+        public short GetSpeed() => Speed;
 
         #endregion
 
         #region IEnemyCombatStatsBuilder Implementation
 
-        public decimal GetEvade()
-        {
-            return Evade ?? default;
-        }
-
-        public byte GetFlowerPoints()
-        {
-            return FlowerPoints ?? default;
-        }
-
-        public decimal GetMagicEvade()
-        {
-            return MagicEvade ?? default;
-        }
+        public decimal GetEvade() => Evade ?? default;
+        public byte GetFlowerPoints() => FlowerPoints ?? default;
+        public decimal GetMagicEvade() => MagicEvade ?? default;
 
         #endregion
 
         #region Static Interface
 
-        public static implicit operator Domain.Stats.CombatStats(CombatStats combatStats)
-        {
-            return combatStats.Build();
-        }
+        public static implicit operator Domain.Stats.CombatStats(CombatStats combatStats) => combatStats.Build();
 
-        public static implicit operator EnemyCombatStats(CombatStats combatStats)
-        {
-            return combatStats.BuildEnemyCombatStats();
-        }
+        public static implicit operator EnemyCombatStats(CombatStats combatStats) =>
+            combatStats.BuildEnemyCombatStats();
 
-        public static implicit operator CombatStats(EnemyCombatStats combatStats)
-        {
-            return new(
+        public static implicit operator CombatStats(EnemyCombatStats combatStats) =>
+            new(
                 combatStats.HitPoints,
                 combatStats.FlowerPoints,
                 combatStats.Speed,
@@ -149,11 +102,9 @@ namespace SuperMarioRpg.Infrastructure.Write
                 combatStats.Evade,
                 combatStats.MagicEvade
             );
-        }
 
-        public static implicit operator CombatStats(Domain.Stats.CombatStats combatStats)
-        {
-            return new(
+        public static implicit operator CombatStats(Domain.Stats.CombatStats combatStats) =>
+            new(
                 combatStats.HitPoints,
                 speed: combatStats.Speed,
                 attack: combatStats.Attack,
@@ -161,7 +112,6 @@ namespace SuperMarioRpg.Infrastructure.Write
                 defense: combatStats.Defense,
                 magicDefense: combatStats.MagicDefense
             );
-        }
 
         #endregion
     }

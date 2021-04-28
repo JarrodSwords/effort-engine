@@ -77,64 +77,25 @@ namespace SuperMarioRpg.Infrastructure.Write
             return characterTypes;
         }
 
-        public Domain.Stats.CombatStats GetCombatStats()
-        {
-            return CombatStats;
-        }
-
-        public EnemyCombatStats GetEnemyCombatStats()
-        {
-            return CombatStats;
-        }
-
-        public Id GetId()
-        {
-            return new(Id);
-        }
-
-        public Name GetName()
-        {
-            return Name;
-        }
+        public Domain.Stats.CombatStats GetCombatStats() => CombatStats;
+        public EnemyCombatStats GetEnemyCombatStats() => CombatStats;
+        public Id GetId() => new(Id);
+        public Name GetName() => Name;
 
         #endregion
 
         #region Static Interface
 
-        private static Character AsCharacter(Enemy enemy)
-        {
-            return enemy;
-        }
+        private static Character AsCharacter(Enemy enemy) => enemy;
+        private static Character AsCharacter(NonPlayableCharacter nonPlayableCharacter) => nonPlayableCharacter;
+        private static Character AsCharacter(PlayableCharacter playableCharacter) => playableCharacter;
+        public static implicit operator Character(Enemy enemy) => new(enemy);
 
-        private static Character AsCharacter(NonPlayableCharacter nonPlayableCharacter)
-        {
-            return nonPlayableCharacter;
-        }
+        public static implicit operator Character(NonPlayableCharacter nonPlayableCharacter) =>
+            new(nonPlayableCharacter);
 
-        private static Character AsCharacter(PlayableCharacter playableCharacter)
-        {
-            return playableCharacter;
-        }
-
-        public static implicit operator Character(Enemy enemy)
-        {
-            return new(enemy);
-        }
-
-        public static implicit operator Character(NonPlayableCharacter nonPlayableCharacter)
-        {
-            return new(nonPlayableCharacter);
-        }
-
-        public static implicit operator Character(PlayableCharacter playableCharacter)
-        {
-            return new(playableCharacter);
-        }
-
-        public static implicit operator PlayableCharacter(Character character)
-        {
-            return new(character);
-        }
+        public static implicit operator Character(PlayableCharacter playableCharacter) => new(playableCharacter);
+        public static implicit operator PlayableCharacter(Character character) => new(character);
 
         #endregion
     }

@@ -62,10 +62,8 @@ namespace SuperMarioRpg.Domain.Combat
             return equipment;
         }
 
-        public static IEnumerable<Equipment> CreateEquipment(params EquipmentType[] equipmentTypes)
-        {
-            return equipmentTypes.Select(CreateEquipment);
-        }
+        public static IEnumerable<Equipment> CreateEquipment(params EquipmentType[] equipmentTypes) =>
+            equipmentTypes.Select(CreateEquipment);
 
         #endregion
     }

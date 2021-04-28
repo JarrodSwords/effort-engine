@@ -8,15 +8,8 @@ namespace Effort.Domain.Test
 
         #region Protected Interface
 
-        protected override ValueObject Create()
-        {
-            return new Id(Id);
-        }
-
-        protected override ValueObject CreateOther()
-        {
-            return new Id();
-        }
+        protected override ValueObject Create() => new Id(Id);
+        protected override ValueObject CreateOther() => new Id();
 
         #endregion
     }

@@ -19,89 +19,24 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
         short MagicDefense
     ) : ICommand, ICharacterBuilder, ICombatStatsBuilder
     {
-        #region Public Interface
-
-        public PlayableCharacter Build()
-        {
-            return new(this);
-        }
-
-        public CombatStats BuildCombatStats()
-        {
-            return new(this);
-        }
-
-        #endregion
-
         #region ICharacterBuilder Implementation
 
-        public CharacterTypes GetCharacterTypes()
-        {
-            return CharacterTypes.Combatant | CharacterTypes.Playable;
-        }
-
-        public CombatStats GetCombatStats()
-        {
-            return BuildCombatStats();
-        }
-
-        public EnemyCombatStats GetEnemyCombatStats()
-        {
-            throw new NotSupportedException();
-        }
-
-        public Id GetId()
-        {
-            return default;
-        }
-
-        public Name GetName()
-        {
-            return Name;
-        }
+        public CharacterTypes GetCharacterTypes() => CharacterTypes.Combatant | CharacterTypes.Playable;
+        public CombatStats GetCombatStats() => new(this);
+        public EnemyCombatStats GetEnemyCombatStats() => throw new NotSupportedException();
+        public Id GetId() => default;
+        public Name GetName() => Name;
 
         #endregion
 
         #region ICombatStatsBuilder Implementation
 
-        public short GetAttack()
-        {
-            return Attack;
-        }
-
-        public short GetDefense()
-        {
-            return Defense;
-        }
-
-        public ushort GetHitPoints()
-        {
-            return HitPoints;
-        }
-
-        public short GetMagicAttack()
-        {
-            return MagicAttack;
-        }
-
-        public short GetMagicDefense()
-        {
-            return MagicDefense;
-        }
-
-        public short GetSpeed()
-        {
-            return Speed;
-        }
-
-        #endregion
-
-        #region Static Interface
-
-        public static PlayableCharacter Build(Create builder)
-        {
-            return builder.Build();
-        }
+        public short GetAttack() => Attack;
+        public short GetDefense() => Defense;
+        public ushort GetHitPoints() => HitPoints;
+        public short GetMagicAttack() => MagicAttack;
+        public short GetMagicDefense() => MagicDefense;
+        public short GetSpeed() => Speed;
 
         #endregion
 
@@ -119,7 +54,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
 
             public override void Handle(Create command)
             {
-                UnitOfWork.PlayableCharacters.Create(command.Build());
+                UnitOfWork.PlayableCharacters.Create(new PlayableCharacter(command));
                 UnitOfWork.Commit();
             }
 

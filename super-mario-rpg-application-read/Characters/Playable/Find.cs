@@ -11,10 +11,8 @@ namespace SuperMarioRpg.Application.Read.Characters.Playable
         {
             #region Public Interface
 
-            public override PlayableCharacter MakeRequest(IDbConnection connection, Find query)
-            {
-                return connection.QuerySingle<Record>(Record.Find, query);
-            }
+            public override PlayableCharacter MakeRequest(IDbConnection connection, Find query) =>
+                connection.QuerySingle<Record>(Record.Find, query);
 
             #endregion
         }
