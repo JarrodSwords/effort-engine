@@ -1,21 +1,20 @@
 ﻿using Effort.Domain;
 using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Domain.Stats;
+using CombatStats = SuperMarioRpg.Domain.Stats.CombatStats;
 
 namespace SuperMarioRpg.Domain.Characters
 {
-    public partial class Character
+    public interface ICharacterBuilder
     {
-        public interface IBuilder
-        {
-            #region Public Interface
+        #region Public Interface
 
-            CharacterTypes GetCharacterTypes();
-            Enemy.CombatStats GetEnemyCombatStats();
-            Id GetId();
-            Name GetName();
-            PlayableCharacter.CombatStats GetPlayableCharacterCombatStats();
+        CharacterTypes GetCharacterTypes();
+        CombatStats GetCombatStats();
+        EnemyCombatStats GetEnemyCombatStats();
+        Id GetId();
+        Name GetName();
 
-            #endregion
-        }
+        #endregion
     }
 }

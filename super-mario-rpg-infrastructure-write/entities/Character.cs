@@ -2,10 +2,11 @@
 using Effort.Domain;
 using SuperMarioRpg.Domain.Characters;
 using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Domain.Stats;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
-    public partial class Character : Entity, Domain.Characters.Character.IBuilder
+    public partial class Character : Entity, ICharacterBuilder
     {
         #region Creation
 
@@ -61,7 +62,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #endregion
 
-        #region IBuilder Implementation
+        #region ICharacterBuilder Implementation
 
         public CharacterTypes GetCharacterTypes()
         {
@@ -76,19 +77,14 @@ namespace SuperMarioRpg.Infrastructure.Write
             return characterTypes;
         }
 
-        public Enemy.CombatStats GetEnemyCombatStats()
+        public Domain.Stats.CombatStats GetCombatStats()
         {
-            return new(
-                CombatStats.HitPoints,
-                CombatStats.FlowerPoints.Value,
-                CombatStats.Speed,
-                CombatStats.Attack,
-                CombatStats.MagicAttack,
-                CombatStats.Defense,
-                CombatStats.MagicDefense,
-                CombatStats.Evade.Value,
-                CombatStats.MagicEvade.Value
-            );
+            return CombatStats;
+        }
+
+        public EnemyCombatStats GetEnemyCombatStats()
+        {
+            return CombatStats;
         }
 
         public Id GetId()
@@ -99,18 +95,6 @@ namespace SuperMarioRpg.Infrastructure.Write
         public Name GetName()
         {
             return Name;
-        }
-
-        public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
-        {
-            return new(
-                CombatStats.HitPoints,
-                CombatStats.Speed,
-                CombatStats.Attack,
-                CombatStats.MagicAttack,
-                CombatStats.Defense,
-                CombatStats.MagicDefense
-            );
         }
 
         #endregion

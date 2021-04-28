@@ -17,9 +17,9 @@ namespace SuperMarioRpg.Wpf.Menus.Status
 
         #region Public Interface
 
-        public short Hp => _playerCharacter.EffectiveStats.Hp.Value;
+        public short Hp => _playerCharacter.EffectiveStats.Hp;
         public byte Level => _playerCharacter.Progression.CurrentLevel.Value;
-        public string Name => _playerCharacter.Name.Value;
+        public string Name => _playerCharacter.Name;
 
         #endregion
     }

@@ -1,19 +1,21 @@
-﻿namespace SuperMarioRpg.Domain.Characters
+﻿using SuperMarioRpg.Domain.Stats;
+
+namespace SuperMarioRpg.Domain.Characters
 {
-    public partial class Enemy : Character
+    public class Enemy : Character
     {
         #region Creation
 
-        public Enemy(IBuilder builder) : base(builder)
+        public Enemy(ICharacterBuilder characterBuilder) : base(characterBuilder)
         {
-            BaseStats = builder.GetEnemyCombatStats();
+            BaseStats = characterBuilder.GetEnemyCombatStats();
         }
 
         #endregion
 
         #region Public Interface
 
-        public CombatStats BaseStats { get; }
+        public EnemyCombatStats BaseStats { get; }
 
         #endregion
     }

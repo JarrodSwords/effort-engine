@@ -1,12 +1,14 @@
-﻿namespace SuperMarioRpg.Domain.Characters
+﻿using SuperMarioRpg.Domain.Stats;
+
+namespace SuperMarioRpg.Domain.Characters
 {
-    public partial class PlayableCharacter : Character
+    public class PlayableCharacter : Character
     {
         #region Creation
 
-        public PlayableCharacter(IBuilder builder) : base(builder)
+        public PlayableCharacter(ICharacterBuilder characterBuilder) : base(characterBuilder)
         {
-            BaseStats = builder.GetPlayableCharacterCombatStats();
+            BaseStats = characterBuilder.GetCombatStats();
         }
 
         #endregion

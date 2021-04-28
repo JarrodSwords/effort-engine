@@ -1,6 +1,6 @@
 ﻿using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
-using SuperMarioRpg.Domain.Characters;
+using SuperMarioRpg.Domain.Stats;
 
 namespace SuperMarioRpg.Application.Write.Characters.Playable
 {
@@ -12,8 +12,42 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
         short MagicAttack,
         short Defense,
         short MagicDefense
-    ) : ICommand
+    ) : ICommand, ICombatStatsBuilder
     {
+        #region ICombatStatsBuilder Implementation
+
+        public short GetAttack()
+        {
+            return Attack;
+        }
+
+        public short GetDefense()
+        {
+            return Defense;
+        }
+
+        public ushort GetHitPoints()
+        {
+            return HitPoints;
+        }
+
+        public short GetMagicAttack()
+        {
+            return MagicAttack;
+        }
+
+        public short GetMagicDefense()
+        {
+            return MagicDefense;
+        }
+
+        public short GetSpeed()
+        {
+            return Speed;
+        }
+
+        #endregion
+
         internal class Handler : Handler<UpdateBaseStats>
         {
             #region Creation
@@ -28,19 +62,9 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
 
             public override void Handle(UpdateBaseStats command)
             {
-                var (name, hitPoints, speed, attack, magicAttack, defense, magicDefense) = command;
-                var baseStats = new PlayableCharacter.CombatStats(
-                    hitPoints,
-                    speed,
-                    attack,
-                    magicAttack,
-                    defense,
-                    magicDefense
-                );
+                var playableCharacter = UnitOfWork.PlayableCharacters.Find(command.Name);
 
-                var playableCharacter = UnitOfWork.PlayableCharacters.Find(name);
-
-                playableCharacter.BaseStats = baseStats;
+                playableCharacter.BaseStats = new CombatStats(command);
 
                 UnitOfWork.PlayableCharacters.Update(playableCharacter);
                 UnitOfWork.Commit();

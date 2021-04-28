@@ -4,10 +4,12 @@ using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Characters;
 using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Domain.Stats;
+using CombatStats = SuperMarioRpg.Domain.Stats.CombatStats;
 
 namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 {
-    public record Create(string Name) : ICommand, Character.IBuilder
+    public record Create(string Name) : ICommand, ICharacterBuilder
     {
         #region Public Interface
 
@@ -18,14 +20,19 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 
         #endregion
 
-        #region IBuilder Implementation
+        #region ICharacterBuilder Implementation
 
         public CharacterTypes GetCharacterTypes()
         {
             return CharacterTypes.None;
         }
 
-        public Enemy.CombatStats GetEnemyCombatStats()
+        public CombatStats GetCombatStats()
+        {
+            throw new NotSupportedException();
+        }
+
+        public EnemyCombatStats GetEnemyCombatStats()
         {
             throw new NotSupportedException();
         }
@@ -38,11 +45,6 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
         public Name GetName()
         {
             return Name;
-        }
-
-        public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
-        {
-            throw new NotSupportedException();
         }
 
         #endregion

@@ -1,8 +1,8 @@
-﻿using SuperMarioRpg.Domain.Characters;
+﻿using SuperMarioRpg.Domain.Stats;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
-    public class CombatStats : Entity
+    public class CombatStats : Entity, IEnemyCombatStatsBuilder
     {
         #region Creation
 
@@ -47,53 +47,119 @@ namespace SuperMarioRpg.Infrastructure.Write
         public decimal? MagicEvade { get; set; }
         public short Speed { get; set; }
 
-        public CombatStats Update(PlayableCharacter.CombatStats combatStats)
+        public Domain.Stats.CombatStats Build()
         {
-            var (hitPoints, speed, attack, magicAttack, defense, magicDefense) = combatStats;
+            return new(this);
+        }
 
-            HitPoints = hitPoints;
-            Speed = speed;
-            Attack = attack;
-            MagicAttack = magicAttack;
-            Defense = defense;
-            MagicDefense = magicDefense;
+        public EnemyCombatStats BuildEnemyCombatStats()
+        {
+            return new(this);
+        }
+
+        public CombatStats Update(CombatStats combatStats)
+        {
+            Attack = combatStats.Attack;
+            Defense = combatStats.Defense;
+            HitPoints = combatStats.HitPoints;
+            MagicAttack = combatStats.MagicAttack;
+            MagicDefense = combatStats.MagicDefense;
+            Speed = combatStats.Speed;
 
             return this;
         }
 
         #endregion
 
+        #region ICombatStatsBuilder Implementation
+
+        public short GetAttack()
+        {
+            return Attack;
+        }
+
+        public short GetDefense()
+        {
+            return Defense;
+        }
+
+        public ushort GetHitPoints()
+        {
+            return HitPoints;
+        }
+
+        public short GetMagicAttack()
+        {
+            return MagicAttack;
+        }
+
+        public short GetMagicDefense()
+        {
+            return MagicDefense;
+        }
+
+        public short GetSpeed()
+        {
+            return Speed;
+        }
+
+        #endregion
+
+        #region IEnemyCombatStatsBuilder Implementation
+
+        public decimal GetEvade()
+        {
+            return Evade ?? default;
+        }
+
+        public byte GetFlowerPoints()
+        {
+            return FlowerPoints ?? default;
+        }
+
+        public decimal GetMagicEvade()
+        {
+            return MagicEvade ?? default;
+        }
+
+        #endregion
+
         #region Static Interface
 
-        public static implicit operator CombatStats(Enemy.CombatStats combatStats)
+        public static implicit operator Domain.Stats.CombatStats(CombatStats combatStats)
         {
-            var (hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade, magicEvade) =
-                combatStats;
+            return combatStats.Build();
+        }
 
-            return new CombatStats(
-                hitPoints,
-                flowerPoints,
-                speed,
-                attack,
-                magicAttack,
-                defense,
-                magicDefense,
-                evade,
-                magicEvade
+        public static implicit operator EnemyCombatStats(CombatStats combatStats)
+        {
+            return combatStats.BuildEnemyCombatStats();
+        }
+
+        public static implicit operator CombatStats(EnemyCombatStats combatStats)
+        {
+            return new(
+                combatStats.HitPoints,
+                combatStats.FlowerPoints,
+                combatStats.Speed,
+                combatStats.Attack,
+                combatStats.MagicAttack,
+                combatStats.Defense,
+                combatStats.MagicDefense,
+                combatStats.Evade,
+                combatStats.MagicEvade
             );
         }
 
-        public static implicit operator CombatStats(PlayableCharacter.CombatStats combatStats)
+        public static implicit operator CombatStats(Domain.Stats.CombatStats combatStats)
         {
-            var (hitPoints, speed, attack, magicAttack, defense, magicDefense) = combatStats;
-
-            return new CombatStats(
-                hitPoints,
-                speed: speed,
-                attack: attack,
-                magicAttack: magicAttack,
-                defense: defense,
-                magicDefense: magicDefense
+            return new(
+                combatStats.HitPoints,
+                speed: combatStats.Speed,
+                attack: combatStats.Attack,
+                magicAttack: combatStats.MagicAttack,
+                defense: combatStats.Defense,
+                magicDefense: combatStats.MagicDefense
             );
         }
 

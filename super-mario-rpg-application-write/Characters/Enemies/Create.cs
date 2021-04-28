@@ -4,6 +4,8 @@ using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Characters;
 using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Domain.Stats;
+using CombatStats = SuperMarioRpg.Domain.Stats.CombatStats;
 
 namespace SuperMarioRpg.Application.Write.Characters.Enemies
 {
@@ -18,7 +20,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
         short MagicDefense,
         decimal Evade,
         decimal MagicEvade
-    ) : ICommand, Character.IBuilder
+    ) : ICommand, ICharacterBuilder, IEnemyCombatStatsBuilder
     {
         #region Public Interface
 
@@ -27,28 +29,28 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
             return new(this);
         }
 
+        public EnemyCombatStats BuildEnemyCombatStats()
+        {
+            return new(this);
+        }
+
         #endregion
 
-        #region IBuilder Implementation
+        #region ICharacterBuilder Implementation
 
         public CharacterTypes GetCharacterTypes()
         {
             return CharacterTypes.Combatant;
         }
 
-        public Enemy.CombatStats GetEnemyCombatStats()
+        public CombatStats GetCombatStats()
         {
-            return new(
-                HitPoints,
-                FlowerPoints,
-                Speed,
-                Attack,
-                MagicAttack,
-                Defense,
-                MagicDefense,
-                Evade,
-                MagicEvade
-            );
+            throw new NotSupportedException();
+        }
+
+        public EnemyCombatStats GetEnemyCombatStats()
+        {
+            return BuildEnemyCombatStats();
         }
 
         public Id GetId()
@@ -61,9 +63,57 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
             return Name;
         }
 
-        public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
+        #endregion
+
+        #region ICombatStatsBuilder Implementation
+
+        public short GetAttack()
         {
-            throw new NotSupportedException();
+            return Attack;
+        }
+
+        public short GetDefense()
+        {
+            return Defense;
+        }
+
+        public ushort GetHitPoints()
+        {
+            return HitPoints;
+        }
+
+        public short GetMagicAttack()
+        {
+            return MagicAttack;
+        }
+
+        public short GetMagicDefense()
+        {
+            return MagicDefense;
+        }
+
+        public short GetSpeed()
+        {
+            return Speed;
+        }
+
+        #endregion
+
+        #region IEnemyCombatStatsBuilder Implementation
+
+        public decimal GetEvade()
+        {
+            return Evade;
+        }
+
+        public byte GetFlowerPoints()
+        {
+            return FlowerPoints;
+        }
+
+        public decimal GetMagicEvade()
+        {
+            return MagicEvade;
         }
 
         #endregion

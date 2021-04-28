@@ -2,10 +2,12 @@
 using Effort.Domain;
 using SuperMarioRpg.Domain.Characters;
 using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Domain.Stats;
+using CombatStats = SuperMarioRpg.Domain.Stats.CombatStats;
 
 namespace SuperMarioRpg.Domain.Test.Configuration
 {
-    public class FluentBuilder : Character.IBuilder
+    public class FluentCharacterBuilder : ICharacterBuilder
     {
         #region Public Interface
 
@@ -17,13 +19,13 @@ namespace SuperMarioRpg.Domain.Test.Configuration
             return new(this);
         }
 
-        public FluentBuilder WithId(Guid id)
+        public FluentCharacterBuilder WithId(Guid id)
         {
             Id = id;
             return this;
         }
 
-        public FluentBuilder WithName(string name)
+        public FluentCharacterBuilder WithName(string name)
         {
             Name = name;
             return this;
@@ -31,14 +33,19 @@ namespace SuperMarioRpg.Domain.Test.Configuration
 
         #endregion
 
-        #region IBuilder Implementation
+        #region ICharacterBuilder Implementation
 
         public CharacterTypes GetCharacterTypes()
         {
             return 0;
         }
 
-        public Enemy.CombatStats GetEnemyCombatStats()
+        public CombatStats GetCombatStats()
+        {
+            throw new NotImplementedException();
+        }
+
+        public EnemyCombatStats GetEnemyCombatStats()
         {
             throw new NotImplementedException();
         }
@@ -51,11 +58,6 @@ namespace SuperMarioRpg.Domain.Test.Configuration
         public Name GetName()
         {
             return Name;
-        }
-
-        public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
