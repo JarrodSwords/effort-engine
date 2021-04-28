@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Configuration\characters\_repositories\INonPlayableCharacterRepository.cs" />
+    <None Include="Characters\non-playable-character\INonPlayableCharacterRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

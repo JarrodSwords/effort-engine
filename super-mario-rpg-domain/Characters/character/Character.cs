@@ -1,7 +1,7 @@
 ﻿using Effort.Domain;
 using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Domain.Configuration
+namespace SuperMarioRpg.Domain.Characters
 {
     public abstract partial class Character : AggregateRoot
     {

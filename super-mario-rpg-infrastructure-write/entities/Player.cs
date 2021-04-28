@@ -23,7 +23,7 @@
 
         #region Static Interface
 
-        public static implicit operator Player(Domain.Configuration.Player player)
+        public static implicit operator Player(Domain.Players.Player player)
         {
             return new(player.EmailAddress, player.Password, player.UserName);
         }

@@ -1,4 +1,4 @@
-﻿namespace SuperMarioRpg.Domain.Configuration
+﻿namespace SuperMarioRpg.Domain.Characters
 {
     public partial class Enemy : Character
     {

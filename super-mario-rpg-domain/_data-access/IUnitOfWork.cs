@@ -1,4 +1,5 @@
-using SuperMarioRpg.Domain.Configuration;
+using SuperMarioRpg.Domain.Characters;
+using SuperMarioRpg.Domain.Players;
 
 namespace SuperMarioRpg.Domain
 {

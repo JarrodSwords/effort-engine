@@ -1,8 +1,8 @@
 ﻿using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
-using SuperMarioRpg.Domain.Configuration;
+using SuperMarioRpg.Domain.Players;
 
-namespace SuperMarioRpg.Application.Write.Configuration.Players
+namespace SuperMarioRpg.Application.Write.Players
 {
     public record Register(
         string EmailAddress,

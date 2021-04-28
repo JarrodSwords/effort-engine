@@ -1,11 +1,11 @@
 ﻿using System;
 using Effort.Domain;
+using SuperMarioRpg.Domain.Characters;
 using SuperMarioRpg.Domain.Combat;
-using SuperMarioRpg.Domain.Configuration;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
-    public partial class Character : Entity, Domain.Configuration.Character.IBuilder
+    public partial class Character : Entity, Domain.Characters.Character.IBuilder
     {
         #region Creation
 
@@ -13,19 +13,19 @@ namespace SuperMarioRpg.Infrastructure.Write
         {
         }
 
-        private Character(Domain.Configuration.Character character)
+        private Character(Domain.Characters.Character character)
         {
             Name = character.Name;
             Update(character.CharacterTypes);
         }
 
-        private Character(Enemy enemy) : this(enemy as Domain.Configuration.Character)
+        private Character(Enemy enemy) : this(enemy as Domain.Characters.Character)
         {
             CombatStats = enemy.BaseStats;
         }
 
         private Character(PlayableCharacter playableCharacter) : this(
-            playableCharacter as Domain.Configuration.Character
+            playableCharacter as Domain.Characters.Character
         )
         {
             CombatStats = playableCharacter.BaseStats;

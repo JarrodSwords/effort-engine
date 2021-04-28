@@ -2,27 +2,24 @@
 using Effort.Domain;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Characters;
 using SuperMarioRpg.Domain.Combat;
-using SuperMarioRpg.Domain.Configuration;
 
-namespace SuperMarioRpg.Application.Write.Configuration.Characters.Enemies
+namespace SuperMarioRpg.Application.Write.Characters.Playable
 {
     public record Create(
         string Name,
         ushort HitPoints,
-        byte FlowerPoints,
         short Speed,
         short Attack,
         short MagicAttack,
         short Defense,
-        short MagicDefense,
-        decimal Evade,
-        decimal MagicEvade
+        short MagicDefense
     ) : ICommand, Character.IBuilder
     {
         #region Public Interface
 
-        public Enemy Build()
+        public PlayableCharacter Build()
         {
             return new(this);
         }
@@ -33,22 +30,12 @@ namespace SuperMarioRpg.Application.Write.Configuration.Characters.Enemies
 
         public CharacterTypes GetCharacterTypes()
         {
-            return CharacterTypes.Combatant;
+            return CharacterTypes.Combatant | CharacterTypes.Playable;
         }
 
         public Enemy.CombatStats GetEnemyCombatStats()
         {
-            return new(
-                HitPoints,
-                FlowerPoints,
-                Speed,
-                Attack,
-                MagicAttack,
-                Defense,
-                MagicDefense,
-                Evade,
-                MagicEvade
-            );
+            throw new NotSupportedException();
         }
 
         public Id GetId()
@@ -63,14 +50,14 @@ namespace SuperMarioRpg.Application.Write.Configuration.Characters.Enemies
 
         public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
         {
-            throw new NotSupportedException();
+            return new(HitPoints, Speed, Attack, MagicAttack, Defense, MagicDefense);
         }
 
         #endregion
 
         #region Static Interface
 
-        public static Enemy Build(Create builder)
+        public static PlayableCharacter Build(Create builder)
         {
             return builder.Build();
         }
@@ -91,7 +78,7 @@ namespace SuperMarioRpg.Application.Write.Configuration.Characters.Enemies
 
             public override void Handle(Create command)
             {
-                UnitOfWork.Enemies.Create(command.Build());
+                UnitOfWork.PlayableCharacters.Create(command.Build());
                 UnitOfWork.Commit();
             }
 

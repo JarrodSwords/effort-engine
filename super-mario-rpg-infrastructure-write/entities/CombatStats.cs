@@ -1,4 +1,4 @@
-﻿using SuperMarioRpg.Domain.Configuration;
+﻿using SuperMarioRpg.Domain.Characters;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {

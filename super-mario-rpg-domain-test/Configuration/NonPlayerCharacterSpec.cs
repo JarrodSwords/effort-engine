@@ -1,6 +1,6 @@
 ﻿using System;
 using FluentAssertions;
-using SuperMarioRpg.Domain.Configuration;
+using SuperMarioRpg.Domain.Characters;
 using Xunit;
 
 namespace SuperMarioRpg.Domain.Test.Configuration

@@ -2,7 +2,7 @@
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 
-namespace SuperMarioRpg.Application.Write.Configuration.Characters.NonPlayable
+namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 {
     public record Seed : ICommand
     {

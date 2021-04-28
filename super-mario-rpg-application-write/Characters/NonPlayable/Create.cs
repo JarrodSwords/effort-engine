@@ -2,10 +2,10 @@
 using Effort.Domain;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Characters;
 using SuperMarioRpg.Domain.Combat;
-using SuperMarioRpg.Domain.Configuration;
 
-namespace SuperMarioRpg.Application.Write.Configuration.Characters.NonPlayable
+namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 {
     public record Create(string Name) : ICommand, Character.IBuilder
     {

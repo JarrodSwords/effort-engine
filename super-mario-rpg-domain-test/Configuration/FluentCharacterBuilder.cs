@@ -1,7 +1,7 @@
 ﻿using System;
 using Effort.Domain;
+using SuperMarioRpg.Domain.Characters;
 using SuperMarioRpg.Domain.Combat;
-using SuperMarioRpg.Domain.Configuration;
 
 namespace SuperMarioRpg.Domain.Test.Configuration
 {
