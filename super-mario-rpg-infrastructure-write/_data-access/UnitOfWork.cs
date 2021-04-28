@@ -30,7 +30,7 @@ namespace SuperMarioRpg.Infrastructure.Write
         public IEnemyRepository EnemyRepository => CharacterRepository;
         public INonPlayableCharacterRepository NonPlayerCharacterRepository => CharacterRepository;
         public IPlayableCharacterRepository PlayableCharacterRepository => CharacterRepository;
-        public IPlayerRepository PlayerRepository => _playerRepository ?? new Player.Repository(_context);
+        public IPlayerRepository PlayerRepository => _playerRepository ??= new Player.Repository(_context);
 
         public void Commit()
         {

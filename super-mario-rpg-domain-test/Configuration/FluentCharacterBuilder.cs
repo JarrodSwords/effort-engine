@@ -2,8 +2,6 @@
 using Effort.Domain;
 using SuperMarioRpg.Domain.Characters;
 using SuperMarioRpg.Domain.Combat;
-using SuperMarioRpg.Domain.Stats;
-using CombatStats = SuperMarioRpg.Domain.Stats.CombatStats;
 
 namespace SuperMarioRpg.Domain.Test.Configuration
 {
@@ -32,8 +30,6 @@ namespace SuperMarioRpg.Domain.Test.Configuration
         #region ICharacterBuilder Implementation
 
         public CharacterTypes GetCharacterTypes() => 0;
-        public CombatStats GetCombatStats() => throw new NotImplementedException();
-        public EnemyCombatStats GetEnemyCombatStats() => throw new NotImplementedException();
         public Id GetId() => Id;
         public Name GetName() => Name;
 

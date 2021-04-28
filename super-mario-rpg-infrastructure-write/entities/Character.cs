@@ -2,11 +2,10 @@
 using Effort.Domain;
 using SuperMarioRpg.Domain.Characters;
 using SuperMarioRpg.Domain.Combat;
-using SuperMarioRpg.Domain.Stats;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
-    public partial class Character : Entity, ICharacterBuilder
+    public partial class Character : Entity, ICharacterBuilder, IPlayableCharacterBuilder
     {
         #region Creation
 
@@ -77,10 +76,14 @@ namespace SuperMarioRpg.Infrastructure.Write
             return characterTypes;
         }
 
-        public Domain.Stats.CombatStats GetCombatStats() => CombatStats;
-        public EnemyCombatStats GetEnemyCombatStats() => CombatStats;
         public Id GetId() => new(Id);
         public Name GetName() => Name;
+
+        #endregion
+
+        #region IPlayableCharacterBuilder Implementation
+
+        public Domain.Stats.CombatStats GetCombatStats() => CombatStats;
 
         #endregion
 
