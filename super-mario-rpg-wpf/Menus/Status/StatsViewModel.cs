@@ -1,4 +1,4 @@
-﻿using SuperMarioRpg.Domain.Combat;
+﻿using SuperMarioRpg.Domain.Old.Combat;
 
 namespace SuperMarioRpg.Wpf.Menus.Status
 {

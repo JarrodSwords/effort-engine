@@ -1,4 +1,4 @@
-﻿using SuperMarioRpg.Domain.Combat;
+﻿using SuperMarioRpg.Domain.Old.Combat;
 using SuperMarioRpg.Wpf.Controls;
 using SuperMarioRpg.Wpf.Main;
 

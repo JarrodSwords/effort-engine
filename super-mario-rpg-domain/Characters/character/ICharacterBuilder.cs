@@ -1,5 +1,5 @@
 ﻿using Effort.Domain;
-using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Domain.Old.Combat;
 
 namespace SuperMarioRpg.Domain.Characters
 {
