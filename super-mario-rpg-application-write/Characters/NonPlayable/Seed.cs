@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Characters;
 
 namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 {
@@ -29,8 +30,8 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 
             public override void Handle(Seed command)
             {
-                var characters = Characters.Select(Create.Build);
-                UnitOfWork.NonPlayerCharacters.Create(characters.ToArray());
+                var characters = Characters.Select(x => new NonPlayableCharacter(x));
+                UnitOfWork.NonPlayerCharacterRepository.Create(characters.ToArray());
                 UnitOfWork.Commit();
             }
 

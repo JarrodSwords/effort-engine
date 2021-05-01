@@ -1,8 +1,8 @@
-﻿using SuperMarioRpg.Domain;
+﻿using SuperMarioRpg.Domain.Stats;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
-    public class CombatStats : Entity
+    public class CombatStats : Entity, IEnemyCombatStatsBuilder
     {
         #region Creation
 
@@ -47,55 +47,71 @@ namespace SuperMarioRpg.Infrastructure.Write
         public decimal? MagicEvade { get; set; }
         public short Speed { get; set; }
 
-        public CombatStats Update(PlayableCharacter.CombatStats combatStats)
-        {
-            var (hitPoints, speed, attack, magicAttack, defense, magicDefense) = combatStats;
+        public Domain.Stats.CombatStats Build() => new(this);
+        public EnemyCombatStats BuildEnemyCombatStats() => new(this);
 
-            HitPoints = hitPoints;
-            Speed = speed;
-            Attack = attack;
-            MagicAttack = magicAttack;
-            Defense = defense;
-            MagicDefense = magicDefense;
+        public CombatStats Update(CombatStats combatStats)
+        {
+            Attack = combatStats.Attack;
+            Defense = combatStats.Defense;
+            HitPoints = combatStats.HitPoints;
+            MagicAttack = combatStats.MagicAttack;
+            MagicDefense = combatStats.MagicDefense;
+            Speed = combatStats.Speed;
 
             return this;
         }
 
         #endregion
 
+        #region ICombatStatsBuilder Implementation
+
+        public short GetAttack() => Attack;
+        public short GetDefense() => Defense;
+        public ushort GetHitPoints() => HitPoints;
+        public short GetMagicAttack() => MagicAttack;
+        public short GetMagicDefense() => MagicDefense;
+        public short GetSpeed() => Speed;
+
+        #endregion
+
+        #region IEnemyCombatStatsBuilder Implementation
+
+        public decimal GetEvade() => Evade ?? default;
+        public byte GetFlowerPoints() => FlowerPoints ?? default;
+        public decimal GetMagicEvade() => MagicEvade ?? default;
+
+        #endregion
+
         #region Static Interface
 
-        public static implicit operator CombatStats(Enemy.CombatStats combatStats)
-        {
-            var (hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade, magicEvade) =
-                combatStats;
+        public static implicit operator Domain.Stats.CombatStats(CombatStats combatStats) => combatStats.Build();
 
-            return new CombatStats(
-                hitPoints,
-                flowerPoints,
-                speed,
-                attack,
-                magicAttack,
-                defense,
-                magicDefense,
-                evade,
-                magicEvade
+        public static implicit operator EnemyCombatStats(CombatStats combatStats) =>
+            combatStats.BuildEnemyCombatStats();
+
+        public static implicit operator CombatStats(EnemyCombatStats combatStats) =>
+            new(
+                combatStats.HitPoints,
+                combatStats.FlowerPoints,
+                combatStats.Speed,
+                combatStats.Attack,
+                combatStats.MagicAttack,
+                combatStats.Defense,
+                combatStats.MagicDefense,
+                combatStats.Evade,
+                combatStats.MagicEvade
             );
-        }
 
-        public static implicit operator CombatStats(PlayableCharacter.CombatStats combatStats)
-        {
-            var (hitPoints, speed, attack, magicAttack, defense, magicDefense) = combatStats;
-
-            return new CombatStats(
-                hitPoints,
-                speed: speed,
-                attack: attack,
-                magicAttack: magicAttack,
-                defense: defense,
-                magicDefense: magicDefense
+        public static implicit operator CombatStats(Domain.Stats.CombatStats combatStats) =>
+            new(
+                combatStats.HitPoints,
+                speed: combatStats.Speed,
+                attack: combatStats.Attack,
+                magicAttack: combatStats.MagicAttack,
+                defense: combatStats.Defense,
+                magicDefense: combatStats.MagicDefense
             );
-        }
 
         #endregion
     }

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Effort.Domain;
 using Microsoft.EntityFrameworkCore;
-using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Characters;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
@@ -23,10 +23,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             #region IEnemyRepository Implementation
 
-            public string Create(Enemy enemy)
-            {
-                return base.Create(enemy).Name;
-            }
+            public string Create(Enemy enemy) => base.Create(enemy).Name;
 
             public void Create(params Enemy[] enemies)
             {
@@ -37,10 +34,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             #region INonPlayableCharacterRepository Implementation
 
-            public string Create(NonPlayableCharacter nonPlayableCharacter)
-            {
-                return base.Create(nonPlayableCharacter).Name;
-            }
+            public string Create(NonPlayableCharacter nonPlayableCharacter) => base.Create(nonPlayableCharacter).Name;
 
             public void Create(params NonPlayableCharacter[] nonPlayerCharacters)
             {
@@ -53,10 +47,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
             #region IPlayableCharacterRepository Implementation
 
-            public string Create(PlayableCharacter playableCharacter)
-            {
-                return base.Create(playableCharacter).Name;
-            }
+            public string Create(PlayableCharacter playableCharacter) => base.Create(playableCharacter).Name;
 
             public void Create(params PlayableCharacter[] playableCharacters)
             {

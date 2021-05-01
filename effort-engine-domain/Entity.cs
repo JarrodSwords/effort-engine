@@ -32,10 +32,7 @@ namespace Effort.Domain
             return Id == otherEntity.Id;
         }
 
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
+        public override int GetHashCode() => Id.GetHashCode();
 
         #endregion
 
@@ -43,19 +40,13 @@ namespace Effort.Domain
 
         public static bool operator ==(Entity left, Entity right)
         {
-            if (left is null && right is null)
-                return true;
-
-            if (left is null || right is null)
-                return false;
+            if (left is null)
+                return right is null;
 
             return Equals(left, right);
         }
 
-        public static bool operator !=(Entity left, Entity right)
-        {
-            return !Equals(left, right);
-        }
+        public static bool operator !=(Entity left, Entity right) => !Equals(left, right);
 
         #endregion
     }

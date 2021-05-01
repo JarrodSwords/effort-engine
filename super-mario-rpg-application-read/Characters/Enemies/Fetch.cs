@@ -13,12 +13,10 @@ namespace SuperMarioRpg.Application.Read.Characters.Enemies
         {
             #region Public Interface
 
-            public override IEnumerable<Enemy> MakeRequest(IDbConnection connection, Fetch query)
-            {
-                return connection
+            public override IEnumerable<Enemy> MakeRequest(IDbConnection connection, Fetch query) =>
+                connection
                     .Query<Record>(Record.Fetch)
                     .Select(Record.AsEnemy);
-            }
 
             #endregion
         }

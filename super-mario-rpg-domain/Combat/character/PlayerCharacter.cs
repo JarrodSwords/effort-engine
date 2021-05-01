@@ -82,11 +82,7 @@ namespace SuperMarioRpg.Domain.Combat
             return this;
         }
 
-
-        public bool IsEquipped(Equipment equipment)
-        {
-            return Loadout.IsEquipped(equipment);
-        }
+        public bool IsEquipped(Equipment equipment) => Loadout.IsEquipped(equipment);
 
         public PlayerCharacter Unequip(Equipment equipment)
         {
@@ -114,10 +110,7 @@ namespace SuperMarioRpg.Domain.Combat
             return new Standard(Progression.Xp);
         }
 
-        private Status CreateStatus()
-        {
-            return Loadout.GetStatus();
-        }
+        private Status CreateStatus() => Loadout.GetStatus();
 
         #endregion
     }

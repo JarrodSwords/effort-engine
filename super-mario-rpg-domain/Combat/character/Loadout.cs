@@ -45,15 +45,8 @@ namespace SuperMarioRpg.Domain.Combat
             };
         }
 
-        public Stats GetStats()
-        {
-            return Stats.Aggregate(Accessory.Stats, Armor.Stats, Weapon.Stats);
-        }
-
-        public bool IsEquipped(Equipment equipment)
-        {
-            return equipment == GetEquipment(equipment.EquipmentSlot);
-        }
+        public Stats GetStats() => Stats.Aggregate(Accessory.Stats, Armor.Stats, Weapon.Stats);
+        public bool IsEquipped(Equipment equipment) => equipment == GetEquipment(equipment.EquipmentSlot);
 
         public Loadout Unequip(Equipment equipment)
         {
@@ -73,10 +66,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region IStatusProvider Implementation
 
-        public Status GetStatus()
-        {
-            return Aggregate(Accessory, Armor, Weapon);
-        }
+        public Status GetStatus() => Aggregate(Accessory, Armor, Weapon);
 
         #endregion
     }

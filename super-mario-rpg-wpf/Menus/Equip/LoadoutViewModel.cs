@@ -17,9 +17,9 @@ namespace SuperMarioRpg.Wpf.Menus.Equip
 
         #region Public Interface
 
-        public string Accessory => _loadout.Accessory.Name.Value;
-        public string Armor => _loadout.Armor.Name.Value;
-        public string Weapon => _loadout.Weapon.Name.Value;
+        public string Accessory => _loadout.Accessory.Name;
+        public string Armor => _loadout.Armor.Name;
+        public string Weapon => _loadout.Weapon.Name;
 
         #endregion
     }

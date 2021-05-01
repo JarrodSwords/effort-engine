@@ -47,10 +47,7 @@ select c.name
 
         #region Static Interface
 
-        public static Enemy AsEnemy(Record record)
-        {
-            return record;
-        }
+        public static Enemy AsEnemy(Record record) => record;
 
         public static implicit operator Enemy(Record record)
         {

@@ -1,10 +1,10 @@
-﻿namespace SuperMarioRpg.Domain
+﻿namespace SuperMarioRpg.Domain.Characters
 {
     public class NonPlayableCharacter : Character
     {
         #region Creation
 
-        public NonPlayableCharacter(IBuilder builder) : base(builder)
+        public NonPlayableCharacter(ICharacterBuilder builder) : base(builder)
         {
         }
 

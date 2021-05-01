@@ -26,7 +26,6 @@ namespace SuperMarioRpg.Domain.Combat
         public Name Name { get; }
         public Stats NaturalStats { get; private set; }
         public Equipment Weapon { get; private set; }
-
         public Xp Xp => new();
 
         public ManualPlayerCharacterBuilder Add(params Equipment[] equipment)
@@ -111,35 +110,12 @@ namespace SuperMarioRpg.Domain.Combat
             NaturalStats = CreateStats(Attack, Defense, Hp, SpecialAttack, SpecialDefense, Speed);
         }
 
-        public CharacterTypes GetCharacterType()
-        {
-            return CharacterType;
-        }
-
-        public Id GetId()
-        {
-            return new(Id);
-        }
-
-        public Loadout GetLoadout()
-        {
-            return new(Accessory, Armor, Weapon);
-        }
-
-        public Name GetName()
-        {
-            return Name;
-        }
-
-        public Stats GetNaturalStats()
-        {
-            return NaturalStats;
-        }
-
-        public Xp GetXp()
-        {
-            return Xp;
-        }
+        public CharacterTypes GetCharacterType() => CharacterType;
+        public Id GetId() => new(Id);
+        public Loadout GetLoadout() => new(Accessory, Armor, Weapon);
+        public Name GetName() => Name;
+        public Stats GetNaturalStats() => NaturalStats;
+        public Xp GetXp() => Xp;
 
         #endregion
     }

@@ -1,57 +1,18 @@
-﻿using System;
-using Effort.Domain;
+﻿using Effort.Domain;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Characters;
 using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 {
-    public record Create(string Name) : ICommand, Character.IBuilder
+    public record Create(string Name) : ICommand, ICharacterBuilder
     {
-        #region Public Interface
+        #region ICharacterBuilder Implementation
 
-        public NonPlayableCharacter Build()
-        {
-            return new(this);
-        }
-
-        #endregion
-
-        #region IBuilder Implementation
-
-        public CharacterTypes GetCharacterTypes()
-        {
-            return CharacterTypes.None;
-        }
-
-        public Enemy.CombatStats GetEnemyCombatStats()
-        {
-            throw new NotSupportedException();
-        }
-
-        public Id GetId()
-        {
-            return default;
-        }
-
-        public Name GetName()
-        {
-            return Name;
-        }
-
-        public PlayableCharacter.CombatStats GetPlayableCharacterCombatStats()
-        {
-            throw new NotSupportedException();
-        }
-
-        #endregion
-
-        #region Static Interface
-
-        public static NonPlayableCharacter Build(Create builder)
-        {
-            return builder.Build();
-        }
+        public CharacterTypes GetCharacterTypes() => CharacterTypes.None;
+        public Id GetId() => default;
+        public Name GetName() => Name;
 
         #endregion
 
@@ -70,7 +31,7 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 
             public override void Handle(Create command)
             {
-                UnitOfWork.NonPlayerCharacters.Create(command.Build());
+                UnitOfWork.NonPlayerCharacterRepository.Create(new NonPlayableCharacter(command));
                 UnitOfWork.Commit();
             }
 

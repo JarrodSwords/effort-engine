@@ -14,20 +14,9 @@ namespace SuperMarioRpg.Domain.Combat
 
         #region Static Interface
 
-        public static Xp operator +(Xp left, Xp right)
-        {
-            return new((ushort) (left.Value + right.Value));
-        }
-
-        public static implicit operator Xp(ushort value)
-        {
-            return new(value);
-        }
-
-        public static Xp operator -(Xp left, Xp right)
-        {
-            return new((ushort) (left.Value - right.Value));
-        }
+        public static Xp operator +(Xp left, Xp right) => new((ushort) (left.Value + right.Value));
+        public static Xp operator -(Xp left, Xp right) => new((ushort) (left.Value - right.Value));
+        public static implicit operator Xp(ushort value) => new(value);
 
         #endregion
     }

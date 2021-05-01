@@ -1,5 +1,6 @@
 ﻿using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Players;
 
 namespace SuperMarioRpg.Application.Write.Players
 {
@@ -27,7 +28,7 @@ namespace SuperMarioRpg.Application.Write.Players
 
                 var player = new Player(emailAddress, password, userName);
 
-                UnitOfWork.Players.Create(player);
+                UnitOfWork.PlayerRepository.Create(player);
                 UnitOfWork.Commit();
             }
 

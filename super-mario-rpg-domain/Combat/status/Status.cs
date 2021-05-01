@@ -42,15 +42,13 @@ namespace SuperMarioRpg.Domain.Combat
             );
         }
 
-        public static Status operator +(Status left, Status right)
-        {
-            return new(
+        public static Status operator +(Status left, Status right) =>
+            new(
                 left.AilmentImmunities | right.AilmentImmunities,
                 left.Buffs | right.Buffs,
                 left.ElementalImmunities | right.ElementalImmunities,
                 left.ElementalResistances | right.ElementalResistances
             );
-        }
 
         #endregion
     }

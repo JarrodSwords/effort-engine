@@ -1,13 +1,13 @@
 ﻿using Effort.Domain;
 using SuperMarioRpg.Domain.Combat;
 
-namespace SuperMarioRpg.Domain
+namespace SuperMarioRpg.Domain.Characters
 {
-    public abstract partial class Character : AggregateRoot
+    public abstract class Character : AggregateRoot
     {
         #region Creation
 
-        protected Character(IBuilder builder) : base(builder.GetId())
+        protected Character(ICharacterBuilder builder) : base(builder.GetId())
         {
             CharacterTypes = builder.GetCharacterTypes();
             Name = builder.GetName();

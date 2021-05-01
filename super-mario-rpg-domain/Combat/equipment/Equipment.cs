@@ -39,33 +39,22 @@ namespace SuperMarioRpg.Domain.Combat
         public Name Name { get; }
         public Stats Stats { get; }
 
-        public bool IsCompatible(CharacterTypes characterType)
-        {
-            return CharacterTypes.Contains(characterType);
-        }
+        public bool IsCompatible(CharacterTypes characterType) => CharacterTypes.Contains(characterType);
 
-        public override string ToString()
-        {
-            return Name.ToString();
-        }
+        public override string ToString() => Name.ToString();
 
         #endregion
 
         #region IStatusProvider Implementation
 
-        public Status GetStatus()
-        {
-            return new(buffs: Buffs);
-        }
+        public Status GetStatus() => new(buffs: Buffs);
 
         #endregion
 
         #region Static Interface
 
-        public static Equipment CreateEquipment(EquipmentSlot equipmentSlot)
-        {
-            return new(new Id(), EquipmentType.None, equipmentSlot, CharacterTypes.Playable, null, Buffs.None);
-        }
+        public static Equipment CreateEquipment(EquipmentSlot equipmentSlot) =>
+            new(new Id(), EquipmentType.None, equipmentSlot, CharacterTypes.Playable, null, Buffs.None);
 
         public static Equipment CreateEquipment(
             EquipmentType equipmentType,
@@ -74,10 +63,8 @@ namespace SuperMarioRpg.Domain.Combat
             string name,
             Buffs buffs = default,
             Id id = default
-        )
-        {
-            return new(id, equipmentType, equipmentSlot, characterTypes, name, buffs);
-        }
+        ) =>
+            new(id, equipmentType, equipmentSlot, characterTypes, name, buffs);
 
         #endregion
     }

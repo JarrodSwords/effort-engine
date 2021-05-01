@@ -33,39 +33,22 @@ namespace Effort.Domain
                 : base.Equals(other);
         }
 
-        public bool Equals(T other)
-        {
-            return ((T) this).Equals(other);
-        }
+        public bool Equals(T other) => ((T) this).Equals(other);
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Value;
         }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+        public override int GetHashCode() => base.GetHashCode();
 
         #endregion
 
         #region Static Interface
 
-        public static bool operator ==(TinyType<T> left, TinyType<T> right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(TinyType<T> left, TinyType<T> right)
-        {
-            return !Equals(left, right);
-        }
-
-        public static implicit operator T(TinyType<T> instance)
-        {
-            return instance is null ? default : instance.Value;
-        }
+        public static bool operator ==(TinyType<T> left, TinyType<T> right) => Equals(left, right);
+        public static bool operator !=(TinyType<T> left, TinyType<T> right) => !Equals(left, right);
+        public static implicit operator T(TinyType<T> instance) => instance is null ? default : instance.Value;
 
         #endregion
     }

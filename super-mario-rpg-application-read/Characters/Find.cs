@@ -17,10 +17,8 @@ select name
 
             #region Public Interface
 
-            public override Character MakeRequest(IDbConnection connection, Find query)
-            {
-                return connection.QuerySingle<Character>(Find, query);
-            }
+            public override Character MakeRequest(IDbConnection connection, Find query) =>
+                connection.QuerySingle<Character>(Find, query);
 
             #endregion
         }

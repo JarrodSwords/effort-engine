@@ -1,5 +1,6 @@
 ﻿using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Stats;
 
 namespace SuperMarioRpg.Application.Write.Characters.Playable
 {
@@ -11,8 +12,19 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
         short MagicAttack,
         short Defense,
         short MagicDefense
-    ) : ICommand
+    ) : ICommand, ICombatStatsBuilder
     {
+        #region ICombatStatsBuilder Implementation
+
+        public short GetAttack() => Attack;
+        public short GetDefense() => Defense;
+        public ushort GetHitPoints() => HitPoints;
+        public short GetMagicAttack() => MagicAttack;
+        public short GetMagicDefense() => MagicDefense;
+        public short GetSpeed() => Speed;
+
+        #endregion
+
         internal class Handler : Handler<UpdateBaseStats>
         {
             #region Creation
@@ -27,21 +39,11 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
 
             public override void Handle(UpdateBaseStats command)
             {
-                var (name, hitPoints, speed, attack, magicAttack, defense, magicDefense) = command;
-                var baseStats = new PlayableCharacter.CombatStats(
-                    hitPoints,
-                    speed,
-                    attack,
-                    magicAttack,
-                    defense,
-                    magicDefense
-                );
+                var playableCharacter = UnitOfWork.PlayableCharacterRepository.Find(command.Name);
 
-                var playableCharacter = UnitOfWork.PlayableCharacters.Find(name);
+                playableCharacter.BaseStats = new CombatStats(command);
 
-                playableCharacter.BaseStats = baseStats;
-
-                UnitOfWork.PlayableCharacters.Update(playableCharacter);
+                UnitOfWork.PlayableCharacterRepository.Update(playableCharacter);
                 UnitOfWork.Commit();
             }
 

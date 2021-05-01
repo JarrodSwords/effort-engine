@@ -17,10 +17,8 @@ select email_address
 
             #region Public Interface
 
-            public override Player MakeRequest(IDbConnection connection, Find query)
-            {
-                return connection.QuerySingle<Record>(Find, query);
-            }
+            public override Player MakeRequest(IDbConnection connection, Find query) =>
+                connection.QuerySingle<Record>(Find, query);
 
             #endregion
         }

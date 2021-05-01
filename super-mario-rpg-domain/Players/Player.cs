@@ -1,6 +1,6 @@
 ﻿using Effort.Domain;
 
-namespace SuperMarioRpg.Domain
+namespace SuperMarioRpg.Domain.Players
 {
     public class Player : AggregateRoot
     {

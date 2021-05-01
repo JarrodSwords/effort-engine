@@ -17,10 +17,10 @@ namespace SuperMarioRpg.Wpf.Menus.Equip
 
         #region Public Interface
 
-        public short Attack => _stats.Attack.Value;
-        public short Defense => _stats.Defense.Value;
-        public short MagicAttack => _stats.SpecialAttack.Value;
-        public short MagicDefense => _stats.SpecialDefense.Value;
+        public short Attack => _stats.Attack;
+        public short Defense => _stats.Defense;
+        public short MagicAttack => _stats.SpecialAttack;
+        public short MagicDefense => _stats.SpecialDefense;
 
         #endregion
     }

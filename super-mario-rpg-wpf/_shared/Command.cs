@@ -55,10 +55,7 @@ namespace SuperMarioRpg.Wpf
 
         #region ICommand Implementation
 
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute((T) parameter);
-        }
+        public bool CanExecute(object parameter) => _canExecute((T) parameter);
 
         public void Execute(object parameter)
         {
