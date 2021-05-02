@@ -13,7 +13,7 @@ namespace SuperMarioRpg.WebApi.Test
         #region Core
 
         public NonPlayerCharacterControllerSpec(WebApplicationFactory<Startup> factory)
-            : base(factory, "api/non-player-characters")
+            : base(factory, "api/non-playable-characters")
         {
         }
 
