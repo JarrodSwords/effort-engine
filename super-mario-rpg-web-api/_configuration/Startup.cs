@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using SuperMarioRpg.Infrastructure.Write;
 
 namespace SuperMarioRpg.WebApi
 {
@@ -35,7 +34,6 @@ namespace SuperMarioRpg.WebApi
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SuperMarioRpg.WebApi v1"));
-                app.ConfigureDevDatabase();
             }
 
             app.UseHttpsRedirection();
@@ -53,7 +51,6 @@ namespace SuperMarioRpg.WebApi
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterType<Context>();
             builder.RegisterModules();
         }
 
