@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "application-read", "super-m
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api", "super-mario-rpg-api\api.csproj", "{A0FFD271-A5E6-447F-8BE5-E435A321A50D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "seeder", "super-mario-rpg-seeder\seeder.csproj", "{F918F48D-00BF-45C7-90C7-EFFC837637E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -171,6 +173,18 @@ Global
 		{A0FFD271-A5E6-447F-8BE5-E435A321A50D}.Release|x64.Build.0 = Release|Any CPU
 		{A0FFD271-A5E6-447F-8BE5-E435A321A50D}.Release|x86.ActiveCfg = Release|Any CPU
 		{A0FFD271-A5E6-447F-8BE5-E435A321A50D}.Release|x86.Build.0 = Release|Any CPU
+		{F918F48D-00BF-45C7-90C7-EFFC837637E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F918F48D-00BF-45C7-90C7-EFFC837637E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F918F48D-00BF-45C7-90C7-EFFC837637E3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F918F48D-00BF-45C7-90C7-EFFC837637E3}.Debug|x64.Build.0 = Debug|Any CPU
+		{F918F48D-00BF-45C7-90C7-EFFC837637E3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F918F48D-00BF-45C7-90C7-EFFC837637E3}.Debug|x86.Build.0 = Debug|Any CPU
+		{F918F48D-00BF-45C7-90C7-EFFC837637E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F918F48D-00BF-45C7-90C7-EFFC837637E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F918F48D-00BF-45C7-90C7-EFFC837637E3}.Release|x64.ActiveCfg = Release|Any CPU
+		{F918F48D-00BF-45C7-90C7-EFFC837637E3}.Release|x64.Build.0 = Release|Any CPU
+		{F918F48D-00BF-45C7-90C7-EFFC837637E3}.Release|x86.ActiveCfg = Release|Any CPU
+		{F918F48D-00BF-45C7-90C7-EFFC837637E3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -187,6 +201,7 @@ Global
 		{B5AACF0F-37CE-4C78-A5A9-9AA0FC4ED73B} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
 		{B2173D18-7806-4DF3-B1A8-AF67E15BFE41} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
 		{A0FFD271-A5E6-447F-8BE5-E435A321A50D} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
+		{F918F48D-00BF-45C7-90C7-EFFC837637E3} = {2C2B936F-37FD-48B1-AC5C-F78516012AE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DB219336-6540-4720-BC3B-6A42D018B888}
