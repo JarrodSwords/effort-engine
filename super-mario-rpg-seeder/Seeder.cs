@@ -1,5 +1,5 @@
 using Effort.Domain.Messages;
-using SuperMarioRpg.Application.Write.Characters.Enemies;
+using SuperMarioRpg.Application.Write.Administration;
 using SuperMarioRpg.Infrastructure.Write;
 
 namespace SuperMarioRpg.Seeder
@@ -7,26 +7,26 @@ namespace SuperMarioRpg.Seeder
     public class Seeder
     {
         private readonly Context _context;
-        private readonly ICommandHandler<Seed> _seedEnemiesHandler;
+        private readonly ICommandHandler<SeedEnemies> _seedEnemiesHandler;
 
-        private readonly ICommandHandler<Application.Write.Characters.NonPlayable.Seed>
+        private readonly ICommandHandler<SeedNonPlayableCharacters>
             _seedNonPlayableCharactersHandler;
 
-        private readonly ICommandHandler<Application.Write.Characters.Playable.Seed> _seedPlayableCharactersHandler;
+        private readonly ICommandHandler<SeedPlayableCharacters> _seedPlayableCharactersHandler;
 
         #region Creation
 
         public Seeder(
             Context context,
-            ICommandHandler<Application.Write.Characters.NonPlayable.Seed> seedNonPlayableCharactersHandler,
-            ICommandHandler<Application.Write.Characters.Playable.Seed> seedPlayableCharactersHandler,
-            ICommandHandler<Seed> seedEnemiesHandler
+            ICommandHandler<SeedEnemies> seedEnemiesHandler,
+            ICommandHandler<SeedNonPlayableCharacters> seedNonPlayableCharactersHandler,
+            ICommandHandler<SeedPlayableCharacters> seedPlayableCharactersHandler
         )
         {
             _context = context;
+            _seedEnemiesHandler = seedEnemiesHandler;
             _seedNonPlayableCharactersHandler = seedNonPlayableCharactersHandler;
             _seedPlayableCharactersHandler = seedPlayableCharactersHandler;
-            _seedEnemiesHandler = seedEnemiesHandler;
         }
 
         #endregion
@@ -41,9 +41,9 @@ namespace SuperMarioRpg.Seeder
 
         public Seeder Seed()
         {
-            _seedNonPlayableCharactersHandler.Handle(new Application.Write.Characters.NonPlayable.Seed());
-            _seedEnemiesHandler.Handle(new Seed());
-            _seedPlayableCharactersHandler.Handle(new Application.Write.Characters.Playable.Seed());
+            _seedNonPlayableCharactersHandler.Handle(new SeedNonPlayableCharacters());
+            _seedEnemiesHandler.Handle(new SeedEnemies());
+            _seedPlayableCharactersHandler.Handle(new SeedPlayableCharacters());
             return this;
         }
 

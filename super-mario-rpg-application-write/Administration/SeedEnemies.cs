@@ -1,13 +1,14 @@
 ﻿using System.Linq;
 using Effort.Domain.Messages;
+using SuperMarioRpg.Application.Write.Characters.Enemies;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Characters;
 
-namespace SuperMarioRpg.Application.Write.Characters.Enemies
+namespace SuperMarioRpg.Application.Write.Administration
 {
-    public record Seed : ICommand
+    public record SeedEnemies : ICommand
     {
-        internal class Handler : Handler<Seed>
+        internal class Handler : Handler<SeedEnemies>
         {
             private static readonly Create[] Enemies =
             {
@@ -28,7 +29,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
 
             #region Public Interface
 
-            public override void Handle(Seed command)
+            public override void Handle(SeedEnemies command)
             {
                 var enemies = Enemies.Select(x => new Enemy(x));
                 UnitOfWork.EnemyRepository.Create(enemies.ToArray());

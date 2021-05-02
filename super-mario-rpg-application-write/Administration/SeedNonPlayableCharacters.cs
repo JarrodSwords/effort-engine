@@ -1,13 +1,14 @@
 ﻿using System.Linq;
 using Effort.Domain.Messages;
+using SuperMarioRpg.Application.Write.Characters.NonPlayable;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Characters;
 
-namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
+namespace SuperMarioRpg.Application.Write.Administration
 {
-    public record Seed : ICommand
+    public record SeedNonPlayableCharacters : ICommand
     {
-        internal class Handler : Handler<Seed>
+        internal class Handler : Handler<SeedNonPlayableCharacters>
         {
             private static readonly Create[] Characters =
             {
@@ -28,7 +29,7 @@ namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 
             #region Public Interface
 
-            public override void Handle(Seed command)
+            public override void Handle(SeedNonPlayableCharacters command)
             {
                 var characters = Characters.Select(x => new NonPlayableCharacter(x));
                 UnitOfWork.NonPlayerCharacterRepository.Create(characters.ToArray());
