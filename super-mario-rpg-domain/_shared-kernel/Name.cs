@@ -1,4 +1,6 @@
-namespace Effort.Domain
+using Effort.Domain;
+
+namespace SuperMarioRpg.Domain
 {
     public class Name : TinyType<string>
     {

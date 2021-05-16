@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Effort.Domain;
 using Microsoft.EntityFrameworkCore;
+using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Domain.Overworld;
 
