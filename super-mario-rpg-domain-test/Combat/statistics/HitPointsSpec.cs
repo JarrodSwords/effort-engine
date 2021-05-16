@@ -1,9 +1,10 @@
 ﻿using Effort.Domain;
+using Effort.Domain.Test;
 using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Domain.Test.Combat
 {
-    public class HitPointsSpec : StatisticSpec
+    public class HitPointsSpec : ValueObjectSpec
     {
         #region Protected Interface
 

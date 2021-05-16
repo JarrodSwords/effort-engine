@@ -4,12 +4,12 @@ using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Domain.Test.Combat
 {
-    public class SpeedSpec : ValueObjectSpec
+    public class FlowerPointsSpec : ValueObjectSpec
     {
         #region Protected Interface
 
-        protected override ValueObject Create() => new Speed(1);
-        protected override ValueObject CreateOther() => new Speed(2);
+        protected override ValueObject Create() => new FlowerPoints(1);
+        protected override ValueObject CreateOther() => new FlowerPoints(2);
 
         #endregion
     }

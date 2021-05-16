@@ -1,9 +1,10 @@
 ﻿using Effort.Domain;
+using Effort.Domain.Test;
 using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Domain.Test.Combat
 {
-    public class MagicAttackSpec : StatisticSpec
+    public class MagicAttackSpec : ValueObjectSpec
     {
         #region Protected Interface
 
