@@ -2,8 +2,8 @@
 {
     public interface IEnemyStatisticsBuilder : IStatisticsBuilder
     {
-        decimal GetEvade();
-        byte GetFlowerPoints();
-        decimal GetMagicEvade();
+        Evade GetEvade();
+        FlowerPoints GetFlowerPoints();
+        MagicEvade GetMagicEvade();
     }
 }

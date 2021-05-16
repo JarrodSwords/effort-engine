@@ -1,6 +1,8 @@
-﻿namespace SuperMarioRpg.Domain.Combat
+﻿using Effort.Domain;
+
+namespace SuperMarioRpg.Domain.Combat
 {
-    public class MagicDefense : Statistic
+    public class MagicDefense : TinyType<short>
     {
         #region Creation
 

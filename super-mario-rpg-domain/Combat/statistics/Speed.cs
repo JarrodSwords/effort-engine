@@ -1,6 +1,8 @@
-﻿namespace SuperMarioRpg.Domain.Combat
+﻿using Effort.Domain;
+
+namespace SuperMarioRpg.Domain.Combat
 {
-    public class Speed : Statistic
+    public class Speed : TinyType<short>
     {
         #region Creation
 

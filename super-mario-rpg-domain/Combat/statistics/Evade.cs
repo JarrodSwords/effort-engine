@@ -1,10 +1,12 @@
-﻿namespace SuperMarioRpg.Domain.Combat
+﻿using Effort.Domain;
+
+namespace SuperMarioRpg.Domain.Combat
 {
-    public class Evade : Statistic
+    public class Evade : TinyType<decimal>
     {
         #region Creation
 
-        public Evade(short value) : base(value)
+        public Evade(decimal value) : base(value)
         {
         }
 
@@ -12,7 +14,7 @@
 
         #region Static Interface
 
-        public static implicit operator Evade(short value) => new(value);
+        public static implicit operator Evade(decimal value) => new(value);
 
         #endregion
     }

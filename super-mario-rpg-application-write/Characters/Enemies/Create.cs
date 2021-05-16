@@ -19,6 +19,12 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
         decimal MagicEvade
     ) : ICommand, IEnemyBuilder, IEnemyStatisticsBuilder
     {
+        #region Public Interface
+
+        public EnemyStatistics GetStatistics() => new(this);
+
+        #endregion
+
         #region ICharacterBuilder Implementation
 
         public CharacterTypes GetCharacterTypes() => CharacterTypes.Combatant;
@@ -27,17 +33,11 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
 
         #endregion
 
-        #region IEnemyBuilder Implementation
-
-        public EnemyStatistics GetCombatStats() => new(this);
-
-        #endregion
-
         #region IEnemyStatisticsBuilder Implementation
 
-        public decimal GetEvade() => Evade;
-        public byte GetFlowerPoints() => FlowerPoints;
-        public decimal GetMagicEvade() => MagicEvade;
+        public Evade GetEvade() => Evade;
+        public FlowerPoints GetFlowerPoints() => FlowerPoints;
+        public MagicEvade GetMagicEvade() => MagicEvade;
 
         #endregion
 

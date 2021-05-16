@@ -23,7 +23,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         private Character(Enemy enemy) : this(enemy as Domain.Combat.Character)
         {
-            Statistics = enemy.BaseStats;
+            Statistics = enemy.Statistics;
         }
 
         private Character(PlayableCharacter playableCharacter) : this(

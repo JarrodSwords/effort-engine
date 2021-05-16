@@ -1,10 +1,12 @@
-﻿namespace SuperMarioRpg.Domain.Combat
+﻿using Effort.Domain;
+
+namespace SuperMarioRpg.Domain.Combat
 {
-    public class MagicEvade : Statistic
+    public class MagicEvade : TinyType<decimal>
     {
         #region Creation
 
-        public MagicEvade(short value) : base(value)
+        public MagicEvade(decimal value) : base(value)
         {
         }
 
@@ -12,7 +14,7 @@
 
         #region Static Interface
 
-        public static implicit operator MagicEvade(short value) => new(value);
+        public static implicit operator MagicEvade(decimal value) => new(value);
 
         #endregion
     }

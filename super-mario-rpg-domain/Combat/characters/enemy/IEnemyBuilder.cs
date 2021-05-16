@@ -2,6 +2,6 @@
 {
     public interface IEnemyBuilder : ICharacterBuilder
     {
-        EnemyStatistics GetCombatStats();
+        EnemyStatistics GetStatistics();
     }
 }

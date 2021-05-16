@@ -1,6 +1,8 @@
-﻿namespace SuperMarioRpg.Domain.Combat
+﻿using Effort.Domain;
+
+namespace SuperMarioRpg.Domain.Combat
 {
-    public class HitPoints : Statistic
+    public class HitPoints : TinyType<short>
     {
         #region Creation
 

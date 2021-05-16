@@ -65,9 +65,9 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region IEnemyStatisticsBuilder Implementation
 
-        public decimal GetEvade() => Evade ?? default;
-        public byte GetFlowerPoints() => FlowerPoints ?? default;
-        public decimal GetMagicEvade() => MagicEvade ?? default;
+        public Evade GetEvade() => Evade ?? default;
+        public FlowerPoints GetFlowerPoints() => FlowerPoints ?? default;
+        public MagicEvade GetMagicEvade() => MagicEvade ?? default;
 
         #endregion
 

@@ -1,10 +1,12 @@
-﻿namespace SuperMarioRpg.Domain.Combat
+﻿using Effort.Domain;
+
+namespace SuperMarioRpg.Domain.Combat
 {
-    public class FlowerPoints : Statistic
+    public class FlowerPoints : TinyType<byte>
     {
         #region Creation
 
-        public FlowerPoints(short value) : base(value)
+        public FlowerPoints(byte value) : base(value)
         {
         }
 
@@ -12,7 +14,7 @@
 
         #region Static Interface
 
-        public static implicit operator FlowerPoints(short value) => new(value);
+        public static implicit operator FlowerPoints(byte value) => new(value);
 
         #endregion
     }

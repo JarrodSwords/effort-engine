@@ -15,9 +15,9 @@
 
         #region Public Interface
 
-        public decimal Evade { get; }
-        public byte FlowerPoints { get; }
-        public decimal MagicEvade { get; }
+        public Evade Evade { get; }
+        public FlowerPoints FlowerPoints { get; }
+        public MagicEvade MagicEvade { get; }
 
         #endregion
     }
