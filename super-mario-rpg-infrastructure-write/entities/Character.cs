@@ -33,6 +33,12 @@ namespace SuperMarioRpg.Infrastructure.Write
             CombatStats = playableCharacter.BaseStats;
         }
 
+        private Character(NonPlayableCharacter nonPlayableCharacter)
+        {
+            Name = nonPlayableCharacter.Name;
+            Update(nonPlayableCharacter.CharacterTypes);
+        }
+
         #endregion
 
         #region Public Interface
