@@ -3,6 +3,7 @@ using Effort.Domain;
 using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Domain.Old.Combat;
 using SuperMarioRpg.Domain.Overworld;
+using ICharacterBuilder = SuperMarioRpg.Domain.Combat.ICharacterBuilder;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
