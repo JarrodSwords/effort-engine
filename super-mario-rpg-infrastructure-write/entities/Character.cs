@@ -91,7 +91,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region IPlayableCharacterBuilder Implementation
 
-        public Domain.Combat.Statistics GetStatistics() => Statistics;
+        public Domain.Statistics GetStatistics() => Statistics;
 
         #endregion
 

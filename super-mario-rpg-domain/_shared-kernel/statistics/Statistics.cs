@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Effort.Domain;
 
-namespace SuperMarioRpg.Domain.Combat
+namespace SuperMarioRpg.Domain
 {
     public class Statistics : ValueObject
     {

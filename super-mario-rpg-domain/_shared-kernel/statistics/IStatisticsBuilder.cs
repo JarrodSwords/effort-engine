@@ -1,4 +1,4 @@
-﻿namespace SuperMarioRpg.Domain.Combat
+﻿namespace SuperMarioRpg.Domain
 {
     public interface IStatisticsBuilder
     {

@@ -1,6 +1,6 @@
 ﻿using Effort.Domain;
 
-namespace SuperMarioRpg.Domain.Combat
+namespace SuperMarioRpg.Domain
 {
     public class MagicEvade : TinyType<decimal>
     {

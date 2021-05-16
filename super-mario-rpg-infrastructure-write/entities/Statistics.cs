@@ -1,4 +1,5 @@
-﻿using SuperMarioRpg.Domain.Combat;
+﻿using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
@@ -84,7 +85,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region Static Interface
 
-        public static implicit operator Domain.Combat.Statistics(Statistics statistics) => new(statistics);
+        public static implicit operator Domain.Statistics(Statistics statistics) => new(statistics);
 
         public static implicit operator EnemyStatistics(Statistics statistics) => statistics.BuildEnemyCombatStats();
 
@@ -101,7 +102,7 @@ namespace SuperMarioRpg.Infrastructure.Write
                 statistics.MagicEvade
             );
 
-        public static implicit operator Statistics(Domain.Combat.Statistics statistics) =>
+        public static implicit operator Statistics(Domain.Statistics statistics) =>
             new(
                 statistics.HitPoints,
                 speed: statistics.Speed,
