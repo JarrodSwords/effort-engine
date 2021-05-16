@@ -6,7 +6,7 @@ namespace SuperMarioRpg.Application.Read.Characters.Playable
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal record Record(
         string name,
-        int hit_points,
+        short hit_points,
         short speed,
         short attack,
         short magic_attack,
@@ -50,7 +50,7 @@ select c.name
             return new PlayableCharacter(
                 name,
                 new PlayableCharacterCombatStats(
-                    (ushort) hitPoints,
+                    hitPoints,
                     speed,
                     attack,
                     magicAttack,

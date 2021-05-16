@@ -1,7 +1,10 @@
 ﻿using System;
 using Effort.Domain;
-using SuperMarioRpg.Domain.Characters;
+using SuperMarioRpg.Domain;
+using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Domain.Old.Combat;
+using SuperMarioRpg.Domain.Overworld;
+using ICharacterBuilder = SuperMarioRpg.Domain.Combat.ICharacterBuilder;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
@@ -13,33 +16,39 @@ namespace SuperMarioRpg.Infrastructure.Write
         {
         }
 
-        private Character(Domain.Characters.Character character)
+        private Character(Domain.Combat.Character character)
         {
             Name = character.Name;
             Update(character.CharacterTypes);
         }
 
-        private Character(Enemy enemy) : this(enemy as Domain.Characters.Character)
+        private Character(Enemy enemy) : this(enemy as Domain.Combat.Character)
         {
-            CombatStats = enemy.BaseStats;
+            Statistics = enemy.Statistics;
         }
 
         private Character(PlayableCharacter playableCharacter) : this(
-            playableCharacter as Domain.Characters.Character
+            playableCharacter as Domain.Combat.Character
         )
         {
-            CombatStats = playableCharacter.BaseStats;
+            Statistics = playableCharacter.Statistics;
+        }
+
+        private Character(NonPlayableCharacter nonPlayableCharacter)
+        {
+            Name = nonPlayableCharacter.Name;
+            Update(nonPlayableCharacter.CharacterTypes);
         }
 
         #endregion
 
         #region Public Interface
 
-        public CombatStats CombatStats { get; set; }
         public Guid? CombatStatsId { get; set; }
         public bool IsCombatant { get; set; }
         public bool IsPlayable { get; set; }
         public string Name { get; set; }
+        public Statistics Statistics { get; set; }
 
         #endregion
 
@@ -47,7 +56,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         private Character Update(PlayableCharacter playableCharacter)
         {
-            CombatStats.Update(playableCharacter.BaseStats);
+            Statistics.Update(playableCharacter.Statistics);
             return this;
         }
 
@@ -83,7 +92,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region IPlayableCharacterBuilder Implementation
 
-        public Domain.Stats.CombatStats GetCombatStats() => CombatStats;
+        public Domain.Statistics GetStatistics() => Statistics;
 
         #endregion
 

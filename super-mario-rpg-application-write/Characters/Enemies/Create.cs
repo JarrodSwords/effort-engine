@@ -1,15 +1,14 @@
 ﻿using Effort.Domain;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
-using SuperMarioRpg.Domain.Characters;
+using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Domain.Old.Combat;
-using SuperMarioRpg.Domain.Stats;
 
 namespace SuperMarioRpg.Application.Write.Characters.Enemies
 {
     public record Create(
         string Name,
-        ushort HitPoints,
+        short HitPoints,
         byte FlowerPoints,
         short Speed,
         short Attack,
@@ -18,8 +17,14 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
         short MagicDefense,
         decimal Evade,
         decimal MagicEvade
-    ) : ICommand, IEnemyBuilder, IEnemyCombatStatsBuilder
+    ) : ICommand, IEnemyBuilder, IEnemyStatisticsBuilder
     {
+        #region Public Interface
+
+        public EnemyStatistics GetStatistics() => new(this);
+
+        #endregion
+
         #region ICharacterBuilder Implementation
 
         public CharacterTypes GetCharacterTypes() => CharacterTypes.Combatant;
@@ -28,28 +33,22 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
 
         #endregion
 
-        #region ICombatStatsBuilder Implementation
+        #region IEnemyStatisticsBuilder Implementation
 
-        public short GetAttack() => Attack;
-        public short GetDefense() => Defense;
-        public ushort GetHitPoints() => HitPoints;
-        public short GetMagicAttack() => MagicAttack;
-        public short GetMagicDefense() => MagicDefense;
-        public short GetSpeed() => Speed;
+        public Evade GetEvade() => Evade;
+        public FlowerPoints GetFlowerPoints() => FlowerPoints;
+        public MagicEvade GetMagicEvade() => MagicEvade;
 
         #endregion
 
-        #region IEnemyBuilder Implementation
+        #region IStatisticsBuilder Implementation
 
-        public EnemyCombatStats GetCombatStats() => new(this);
-
-        #endregion
-
-        #region IEnemyCombatStatsBuilder Implementation
-
-        public decimal GetEvade() => Evade;
-        public byte GetFlowerPoints() => FlowerPoints;
-        public decimal GetMagicEvade() => MagicEvade;
+        public Attack GetAttack() => Attack;
+        public Defense GetDefense() => Defense;
+        public HitPoints GetHitPoints() => HitPoints;
+        public MagicAttack GetMagicAttack() => MagicAttack;
+        public MagicDefense GetMagicDefense() => MagicDefense;
+        public Speed GetSpeed() => Speed;
 
         #endregion
 
