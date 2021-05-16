@@ -1,4 +1,4 @@
-﻿using SuperMarioRpg.Domain.Stats;
+﻿using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
@@ -47,7 +47,7 @@ namespace SuperMarioRpg.Infrastructure.Write
         public decimal? MagicEvade { get; set; }
         public short Speed { get; set; }
 
-        public Domain.Stats.CombatStats Build() => new(this);
+        public Domain.Combat.CombatStats Build() => new(this);
         public EnemyCombatStats BuildEnemyCombatStats() => new(this);
 
         public CombatStats Update(CombatStats combatStats)
@@ -85,7 +85,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region Static Interface
 
-        public static implicit operator Domain.Stats.CombatStats(CombatStats combatStats) => combatStats.Build();
+        public static implicit operator Domain.Combat.CombatStats(CombatStats combatStats) => combatStats.Build();
 
         public static implicit operator EnemyCombatStats(CombatStats combatStats) =>
             combatStats.BuildEnemyCombatStats();
@@ -103,7 +103,7 @@ namespace SuperMarioRpg.Infrastructure.Write
                 combatStats.MagicEvade
             );
 
-        public static implicit operator CombatStats(Domain.Stats.CombatStats combatStats) =>
+        public static implicit operator CombatStats(Domain.Combat.CombatStats combatStats) =>
             new(
                 combatStats.HitPoints,
                 speed: combatStats.Speed,

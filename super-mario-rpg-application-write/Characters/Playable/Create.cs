@@ -1,10 +1,9 @@
 ﻿using Effort.Domain;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
-using SuperMarioRpg.Domain.Characters;
+using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Domain.Old.Combat;
-using SuperMarioRpg.Domain.Stats;
-using CombatStats = SuperMarioRpg.Domain.Stats.CombatStats;
+using CombatStats = SuperMarioRpg.Domain.Combat.CombatStats;
 
 namespace SuperMarioRpg.Application.Write.Characters.Playable
 {

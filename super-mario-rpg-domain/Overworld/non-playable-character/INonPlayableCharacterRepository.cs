@@ -1,4 +1,4 @@
-﻿namespace SuperMarioRpg.Domain.Characters
+﻿namespace SuperMarioRpg.Domain.Overworld
 {
     public interface INonPlayableCharacterRepository : IRepository<NonPlayableCharacter>
     {

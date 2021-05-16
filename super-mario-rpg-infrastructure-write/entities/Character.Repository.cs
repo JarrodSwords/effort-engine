@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using Effort.Domain;
 using Microsoft.EntityFrameworkCore;
-using SuperMarioRpg.Domain.Characters;
+using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Domain.Overworld;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {

@@ -1,8 +1,9 @@
 ﻿using Effort.Domain;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
-using SuperMarioRpg.Domain.Characters;
+using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Domain.Old.Combat;
+using SuperMarioRpg.Domain.Overworld;
 
 namespace SuperMarioRpg.Application.Write.Characters.NonPlayable
 {

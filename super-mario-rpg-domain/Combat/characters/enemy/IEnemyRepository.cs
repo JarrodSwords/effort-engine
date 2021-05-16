@@ -1,4 +1,4 @@
-﻿namespace SuperMarioRpg.Domain.Characters
+﻿namespace SuperMarioRpg.Domain.Combat
 {
     public interface IEnemyRepository : IRepository<Enemy>
     {

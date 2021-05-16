@@ -1,5 +1,6 @@
 ﻿using SuperMarioRpg.Domain;
-using SuperMarioRpg.Domain.Characters;
+using SuperMarioRpg.Domain.Combat;
+using SuperMarioRpg.Domain.Overworld;
 using SuperMarioRpg.Domain.Players;
 
 namespace SuperMarioRpg.Infrastructure.Write

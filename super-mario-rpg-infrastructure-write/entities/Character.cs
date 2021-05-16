@@ -1,7 +1,8 @@
 ﻿using System;
 using Effort.Domain;
-using SuperMarioRpg.Domain.Characters;
+using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Domain.Old.Combat;
+using SuperMarioRpg.Domain.Overworld;
 
 namespace SuperMarioRpg.Infrastructure.Write
 {
@@ -13,19 +14,19 @@ namespace SuperMarioRpg.Infrastructure.Write
         {
         }
 
-        private Character(Domain.Characters.Character character)
+        private Character(Domain.Combat.Character character)
         {
             Name = character.Name;
             Update(character.CharacterTypes);
         }
 
-        private Character(Enemy enemy) : this(enemy as Domain.Characters.Character)
+        private Character(Enemy enemy) : this(enemy as Domain.Combat.Character)
         {
             CombatStats = enemy.BaseStats;
         }
 
         private Character(PlayableCharacter playableCharacter) : this(
-            playableCharacter as Domain.Characters.Character
+            playableCharacter as Domain.Combat.Character
         )
         {
             CombatStats = playableCharacter.BaseStats;
@@ -83,7 +84,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region IPlayableCharacterBuilder Implementation
 
-        public Domain.Stats.CombatStats GetCombatStats() => CombatStats;
+        public Domain.Combat.CombatStats GetCombatStats() => CombatStats;
 
         #endregion
 

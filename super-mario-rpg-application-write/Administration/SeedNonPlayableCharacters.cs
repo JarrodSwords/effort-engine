@@ -2,7 +2,7 @@
 using Effort.Domain.Messages;
 using SuperMarioRpg.Application.Write.Characters.NonPlayable;
 using SuperMarioRpg.Domain;
-using SuperMarioRpg.Domain.Characters;
+using SuperMarioRpg.Domain.Overworld;
 
 namespace SuperMarioRpg.Application.Write.Administration
 {

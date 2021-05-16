@@ -1,7 +1,7 @@
 ﻿using Effort.Domain;
 using SuperMarioRpg.Domain.Old.Combat;
 
-namespace SuperMarioRpg.Domain.Characters
+namespace SuperMarioRpg.Domain.Overworld
 {
     public abstract class Character : AggregateRoot
     {

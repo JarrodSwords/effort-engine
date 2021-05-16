@@ -1,6 +1,4 @@
-﻿using SuperMarioRpg.Domain.Stats;
-
-namespace SuperMarioRpg.Domain.Characters
+﻿namespace SuperMarioRpg.Domain.Combat
 {
     public interface IEnemyBuilder : ICharacterBuilder
     {

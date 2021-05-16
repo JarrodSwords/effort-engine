@@ -2,7 +2,7 @@
 using Effort.Domain.Messages;
 using SuperMarioRpg.Application.Write.Characters.Enemies;
 using SuperMarioRpg.Domain;
-using SuperMarioRpg.Domain.Characters;
+using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Application.Write.Administration
 {
