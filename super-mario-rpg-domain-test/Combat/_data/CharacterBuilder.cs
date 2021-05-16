@@ -1,7 +1,6 @@
 ﻿using Effort.Domain;
 using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Domain.Old.Combat;
-using CombatStats = SuperMarioRpg.Domain.Combat.CombatStats;
 
 namespace SuperMarioRpg.Domain.Test.Combat
 {
@@ -29,7 +28,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
 
         #region IPlayableCharacterBuilder Implementation
 
-        public abstract CombatStats GetCombatStats();
+        public abstract Statistics GetStatistics();
 
         #endregion
 

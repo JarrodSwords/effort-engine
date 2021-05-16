@@ -23,14 +23,14 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         private Character(Enemy enemy) : this(enemy as Domain.Combat.Character)
         {
-            CombatStats = enemy.BaseStats;
+            Statistics = enemy.BaseStats;
         }
 
         private Character(PlayableCharacter playableCharacter) : this(
             playableCharacter as Domain.Combat.Character
         )
         {
-            CombatStats = playableCharacter.BaseStats;
+            Statistics = playableCharacter.Statistics;
         }
 
         private Character(NonPlayableCharacter nonPlayableCharacter)
@@ -43,11 +43,11 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region Public Interface
 
-        public CombatStats CombatStats { get; set; }
         public Guid? CombatStatsId { get; set; }
         public bool IsCombatant { get; set; }
         public bool IsPlayable { get; set; }
         public string Name { get; set; }
+        public Statistics Statistics { get; set; }
 
         #endregion
 
@@ -55,7 +55,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         private Character Update(PlayableCharacter playableCharacter)
         {
-            CombatStats.Update(playableCharacter.BaseStats);
+            Statistics.Update(playableCharacter.Statistics);
             return this;
         }
 
@@ -91,7 +91,7 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region IPlayableCharacterBuilder Implementation
 
-        public Domain.Combat.CombatStats GetCombatStats() => CombatStats;
+        public Domain.Combat.Statistics GetStatistics() => Statistics;
 
         #endregion
 

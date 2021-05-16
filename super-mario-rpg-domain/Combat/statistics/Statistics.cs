@@ -7,19 +7,14 @@ namespace SuperMarioRpg.Domain.Combat
     {
         #region Creation
 
-        public Statistics(
-            Attack attack,
-            Defense defense,
-            MagicAttack magicAttack,
-            MagicDefense magicDefense,
-            Speed speed
-        )
+        public Statistics(IStatisticsBuilder builder)
         {
-            Attack = attack;
-            Defense = defense;
-            MagicAttack = magicAttack;
-            MagicDefense = magicDefense;
-            Speed = speed;
+            Attack = builder.GetAttack();
+            Defense = builder.GetDefense();
+            HitPoints = builder.GetHitPoints();
+            MagicAttack = builder.GetMagicAttack();
+            MagicDefense = builder.GetMagicDefense();
+            Speed = builder.GetSpeed();
         }
 
         #endregion
@@ -28,6 +23,7 @@ namespace SuperMarioRpg.Domain.Combat
 
         public Attack Attack { get; }
         public Defense Defense { get; }
+        public HitPoints HitPoints { get; }
         public MagicAttack MagicAttack { get; }
         public MagicDefense MagicDefense { get; }
         public Speed Speed { get; }
@@ -40,6 +36,7 @@ namespace SuperMarioRpg.Domain.Combat
         {
             yield return Attack;
             yield return Defense;
+            yield return HitPoints;
             yield return MagicAttack;
             yield return MagicDefense;
             yield return Speed;

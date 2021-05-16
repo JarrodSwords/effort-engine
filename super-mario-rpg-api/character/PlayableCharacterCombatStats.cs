@@ -1,7 +1,7 @@
 ﻿namespace SuperMarioRpg.Api
 {
     public record PlayableCharacterCombatStats(
-        ushort HitPoints,
+        short HitPoints,
         short Speed,
         short Attack,
         short MagicAttack,

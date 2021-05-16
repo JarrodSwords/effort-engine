@@ -13,7 +13,7 @@
 
         #region Public Interface
 
-        public EnemyCombatStats BaseStats { get; }
+        public EnemyStatistics BaseStats { get; }
 
         #endregion
     }

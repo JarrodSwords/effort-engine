@@ -6,14 +6,14 @@
 
         public PlayableCharacter(IPlayableCharacterBuilder builder) : base(builder)
         {
-            BaseStats = builder.GetCombatStats();
+            Statistics = builder.GetStatistics();
         }
 
         #endregion
 
         #region Public Interface
 
-        public CombatStats BaseStats { get; set; }
+        public Statistics Statistics { get; set; }
 
         #endregion
     }

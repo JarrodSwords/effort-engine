@@ -3,19 +3,18 @@ using Effort.Domain.Messages;
 using SuperMarioRpg.Domain;
 using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Domain.Old.Combat;
-using CombatStats = SuperMarioRpg.Domain.Combat.CombatStats;
 
 namespace SuperMarioRpg.Application.Write.Characters.Playable
 {
     public record Create(
         string Name,
-        ushort HitPoints,
+        short HitPoints,
         short Speed,
         short Attack,
         short MagicAttack,
         short Defense,
         short MagicDefense
-    ) : ICommand, IPlayableCharacterBuilder, ICombatStatsBuilder
+    ) : ICommand, IPlayableCharacterBuilder, IStatisticsBuilder
     {
         #region ICharacterBuilder Implementation
 
@@ -25,20 +24,20 @@ namespace SuperMarioRpg.Application.Write.Characters.Playable
 
         #endregion
 
-        #region ICombatStatsBuilder Implementation
+        #region IPlayableCharacterBuilder Implementation
 
-        public short GetAttack() => Attack;
-        public short GetDefense() => Defense;
-        public ushort GetHitPoints() => HitPoints;
-        public short GetMagicAttack() => MagicAttack;
-        public short GetMagicDefense() => MagicDefense;
-        public short GetSpeed() => Speed;
+        public Statistics GetStatistics() => new(this);
 
         #endregion
 
-        #region IPlayableCharacterBuilder Implementation
+        #region IStatisticsBuilder Implementation
 
-        public CombatStats GetCombatStats() => new(this);
+        public Attack GetAttack() => Attack;
+        public Defense GetDefense() => Defense;
+        public HitPoints GetHitPoints() => HitPoints;
+        public MagicAttack GetMagicAttack() => MagicAttack;
+        public MagicDefense GetMagicDefense() => MagicDefense;
+        public Speed GetSpeed() => Speed;
 
         #endregion
 

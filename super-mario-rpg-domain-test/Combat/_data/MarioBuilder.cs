@@ -1,6 +1,6 @@
 ﻿using Effort.Domain;
+using SuperMarioRpg.Domain.Combat;
 using SuperMarioRpg.Domain.Old.Combat;
-using CombatStats = SuperMarioRpg.Domain.Combat.CombatStats;
 
 namespace SuperMarioRpg.Domain.Test.Combat
 {
@@ -9,8 +9,8 @@ namespace SuperMarioRpg.Domain.Test.Combat
         #region Public Interface
 
         public override CharacterTypes GetCharacterTypes() => CharacterTypes.Mario;
-        public override CombatStats GetCombatStats() => default;
         public override Name GetName() => "Mario";
+        public override Statistics GetStatistics() => default;
 
         #endregion
     }

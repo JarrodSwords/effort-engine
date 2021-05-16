@@ -2,7 +2,7 @@
 {
     public record CreateEnemyArgs(
         string Name,
-        ushort HitPoints,
+        short HitPoints,
         byte FlowerPoints,
         short Speed,
         short Attack,

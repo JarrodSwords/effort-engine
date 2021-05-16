@@ -8,7 +8,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
 {
     public record Create(
         string Name,
-        ushort HitPoints,
+        short HitPoints,
         byte FlowerPoints,
         short Speed,
         short Attack,
@@ -17,7 +17,7 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
         short MagicDefense,
         decimal Evade,
         decimal MagicEvade
-    ) : ICommand, IEnemyBuilder, IEnemyCombatStatsBuilder
+    ) : ICommand, IEnemyBuilder, IEnemyStatisticsBuilder
     {
         #region ICharacterBuilder Implementation
 
@@ -27,28 +27,28 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
 
         #endregion
 
-        #region ICombatStatsBuilder Implementation
-
-        public short GetAttack() => Attack;
-        public short GetDefense() => Defense;
-        public ushort GetHitPoints() => HitPoints;
-        public short GetMagicAttack() => MagicAttack;
-        public short GetMagicDefense() => MagicDefense;
-        public short GetSpeed() => Speed;
-
-        #endregion
-
         #region IEnemyBuilder Implementation
 
-        public EnemyCombatStats GetCombatStats() => new(this);
+        public EnemyStatistics GetCombatStats() => new(this);
 
         #endregion
 
-        #region IEnemyCombatStatsBuilder Implementation
+        #region IEnemyStatisticsBuilder Implementation
 
         public decimal GetEvade() => Evade;
         public byte GetFlowerPoints() => FlowerPoints;
         public decimal GetMagicEvade() => MagicEvade;
+
+        #endregion
+
+        #region IStatisticsBuilder Implementation
+
+        public Attack GetAttack() => Attack;
+        public Defense GetDefense() => Defense;
+        public HitPoints GetHitPoints() => HitPoints;
+        public MagicAttack GetMagicAttack() => MagicAttack;
+        public MagicDefense GetMagicDefense() => MagicDefense;
+        public Speed GetSpeed() => Speed;
 
         #endregion
 

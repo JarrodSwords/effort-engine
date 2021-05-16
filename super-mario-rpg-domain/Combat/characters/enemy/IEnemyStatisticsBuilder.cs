@@ -1,6 +1,6 @@
 ﻿namespace SuperMarioRpg.Domain.Combat
 {
-    public interface IEnemyCombatStatsBuilder : ICombatStatsBuilder
+    public interface IEnemyStatisticsBuilder : IStatisticsBuilder
     {
         decimal GetEvade();
         byte GetFlowerPoints();

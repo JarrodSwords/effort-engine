@@ -1,10 +1,10 @@
 ﻿namespace SuperMarioRpg.Domain.Combat
 {
-    public class EnemyCombatStats : CombatStats
+    public class EnemyStatistics : Statistics
     {
         #region Creation
 
-        public EnemyCombatStats(IEnemyCombatStatsBuilder builder) : base(builder)
+        public EnemyStatistics(IEnemyStatisticsBuilder builder) : base(builder)
         {
             Evade = builder.GetEvade();
             FlowerPoints = builder.GetFlowerPoints();

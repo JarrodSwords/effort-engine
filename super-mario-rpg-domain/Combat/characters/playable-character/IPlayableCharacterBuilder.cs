@@ -2,6 +2,6 @@
 {
     public interface IPlayableCharacterBuilder : ICharacterBuilder
     {
-        CombatStats GetCombatStats();
+        Statistics GetStatistics();
     }
 }
