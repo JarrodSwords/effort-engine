@@ -44,11 +44,11 @@ namespace SuperMarioRpg.Infrastructure.Write
 
         #region Public Interface
 
-        public Guid? CombatStatsId { get; set; }
         public bool IsCombatant { get; set; }
         public bool IsPlayable { get; set; }
         public string Name { get; set; }
         public Statistics Statistics { get; set; }
+        public Guid? StatisticsId { get; set; }
 
         #endregion
 

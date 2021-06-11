@@ -8,9 +8,9 @@ namespace SuperMarioRpg.Infrastructure.Write
         #region Public Interface
 
         public DbSet<Character> Character { get; set; }
-        public DbSet<Statistics> CombatStats { get; set; }
         public bool IsLatest => Database.GetAppliedMigrations().Last() == Database.GetMigrations().Last();
         public DbSet<Player> Player { get; set; }
+        public DbSet<Statistics> Statistics { get; set; }
 
         public Context ApplyMigrations()
         {
