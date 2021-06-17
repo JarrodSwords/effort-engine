@@ -16,15 +16,15 @@ namespace SuperMarioRpg.Application.Read.Characters.Playable
     {
         private const string Select = @"
 select c.name
-     , cs.hit_points
-     , cs.speed
-     , cs.attack
-     , cs.magic_attack 
-     , cs.defense 
-     , cs.magic_defense
+     , s.hit_points
+     , s.speed
+     , s.attack
+     , s.magic_attack 
+     , s.defense 
+     , s.magic_defense
   from character c
-  join combat_stats cs
-    on cs.id = c.combat_stats_id
+  join statistics s
+    on s.id = c.statistics_id
  where c.is_playable = true";
 
         #region Public Interface
