@@ -1,5 +1,4 @@
-﻿using System.Data;
-using Dapper;
+﻿using Dapper;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
 
@@ -11,8 +10,7 @@ namespace SuperMarioRpg.Application.Read.Characters.Enemies
         {
             #region Public Interface
 
-            public override Enemy MakeRequest(IDbConnection connection, Find query) =>
-                connection.QuerySingle<Record>(Record.Find, query);
+            public override Enemy Execute(Find query) => Connection.QuerySingle<Record>(Record.Find, query);
 
             #endregion
         }

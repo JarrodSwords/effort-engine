@@ -1,6 +1,4 @@
-﻿using System.Data;
-using Dapper;
-using Effort.Domain.Messages;
+﻿using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
 
 namespace SuperMarioRpg.Application.Read.Characters.Playable
@@ -11,8 +9,8 @@ namespace SuperMarioRpg.Application.Read.Characters.Playable
         {
             #region Public Interface
 
-            public override PlayableCharacter MakeRequest(IDbConnection connection, Find query) =>
-                connection.QuerySingle<Record>(Record.Find, query);
+            public override PlayableCharacter Execute(Find query) =>
+                null; //Connection.QuerySingle<Record>(Record.Find, query);
 
             #endregion
         }

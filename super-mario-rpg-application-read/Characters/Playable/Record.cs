@@ -41,13 +41,13 @@ select c.name
 
         #region Static Interface
 
-        public static PlayableCharacter AsPlayableCharacter(Record record) => record;
+        public static Fetch.PlayableCharacter AsPlayableCharacter(Record record) => record;
 
-        public static implicit operator PlayableCharacter(Record record)
+        public static implicit operator Fetch.PlayableCharacter(Record record)
         {
             var (name, hitPoints, speed, attack, magicAttack, defense, magicDefense) = record;
 
-            return new PlayableCharacter(
+            return new Fetch.PlayableCharacter(
                 name,
                 new PlayableCharacterCombatStats(
                     hitPoints,

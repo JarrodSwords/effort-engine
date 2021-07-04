@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using Dapper;
 using Effort.Domain.Messages;
@@ -13,8 +12,8 @@ namespace SuperMarioRpg.Application.Read.Characters.Enemies
         {
             #region Public Interface
 
-            public override IEnumerable<Enemy> MakeRequest(IDbConnection connection, Fetch query) =>
-                connection
+            public override IEnumerable<Enemy> Execute(Fetch query) =>
+                Connection
                     .Query<Record>(Record.Fetch)
                     .Select(Record.AsEnemy);
 

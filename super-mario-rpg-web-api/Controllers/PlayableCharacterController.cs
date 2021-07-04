@@ -11,14 +11,14 @@ namespace SuperMarioRpg.WebApi.Controllers
     [ApiController]
     public class PlayableCharacterController : ControllerBase
     {
-        private readonly IQueryHandler<Fetch, IEnumerable<PlayableCharacter>> _fetchHandler;
+        private readonly IQueryHandler<Fetch, IEnumerable<Fetch.PlayableCharacter>> _fetchHandler;
         private readonly IQueryHandler<Find, PlayableCharacter> _findHandler;
         private readonly ICommandHandler<UpdateBaseStats> _updateBaseStatsHandler;
 
         #region Creation
 
         public PlayableCharacterController(
-            IQueryHandler<Fetch, IEnumerable<PlayableCharacter>> fetchHandler,
+            IQueryHandler<Fetch, IEnumerable<Fetch.PlayableCharacter>> fetchHandler,
             IQueryHandler<Find, PlayableCharacter> findHandler,
             ICommandHandler<UpdateBaseStats> updateBaseStatsHandler
         )

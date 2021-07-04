@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using Dapper;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
@@ -18,8 +17,8 @@ select name
 
             #region Public Interface
 
-            public override IEnumerable<NonPlayableCharacter> MakeRequest(IDbConnection connection, Fetch query) =>
-                connection.Query<NonPlayableCharacter>(Fetch);
+            public override IEnumerable<NonPlayableCharacter> Execute(Fetch query) =>
+                Connection.Query<NonPlayableCharacter>(Fetch);
 
             #endregion
         }

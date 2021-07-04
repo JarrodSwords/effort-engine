@@ -1,5 +1,4 @@
-﻿using System.Data;
-using Dapper;
+﻿using Dapper;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
 
@@ -17,8 +16,7 @@ select email_address
 
             #region Public Interface
 
-            public override Player MakeRequest(IDbConnection connection, Find query) =>
-                connection.QuerySingle<Record>(Find, query);
+            public override Player Execute(Find query) => Connection.QuerySingle<Record>(Find, query);
 
             #endregion
         }

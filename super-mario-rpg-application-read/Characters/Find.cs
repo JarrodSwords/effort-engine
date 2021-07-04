@@ -1,5 +1,4 @@
-﻿using System.Data;
-using Dapper;
+﻿using Dapper;
 using Effort.Domain.Messages;
 using SuperMarioRpg.Api;
 
@@ -17,8 +16,7 @@ select name
 
             #region Public Interface
 
-            public override Character MakeRequest(IDbConnection connection, Find query) =>
-                connection.QuerySingle<Character>(Find, query);
+            public override Character Execute(Find query) => Connection.QuerySingle<Character>(Find, query);
 
             #endregion
         }

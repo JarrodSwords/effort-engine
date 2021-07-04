@@ -9,9 +9,17 @@ namespace SuperMarioRpg.Application.Read
         private const string ConnectionString =
             "User ID=postgres;Password=admin;Host=localhost;Port=5432;Database=SuperMarioRpg;Pooling=true;";
 
+        private IDbConnection _connection;
+
         #region Public Interface
 
-        public abstract TResult MakeRequest(IDbConnection connection, TQuery query);
+        public abstract TResult Execute(TQuery query);
+
+        #endregion
+
+        #region Protected Interface
+
+        protected IDbConnection Connection => _connection ??= new NpgsqlConnection(ConnectionString);
 
         #endregion
 
@@ -19,9 +27,8 @@ namespace SuperMarioRpg.Application.Read
 
         public TResult Handle(TQuery query)
         {
-            using var connection = new NpgsqlConnection(ConnectionString);
-
-            return MakeRequest(connection, query);
+            using var _ = Connection;
+            return Execute(query);
         }
 
         #endregion
