@@ -19,17 +19,17 @@ namespace SuperMarioRpg.Application.Write.Characters.Enemies
         decimal MagicEvade
     ) : ICommand, IEnemyBuilder, IEnemyStatisticsBuilder
     {
-        #region Public Interface
-
-        public EnemyStatistics GetStatistics() => new(this);
-
-        #endregion
-
         #region ICharacterBuilder Implementation
 
         public CharacterTypes GetCharacterTypes() => CharacterTypes.Combatant;
         public Id GetId() => default;
         public Name GetName() => Name;
+
+        #endregion
+
+        #region IEnemyBuilder Implementation
+
+        public EnemyStatistics GetStatistics() => new(this);
 
         #endregion
 

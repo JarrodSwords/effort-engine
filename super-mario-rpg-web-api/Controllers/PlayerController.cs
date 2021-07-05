@@ -1,7 +1,6 @@
 ﻿using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
-using SuperMarioRpg.Api;
-using SuperMarioRpg.Application.Read.Players;
+using SuperMarioRpg.Application.Read;
 using SuperMarioRpg.Application.Write.Players;
 
 namespace SuperMarioRpg.WebApi.Controllers
@@ -10,17 +9,17 @@ namespace SuperMarioRpg.WebApi.Controllers
     [ApiController]
     public class PlayerController : ControllerBase
     {
-        private readonly IQueryHandler<Find, Player> _findHandler;
+        private readonly IQueryHandler<FindPlayer, Player> _findPlayerHandler;
         private readonly ICommandHandler<Register> _registerHandler;
 
         #region Creation
 
         public PlayerController(
-            IQueryHandler<Find, Player> findHandler,
+            IQueryHandler<FindPlayer, Player> findPlayerHandler,
             ICommandHandler<Register> registerHandler
         )
         {
-            _findHandler = findHandler;
+            _findPlayerHandler = findPlayerHandler;
             _registerHandler = registerHandler;
         }
 
@@ -32,7 +31,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         [HttpGet]
         public ActionResult<Player> Find(string userName)
         {
-            var player = _findHandler.Handle(new Find(userName));
+            var player = _findPlayerHandler.Handle(new FindPlayer(userName));
 
             return Ok(player);
         }
@@ -48,5 +47,11 @@ namespace SuperMarioRpg.WebApi.Controllers
         }
 
         #endregion
+
+        public record RegisterPlayerArgs(
+            string EmailAddress,
+            string Password,
+            string UserName
+        );
     }
 }

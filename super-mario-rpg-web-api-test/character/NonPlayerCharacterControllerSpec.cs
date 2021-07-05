@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
-using SuperMarioRpg.Api;
+using SuperMarioRpg.WebApi.Controllers;
 using Xunit;
 
 namespace SuperMarioRpg.WebApi.Test
@@ -24,7 +24,7 @@ namespace SuperMarioRpg.WebApi.Test
         [Fact]
         public async Task CreateNonPlayerCharacter()
         {
-            var character = new CreateNonPlayerCharacterArgs("Mario");
+            var character = new NonPlayableCharacterController.CreateNonPlayerCharacterArgs("Mario");
 
             var response = await HttpClient.PostAsJsonAsync("", character);
 

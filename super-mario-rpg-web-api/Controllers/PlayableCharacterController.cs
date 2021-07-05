@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
-using SuperMarioRpg.Api;
-using SuperMarioRpg.Application.Read.Characters.Playable;
+using SuperMarioRpg.Application.Read;
 using SuperMarioRpg.Application.Write.Characters.Playable;
 
 namespace SuperMarioRpg.WebApi.Controllers
@@ -11,20 +10,22 @@ namespace SuperMarioRpg.WebApi.Controllers
     [ApiController]
     public class PlayableCharacterController : ControllerBase
     {
-        private readonly IQueryHandler<Fetch, IEnumerable<Fetch.PlayableCharacter>> _fetchHandler;
-        private readonly IQueryHandler<Find, PlayableCharacter> _findHandler;
+        private readonly IQueryHandler<FetchPlayableCharacters, IEnumerable<PlayableCharacter>>
+            _fetchPlayableCharacterHandler;
+
+        private readonly IQueryHandler<FindPlayableCharacter, PlayableCharacter> _findPlayableCharacterHandler;
         private readonly ICommandHandler<UpdateBaseStats> _updateBaseStatsHandler;
 
         #region Creation
 
         public PlayableCharacterController(
-            IQueryHandler<Fetch, IEnumerable<Fetch.PlayableCharacter>> fetchHandler,
-            IQueryHandler<Find, PlayableCharacter> findHandler,
+            IQueryHandler<FetchPlayableCharacters, IEnumerable<PlayableCharacter>> fetchPlayableCharacterHandler,
+            IQueryHandler<FindPlayableCharacter, PlayableCharacter> findPlayableCharacterHandler,
             ICommandHandler<UpdateBaseStats> updateBaseStatsHandler
         )
         {
-            _fetchHandler = fetchHandler;
-            _findHandler = findHandler;
+            _fetchPlayableCharacterHandler = fetchPlayableCharacterHandler;
+            _findPlayableCharacterHandler = findPlayableCharacterHandler;
             _updateBaseStatsHandler = updateBaseStatsHandler;
         }
 
@@ -35,7 +36,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<PlayableCharacter>> Fetch()
         {
-            var playableCharacters = _fetchHandler.Handle(new Fetch());
+            var playableCharacters = _fetchPlayableCharacterHandler.Handle(new FetchPlayableCharacters());
 
             return Ok(playableCharacters);
         }
@@ -44,7 +45,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         [Route("{name}")]
         public ActionResult<PlayableCharacter> Find(string name)
         {
-            var playableCharacter = _findHandler.Handle(new Find(name));
+            var playableCharacter = _findPlayableCharacterHandler.Handle(new FindPlayableCharacter(name));
 
             return Ok(playableCharacter);
         }

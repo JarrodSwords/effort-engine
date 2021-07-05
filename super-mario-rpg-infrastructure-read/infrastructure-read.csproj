@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>SuperMarioRpg.Infrastructure.Read</RootNamespace>
+    <AssemblyName>SuperMarioRpg.Infrastructure.Read</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\super-mario-rpg-application-read\application-read.csproj" />
+  </ItemGroup>
+
+</Project>

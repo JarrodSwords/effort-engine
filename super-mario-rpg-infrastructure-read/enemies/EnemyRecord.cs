@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using SuperMarioRpg.Api;
+using SuperMarioRpg.Application.Read;
 
-namespace SuperMarioRpg.Application.Read.Characters.Enemies
+namespace SuperMarioRpg.Infrastructure.Read
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    internal record Record(
+    internal record EnemyRecord(
         string name,
         int hit_points,
         short flower_points,
@@ -47,12 +47,12 @@ select c.name
 
         #region Static Interface
 
-        public static Enemy AsEnemy(Record record) => record;
+        public static Enemy AsEnemy(EnemyRecord enemyRecord) => enemyRecord;
 
-        public static implicit operator Enemy(Record record)
+        public static implicit operator Enemy(EnemyRecord enemyRecord)
         {
             var (name, hitPoints, flowerPoints, speed, attack, magicAttack, defense, magicDefense, evade, magicEvade) =
-                record;
+                enemyRecord;
 
             return new Enemy(
                 name,

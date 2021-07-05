@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
-using SuperMarioRpg.Api;
-using SuperMarioRpg.Application.Read.Characters;
+using SuperMarioRpg.Application.Read;
 
 namespace SuperMarioRpg.WebApi.Controllers
 {
@@ -10,18 +9,18 @@ namespace SuperMarioRpg.WebApi.Controllers
     [ApiController]
     public class CharacterController : ControllerBase
     {
-        private readonly IQueryHandler<Fetch, IEnumerable<Character>> _fetchHandler;
-        private readonly IQueryHandler<Find, Character> _findHandler;
+        private readonly IQueryHandler<FetchCharacters, IEnumerable<Character>> _fetchCharactersHandler;
+        private readonly IQueryHandler<FindCharacter, Character> _findCharacterHandler;
 
         #region Creation
 
         public CharacterController(
-            IQueryHandler<Fetch, IEnumerable<Character>> fetchHandler,
-            IQueryHandler<Find, Character> findHandler
+            IQueryHandler<FetchCharacters, IEnumerable<Character>> fetchCharactersHandler,
+            IQueryHandler<FindCharacter, Character> findCharacterHandler
         )
         {
-            _fetchHandler = fetchHandler;
-            _findHandler = findHandler;
+            _fetchCharactersHandler = fetchCharactersHandler;
+            _findCharacterHandler = findCharacterHandler;
         }
 
         #endregion
@@ -31,7 +30,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Character>> Fetch()
         {
-            var characters = _fetchHandler.Handle(new Fetch());
+            var characters = _fetchCharactersHandler.Handle(new FetchCharacters());
 
             return Ok(characters);
         }
@@ -40,7 +39,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         [Route("{name}")]
         public ActionResult<Character> Find(string name)
         {
-            var character = _findHandler.Handle(new Find(name));
+            var character = _findCharacterHandler.Handle(new FindCharacter(name));
 
             return Ok(character);
         }

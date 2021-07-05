@@ -2,7 +2,7 @@
 using Effort.Domain.Messages;
 using Npgsql;
 
-namespace SuperMarioRpg.Application.Read
+namespace SuperMarioRpg.Infrastructure.Read
 {
     public abstract class Handler<TQuery, TResult> : IQueryHandler<TQuery, TResult> where TQuery : IQuery<TResult>
     {

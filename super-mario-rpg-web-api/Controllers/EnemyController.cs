@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Effort.Domain.Messages;
 using Microsoft.AspNetCore.Mvc;
-using SuperMarioRpg.Api;
-using SuperMarioRpg.Application.Read.Characters.Enemies;
+using SuperMarioRpg.Application.Read;
 using SuperMarioRpg.Application.Write.Characters.Enemies;
 
 namespace SuperMarioRpg.WebApi.Controllers
@@ -12,20 +11,20 @@ namespace SuperMarioRpg.WebApi.Controllers
     public class EnemyController : ControllerBase
     {
         private readonly ICommandHandler<Create> _createHandler;
-        private readonly IQueryHandler<Fetch, IEnumerable<Enemy>> _fetchHandler;
-        private readonly IQueryHandler<Find, Enemy> _findHandler;
+        private readonly IQueryHandler<FetchEnemies, IEnumerable<Enemy>> _fetchEnemiesHandler;
+        private readonly IQueryHandler<FindEnemy, Enemy> _findEnemyHandler;
 
         #region Creation
 
         public EnemyController(
             ICommandHandler<Create> createHandler,
-            IQueryHandler<Fetch, IEnumerable<Enemy>> fetchHandler,
-            IQueryHandler<Find, Enemy> findHandler
+            IQueryHandler<FetchEnemies, IEnumerable<Enemy>> fetchEnemiesHandler,
+            IQueryHandler<FindEnemy, Enemy> findEnemyHandler
         )
         {
             _createHandler = createHandler;
-            _fetchHandler = fetchHandler;
-            _findHandler = findHandler;
+            _fetchEnemiesHandler = fetchEnemiesHandler;
+            _findEnemyHandler = findEnemyHandler;
         }
 
         #endregion
@@ -59,7 +58,7 @@ namespace SuperMarioRpg.WebApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Enemy>> Fetch()
         {
-            var enemies = _fetchHandler.Handle(new Fetch());
+            var enemies = _fetchEnemiesHandler.Handle(new FetchEnemies());
 
             return Ok(enemies);
         }
@@ -68,11 +67,24 @@ namespace SuperMarioRpg.WebApi.Controllers
         [Route("{name}")]
         public ActionResult<Enemy> Find(string name)
         {
-            var enemy = _findHandler.Handle(new Find(name));
+            var enemy = _findEnemyHandler.Handle(new FindEnemy(name));
 
             return Ok(enemy);
         }
 
         #endregion
+
+        public record CreateEnemyArgs(
+            string Name,
+            short HitPoints,
+            byte FlowerPoints,
+            short Speed,
+            short Attack,
+            short MagicAttack,
+            short Defense,
+            short MagicDefense,
+            decimal Evade,
+            decimal MagicEvade
+        );
     }
 }

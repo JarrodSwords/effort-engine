@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Autofac;
-using SuperMarioRpg.Application.Read.Characters;
+using SuperMarioRpg.Application.Read;
 using SuperMarioRpg.Application.Write.Characters.Enemies;
 using SuperMarioRpg.Infrastructure.Write;
 using Entity = Effort.Domain.Entity;
@@ -13,7 +13,7 @@ namespace SuperMarioRpg.Seeder
         private static readonly List<Assembly> Assemblies = new()
         {
             typeof(Entity).Assembly,
-            typeof(Fetch).Assembly,
+            typeof(FetchCharacters).Assembly,
             typeof(Create).Assembly,
             typeof(Context).Assembly,
             typeof(ContainerBuilderExtensions).Assembly

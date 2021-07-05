@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using SuperMarioRpg.Api;
+using SuperMarioRpg.Application.Read;
 
-namespace SuperMarioRpg.Application.Read.Characters.Playable
+namespace SuperMarioRpg.Infrastructure.Read
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    internal record Record(
+    internal record PlayableCharacterRecord(
         string name,
         short hit_points,
         short speed,
@@ -41,13 +41,18 @@ select c.name
 
         #region Static Interface
 
-        public static Fetch.PlayableCharacter AsPlayableCharacter(Record record) => record;
+        public static PlayableCharacter AsPlayableCharacter(
+            PlayableCharacterRecord playableCharacterRecord
+        ) =>
+            playableCharacterRecord;
 
-        public static implicit operator Fetch.PlayableCharacter(Record record)
+        public static implicit operator PlayableCharacter(
+            PlayableCharacterRecord playableCharacterRecord
+        )
         {
-            var (name, hitPoints, speed, attack, magicAttack, defense, magicDefense) = record;
+            var (name, hitPoints, speed, attack, magicAttack, defense, magicDefense) = playableCharacterRecord;
 
-            return new Fetch.PlayableCharacter(
+            return new PlayableCharacter(
                 name,
                 new PlayableCharacterCombatStats(
                     hitPoints,

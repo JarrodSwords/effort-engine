@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\effort-engine-domain\domain.csproj" />
-    <ProjectReference Include="..\super-mario-rpg-api\api.csproj" />
   </ItemGroup>
 
   <ItemGroup>
