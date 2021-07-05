@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\super-mario-rpg-application-read\application-read.csproj" />
     <ProjectReference Include="..\super-mario-rpg-application-write\application-write.csproj" />
+    <ProjectReference Include="..\super-mario-rpg-infrastructure-read\infrastructure-read.csproj" />
     <ProjectReference Include="..\super-mario-rpg-infrastructure-write\infrastructure-write.csproj" />
     <ProjectReference Include="..\super-mario-rpg-domain\domain.csproj" />
   </ItemGroup>

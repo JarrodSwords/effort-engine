@@ -17,12 +17,10 @@ namespace SuperMarioRpg.Application.Write
             if (!type.IsGenericType)
                 return false;
 
-            var typeDefinition = type.GetGenericTypeDefinition();
-
-            return typeDefinition == typeof(ICommandHandler<>) || typeDefinition == typeof(IQueryHandler<,>);
+            return type.GetGenericTypeDefinition() == typeof(ICommandHandler<>);
         }
 
-        public static ContainerBuilder RegisterCommandDecorators(this ContainerBuilder builder)
+        public static ContainerBuilder RegisterDecorators(this ContainerBuilder builder)
         {
             builder.RegisterGenericDecorator(
                 typeof(CommandLogger<>),

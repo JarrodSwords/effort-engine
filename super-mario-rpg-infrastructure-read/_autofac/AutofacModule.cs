@@ -1,6 +1,6 @@
-using Autofac;
+﻿using Autofac;
 
-namespace SuperMarioRpg.Application.Read
+namespace SuperMarioRpg.Infrastructure.Read
 {
     public class AutofacModule : Module
     {
@@ -8,7 +8,10 @@ namespace SuperMarioRpg.Application.Read
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterHandlers();
+            builder
+                .RegisterServices()
+                .RegisterHandlers()
+                .RegisterDecorators();
         }
 
         #endregion

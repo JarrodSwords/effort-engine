@@ -5,6 +5,7 @@ using SuperMarioRpg.Application.Read;
 
 namespace SuperMarioRpg.Infrastructure.Read
 {
+    [Cached]
     public class FetchEnemiesHandler : Handler<FetchEnemies, IEnumerable<Enemy>>
     {
         #region Public Interface

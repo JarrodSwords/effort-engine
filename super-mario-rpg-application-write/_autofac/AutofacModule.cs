@@ -10,7 +10,7 @@ namespace SuperMarioRpg.Application.Write
         {
             builder
                 .RegisterHandlers()
-                .RegisterCommandDecorators();
+                .RegisterDecorators();
         }
 
         #endregion
