@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Dapper;
 using SuperMarioRpg.Application.Read;
 
 namespace SuperMarioRpg.Infrastructure.Read
@@ -7,12 +9,11 @@ namespace SuperMarioRpg.Infrastructure.Read
     {
         #region Public Interface
 
-        public override IEnumerable<PlayableCharacter> Execute(FetchPlayableCharacters query) => null;
+        public override IEnumerable<PlayableCharacter> Execute(FetchPlayableCharacters query) =>
+            Connection
+                .Query<PlayableCharacterRecord>(PlayableCharacterRecord.Fetch)
+                .Select(PlayableCharacterRecord.AsPlayableCharacter);
 
         #endregion
-
-        //Connection
-        //    .Query<PlayableCharacterRecord>(PlayableCharacterRecord.Fetch)
-        //    .Select(PlayableCharacterRecord.AsPlayableCharacter);
     }
 }

@@ -1,4 +1,5 @@
-﻿using SuperMarioRpg.Application.Read;
+﻿using Dapper;
+using SuperMarioRpg.Application.Read;
 
 namespace SuperMarioRpg.Infrastructure.Read
 {
@@ -7,7 +8,7 @@ namespace SuperMarioRpg.Infrastructure.Read
         #region Public Interface
 
         public override PlayableCharacter Execute(FindPlayableCharacter query) =>
-            null; //Connection.QuerySingle<PlayableCharacterRecord>(PlayableCharacterRecord.FindEnemy, query);
+            Connection.QuerySingle<PlayableCharacterRecord>(PlayableCharacterRecord.Find, query);
 
         #endregion
     }
