@@ -1,6 +1,4 @@
-﻿using Effort.Domain;
-
-namespace SuperMarioRpg.Domain.Combat
+﻿namespace SuperMarioRpg.Domain.Combat
 {
     public interface IPlayableCharacterRepository : IRepository<PlayableCharacter>
     {

@@ -1,6 +1,4 @@
-﻿using Effort.Domain;
-
-namespace SuperMarioRpg.Domain.Old.Overworld
+﻿namespace SuperMarioRpg.Domain.Old.Overworld
 {
     public record Location
     {

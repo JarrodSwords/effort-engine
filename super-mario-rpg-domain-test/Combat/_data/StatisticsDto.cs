@@ -1,6 +1,4 @@
-﻿using SuperMarioRpg.Domain.Combat;
-
-namespace SuperMarioRpg.Domain.Test.Combat
+﻿namespace SuperMarioRpg.Domain.Test.Combat
 {
     public class StatisticsDto : IStatisticsBuilder
     {
