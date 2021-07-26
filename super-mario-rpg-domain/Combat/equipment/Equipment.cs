@@ -4,7 +4,7 @@ namespace SuperMarioRpg.Domain.Combat
 {
     public class Equipment : AggregateRoot
     {
-        public static Equipment Hammer = new(statistics: new Statistics(10, 0, 0, 0, 0, 0));
+        public static readonly Equipment Hammer = new(statistics: new Statistics(10, 0, 0, 0, 0, 0));
 
         #region Creation
 
