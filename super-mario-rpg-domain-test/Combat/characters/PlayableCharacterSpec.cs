@@ -1,17 +1,14 @@
 ﻿using System;
 using Effort.Domain;
-using FluentAssertions;
 using SuperMarioRpg.Domain.Combat;
-using Xunit;
-using static SuperMarioRpg.Domain.Combat.Equipment;
 
 namespace SuperMarioRpg.Domain.Test.Combat
 {
     public class PlayableCharacterSpec : CharacterSpec
     {
-        #region Core
-
         private readonly PlayableCharacter _mario;
+
+        #region Creation
 
         public PlayableCharacterSpec()
         {
@@ -20,26 +17,10 @@ namespace SuperMarioRpg.Domain.Test.Combat
 
         #endregion
 
-        #region Test Methods
+        #region Protected Interface
 
         protected override Entity CreateEntity() => _mario;
         protected override Entity CreateEntity(Guid id) => new MarioBuilder().With(id);
-
-        [Fact]
-        public void WhenEquipping_ValidEquipment_CorrectSlotIsUpdated()
-        {
-            _mario.Equip(Hammer);
-
-            _mario.Weapon.Should().Be(Hammer);
-        }
-
-        [Fact]
-        public void WhenEquipping_ValidEquipment_EffectiveStatsAreUpdated()
-        {
-            _mario.Equip(Hammer);
-
-            _mario.EffectiveStatistics.Should().Be(_mario.Statistics + Hammer.Statistics);
-        }
 
         #endregion
     }
