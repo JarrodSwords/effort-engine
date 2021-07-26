@@ -9,7 +9,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
     {
         #region Protected Interface
 
-        protected override Entity CreateEntity() => new Equipment(null);
+        protected override Entity CreateEntity() => new Equipment();
         protected override Entity CreateEntity(Guid id) => new Equipment(id);
 
         #endregion

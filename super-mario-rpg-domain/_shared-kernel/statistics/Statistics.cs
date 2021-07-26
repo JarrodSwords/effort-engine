@@ -17,6 +17,23 @@ namespace SuperMarioRpg.Domain
             Speed = builder.GetSpeed();
         }
 
+        public Statistics(
+            Attack attack,
+            Defense defense,
+            HitPoints hitPoints,
+            MagicAttack magicAttack,
+            MagicDefense magicDefense,
+            Speed speed
+        )
+        {
+            Attack = attack;
+            Defense = defense;
+            HitPoints = hitPoints;
+            MagicAttack = magicAttack;
+            MagicDefense = magicDefense;
+            Speed = speed;
+        }
+
         #endregion
 
         #region Public Interface
@@ -41,6 +58,20 @@ namespace SuperMarioRpg.Domain
             yield return MagicDefense;
             yield return Speed;
         }
+
+        #endregion
+
+        #region Static Interface
+
+        public static Statistics operator +(Statistics left, Statistics right) =>
+            new(
+                (short) (left.Attack + right.Attack),
+                (short) (left.Defense + right.Defense),
+                (short) (left.HitPoints + right.HitPoints),
+                (short) (left.MagicAttack + right.MagicAttack),
+                (short) (left.MagicDefense + right.MagicDefense),
+                (short) (left.Speed + right.Speed)
+            );
 
         #endregion
     }
