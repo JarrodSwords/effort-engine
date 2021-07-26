@@ -7,20 +7,20 @@
         public PlayableCharacter(IPlayableCharacterBuilder builder) : base(builder)
         {
             Statistics = builder.GetStatistics();
+            Loadout = new Loadout();
         }
 
         #endregion
 
         #region Public Interface
 
-        public Statistics EffectiveStatistics => Statistics + Weapon.Statistics;
+        public Statistics EffectiveStatistics => Statistics + Loadout.Statistics;
+        public Loadout Loadout { get; set; }
         public Statistics Statistics { get; set; }
-
-        public Equipment Weapon { get; private set; }
 
         public PlayableCharacter Equip(Equipment equipment)
         {
-            Weapon = equipment;
+            Loadout = Loadout.Equip(equipment);
             return this;
         }
 
