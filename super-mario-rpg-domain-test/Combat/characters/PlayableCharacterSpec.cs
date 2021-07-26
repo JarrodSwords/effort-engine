@@ -3,6 +3,7 @@ using Effort.Domain;
 using FluentAssertions;
 using SuperMarioRpg.Domain.Combat;
 using Xunit;
+using static SuperMarioRpg.Domain.Combat.Equipment;
 
 namespace SuperMarioRpg.Domain.Test.Combat
 {
@@ -10,27 +11,34 @@ namespace SuperMarioRpg.Domain.Test.Combat
     {
         #region Core
 
-        private readonly MarioBuilder _marioBuilder = new();
+        private readonly PlayableCharacter _mario;
+
+        public PlayableCharacterSpec()
+        {
+            _mario = new MarioBuilder();
+        }
 
         #endregion
 
         #region Test Methods
 
-        protected override Entity CreateEntity() => _marioBuilder;
-        protected override Entity CreateEntity(Guid id) => _marioBuilder.With(id);
+        protected override Entity CreateEntity() => _mario;
+        protected override Entity CreateEntity(Guid id) => new MarioBuilder().With(id);
+
+        [Fact]
+        public void WhenEquipping_ValidEquipment_CorrectSlotIsUpdated()
+        {
+            _mario.Equip(Hammer);
+
+            _mario.Loadout.Weapon.Should().Be(Hammer);
+        }
 
         [Fact]
         public void WhenEquipping_ValidEquipment_EffectiveStatsAreUpdated()
         {
-            var mario = new PlayableCharacter(_marioBuilder);
-            var hammer = new Equipment(
-                null,
-                new Statistics(1, 2, 3, 4, 5, 6)
-            );
+            _mario.Equip(Hammer);
 
-            mario.Equip(hammer);
-
-            mario.EffectiveStatistics.Should().Be(mario.Statistics + hammer.Statistics);
+            _mario.EffectiveStatistics.Should().Be(_mario.Statistics + Hammer.Statistics);
         }
 
         #endregion
