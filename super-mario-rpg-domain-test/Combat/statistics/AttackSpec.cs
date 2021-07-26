@@ -1,6 +1,5 @@
 ﻿using Effort.Domain;
 using Effort.Domain.Test;
-using SuperMarioRpg.Domain.Combat;
 
 namespace SuperMarioRpg.Domain.Test.Combat
 {
