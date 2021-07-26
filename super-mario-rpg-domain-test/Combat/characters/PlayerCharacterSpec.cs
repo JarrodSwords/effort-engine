@@ -23,6 +23,14 @@ namespace SuperMarioRpg.Domain.Test.Combat
 
         #region Test Methods
 
+        [Fact]
+        public void AfterInstantiation_NaturalStatistics_ArePlayableCharacterStatistics()
+        {
+            PlayableCharacter playableCharacter = new MarioBuilder();
+
+            _mario.NaturalStatistics.Should().Be(playableCharacter.Statistics);
+        }
+
         protected override Entity CreateEntity() => _mario;
         protected override Entity CreateEntity(Guid id) => new PlayerCharacter(new TestBuilder().With(id));
 
