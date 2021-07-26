@@ -30,7 +30,7 @@ namespace SuperMarioRpg.Domain.Test.Combat
         {
             _mario.Equip(Hammer);
 
-            _mario.Loadout.Weapon.Should().Be(Hammer);
+            _mario.Weapon.Should().Be(Hammer);
         }
 
         [Fact]
